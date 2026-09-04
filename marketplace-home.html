@@ -499,6 +499,28 @@
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
       @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}.delivery-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-card:last-child{grid-column:1/-1;max-width:calc(50% - 9px);width:100%;justify-self:center}}
       @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card:last-child{grid-column:auto;max-width:none}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}}
+      .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
+      .ai-turn { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 11px; align-items: start; }
+      .ai-turn.user { grid-template-columns: minmax(0,1fr) 34px; padding-left: 54px; }
+      .ai-turn.user .ai-avatar { grid-column: 2; background: #fff; color: var(--easy-blue); border: 1px solid rgba(17,61,106,.25); font: 800 11px/1 Arial, sans-serif; }
+      .ai-turn.user .ai-bubble { grid-column: 1; grid-row: 1; border-radius: 16px 4px 16px 16px; background: var(--easy-blue); color: #fff; }
+      .ai-turn.user .ai-bubble p { color: #fff; }
+      .assistant-response.ai-bubble { margin: 0; border-left: 1px solid rgba(17,61,106,.16); border-radius: 4px 16px 16px 16px; background: #fff; }
+      .ai-guest-meter { margin: 12px 0 16px; padding: 12px 14px; border: 1px solid rgba(17,61,106,.16); border-radius: 10px; background: rgba(238,245,255,.74); }
+      .ai-guest-meter-row { display: flex; justify-content: space-between; gap: 14px; color: var(--easy-blue); font: 700 11px/1.3 Arial, sans-serif; }
+      .ai-guest-meter-track { height: 4px; margin-top: 9px; border-radius: 99px; background: rgba(17,61,106,.13); overflow: hidden; }
+      .ai-guest-meter-fill { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--easy-gold), var(--easy-blue)); transition: width .25s ease; }
+      .ai-followups { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .ai-followup { padding: 8px 11px; border: 1px solid rgba(17,61,106,.25); border-radius: 999px; background: var(--easy-pale); color: var(--easy-blue); cursor: pointer; font: 700 11px/1.25 Arial, sans-serif; }
+      .ai-followup:hover { border-color: var(--easy-blue); background: #fff; }
+      .ai-upgrade { margin: 18px 0; padding: 22px; border: 1px solid rgba(17,61,106,.38); border-radius: 14px; background: linear-gradient(135deg, #fff, #e3eefc); box-shadow: 0 14px 32px rgba(8,43,76,.11); }
+      .ai-upgrade .eyebrow { color: var(--easy-blue); }
+      .ai-upgrade h3 { margin: 7px 0 8px; font-size: 24px; }
+      .ai-upgrade p { margin: 0 0 14px; font: 14px/1.55 Arial, sans-serif; }
+      .ai-upgrade ul { margin: 0 0 17px; padding-left: 20px; }
+      .ai-upgrade li { margin: 5px 0; font: 13px/1.45 Arial, sans-serif; }
+      .ai-upgrade-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+      @media(max-width:760px){.ai-conversation{max-height:none}.ai-turn.user{padding-left:22px}.ai-upgrade-actions .button{width:100%}}
     </style>
   </head>
   <body>
@@ -528,7 +550,10 @@
               </aside>
               <div class="ai-chat">
                 <div class="assistant-intro"><div class="section-head"><div class="guest-label">Guest AI — start here</div><h2>What do you need help with?</h2><p>Describe the situation in ordinary words. Lighthouse will help you understand the need and organize a useful next step.</p></div></div>
-                <div class="ai-welcome"><span class="ai-avatar" aria-hidden="true">L</span><div class="ai-bubble"><strong>Hi, I’m Lighthouse.</strong><p>Tell me what you are trying to get done. You can type, add pictures, or attach a short video. You do not need to know which service comes first.</p></div></div>
+                <div class="ai-conversation" id="assistant-conversation" aria-live="polite">
+                  <div class="ai-turn"><span class="ai-avatar" aria-hidden="true">L</span><div class="ai-bubble"><strong>Hi, I’m Lighthouse.</strong><p>Tell me what you are trying to get done—even if the idea is unfinished. I can ask a useful follow-up, look at pictures or a short video, and help you decide what comes next. You do not need to know which service comes first.</p></div></div>
+                </div>
+                <div class="ai-guest-meter" id="assistant-guest-meter"><div class="ai-guest-meter-row"><span>Live guest conversation</span><strong id="assistant-guest-count">3 messages available</strong></div><div class="ai-guest-meter-track" aria-hidden="true"><span class="ai-guest-meter-fill" id="assistant-guest-fill"></span></div></div>
                 <div class="assistant-composer">
                   <form class="assistant-form" id="assistant-text-form">
                     <label for="assistant-text-input">Message Lighthouse<textarea id="assistant-text-input" maxlength="2000" placeholder="For example: I have a damaged gate, I need help finding work, or I need to organize a business project…"></textarea></label>
@@ -545,7 +570,7 @@
                 <div class="assistant-tools"><div class="voice-stage"><button class="voice-button" id="assistant-voice-toggle" type="button" data-state="checking" aria-pressed="false" aria-label="Ask Lighthouse by voice" disabled><span class="voice-icon" aria-hidden="true"></span><span class="voice-button-label">ASK BY VOICE</span></button><span class="assistant-status" id="assistant-status" role="status" aria-live="polite">Checking Lighthouse…</span></div><div class="voice-controls"><button class="button secondary" id="assistant-stop-speech" type="button" hidden>STOP SPEAKING</button></div></div>
                 <p class="voice-disclosure">Voice is optional and starts only when you tap the microphone. Transcripts may be retained for review; raw microphone audio is not stored by Lighthouse.</p>
                 <div class="voice-transcript" id="assistant-transcript" aria-live="polite" hidden><strong>You said</strong><p id="assistant-transcript-text"></p><p class="voice-warning" id="assistant-transcript-warning" hidden>Please review names, addresses, measurements, dates, phone numbers, plates, and VINs on screen before confirming.</p></div>
-                <div class="assistant-response" id="assistant-response" aria-live="polite" hidden></div>
+                <div class="ai-upgrade" id="assistant-upgrade" hidden><div class="eyebrow">Continue with Lighthouse</div><h3>Keep the plan, context, and files together.</h3><p>Your private Lighthouse workspace saves the conversation and gives you more room for ongoing work, pictures, video, approvals, and connected tools.</p><ul><li>7-day free trial on every plan</li><li>Private saved work and project memory</li><li>Personal, Plus, and Power options</li></ul><div class="ai-upgrade-actions"><a class="button" href="/plans-pricing">SEE MEMBERSHIP OPTIONS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
                 <div class="assistant-confirm" id="assistant-confirm" hidden>
                   <strong>Review and confirm before submitting</strong>
                   <label><input type="checkbox" id="assistant-terms" /> I agree to the <a href="/policies-terms">Lighthouse terms</a> for this request.</label>
@@ -704,6 +729,10 @@
         activeRequestId: '',
         activeVoiceRequestId: '',
         sessionKey: newSessionKey(),
+        guestTurns: 0,
+        guestLimit: 3,
+        memberEntitled: false,
+        activeRequestKind: '',
         peerConnection: null,
         dataChannel: null,
         mediaStream: null,
@@ -723,7 +752,10 @@
       const textSend = document.getElementById('assistant-send');
       const stopSpeechButton = document.getElementById('assistant-stop-speech');
       const aiStatus = document.getElementById('assistant-status');
-      const aiResponse = document.getElementById('assistant-response');
+      const aiConversation = document.getElementById('assistant-conversation');
+      const aiGuestCount = document.getElementById('assistant-guest-count');
+      const aiGuestFill = document.getElementById('assistant-guest-fill');
+      const aiUpgrade = document.getElementById('assistant-upgrade');
       const aiConfirm = document.getElementById('assistant-confirm');
       const aiConfirmButton = document.getElementById('assistant-confirm-button');
       const aiAuthorizationRow = document.getElementById('assistant-authorization-row');
@@ -739,7 +771,9 @@
       const attachmentTray = document.getElementById('assistant-attachment-tray');
       const mediaConsentRow = document.getElementById('assistant-media-consent-row');
       const mediaConsent = document.getElementById('assistant-media-consent');
-      const guestDraftKey = 'easy-agent-guest-draft-v1';
+      const guestDraftKey = 'lighthouse-guest-draft-v1';
+      const legacyGuestDraftKey = 'easy-agent-guest-draft-v1';
+      const guestTurnsKey = 'lighthouse-guest-turns-v1';
       const lighthouseState = document.getElementById('lighthouse-state');
       const lighthouseAction = document.getElementById('lighthouse-action');
       const lighthousePlanActions = Array.from(document.querySelectorAll('.lighthouse-plan-action'));
@@ -819,7 +853,11 @@
         lighthouseState.textContent = `Opening the secure ${button.dataset.planName} checkout…`;
         postParent({ type: 'lighthouse:select-plan', planId: button.dataset.planId, planName: button.dataset.planName });
       }));
-      try { textInput.value = sessionStorage.getItem(guestDraftKey) || ''; } catch (error) { void error; }
+      try {
+        textInput.value = sessionStorage.getItem(guestDraftKey) || sessionStorage.getItem(legacyGuestDraftKey) || '';
+        ai.guestTurns = Math.max(0, Math.min(ai.guestLimit, Number(sessionStorage.getItem(guestTurnsKey)) || 0));
+        sessionStorage.removeItem(legacyGuestDraftKey);
+      } catch (error) { void error; }
       let aiStatusReceived = false;
       const aiAvailabilityTimeout = setTimeout(() => {
         if (!aiStatusReceived) {
@@ -842,11 +880,67 @@
       function updateComposerState() {
         const hasMedia = ai.attachments.length > 0;
         const hasMessage = String(textInput.value || '').trim().length > 0;
+        const guestLimitReached = !ai.memberEntitled && ai.guestTurns >= ai.guestLimit;
         attachmentTray.hidden = !hasMedia;
         mediaConsentRow.hidden = !hasMedia;
-        addPhotoButton.disabled = ai.busy || ai.attachments.some(item => item.source === 'video');
-        addVideoButton.disabled = ai.busy || ai.attachments.some(item => item.source === 'photo');
-        textSend.disabled = !ai.available || ai.busy || (!hasMessage && !hasMedia) || (hasMedia && !mediaConsent.checked);
+        addPhotoButton.disabled = ai.busy || guestLimitReached || ai.attachments.some(item => item.source === 'video');
+        addVideoButton.disabled = ai.busy || guestLimitReached || ai.attachments.some(item => item.source === 'photo');
+        textInput.disabled = guestLimitReached;
+        textSend.disabled = !ai.available || ai.busy || guestLimitReached || (!hasMessage && !hasMedia) || (hasMedia && !mediaConsent.checked);
+      }
+      function updateGuestExperience() {
+        if (ai.memberEntitled) {
+          aiGuestCount.textContent = 'Member access recognized';
+          aiGuestFill.style.width = '100%';
+          aiUpgrade.hidden = true;
+        } else {
+          const remaining = Math.max(0, ai.guestLimit - ai.guestTurns);
+          aiGuestCount.textContent = remaining ? `${remaining} message${remaining === 1 ? '' : 's'} available` : 'Guest preview complete';
+          aiGuestFill.style.width = `${Math.round((ai.guestTurns / ai.guestLimit) * 100)}%`;
+          aiUpgrade.hidden = remaining > 0;
+        }
+        updateComposerState();
+      }
+      function appendUserTurn(message, attachmentCount) {
+        const turn = document.createElement('div');
+        turn.className = 'ai-turn user';
+        const avatar = document.createElement('span');
+        avatar.className = 'ai-avatar';
+        avatar.setAttribute('aria-hidden', 'true');
+        avatar.textContent = 'YOU';
+        const bubble = document.createElement('div');
+        bubble.className = 'ai-bubble';
+        const copy = document.createElement('p');
+        copy.textContent = message;
+        bubble.appendChild(copy);
+        if (attachmentCount) {
+          const media = document.createElement('p');
+          media.textContent = `${attachmentCount} picture${attachmentCount === 1 ? '' : 's'} included for Lighthouse to examine.`;
+          bubble.appendChild(media);
+        }
+        turn.append(bubble, avatar);
+        aiConversation.appendChild(turn);
+        turn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      function addFollowupSuggestions(surface, result) {
+        if (result.confirmationRequired || result.signInRequired || (!ai.memberEntitled && ai.guestTurns >= ai.guestLimit)) return;
+        const prompts = ['What should I do first?', 'What details are missing?', 'Turn this into a simple plan.'];
+        const wrap = document.createElement('div');
+        wrap.className = 'ai-followups';
+        prompts.forEach(prompt => {
+          const button = document.createElement('button');
+          button.className = 'ai-followup';
+          button.type = 'button';
+          button.textContent = prompt;
+          button.addEventListener('click', () => {
+            textInput.value = prompt;
+            try { sessionStorage.setItem(guestDraftKey, prompt); } catch (error) { void error; }
+            updateComposerState();
+            textInput.focus();
+          });
+          wrap.appendChild(button);
+        });
+        surface.appendChild(wrap);
       }
       function renderAttachments() {
         attachmentTray.replaceChildren();
@@ -1122,6 +1216,12 @@
       function submitMessage(raw, channel = 'TEXT_WEB', needsReview = false) {
         const attachments = channel === 'TEXT_WEB' ? ai.attachments.map(item => ({ type: item.type, imageDataUrl: item.imageDataUrl, fileName: item.fileName, timestampSeconds: item.timestampSeconds })) : [];
         const message = String(raw || '').trim().slice(0, 2000) || (attachments.length ? 'Please help me understand what is shown in the attached picture or video frames and what I should do next.' : '');
+        if (!ai.memberEntitled && ai.guestTurns >= ai.guestLimit) {
+          aiUpgrade.hidden = false;
+          aiUpgrade.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          aiStatus.textContent = 'Your guest preview is complete. Choose a Lighthouse plan or sign in to continue.';
+          return;
+        }
         if (!message) {
           postTelemetry('VOICE_EMPTY_TRANSCRIPT', { success: false });
           resumeListening();
@@ -1136,8 +1236,12 @@
           showTranscript(message, needsReview);
           setMicrophoneEnabled(false);
         }
+        appendUserTurn(message, attachments.length);
+        textInput.value = '';
+        try { sessionStorage.removeItem(guestDraftKey); } catch (error) { void error; }
         setAssistantBusy(true, needsReview ? 'Checking what I heard. Review critical details on screen.' : 'Thinking…');
         ai.activeRequestId = requestId();
+        ai.activeRequestKind = 'MESSAGE';
         ai.activeChannel = channel;
         postParent({ type: 'easy-lot-ai:send', requestId: ai.activeRequestId, input: { message, attachments, mediaConsentAccepted: attachments.length ? true : undefined, sessionKey: ai.sessionKey, anonymousSessionId: ai.sessionKey, channel } });
       }
@@ -1297,10 +1401,17 @@
         return card;
       }
       function renderAssistantResult(result = {}) {
-        aiResponse.replaceChildren();
+        const turn = document.createElement('div');
+        turn.className = 'ai-turn';
+        const avatar = document.createElement('span');
+        avatar.className = 'ai-avatar';
+        avatar.setAttribute('aria-hidden', 'true');
+        avatar.textContent = 'L';
+        const responseSurface = document.createElement('div');
+        responseSurface.className = 'assistant-response ai-bubble';
         const message = document.createElement('p');
         message.textContent = result.message || (result.status === 'COMPLETED' ? 'Your request was submitted for review.' : 'Please continue with one of the standard forms below.');
-        aiResponse.appendChild(message);
+        responseSurface.appendChild(message);
         const summary = Array.isArray(result.summary) ? result.summary : [];
         if (summary.length) {
           const review = document.createElement('div');
@@ -1318,20 +1429,20 @@
             card.appendChild(line);
           });
           review.appendChild(card);
-          aiResponse.appendChild(review);
+          responseSurface.appendChild(review);
         }
         const matches = result.result && Array.isArray(result.result.matches) ? result.result.matches : [];
         if (matches.length) {
           const list = document.createElement('div');
           list.className = 'assistant-matches';
           matches.forEach(match => list.appendChild(addMatch(match)));
-          aiResponse.appendChild(list);
+          responseSurface.appendChild(list);
         }
         if (result.result && result.result.disclaimer) {
           const disclaimer = document.createElement('p');
           disclaimer.className = 'assistant-disclaimer';
           disclaimer.textContent = result.result.disclaimer;
-          aiResponse.appendChild(disclaimer);
+          responseSurface.appendChild(disclaimer);
         }
         const proposedNeeds = result.result && Array.isArray(result.result.needs) ? result.result.needs : [];
         if (proposedNeeds.length) {
@@ -1352,7 +1463,7 @@
             }
             list.appendChild(card);
           });
-          aiResponse.appendChild(list);
+          responseSurface.appendChild(list);
         }
         const routeHint = result.result && result.result.routeHint;
         const allowedRoutes = new Map([
@@ -1366,7 +1477,7 @@
           link.className = 'button';
           link.href = routeHint;
           link.textContent = allowedRoutes.get(routeHint);
-          aiResponse.appendChild(link);
+          responseSurface.appendChild(link);
         }
         if (result.signInRequired === true) {
           const signIn = document.createElement('button');
@@ -1378,9 +1489,12 @@
             ai.activeRequestId = requestId();
             postParent({ type: 'easy-lot-ai:signin', requestId: ai.activeRequestId });
           });
-          aiResponse.appendChild(signIn);
+          responseSurface.appendChild(signIn);
         }
-        aiResponse.hidden = false;
+        addFollowupSuggestions(responseSurface, result);
+        turn.append(avatar, responseSurface);
+        aiConversation.appendChild(turn);
+        turn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         ai.confirmationToken = result.confirmationToken || '';
         ai.pendingAction = result.pendingAction || result.action || '';
         aiConfirm.hidden = !result.confirmationRequired;
@@ -1424,6 +1538,8 @@
         }
         if (payload.type === 'lighthouse:access') {
           const access = payload.access || {};
+          ai.memberEntitled = access.entitled === true;
+          updateGuestExperience();
           communityVideo.access = access;
           const videoCreationAllowed = access.entitled === true;
           communityVideoForm.hidden = !videoCreationAllowed;
@@ -1496,6 +1612,11 @@
         }
         if (payload.type === 'easy-lot-ai:response') {
           if (payload.requestId !== ai.activeRequestId) return;
+          if (ai.activeRequestKind === 'MESSAGE' && !ai.memberEntitled) {
+            ai.guestTurns = Math.min(ai.guestLimit, ai.guestTurns + 1);
+            try { sessionStorage.setItem(guestTurnsKey, String(ai.guestTurns)); } catch (error) { void error; }
+          }
+          updateGuestExperience();
           renderAssistantResult(payload.result);
           ai.attachments = [];
           mediaConsent.checked = false;
@@ -1504,7 +1625,7 @@
           renderAttachments();
           const message = payload.result && payload.result.message || 'Please review the result on screen.';
           if (ai.voiceActive) playVoiceReply(payload.voice, message);
-          else setAssistantBusy(false, payload.result && payload.result.confirmationRequired ? 'Review the details below, then confirm when ready.' : 'Lighthouse is ready for another question.');
+          else setAssistantBusy(false, payload.result && payload.result.confirmationRequired ? 'Review the details below, then confirm when ready.' : (!ai.memberEntitled && ai.guestTurns >= ai.guestLimit ? 'Your guest preview is complete. Choose a plan or sign in to keep working with Lighthouse.' : 'Lighthouse is ready for another question.'));
         }
         if (payload.type === 'easy-lot-ai:error') {
           if (payload.requestId !== ai.activeRequestId) return;
@@ -1685,6 +1806,7 @@
         setMicrophoneEnabled(false);
         setAssistantBusy(true, 'Submitting your confirmed request…');
         ai.activeRequestId = requestId();
+        ai.activeRequestKind = 'CONFIRMATION';
         postParent({ type: 'easy-lot-ai:confirm', requestId: ai.activeRequestId, input: { sessionKey: ai.sessionKey, userConfirmed: true, termsAccepted, privacyAcknowledged, serviceAuthorizationConfirmed, saveAlertRequested, confirmationToken: ai.confirmationToken, channel: ai.activeChannel } });
       });
       document.addEventListener('click', event => {
@@ -1710,6 +1832,7 @@
         if (ai.peerConnection) ai.peerConnection.close();
         if (communityVideo.objectUrl) URL.revokeObjectURL(communityVideo.objectUrl);
       });
+      updateGuestExperience();
       postParent({ type: 'home:ready' });
     </script>
   </body>
