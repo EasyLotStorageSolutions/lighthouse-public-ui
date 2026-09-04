@@ -402,15 +402,32 @@
         .assistant-shell { padding-inline: 17px; }
         .need { grid-template-columns: 34px 1fr; gap: 12px; }
       }
-      .lighthouse-doorway { padding: 18px 0 44px; background: var(--easy-sky); }
-      .lighthouse-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0,1.35fr) minmax(250px,.65fr); gap: 38px; align-items: center; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(225,237,252,.76)); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .lighthouse-doorway { padding: 18px 0 54px; background: var(--easy-sky); }
+      .lighthouse-panel { position: relative; overflow: hidden; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(225,237,252,.76)); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
       .lighthouse-panel::after { content: "L"; position: absolute; right: -8px; bottom: -60px; color: rgba(17,61,106,.055); font: 400 210px/1 'Niconne','Brush Script MT',cursive; pointer-events:none; }
       .lighthouse-panel h2 { margin: 7px 0 12px; }
       .lighthouse-panel p { margin: 0; font-size: 18px; line-height: 1.65; }
-      .lighthouse-offer { position: relative; z-index:1; padding-left: 30px; border-left: 1px solid var(--easy-line); }
+      .lighthouse-intro { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr); gap:38px; align-items:center; }
+      .lighthouse-member { padding-left:30px; border-left:1px solid var(--easy-line); }
+      .lighthouse-member p { font-size:14px; }
+      .lighthouse-plans { position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:34px; }
+      .lighthouse-plan { position:relative; display:flex; flex-direction:column; min-width:0; padding:27px 24px 24px; border:1px solid rgba(17,61,106,.35); border-radius:6px; background:rgba(255,255,255,.84); }
+      .lighthouse-plan.recommended { border:2px solid var(--easy-navy); background:#fff; box-shadow:0 17px 28px -22px rgba(8,43,76,.8); transform:translateY(-6px); }
+      .lighthouse-plan-badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); padding:7px 14px; border-radius:999px; background:var(--easy-navy); color:#fff; font:800 10px/1 Arial,sans-serif; letter-spacing:.1em; white-space:nowrap; }
+      .lighthouse-plan h3 { margin:0 0 8px; font:700 27px/1.15 'Playfair Display',Georgia,serif; }
       .lighthouse-price { display:block; color:var(--easy-navy); font:400 38px/1.1 'Playfair Display',Georgia,serif; }
       .lighthouse-price small { font-size:14px; }
-      .lighthouse-state { min-height:42px; margin:14px 0!important; font:700 13px/1.5 Arial,sans-serif!important; }
+      .lighthouse-trial { margin:8px 0 14px!important; color:var(--easy-navy); font:800 12px/1.35 Arial,sans-serif!important; letter-spacing:.05em; text-transform:uppercase; }
+      .lighthouse-plan-copy { min-height:70px; margin:0 0 17px!important; color:var(--muted); font:15px/1.55 Arial,sans-serif!important; }
+      .lighthouse-plan ul { flex:1; margin:0 0 22px; padding:16px 0 0; border-top:1px solid var(--easy-line); list-style:none; }
+      .lighthouse-plan li { position:relative; margin:9px 0; padding-left:22px; color:var(--ink); font:14px/1.45 Arial,sans-serif; }
+      .lighthouse-plan li::before { content:"✓"; position:absolute; left:0; color:var(--easy-navy); font-weight:800; }
+      .lighthouse-plan .button { width:100%; }
+      .lighthouse-plan.recommended .button { border-color:var(--easy-navy); background:var(--easy-navy); color:#fff; }
+      .lighthouse-plan.recommended .button:hover { border-color:var(--easy-blue); background:var(--easy-blue); }
+      .lighthouse-plan .button[disabled] { cursor:wait; opacity:.65; }
+      .lighthouse-state { min-height:22px; margin:12px 0 0!important; font:700 13px/1.5 Arial,sans-serif!important; }
+      .lighthouse-fine-print { position:relative; z-index:1; margin:20px 0 0!important; color:var(--muted); text-align:center; font:12px/1.5 Arial,sans-serif!important; }
       .video-community { padding: 56px 0; border-block: 1px solid rgba(17,61,106,.28); background: linear-gradient(160deg,#082b4c 0%,#113d6a 62%,#164f84 100%); color:#fff; }
       .video-community h2,.video-community h3,.video-community p,.video-community label { color:#fff; }
       .video-community .eyebrow { color:#9fd0ff; }
@@ -442,7 +459,8 @@
       .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
       .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
       .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{grid-template-columns:1fr;padding:28px 22px}.lighthouse-offer{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}}
+      @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}}
     </style>
   </head>
   <body>
@@ -506,7 +524,15 @@
         </div>
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
-        <div class="container"><div class="lighthouse-panel"><div><div class="eyebrow">For members</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Your private place to turn an idea, a problem, pictures, or a short video into organized work—then keep the decisions, evidence, and next steps together.</p></div><div class="lighthouse-offer"><span class="lighthouse-price">$19.99 <small>/ month</small></span><p>No trial. No per-message charge. No surprise overage.</p><p class="lighthouse-state" id="lighthouse-state" role="status">Checking your membership…</p><a class="button" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a></div></div></div>
+        <div class="container"><div class="lighthouse-panel">
+          <div class="lighthouse-intro"><div><div class="eyebrow">Your private AI workspace</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Bring Lighthouse an idea, a problem, pictures, or a short video. It helps turn what you share into organized work and keeps the decisions, evidence, and next steps together.</p></div><div class="lighthouse-member"><p>Already a member? Your private workspace, saved work, and account tools are waiting.</p><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a><p class="lighthouse-state" id="lighthouse-state" role="status" aria-live="polite">Checking your membership…</p></div></div>
+          <div class="lighthouse-plans" aria-label="Lighthouse membership choices">
+            <article class="lighthouse-plan"><h3>Personal</h3><span class="lighthouse-price">$19.99 <small>/ month</small></span><p class="lighthouse-trial">7 days free</p><p class="lighthouse-plan-copy">Best for one person getting everyday needs and projects organized.</p><ul><li>Private Lighthouse workspace</li><li>Help with ideas, files, pictures, and video</li><li>Saved decisions and next steps</li></ul><button class="button secondary lighthouse-plan-action" type="button" data-plan-id="8d680a1a-cb69-4e99-ac46-273e2592f47c" data-plan-name="Personal">TRY PERSONAL FREE</button></article>
+            <article class="lighthouse-plan recommended"><span class="lighthouse-plan-badge">BEST VALUE</span><h3>Plus</h3><span class="lighthouse-price">$39.99 <small>/ month</small></span><p class="lighthouse-trial">7 days free</p><p class="lighthouse-plan-copy">Best for balancing several projects, responsibilities, or recurring follow-through.</p><ul><li>Everything in Personal</li><li>More room for ongoing work</li><li>A stronger home for connected projects</li></ul><button class="button lighthouse-plan-action" type="button" data-plan-id="e7f41b24-d77e-47af-9bd9-8af907ae7234" data-plan-name="Plus">TRY PLUS FREE</button></article>
+            <article class="lighthouse-plan"><h3>Power</h3><span class="lighthouse-price">$79.99 <small>/ month</small></span><p class="lighthouse-trial">7 days free</p><p class="lighthouse-plan-copy">Best for a business, household, or demanding workload that needs the most room to coordinate.</p><ul><li>Everything in Plus</li><li>Built for heavier ongoing use</li><li>The most room for complex coordination</li></ul><button class="button secondary lighthouse-plan-action" type="button" data-plan-id="7147b6f2-44d3-4f62-b1a8-aa2c3365ca08" data-plan-name="Power">TRY POWER FREE</button></article>
+          </div>
+          <p class="lighthouse-fine-print">Each plan starts with a 7-day free trial, then renews monthly at the price shown. Cancel through your account.</p>
+        </div></div>
       </section>
       <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
@@ -653,6 +679,7 @@
       const guestDraftKey = 'easy-agent-guest-draft-v1';
       const lighthouseState = document.getElementById('lighthouse-state');
       const lighthouseAction = document.getElementById('lighthouse-action');
+      const lighthousePlanActions = Array.from(document.querySelectorAll('.lighthouse-plan-action'));
       const communityVideoForm = document.getElementById('community-video-form');
       const communityVideoSignIn = document.getElementById('video-signin');
       const communityVideoFile = document.getElementById('community-video-file');
@@ -661,6 +688,11 @@
       const communityVideoSubmit = document.getElementById('community-video-submit');
       const communityVideoFeed = document.getElementById('community-video-feed');
       const communityVideo = { access: { entitled: false }, file: null, frames: [], durationSeconds: 0, objectUrl: '', requestId: '', videoId: '' };
+      lighthousePlanActions.forEach(button => button.addEventListener('click', () => {
+        lighthousePlanActions.forEach(action => { action.disabled = true; });
+        lighthouseState.textContent = `Opening the secure ${button.dataset.planName} checkout…`;
+        postParent({ type: 'lighthouse:select-plan', planId: button.dataset.planId, planName: button.dataset.planName });
+      }));
       try { textInput.value = sessionStorage.getItem(guestDraftKey) || ''; } catch (error) { void error; }
       let aiStatusReceived = false;
       const aiAvailabilityTimeout = setTimeout(() => {
@@ -1269,6 +1301,10 @@
           lighthouseState.textContent = presentation[0];
           lighthouseAction.textContent = presentation[1];
           lighthouseAction.href = presentation[2];
+        }
+        if (payload.type === 'lighthouse:checkout-error') {
+          lighthousePlanActions.forEach(action => { action.disabled = false; });
+          lighthouseState.textContent = payload.message || 'Checkout could not open. Please try again.';
         }
         if (payload.type === 'lighthouse-video:upload-ready') {
           if (payload.requestId !== communityVideo.requestId) return;
