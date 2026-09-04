@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="https://www.easylotstoragesolutions.com/" target="_top" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; overflow: hidden; font-family: Arial, Helvetica, sans-serif; color: #113d6a; background: #d6e6fe; }
+      .shell { width: min(980px, 100%); min-height: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+      .brand { display: flex; width: 100%; height: 620px; align-items: center; justify-content: center; overflow: hidden; text-decoration: none; }
+      .brand img { display: block; width: auto; max-width: 100%; height: 620px; object-fit: contain; object-position: center; }
+      nav { width: min(960px, calc(100% - 24px)); margin: 7px auto 0; padding: 6px 8px; display: flex; justify-content: center; align-items: center; gap: 3px; flex-wrap: wrap; border: 1px solid rgba(17,61,106,.3); border-radius: 7px; background: rgba(255,255,255,.88); }
+      nav a { min-height: 30px; padding: 7px 8px; display: inline-flex; align-items: center; color: #113d6a; font-size: 11px; font-weight: 700; line-height: 1.2; text-decoration: none; white-space: nowrap; }
+      nav a.primary { border-radius: 4px; background: #113d6a; color: #fff; }
+      nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+      :focus-visible { outline: 3px solid #f7b731; outline-offset: 3px; }
+      @media (max-width: 700px) {
+        .shell { min-height: 204px; height: 204px; }
+        .brand { height: 204px; }
+        .brand img { width: auto; max-width: 100%; height: 190px; object-fit: contain; object-position: center; }
+        nav { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shell">
+      <a class="brand" href="/" aria-label="The Lighthouse by Easy Lot Storage Solutions home">
+        <img src="https://static.wixstatic.com/media/d4a0d6_71f7b575a8174672a5cb6915e91aa6b3~mv2.png" alt="The Lighthouse by Easy Lot Storage Solutions" />
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a class="primary" href="/#assistant">Ask Lighthouse</a>
+        <a href="/#what-easy-does">For You</a>
+        <a href="/copy-of-how-it-works">For Business</a>
+        <a href="/customer-portal">Work</a>
+        <a href="/find-storage">Storage</a>
+        <a href="/#how-easy-works">How Lighthouse Works</a>
+        <a href="/customer-portal">Sign In</a>
+      </nav>
+    </header>
+    <script>
+      const publicOrigin = 'https://www.easylotstoragesolutions.com';
+      const referrerOrigin = (() => { try { return new URL(document.referrer).origin; } catch (error) { return ''; } })();
+      const referrerHost = (() => { try { return new URL(referrerOrigin).hostname; } catch (error) { return ''; } })();
+      const parentOrigin = referrerOrigin === publicOrigin || referrerOrigin === 'https://easylotstoragesolutions.com' || /\.editor\.wix\.com$/.test(referrerHost) ? referrerOrigin : publicOrigin;
+      document.addEventListener('click', event => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('/')) return;
+        event.preventDefault();
+        window.parent.postMessage({ type: 'easy-lot:navigate', href }, parentOrigin);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #586879;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      main {
+        max-width: 1140px;
+        margin: auto;
+        padding: 48px 24px 70px;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, serif;
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 60px);
+        margin: 10px 0;
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+        max-width: 820px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 270px 1fr;
+        gap: 24px;
+        margin-top: 28px;
+      }
+      .channels,
+      .composer,
+      .thread {
+        border: 1px solid var(--line);
+        padding: 20px;
+      }
+      .channels button {
+        width: 100%;
+        padding: 13px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+        text-align: left;
+        color: var(--blue);
+        font-weight: 700;
+      }
+      .channels button.on {
+        background: var(--blue);
+        color: #fff;
+      }
+      .composer {
+        background: var(--wash);
+        margin-bottom: 18px;
+      }
+      .composer input,
+      .composer select,
+      .composer textarea {
+        width: 100%;
+        margin: 5px 0 11px;
+        padding: 11px;
+        border: 1px solid #acbbc7;
+      }
+      .composer textarea {
+        min-height: 100px;
+      }
+      .primary {
+        min-height: 46px;
+        padding: 0 18px;
+        border: 0;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 700;
+      }
+      .thread {
+        margin-bottom: 12px;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .thread p {
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      .thread-actions {
+        display: flex;
+        gap: 10px;
+      }
+      .thread-actions button {
+        border: 1px solid var(--blue);
+        background: #fff;
+        color: var(--blue);
+        padding: 8px 12px;
+      }
+      .status {
+        padding: 24px;
+        background: var(--wash);
+      }
+      @media (max-width: 720px) {
+        main {
+          padding: 36px 16px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .channels {
+          display: flex;
+          overflow-x: auto;
+        }
+        .channels button {
+          min-width: 190px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      :root {
+        --blue: #113d6a;
+        --gold: #113d6a;
+        --ink: #113d6a;
+        --muted: #294f76;
+        --line: rgba(17, 61, 106, 0.48);
+        --wash: rgba(255, 255, 255, 0.32);
+      }
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      p,
+      .lead,
+      .meta {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .card,
+      .thread,
+      .composer,
+      .status,
+      .notice,
+      .document,
+      .channels,
+      .nav {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      button,
+      a,
+      .primary {
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+        letter-spacing: 0.06em;
+        border: 1px solid #113d6a;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .primary:hover,
+      button:hover,
+      a:hover {
+        background: #fff;
+        color: #113d6a;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid rgba(17, 61, 106, 0.62);
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.68);
+        color: #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">APPROVED OPERATOR NETWORK</div>
+      <h1>Storage Operator Community</h1>
+      <p class="lead">
+        Connect, discuss operations, and build overflow referral
+        relationships—without automatically sharing renter information.
+      </p>
+      <div id="status" class="status">
+        Checking your approved operator access…
+      </div>
+      <div class="layout" id="app" hidden>
+        <nav
+          class="channels"
+          id="channels"
+          aria-label="Community channels"
+        ></nav>
+        <section>
+          <form class="composer" id="composer">
+            <h2>Start a discussion</h2>
+            <label>Channel<select id="channel" required></select></label
+            ><label>Title<input id="title" minlength="5" required /></label
+            ><label
+              >Message<textarea
+                id="body"
+                minlength="10"
+                required
+              ></textarea></label
+            ><button class="primary" type="submit">POST THREAD</button>
+          </form>
+          <div id="threads"></div>
+          <section id="directory">
+            <h2>Approved operator directory</h2>
+            <div id="profiles"></div>
+          </section>
+          <section id="exchange">
+            <h2>Open storage demand</h2>
+            <p class="meta">
+              Respond only about your own availability and capabilities. Renter
+              contact details remain private, and operators must not coordinate
+              prices, customers, or territories.
+            </p>
+            <div id="opportunities"></div>
+          </section>
+          <section id="detail" class="thread" hidden>
+            <button id="back" type="button">BACK TO DISCUSSIONS</button>
+            <div id="threadBody"></div>
+            <form id="replyForm" class="composer">
+              <h3>Post a reply</h3>
+              <textarea id="reply" minlength="2" required></textarea
+              ><button class="primary" type="submit">POST REPLY</button>
+            </form>
+          </section>
+        </section>
+      </div>
+    </main>
+    <script>
+const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      (() => {
+        const status = document.getElementById("status"),
+          app = document.getElementById("app"),
+          channels = document.getElementById("channels"),
+          channel = document.getElementById("channel"),
+          composer = document.getElementById("composer"),
+          title = document.getElementById("title"),
+          body = document.getElementById("body"),
+          threads = document.getElementById("threads"),
+          directory = document.getElementById("directory"),
+          profiles = document.getElementById("profiles"),
+          exchange = document.getElementById("exchange"),
+          opportunities = document.getElementById("opportunities"),
+          detail = document.getElementById("detail"),
+          threadBody = document.getElementById("threadBody"),
+          replyForm = document.getElementById("replyForm"),
+          reply = document.getElementById("reply"),
+          back = document.getElementById("back");
+        const parentWindow = window.parent,
+          esc = (v) =>
+            String(v ?? "").replace(
+              /[&<>"']/g,
+              (c) =>
+                ({
+                  "&": "&amp;",
+                  "<": "&lt;",
+                  ">": "&gt;",
+                  '"': "&quot;",
+                  "'": "&#39;",
+                })[c],
+            );
+        let data = { channels: [], threads: [], profiles: [], opportunities: [] },
+          active = "",
+          threadId = "",
+          readyTimer = setInterval(
+            () => parentWindow.postMessage({ type: "community:ready" }, parentOrigin),
+            750,
+          );
+        function bind() {
+          document.querySelectorAll("[data-key]").forEach(
+            (b) =>
+              (b.onclick = () => {
+                active = b.dataset.key;
+                render();
+              }),
+          );
+          document.querySelectorAll("[data-open]").forEach(
+            (b) =>
+              (b.onclick = () => {
+                threadId = b.dataset.open;
+                parentWindow.postMessage(
+                  { type: "community:open", threadId },
+                  parentOrigin,
+                );
+              }),
+          );
+          document.querySelectorAll("[data-report]").forEach(
+            (b) =>
+              (b.onclick = () =>
+                parentWindow.postMessage(
+                  {
+                    type: "community:report",
+                    targetType: "THREAD",
+                    targetId: b.dataset.report,
+                    reason: "MEMBER_REVIEW_REQUEST",
+                  },
+                  parentOrigin,
+                )),
+          );
+          document.querySelectorAll("[data-connect]").forEach(
+            (b) =>
+              (b.onclick = () =>
+                parentWindow.postMessage(
+                  {
+                    type: "community:connect",
+                    profileId: b.dataset.connect,
+                    reason: "Interested in an operator-network connection.",
+                  },
+                  parentOrigin,
+                )),
+          );
+          document.querySelectorAll("[data-exchange-response]").forEach(
+            (b) =>
+              (b.onclick = () =>
+                parentWindow.postMessage(
+                  {
+                    type: "community:exchange-response",
+                    dispatchId: b.dataset.dispatch,
+                    response: b.dataset.exchangeResponse,
+                  },
+                  parentOrigin,
+                )),
+          );
+        }
+        function render() {
+          status.hidden = true;
+          app.hidden = false;
+          detail.hidden = true;
+          composer.hidden = false;
+          threads.hidden = false;
+          directory.hidden = false;
+          exchange.hidden = false;
+          channels.innerHTML = data.channels
+            .map(
+              (c) =>
+                `<button class="${c.key === active ? "on" : ""}" data-key="${esc(c.key)}">${esc(c.title)}</button>`,
+            )
+            .join("");
+          channel.innerHTML = data.channels
+            .map(
+              (c) => `<option value="${esc(c.key)}">${esc(c.title)}</option>`,
+            )
+            .join("");
+          threads.innerHTML =
+            data.threads
+              .filter((t) => !active || t.channelKey === active)
+              .map(
+                (t) =>
+                  `<article class="thread"><h3>${esc(t.title)}</h3><div class="meta">${esc((t.author || {}).displayName || "Approved operator")} • ${Number(t.replyCount || 0)} replies</div><p>${esc(t.body)}</p><div class="thread-actions"><button data-open="${esc(t.id)}">VIEW / REPLY</button><button data-report="${esc(t.id)}">REPORT</button></div></article>`,
+              )
+              .join("") ||
+            '<div class="status">No discussions in this channel yet.</div>';
+          profiles.innerHTML =
+            (data.profiles || [])
+              .map(
+                (p) =>
+                  `<article class="thread"><h3>${esc(p.businessName || p.displayName || "Approved operator")}</h3><div class="meta">${esc([p.roleType, p.serviceArea].filter(Boolean).join(" • "))}</div><p>${esc(p.bio || "Approved Easy Lot operator-network member.")}</p><button data-connect="${esc(p.id)}">REQUEST CONNECTION</button></article>`,
+              )
+              .join("") ||
+            '<div class="status">No directory profiles are available yet.</div>';
+          opportunities.innerHTML =
+            (data.opportunities || [])
+              .map((d) => {
+                const o = d.opportunity || {};
+                const facts = [
+                  o.storageCategory,
+                  o.desiredCityOrZip,
+                  o.estimatedRequiredSquareFeet && `${o.estimatedRequiredSquareFeet} estimated sq. ft.`,
+                  o.storageDuration,
+                ].filter(Boolean).join(" • ");
+                return `<article class="thread"><h3>${esc(o.storageCategory || "Storage opportunity")}</h3><div class="meta">${esc(facts || "Details available after Easy Lot review")}</div><p>${esc(o.fitDisclaimer || "All dimensions, access, availability, legality, zoning, and suitability require verification.")}</p><div class="thread-actions"><button data-dispatch="${esc(d.id)}" data-exchange-response="AVAILABLE">AVAILABLE</button><button data-dispatch="${esc(d.id)}" data-exchange-response="POTENTIAL_FIT">POTENTIAL FIT</button><button data-dispatch="${esc(d.id)}" data-exchange-response="NOT_AVAILABLE">NOT AVAILABLE</button></div></article>`;
+              })
+              .join("") ||
+            '<div class="status">No privacy-safe storage opportunities are open for your operator profile right now.</div>';
+          bind();
+        }
+        function renderThread(t) {
+          if (!t) return;
+          composer.hidden = true;
+          threads.hidden = true;
+          directory.hidden = true;
+          exchange.hidden = true;
+          detail.hidden = false;
+          threadBody.innerHTML = `<h2>${esc(t.title)}</h2><p>${esc(t.body)}</p><h3>Replies</h3>${(t.replies || []).map((r) => `<article><p>${esc(r.body)}</p><button data-report-reply="${esc(r.id)}">REPORT REPLY</button></article>`).join("") || "<p>No replies yet.</p>"}`;
+          document.querySelectorAll("[data-report-reply]").forEach(
+            (b) =>
+              (b.onclick = () =>
+                parentWindow.postMessage(
+                  {
+                    type: "community:report",
+                    targetType: "REPLY",
+                    targetId: b.dataset.reportReply,
+                    reason: "MEMBER_REVIEW_REQUEST",
+                  },
+                  parentOrigin,
+                )),
+          );
+        }
+        composer.onsubmit = (e) => {
+          e.preventDefault();
+          parentWindow.postMessage(
+            {
+              type: "community:create",
+              input: {
+                channelKey: channel.value,
+                title: title.value,
+                body: body.value,
+              },
+            },
+            parentOrigin,
+          );
+        };
+        replyForm.onsubmit = (e) => {
+          e.preventDefault();
+          parentWindow.postMessage(
+            { type: "community:reply", threadId, message: reply.value },
+            parentOrigin,
+          );
+        };
+        back.onclick = render;
+        window.addEventListener("message", (event) => { if (event.source !== window.parent || event.origin !== parentOrigin) return;
+          const m = event.data || {};
+          if (typeof m.type === "string" && m.type.startsWith("community:")) {
+            clearInterval(readyTimer);
+            readyTimer = null;
+          }
+          if (m.type === "community:data") {
+            data = m.data || data;
+            active = active || (data.channels[0] || {}).key || "";
+            render();
+          }
+          if (m.type === "community:thread") renderThread(m.thread);
+          if (m.type === "community:error") {
+            status.hidden = false;
+            app.hidden = true;
+            status.textContent =
+              m.message ||
+              "Operator community is available to signed-in approved operators.";
+          }
+          if (m.type === "community:created") {
+            title.value = "";
+            body.value = "";
+            parentWindow.postMessage({ type: "community:ready" }, parentOrigin);
+          }
+          if (m.type === "community:replied") {
+            reply.value = "";
+            parentWindow.postMessage({ type: "community:open", threadId }, parentOrigin);
+          }
+          if (m.type === "community:notice") {
+            status.hidden = false;
+            status.textContent = m.message;
+          }
+        });
+        parentWindow.postMessage({ type: "community:ready" }, parentOrigin);
+        setTimeout(() => {
+          if (app.hidden && status.textContent.includes("Checking"))
+            status.textContent =
+              "Please sign in with an approved operator account to use the community.";
+        }, 3500);
+      })();
+    </script>
+  </body>
+</html>

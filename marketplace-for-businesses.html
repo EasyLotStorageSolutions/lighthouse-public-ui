@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #506071;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+      }
+      main {
+        max-width: 1120px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, serif;
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 64px);
+        line-height: 1.05;
+        margin: 10px 0 16px;
+      }
+      .lead,
+      p {
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .lead {
+        font-size: 18px;
+        max-width: 820px;
+      }
+      .grid,
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin: 34px 0;
+      }
+      .card,
+      .support-card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 20px rgba(17, 61, 106, 0.06);
+      }
+      .features,
+      .support {
+        background: var(--wash);
+        padding: 30px;
+        margin-top: 30px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+      .tags span {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 9px 12px;
+        font-weight: 700;
+        color: var(--blue);
+        font-size: 13px;
+      }
+      .marketplace {
+        margin-top: 28px;
+        background: var(--blue);
+        color: #fff;
+        padding: 28px;
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+        align-items: center;
+      }
+      .marketplace h2,
+      .marketplace p {
+        color: #fff;
+        margin-top: 0;
+      }
+      .marketplace a,
+      .support a {
+        background: #fff;
+        color: var(--blue);
+        font-weight: 700;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+      .support a {
+        display: inline-block;
+        background: var(--blue);
+        color: #fff;
+      }
+      #openSupport {
+        background: var(--blue);
+        border: 1px solid var(--blue);
+        color: #fff;
+        cursor: pointer;
+        font: 700 12px/1 Arial, sans-serif;
+        letter-spacing: 0.1em;
+        margin-bottom: 24px;
+        padding: 15px 20px;
+        text-transform: uppercase;
+      }
+      .disclosure {
+        border-left: 4px solid var(--gold);
+        padding: 15px;
+        background: #fff;
+      }
+      @media (max-width: 760px) {
+        .grid,
+        .support-grid {
+          grid-template-columns: 1fr;
+        }
+        .marketplace {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        main {
+          padding: 38px 16px 50px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 1120px;
+        padding: 36px 34px 44px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      .lead,
+      p {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .grid {
+        margin: 24px 0;
+      }
+      .card,
+      .support-card,
+      .features,
+      .support {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      .card {
+        padding: 20px;
+      }
+      .features,
+      .support {
+        margin-top: 22px;
+        padding: 24px;
+      }
+      .tags span {
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+      }
+      .marketplace {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+        margin-top: 22px;
+        padding: 22px 24px;
+      }
+      .marketplace h2,
+      .marketplace p {
+        color: #113d6a;
+      }
+      .marketplace a,
+      .support a {
+        font:
+          700 10px/1 Arial,
+          sans-serif;
+        letter-spacing: 0.08em;
+        border: 1px solid #113d6a;
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .disclosure {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid #113d6a;
+      }
+      .support-grid {
+        display: none;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">LIGHTHOUSE FOR BUSINESS</div>
+      <h1>Tell Lighthouse what your business needs.</h1>
+      <p class="lead">
+        Find people, organize work, keep up with customers, coordinate resources,
+        and get practical help with the things that keep your business moving.
+        Start with the outcome—not a software menu.
+      </p>
+      <section class="grid">
+        <article class="card">
+          <h3>Find the right people</h3>
+          <p>
+            Tell Lighthouse when you need a worker, contractor, provider, helper, or
+            specialist and what the job requires.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Keep work organized</h3>
+          <p>
+            Bring together jobs, customers, files, follow-ups, schedules, and
+            the details that otherwise get scattered.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Find the next opportunity</h3>
+          <p>
+            Help people discover what your business does, respond to real needs,
+            and follow through without losing the human relationship.
+          </p>
+        </article>
+      </section>
+      <section class="features">
+        <h2>Help with the work behind the work</h2>
+        <div class="tags">
+          <span>WORKERS</span><span>JOBS</span><span>CUSTOMERS</span
+          ><span>FOLLOW-UPS</span><span>SCHEDULING</span><span>FILES</span
+          ><span>RESEARCH</span><span>WEBSITES</span><span>RESOURCES</span
+          ><span>LOCAL OPPORTUNITIES</span>
+        </div>
+      </section>
+      <section class="marketplace">
+        <div>
+          <h2>You do not need to know which Lighthouse capability comes first.</h2>
+          <p>
+            Tell Lighthouse what is happening and what result you need. Lighthouse helps
+            organize the next useful step while you review important decisions.
+          </p>
+        </div>
+        <a href="https://www.easylotstoragesolutions.com/#assistant" target="_top">ASK LIGHTHOUSE</a>
+      </section>
+      <section class="support">
+        <div class="eyebrow">STORAGE &amp; OPERATIONAL SUPPORT</div>
+        <h2>Need space or hands-on help?</h2>
+        <p>
+          Storage remains one important Lighthouse capability. Find business vehicle
+          parking, contractor yards, equipment or container space, indoor space,
+          towing, access help, cleanout support, and other practical resources.
+        </p>
+        <p><a href="https://www.easylotstoragesolutions.com/find-storage" target="_top">FIND BUSINESS STORAGE</a></p>
+        <div class="support-grid" id="supportGrid">
+          <p>Loading available support services…</p>
+        </div>
+        <button type="button" id="openSupport">REQUEST PRACTICAL SUPPORT</button>
+        <div class="disclosure">
+          Independent provider availability, price, timing, service area,
+          credentials, and work terms must be confirmed. Easy Lot does not
+          guarantee dispatch or performance.
+        </div>
+      </section>
+    </main>
+    <script>
+      const parentWindow = window.parent;
+      const parentOrigin = (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
+      const esc = (v) =>
+        String(v ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      let readyTimer = setInterval(
+        () => parentWindow.postMessage({ type: "support:ready" }, parentOrigin),
+        750,
+      );
+      window.addEventListener("message", (event) => {
+        if (event.source !== parentWindow || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type !== "support:services") return;
+        clearInterval(readyTimer);
+        readyTimer = null;
+        const services = data.services || [];
+        document.getElementById("supportGrid").innerHTML = services.length
+          ? services
+              .map(
+                (service) =>
+                  `<article class="support-card"><h3>${esc(service.title)}</h3><p>${esc(service.description)}</p><a href="https://www.easylotstoragesolutions.com/contact" target="_top">${esc(service.callToAction || "REQUEST HELP")}</a></article>`,
+              )
+              .join("")
+          : "<p>No provider is currently available. You may still submit a request for review.</p>";
+      });
+      parentWindow.postMessage({ type: "support:ready" }, parentOrigin);
+      document.getElementById("openSupport").addEventListener("click", () => {
+        parentWindow.postMessage({ type: "support:open-request" }, parentOrigin);
+      });
+    </script>
+  </body>
+</html>

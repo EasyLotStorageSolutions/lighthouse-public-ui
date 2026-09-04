@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #586879;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+      }
+      main {
+        max-width: 1140px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2 {
+        font-family: Georgia, serif;
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 64px);
+        margin: 10px 0 16px;
+      }
+      .lead {
+        max-width: 800px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.65;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 34px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        min-height: 390px;
+        box-shadow: 0 8px 20px rgba(17, 61, 106, 0.06);
+      }
+      .card.featured {
+        border: 2px solid var(--gold);
+      }
+      .badge {
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        min-height: 16px;
+      }
+      .price {
+        font-size: 34px;
+        font-weight: 700;
+        color: var(--blue);
+        margin: 12px 0;
+      }
+      .price small {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      ul {
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .card a,
+      .disabled {
+        display: flex;
+        margin-top: auto;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        background: var(--blue);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .disabled {
+        background: #8a969f;
+      }
+      .notice {
+        margin-top: 28px;
+        padding: 20px;
+        background: var(--wash);
+        border-left: 4px solid var(--gold);
+        line-height: 1.55;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        main {
+          padding: 38px 16px 50px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          min-height: 0;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      :root {
+        --blue: #113d6a;
+        --gold: #113d6a;
+        --ink: #113d6a;
+        --muted: #294f76;
+        --line: rgba(17, 61, 106, 0.48);
+        --wash: rgba(255, 255, 255, 0.32);
+      }
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      p,
+      .lead,
+      .meta {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .card,
+      .thread,
+      .composer,
+      .status,
+      .notice,
+      .document,
+      .channels,
+      .nav {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      button,
+      a,
+      .primary {
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+        letter-spacing: 0.06em;
+        border: 1px solid #113d6a;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .primary:hover,
+      button:hover,
+      a:hover {
+        background: #fff;
+        color: #113d6a;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid rgba(17, 61, 106, 0.62);
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.68);
+        color: #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">MARKETPLACE LISTING PLANS</div>
+      <h1>Choose how you participate.</h1>
+      <p class="lead">
+        Start free or select a paid advertising plan. Paid visibility is labeled
+        as promotion and never secretly changes objective organic match scores.
+      </p>
+      <div class="grid" id="plans"><p>Loading plans…</p></div>
+      <div class="notice">
+        <strong>Two separate payment relationships:</strong> these plans pay
+        Easy Lot for marketplace advertising. Rent for an independent host’s
+        space is paid directly to that host. Easy Lot-operated storage customers
+        receive a separate approved payment path after availability is
+        confirmed.
+      </div>
+    </main>
+    <script>
+const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      const parentWindow = window.parent,
+        esc = (v) =>
+          String(v ?? "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+      let readyTimer = setInterval(
+        () => parentWindow.postMessage({ type: "plans:ready" }, parentOrigin),
+        750,
+      );
+      window.addEventListener("message", (event) => { if (event.source !== window.parent || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type !== "plans:data") return;
+        clearInterval(readyTimer);
+        readyTimer = null;
+        const plans = data.plans || [];
+        document.getElementById("plans").innerHTML = plans
+          .map((plan) => {
+            const featured = plan.planKey === "FEATURED";
+            const action = plan.available
+              ? `<a target="_top" href="${esc(plan.checkoutPath)}">${plan.price ? "SELECT PLAN" : "START FREE"}</a>`
+              : `<div class="disabled" aria-disabled="true">SETUP IN PROGRESS</div>`;
+            return `<article class="card ${featured ? "featured" : ""}"><div class="badge">${featured ? "PROMOTED PLACEMENT AVAILABLE" : ""}</div><h2>${esc(plan.name)}</h2><div class="price">${plan.price ? `$${Number(plan.price).toFixed(2)}` : "Free"} <small>${plan.price ? `/ ${esc(plan.billingCadence.toLowerCase())}` : ""}</small></div><ul>${(plan.benefits || []).map((b) => `<li>${esc((b.key || "").replaceAll("_", " ").toLowerCase())}${b.text ? `: ${esc(b.text)}` : ""}</li>`).join("")}</ul>${plan.price ? `<p>Recurring billing. ${plan.buyerCanCancel ? "You can request cancellation through your account." : "Review cancellation terms before purchase."}</p>` : ""}${action}</article>`;
+          })
+          .join("");
+      });
+      parentWindow.postMessage({ type: "plans:ready" }, parentOrigin);
+    </script>
+  </body>
+</html>

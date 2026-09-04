@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #1d2d3c;
+      }
+      main {
+        max-width: 1120px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: #bd8d3a;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, serif;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 64px);
+        line-height: 1.05;
+        margin: 10px 0 16px;
+      }
+      .lead,
+      p {
+        line-height: 1.65;
+        color: #506071;
+      }
+      .lead {
+        font-size: 18px;
+        max-width: 800px;
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 38px;
+      }
+      .path {
+        border: 1px solid #d9e0e6;
+        padding: 28px;
+      }
+      .path.operated {
+        border-top: 6px solid #113d6a;
+      }
+      .path.independent {
+        border-top: 6px solid #5d6770;
+      }
+      .badge {
+        display: inline-block;
+        background: #113d6a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 8px 10px;
+      }
+      .independent .badge {
+        background: #5d6770;
+      }
+      .path h2 {
+        font-size: 30px;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 13px;
+        margin: 20px 0;
+      }
+      .step b {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        background: #edf3f8;
+        color: #113d6a;
+      }
+      .step h3 {
+        margin: 2px 0 4px;
+        font-size: 20px;
+      }
+      .step p {
+        margin: 0;
+      }
+      .notice {
+        margin-top: 28px;
+        padding: 24px;
+        background: #f4f7fa;
+        border-left: 5px solid #bd8d3a;
+      }
+      @media (max-width: 760px) {
+        .columns {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding: 38px 16px 50px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      .lead,
+      p {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .path {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      .path.operated,
+      .path.independent {
+        border-top: 1px solid #113d6a;
+      }
+      .badge,
+      .independent .badge {
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+      }
+      .step b {
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid #113d6a;
+      }
+      .notice {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">FIND SPACE • LIST SPACE</div>
+      <h1>How Easy Lot works.</h1>
+      <p class="lead">
+        The next steps depend on whether the space is operated by Easy Lot or
+        advertised by an independent host. Every listing is clearly labeled.
+      </p>
+      <section class="columns">
+        <article class="path independent">
+          <span class="badge">INDEPENDENT HOST</span>
+          <h2>Search → Compare → Contact → Arrange</h2>
+          <div class="step">
+            <b>1</b>
+            <div>
+              <h3>Search</h3>
+              <p>
+                Filter approved listings by location, size, price, access, and
+                reported features.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <b>2</b>
+            <div>
+              <h3>Compare</h3>
+              <p>
+                Review advertised pricing, general location, amenities,
+                availability, and host-reported details.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <b>3</b>
+            <div>
+              <h3>Contact</h3>
+              <p>Send an inquiry about the space and desired start date.</p>
+            </div>
+          </div>
+          <div class="step">
+            <b>4</b>
+            <div>
+              <h3>Arrange directly</h3>
+              <p>
+                The independent host and renter confirm price, terms, payment,
+                and access directly.
+              </p>
+            </div>
+          </div>
+        </article>
+        <article class="path operated">
+          <span class="badge">EASY LOT OPERATED</span>
+          <h2>Request → Review → Payment → Access</h2>
+          <div class="step">
+            <b>1</b>
+            <div>
+              <h3>Request</h3>
+              <p>
+                Send Easy Lot the item, vehicle, equipment, or business storage
+                details.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <b>2</b>
+            <div>
+              <h3>Easy Lot review</h3>
+              <p>
+                Easy Lot confirms the fit, availability, documentation, and
+                approval steps.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <b>3</b>
+            <div>
+              <h3>Payment to Easy Lot</h3>
+              <p>
+                Approved Easy Lot customers receive the established payment
+                instructions.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <b>4</b>
+            <div>
+              <h3>Access instructions</h3>
+              <p>
+                Easy Lot provides access details after approval and required
+                payment steps.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+      <div class="notice">
+        <strong>No automatic guarantees.</strong> Independent-host features are
+        presented as host reported unless a listing specifically says Easy Lot
+        verified. Exact private host addresses are not shown in public
+        marketplace results.
+      </div>
+    </main>
+  </body>
+</html>

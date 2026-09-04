@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #1d2d3c;
+      }
+      main {
+        max-width: 1120px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: #bd8d3a;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2 {
+        font-family: Georgia, serif;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 64px);
+        line-height: 1.05;
+        margin: 10px 0 16px;
+      }
+      h2 {
+        font-size: 30px;
+        margin: 0 0 12px;
+      }
+      p {
+        line-height: 1.65;
+        color: #506071;
+      }
+      .lead {
+        font-size: 18px;
+        max-width: 800px;
+      }
+      .promise {
+        margin: 30px 0;
+        padding: 22px;
+        border-left: 5px solid #bd8d3a;
+        background: #f4f7fa;
+        font-size: 19px;
+        font-weight: 700;
+        color: #113d6a;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin: 34px 0;
+      }
+      .card {
+        border: 1px solid #d9e0e6;
+        padding: 24px;
+        box-shadow: 0 8px 20px rgba(17, 61, 106, 0.06);
+      }
+      .num {
+        display: inline-grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        background: #113d6a;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .types {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin: 18px 0 35px;
+      }
+      .space-choices {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 28px 0 8px;
+      }
+      .space-choice {
+        min-height: 72px;
+        display: grid;
+        place-items: center;
+        padding: 14px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.52);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+        font: 700 10px/1.35 Arial, sans-serif;
+        letter-spacing: .06em;
+      }
+      .types span {
+        padding: 9px 12px;
+        background: #edf3f8;
+        color: #113d6a;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .disclosure {
+        background: #113d6a;
+        color: #fff;
+        padding: 28px;
+        margin-top: 34px;
+      }
+      .disclosure h2,
+      .disclosure p {
+        color: #fff;
+      }
+      .form-note {
+        text-align: center;
+        padding: 28px;
+        border: 1px dashed #9eb0c0;
+        background: #f8fafc;
+      }
+      .form-note strong {
+        display: block;
+        color: #113d6a;
+        font:
+          700 25px Georgia,
+          serif;
+        margin-bottom: 8px;
+      }
+      .form-note button {
+        border: 1px solid #113d6a;
+        background: #113d6a;
+        color: #fff;
+        cursor: pointer;
+        font: 700 12px/1 Arial, sans-serif;
+        letter-spacing: 0.1em;
+        padding: 15px 20px;
+        text-transform: uppercase;
+      }
+      @media (max-width: 760px) {
+        .space-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding: 38px 16px 50px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      .form-note strong {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      p,
+      .lead {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .promise,
+      .card,
+      .form-note {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+        color: #113d6a;
+      }
+      .promise {
+        border-left: 1px solid #113d6a;
+        font:
+          500 italic 23px/1.45 "Cormorant Garamond",
+          Georgia,
+          serif;
+      }
+      .num,
+      .types span {
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+      }
+      .types span {
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+        letter-spacing: 0.05em;
+      }
+      .disclosure {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid #113d6a;
+        color: #113d6a;
+      }
+      .disclosure h2,
+      .disclosure p {
+        color: #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">BECOME AN EASY LOT MARKETPLACE HOST</div>
+      <h1>List your space.</h1>
+      <p class="lead">
+        Start with the closest kind of space. Easy Lot will only ask the
+        questions that matter for that property.
+      </p>
+      <div class="space-choices" aria-label="Choose the kind of space you have">
+        <div class="space-choice">OUTDOOR LOT / YARD</div>
+        <div class="space-choice">PARKING</div>
+        <div class="space-choice">WAREHOUSE</div>
+        <div class="space-choice">GARAGE / COVERED</div>
+        <div class="space-choice">INDUSTRIAL / FLEX</div>
+        <div class="space-choice">CONTAINER AREA</div>
+        <div class="space-choice">TEMPORARY STAGING</div>
+        <div class="space-choice">OTHER</div>
+      </div>
+      <div class="promise">
+        You control your advertised price. Easy Lot does not require hosts to
+        reduce their price.
+      </div>
+      <div class="types">
+        <span>GARAGES</span><span>DRIVEWAYS</span><span>VEHICLE STORAGE</span
+        ><span>CONTRACTOR YARDS</span><span>FLEET PARKING</span
+        ><span>WAREHOUSES</span><span>COMMERCIAL OUTDOOR</span>
+      </div>
+      <section class="grid">
+        <article class="card">
+          <div class="num">1</div>
+          <h2>Tell us about it</h2>
+          <p>
+            Describe the property, available space, intended uses, access,
+            features, and your advertised monthly price.
+          </p>
+        </article>
+        <article class="card">
+          <div class="num">2</div>
+          <h2>Easy Lot reviews</h2>
+          <p>
+            Every new listing is held for review. Submitting the form does not
+            publish the space automatically.
+          </p>
+        </article>
+        <article class="card">
+          <div class="num">3</div>
+          <h2>Connect directly</h2>
+          <p>
+            After approval, interested renters can inquire. Independent hosts
+            and renters make their own arrangements directly.
+          </p>
+        </article>
+      </section>
+      <div class="form-note">
+        <strong>List Your Space form</strong
+        ><span
+          >Continue to the secure Easy Lot form to submit your property for review.</span
+        >
+        <button type="button" id="openHostForm">CONTINUE TO LIST YOUR SPACE</button>
+      </div>
+      <section class="disclosure">
+        <h2>Independent-host marketplace</h2>
+        <p>
+          Easy Lot provides advertising and marketplace access. Easy Lot does
+          not negotiate the host’s price, collect host rent or deposits, execute
+          the parties’ agreement, manage the independent property, or handle
+          towing, default, or lien enforcement.
+        </p>
+      </section>
+    </main>
+    <script>
+      const parentOrigin = (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
+      document.getElementById("openHostForm").addEventListener("click", () => {
+        window.parent.postMessage({ type: "marketplace:open-host-form" }, parentOrigin);
+      });
+    </script>
+  </body>
+</html>

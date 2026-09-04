@@ -1,0 +1,1502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="https://www.easylotstoragesolutions.com/" target="_top" />
+    <title>The Lighthouse — AI Help, Projects &amp; Community Video</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+      :root {
+        --blue: #113d6a;
+        --blue-2: #0a2c4e;
+        --sky: #d6e6fe;
+        --ice: #edf4ff;
+        --white: #fff;
+        --ink: #132238;
+        --muted: #506176;
+        --line: rgba(17, 61, 106, 0.22);
+        --radius: 8px;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; overflow: hidden; color: var(--ink); background: var(--white); font-family: Arial, Helvetica, sans-serif; }
+      a { color: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      :focus-visible { outline: 3px solid #f7b731; outline-offset: 3px; }
+      .container { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+      .site-header { background: var(--white); border-bottom: 1px solid var(--line); position: relative; z-index: 2; }
+      .header-inner { min-height: 96px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+      .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; min-width: 240px; }
+      .brand-mark { width: 92px; height: 58px; overflow: hidden; flex: 0 0 auto; }
+      .brand-mark img { width: 118px; height: auto; transform: translate(-13px, -2px); }
+      .brand-copy strong { display: block; color: var(--blue); font: 800 24px/1 Arial, sans-serif; letter-spacing: 0.06em; }
+      .brand-copy span { display: block; color: var(--muted); font-size: 12px; margin-top: 5px; }
+      .nav { display: flex; align-items: center; justify-content: flex-end; gap: 20px; flex-wrap: wrap; }
+      .nav a { font-weight: 700; font-size: 13px; text-decoration: none; color: var(--blue-2); }
+      .nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+      .button { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; padding: 0 24px; border: 2px solid var(--blue); border-radius: var(--radius); background: var(--blue); color: var(--white); font: 800 13px/1 Arial, sans-serif; letter-spacing: 0.06em; text-decoration: none; white-space: nowrap; }
+      .button.secondary { background: transparent; color: var(--blue); }
+      .button.light { background: var(--white); color: var(--blue); border-color: var(--white); }
+      .button:hover { background: var(--blue-2); color: var(--white); border-color: var(--blue-2); }
+      .hero { background: linear-gradient(120deg, var(--sky), var(--ice)); padding: 94px 0 88px; }
+      .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr); align-items: center; gap: 72px; }
+      .eyebrow { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+      h1, h2, h3 { color: var(--blue-2); margin-top: 0; }
+      h1 { margin-bottom: 24px; max-width: 760px; font: 800 clamp(48px, 7vw, 82px)/0.98 Arial, sans-serif; letter-spacing: -0.045em; }
+      h2 { margin-bottom: 18px; font: 800 clamp(34px, 4vw, 52px)/1.05 Arial, sans-serif; letter-spacing: -0.035em; }
+      h3 { margin-bottom: 10px; font-size: 21px; line-height: 1.2; }
+      .hero p { max-width: 740px; margin: 0 0 30px; color: var(--ink); font-size: clamp(18px, 2vw, 23px); line-height: 1.55; }
+      .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+      .hero-card { padding: 32px; background: rgba(255,255,255,.8); border: 1px solid var(--line); border-radius: var(--radius); }
+      .hero-card h2 { font-size: 30px; }
+      .hero-card p { font-size: 16px; margin-bottom: 22px; }
+      .section { padding: 86px 0; }
+      .section.soft { background: var(--ice); }
+      .section.sky { background: var(--sky); }
+      .section.dark { background: var(--blue-2); color: var(--white); }
+      .section.dark h2, .section.dark h3, .section.dark p { color: var(--white); }
+      .section-head { max-width: 780px; margin-bottom: 38px; }
+      .section-head p, .copy { color: var(--muted); font-size: 18px; line-height: 1.65; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+      .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .card { display: flex; flex-direction: column; min-height: 100%; padding: 28px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
+      .card p { color: var(--muted); line-height: 1.6; margin: 0; }
+      .card .button { margin-top: auto; align-self: flex-start; }
+      .solution-card { gap: 18px; padding: 32px; }
+      .solution-card h3 { font-size: 24px; }
+      .solution-card ul { margin: 0 0 8px; padding-left: 20px; color: var(--muted); line-height: 1.75; }
+      .solution-note { margin: 28px 0 0; font-weight: 700; color: var(--blue-2); }
+      .category { min-height: 112px; justify-content: center; }
+      .category h3 { margin: 0; font-size: 19px; }
+      .split { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 58px; }
+      .checklist { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+      .checklist li { position: relative; padding-left: 24px; line-height: 1.5; }
+      .checklist li::before { content: ""; position: absolute; left: 0; top: .45em; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+      .badge { display: inline-flex; margin-bottom: 14px; padding: 7px 10px; border-radius: 999px; background: var(--blue); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+      .location-card .address { min-height: 48px; font-weight: 700; line-height: 1.5; }
+      .rates { margin: 18px 0 24px; padding: 0; list-style: none; color: var(--muted); line-height: 1.8; }
+      .steps { counter-reset: step; }
+      .step { position: relative; padding-top: 64px; }
+      .step::before { counter-increment: step; content: counter(step); position: absolute; top: 0; left: 0; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: var(--white); font-weight: 800; }
+      .model { padding: 34px; border: 1px solid rgba(255,255,255,.28); border-radius: var(--radius); }
+      .model ol { margin: 20px 0; padding-left: 22px; line-height: 1.8; }
+      .note { font-size: 14px; line-height: 1.6; opacity: .86; }
+      .final { text-align: center; }
+      .final .actions { justify-content: center; margin-top: 28px; }
+      .site-footer { background: #061d35; color: rgba(255,255,255,.82); padding: 58px 0 32px; }
+      .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 42px; }
+      .site-footer h3 { color: var(--white); font-size: 16px; }
+      .site-footer a { display: block; margin: 10px 0; color: rgba(255,255,255,.82); text-decoration: none; font-size: 14px; }
+      .site-footer p { font-size: 14px; line-height: 1.7; }
+      .copyright { margin-top: 38px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.16); font-size: 13px; }
+      .assistant-shell { max-width: 820px; margin: 0 auto; padding: 34px; background: rgba(255,255,255,.58); border: 1px solid rgba(17,61,106,.72); border-radius: 4px; box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .assistant-shell .section-head { margin-bottom: 24px; text-align: left; }
+      .assistant-shell h2 { margin-bottom: 10px; }
+      .journey-grid { margin-top: 34px; }
+      .journey-grid .card { gap: 16px; }
+      .assistant-form { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; }
+      .assistant-form label { display: grid; gap: 8px; font: 700 13px/1.4 Arial, Helvetica, sans-serif; }
+      .assistant-form textarea { width: 100%; min-height: 112px; padding: 15px; resize: vertical; border: 1px solid var(--blue); border-radius: 4px; background: rgba(255,255,255,.78); color: var(--blue-2); font: 16px/1.5 Arial, Helvetica, sans-serif; }
+      .suggestions { display: flex; flex-wrap: wrap; gap: 9px; margin: 15px 0 4px; }
+      .suggestion { padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.6); color: var(--blue); cursor: pointer; font: 700 12px/1.25 Arial, Helvetica, sans-serif; }
+      .assistant-tools { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+      .voice-stage { display: flex; align-items: center; gap: 12px; padding: 0; text-align: left; }
+      .voice-button { width: 50px; height: 50px; display: grid; place-items: center; border: 1px solid var(--blue); border-radius: 50%; background: rgba(255,255,255,.58); color: var(--blue); cursor: pointer; box-shadow: none; transition: transform .18s ease, background .18s ease; }
+      .voice-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--blue-2); box-shadow: 0 16px 34px rgba(17,61,106,.32); }
+      .voice-button:disabled { cursor: not-allowed; opacity: .56; }
+      .voice-button[data-state="listening"] { animation: voice-pulse 1.8s ease-in-out infinite; }
+      .voice-icon { width: 14px; height: 20px; position: relative; display: block; border: 2px solid currentColor; border-radius: 9px; }
+      .voice-icon::before { content: ""; position: absolute; left: 50%; bottom: -7px; width: 22px; height: 12px; border: 2px solid currentColor; border-top: 0; border-radius: 0 0 15px 15px; transform: translateX(-50%); }
+      .voice-icon::after { content: ""; position: absolute; left: 50%; bottom: -12px; width: 2px; height: 6px; background: currentColor; transform: translateX(-50%); }
+      .voice-button-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .assistant-status { max-width: 500px; font: 700 13px/1.45 Arial, Helvetica, sans-serif; color: var(--blue); }
+      .voice-controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+      .voice-controls .button { min-height: 40px; }
+      .voice-transcript { width: 100%; margin-top: 20px; padding: 16px 18px; border: 1px solid var(--line); background: rgba(255,255,255,.58); text-align: left; }
+      .voice-transcript strong { display: block; margin-bottom: 7px; font: 800 11px/1.3 Arial, Helvetica, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+      .voice-transcript p { margin: 0; line-height: 1.55; }
+      .voice-warning { margin-top: 9px !important; color: #7b3f00; font: 700 12px/1.45 Arial, Helvetica, sans-serif; }
+      .voice-disclosure { margin: 0; font: 12px/1.5 Arial, Helvetica, sans-serif; color: var(--muted); }
+      @keyframes voice-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,61,106,.26), 0 12px 28px rgba(17,61,106,.24); } 50% { box-shadow: 0 0 0 17px rgba(17,61,106,0), 0 12px 28px rgba(17,61,106,.24); } }
+      .assistant-response { margin-top: 22px; padding: 20px; border-left: 4px solid var(--blue); background: rgba(214,230,254,.52); }
+      .assistant-response p { margin: 0; line-height: 1.6; }
+      .assistant-matches { display: grid; gap: 12px; margin-top: 16px; }
+      .assistant-match { padding: 16px; background: rgba(255,255,255,.7); border: 1px solid var(--line); }
+      .assistant-match h3 { margin-bottom: 7px; font-size: 19px; }
+      .assistant-match p { margin: 4px 0; font-size: 14px; }
+      .assistant-confirm { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+      .assistant-confirm label { display: block; margin: 10px 0; font: 14px/1.5 Arial, Helvetica, sans-serif; color: var(--ink); }
+      .assistant-fallbacks { margin-top: 18px; }
+      .assistant-fallbacks summary { cursor: pointer; font: 700 13px/1.4 Arial, Helvetica, sans-serif; color: var(--blue); }
+      .assistant-fallback-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+      .assistant-fallbacks .button { min-height: 40px; }
+      .assistant-disclaimer { margin: 18px 0 0; font: 12px/1.55 Arial, Helvetica, sans-serif; color: var(--muted); }
+      .ai-console-bar { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: -42px -42px 34px; padding: 18px 24px; border-radius: 4px 4px 0 0; background: linear-gradient(110deg, #082b4c, #164f84); color: #fff; }
+      .ai-identity { display: flex; align-items: center; gap: 13px; min-width: 0; }
+      .ai-mark { position: relative; width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.58); border-radius: 14px; background: radial-gradient(circle at 35% 30%, #fff 0 7%, #93c7f4 8% 18%, #1b659d 19% 48%, #082b4c 49%); box-shadow: 0 0 24px rgba(147,199,244,.42); }
+      .ai-mark::after { content: ""; width: 9px; height: 9px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255,255,255,.14); }
+      .ai-name { display: block; color: #fff; font: 700 19px/1.2 'Playfair Display', Georgia, serif; }
+      .ai-subtitle { display: block; margin-top: 3px; color: #dceeff; font: 700 10px/1.3 Arial, sans-serif; letter-spacing: .09em; text-transform: uppercase; }
+      .ai-live { display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; padding: 8px 11px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: rgba(255,255,255,.1); color: #fff; font: 800 10px/1 Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+      .ai-live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #74e3a4; box-shadow: 0 0 0 4px rgba(116,227,164,.13); }
+      .ai-console-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 28px; align-items: start; }
+      .ai-guide { padding: 22px 20px; border: 1px solid rgba(17,61,106,.2); border-radius: 14px; background: rgba(234,244,255,.72); }
+      .ai-guide h3 { margin: 0 0 8px; font-size: 21px; }
+      .ai-guide > p { margin: 0 0 18px; color: var(--easy-muted); font: 14px/1.55 Arial, sans-serif; }
+      .ai-capabilities { display: grid; gap: 14px; }
+      .ai-capability { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+      .ai-capability span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: #fff; color: var(--easy-blue); font: 800 12px/1 Arial, sans-serif; box-shadow: 0 4px 12px rgba(8,43,76,.08); }
+      .ai-capability strong { display: block; margin-bottom: 3px; color: var(--easy-navy); font: 700 13px/1.3 Arial, sans-serif; }
+      .ai-capability small { display: block; color: var(--easy-muted); font: 12px/1.42 Arial, sans-serif; }
+      .ai-access { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(17,61,106,.16); }
+      .ai-access strong { display: block; color: var(--easy-navy); font: 700 13px/1.35 Arial, sans-serif; }
+      .ai-access p { margin: 5px 0 12px; color: var(--easy-muted); font: 12px/1.45 Arial, sans-serif; }
+      .ai-access .button { width: 100%; min-height: 40px; padding: 0 12px; background: var(--easy-blue); color: #fff; }
+      .guest-label { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 5px; color: var(--easy-blue); font: 800 10px/1.2 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+      .guest-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--easy-gold); }
+      .ai-chat { min-width: 0; }
+      .ai-chat .assistant-intro { display: block; margin-bottom: 16px; }
+      .ai-chat .assistant-intro .section-head { max-width: none; }
+      .ai-chat .assistant-intro h2 { margin-top: 5px; font-size: clamp(34px, 4vw, 48px); }
+      .ai-chat .assistant-intro p { font-size: 16px; line-height: 1.55; }
+      .ai-welcome { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 11px; align-items: start; margin-bottom: 14px; }
+      .ai-avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--easy-blue); color: #fff; font: 700 18px/1 'Niconne', cursive; box-shadow: 0 7px 16px rgba(8,43,76,.18); }
+      .ai-bubble { padding: 14px 16px; border: 1px solid rgba(17,61,106,.16); border-radius: 4px 16px 16px 16px; background: #fff; color: var(--easy-ink); box-shadow: 0 8px 22px rgba(8,43,76,.08); }
+      .ai-bubble strong { display: block; margin-bottom: 4px; color: var(--easy-navy); font: 700 14px/1.35 Arial, sans-serif; }
+      .ai-bubble p { margin: 0; color: var(--easy-blue); font: 14px/1.55 Arial, sans-serif; }
+      .prompt-label { margin: 16px 0 8px; color: var(--easy-muted); font: 800 10px/1.2 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+      [hidden] { display: none !important; }
+      @media (max-width: 980px) {
+        .header-inner { align-items: flex-start; flex-direction: column; padding: 18px 0; }
+        .nav { justify-content: flex-start; }
+        .hero-grid, .split { grid-template-columns: 1fr; }
+        .grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 640px) {
+        .container { width: min(100% - 32px, 1160px); }
+        .site-header { position: static; }
+        .brand-mark { width: 72px; height: 48px; }
+        .brand-mark img { width: 94px; }
+        .brand-copy strong { font-size: 20px; }
+        .nav { gap: 13px 18px; }
+        .nav a { font-size: 12px; }
+        .hero { padding: 62px 0; }
+        h1 { font-size: clamp(42px, 13vw, 62px); overflow-wrap: anywhere; }
+        .section { padding: 64px 0; }
+        .grid, .grid.four, .footer-grid, .checklist { grid-template-columns: 1fr; }
+        .card { padding: 24px; }
+        .solution-card { min-width: 0; }
+        .solution-card .button { width: 100%; padding: 12px 16px; line-height: 1.25; text-align: center; white-space: normal; }
+        .actions .button { width: 100%; }
+        .assistant-shell { padding: 24px; }
+        .assistant-form { grid-template-columns: 1fr; }
+        .assistant-form .button { width: 100%; }
+        .voice-button { width: 50px; height: 50px; }
+        .voice-controls, .assistant-fallback-actions { width: 100%; }
+        .voice-controls .button, .assistant-fallback-actions .button { width: 100%; }
+      }
+
+      /* Original Easy Lot visual system */
+      html, body { color: var(--blue); background: var(--sky); font-family: 'Playfair Display', Georgia, serif; }
+      .container { width: min(980px, calc(100% - 48px)); }
+      .hero { background: var(--sky); padding: 22px 0 70px; text-align: center; }
+      .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 54px; text-align: left; }
+      .eyebrow { color: var(--blue); font: 400 11px/1.3 Arial, Helvetica, sans-serif; letter-spacing: .13em; }
+      h1, h2, h3 { color: var(--blue); }
+      h1 { font: 400 clamp(38px, 4vw, 45px)/1.08 'Playfair Display', Georgia, serif; letter-spacing: -.018em; }
+      h2 { font: italic 400 clamp(42px, 5vw, 60px)/1.08 'Niconne', 'Brush Script MT', cursive; letter-spacing: -.02em; }
+      .hero-card h2 { font-size: 44px; }
+      h3 { font: 400 22px/1.25 'Playfair Display', Georgia, serif; }
+      p, li { color: var(--blue); font-family: 'Playfair Display', Georgia, serif; }
+      .hero p { color: var(--blue); font-size: 21px; }
+      .section { padding: 60px 0; background: var(--sky); }
+      .section.soft, .section.sky, .section.dark { background: var(--sky); color: var(--blue); }
+      .section.dark h2, .section.dark h3, .section.dark p { color: var(--blue); }
+      .section-head { margin-inline: auto; text-align: center; }
+      .section-head p, .copy { color: var(--blue); font-size: 18px; }
+      .card, .hero-card, .model { background: rgba(255,255,255,.42); border: 1px solid rgba(17,61,106,.72); border-radius: 4px; box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .card p, .solution-card ul, .rates { color: var(--blue); }
+      .button, .button.secondary, .button.light { min-height: 44px; padding: 0 22px; border: 1px solid var(--blue); border-radius: 4px; background: rgba(255,255,255,.48); color: var(--blue); font: 400 11px/1 Arial, Helvetica, sans-serif; letter-spacing: .04em; }
+      .button:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+      .badge, .step::before { background: var(--blue); color: #fff; }
+      .solution-note { color: var(--blue); font-weight: 400; font-style: italic; text-align: center; }
+      .checklist li::before { background: var(--blue); }
+      .final { border-top: 1px solid rgba(17,61,106,.28); }
+      @media (max-width: 980px) {
+        .hero-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .container { width: min(100% - 28px, 980px); }
+        .hero { padding: 48px 0 56px; }
+        h1 { max-width: 440px; margin-inline: auto; font-size: 42px; line-height: 1.02; overflow-wrap: normal; word-break: normal; }
+        h2 { font-size: 44px; }
+        .hero p, .section-head p, .copy { font-size: 17px; }
+        .section { padding: 58px 0; }
+      }
+    </style>
+    <style>
+      /* Easy platform homepage correction: the established blue visual system,
+         with Ask Lighthouse as the front door and storage as one service vertical. */
+      :root {
+        --easy-navy: #082b4c;
+        --easy-blue: #113d6a;
+        --easy-sky: #d6e6fe;
+        --easy-pale: #eef5ff;
+        --easy-white: #ffffff;
+        --easy-gold: #f2b84b;
+        --easy-ink: #14283d;
+        --easy-muted: #52677c;
+        --easy-line: rgba(17, 61, 106, .2);
+      }
+      html, body { color: var(--easy-blue); background: var(--easy-sky); font-family: 'Playfair Display', Georgia, serif; }
+      .container { width: min(1080px, calc(100% - 48px)); }
+      h1, h2, h3, p, li { font-family: 'Playfair Display', Georgia, serif; }
+      h1, h2, h3 { color: var(--easy-navy); }
+      h1 { max-width: 850px; margin: 12px auto 24px; font: 400 clamp(62px, 8vw, 94px)/.96 'Niconne', 'Brush Script MT', cursive; letter-spacing: -.025em; }
+      h2 { margin-bottom: 18px; font: 400 clamp(46px, 5.4vw, 66px)/1.02 'Niconne', 'Brush Script MT', cursive; letter-spacing: -.015em; }
+      h3 { font: 400 22px/1.25 'Playfair Display', Georgia, serif; }
+      p, li { color: var(--easy-blue); }
+      .eyebrow { color: var(--easy-blue); font: 800 11px/1.3 Arial, Helvetica, sans-serif; letter-spacing: .16em; }
+      .button, .button.secondary, .button.light { min-height: 46px; padding: 0 24px; border: 1px solid var(--easy-blue); border-radius: 4px; background: rgba(255,255,255,.48); color: var(--easy-blue); font: 400 11px/1 Arial, Helvetica, sans-serif; letter-spacing: .055em; }
+      .button.secondary { background: transparent; color: var(--easy-blue); }
+      .button:hover { background: var(--easy-blue); border-color: var(--easy-blue); color: #fff; text-decoration: none; }
+      .hero { position: relative; overflow: hidden; padding: 64px 0 90px; background: var(--easy-sky); text-align: center; }
+      .hero::before, .hero::after { display: none; }
+      .hero .container { position: relative; z-index: 1; }
+      .hero p { max-width: 790px; margin: 0 auto 30px; color: var(--easy-blue); font: 400 clamp(19px, 2.2vw, 24px)/1.62 'Playfair Display', Georgia, serif; }
+      .hero .actions { justify-content: center; }
+      .hero-note { margin-top: 22px !important; color: var(--easy-blue) !important; font-size: 14px !important; font-weight: 700 !important; }
+      .journey-grid { display: none; }
+      #assistant { position: relative; z-index: 2; margin-top: -58px; padding: 0 0 76px; background: transparent; }
+      .assistant-shell { max-width: 940px; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: rgba(255,255,255,.48); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .assistant-shell .section-head { max-width: 680px; margin: 0 0 28px; text-align: left; }
+      .assistant-shell h2 { margin: 8px 0 10px; font-size: clamp(36px, 5vw, 56px); }
+      .assistant-shell .section-head p { color: var(--easy-blue); font: 400 18px/1.65 'Playfair Display', Georgia, serif; }
+      .assistant-form { grid-template-columns: 1fr auto; gap: 12px; }
+      .assistant-form label { color: var(--easy-navy); font-size: 13px; }
+      .assistant-form textarea { min-height: 124px; border: 1px solid rgba(17,61,106,.46); border-radius: 10px; background: #f8fbff; color: var(--easy-ink); font: 17px/1.5 Arial, Helvetica, sans-serif; box-shadow: inset 0 1px 2px rgba(8,43,76,.05); }
+      .suggestion { padding: 10px 14px; border-color: var(--easy-line); background: var(--easy-pale); color: var(--easy-blue); font-size: 12px; }
+      .suggestion:hover { border-color: var(--easy-blue); background: #fff; }
+      .assistant-status { color: var(--easy-blue); }
+      .voice-disclosure, .assistant-disclaimer { color: var(--easy-muted); }
+      .assistant-shell { position: relative; overflow: hidden; background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(224,236,250,.82)); }
+      .assistant-shell::before { content: none; }
+      .assistant-intro { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end; margin-bottom: 24px; }
+      .assistant-intro .section-head { margin: 0; }
+      .assistant-steps { display: flex; align-items: center; gap: 7px; color: var(--easy-muted); font: 700 11px/1.2 Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+      .assistant-steps span { display: inline-flex; align-items: center; gap: 7px; }
+      .assistant-steps span + span::before { content: "→"; color: var(--easy-gold); font-size: 15px; }
+      .assistant-composer { position: relative; border: 1px solid rgba(17,61,106,.42); border-radius: 16px; background: rgba(255,255,255,.9); box-shadow: 0 18px 45px rgba(8,43,76,.12); overflow: hidden; }
+      .assistant-form { display: block; }
+      .assistant-form label { padding: 18px 20px 0; color: var(--easy-navy); }
+      .assistant-form textarea { min-height: 132px; padding: 4px 0 16px; border: 0; border-radius: 0; background: transparent; box-shadow: none; resize: none; }
+      .assistant-form textarea:focus { outline: 0; }
+      .assistant-form textarea::placeholder { color: #64778a; }
+      .composer-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 14px; border-top: 1px solid rgba(17,61,106,.14); background: rgba(230,239,250,.6); }
+      .composer-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .composer-tool { min-height: 42px; display: inline-flex; align-items: center; gap: 8px; padding: 0 13px; border: 1px solid rgba(17,61,106,.35); border-radius: 999px; background: rgba(255,255,255,.85); color: var(--easy-blue); cursor: pointer; font: 700 12px/1 Arial, sans-serif; }
+      .composer-tool:hover:not(:disabled) { border-color: var(--easy-blue); background: #fff; }
+      .composer-tool:disabled { opacity: .55; cursor: not-allowed; }
+      .composer-icon { font-size: 17px; line-height: 1; }
+      .composer-send { min-width: 132px; border-radius: 999px; }
+      .attachment-tray { display: grid; gap: 10px; padding: 0 20px 16px; }
+      .attachment-item { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; padding: 9px; border: 1px solid rgba(17,61,106,.18); border-radius: 10px; background: #f7fbff; }
+      .attachment-item img { width: 54px; height: 44px; object-fit: cover; border-radius: 7px; }
+      .attachment-item strong { display: block; color: var(--easy-navy); font: 700 13px/1.3 Arial, sans-serif; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .attachment-item small { color: var(--easy-muted); }
+      .attachment-remove { width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--easy-blue); cursor: pointer; font-size: 20px; }
+      .media-consent { display: block; margin: 0 20px 16px; color: var(--easy-ink); font: 12px/1.5 Arial, sans-serif; }
+      .media-help { margin: 10px 0 0; color: var(--easy-muted); font: 12px/1.5 Arial, sans-serif; }
+      .assistant-tools { justify-content: space-between; }
+      .voice-stage { flex: 1; }
+      .voice-button { width: 46px; height: 46px; box-shadow: none; }
+      .section { padding: 58px 0; background: var(--easy-sky); }
+      .section-head { max-width: 760px; margin: 0 0 50px; text-align: left; }
+      .section-head p, .copy { color: var(--easy-blue); font: 400 18px/1.7 'Playfair Display', Georgia, serif; }
+      .easy-needs { border-top: 1px solid var(--easy-line); }
+      .needs-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
+      .need { display: grid; grid-template-columns: 42px 1fr; gap: 18px; padding: 26px 0; border-top: 1px solid var(--easy-line); }
+      .need:nth-child(-n+2) { border-top: 0; }
+      .need-number { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--easy-sky); color: var(--easy-blue); font: 800 12px/1 Arial, sans-serif; }
+      .need h3 { margin: 0 0 7px; }
+      .need p { margin: 0; font: 400 16px/1.65 'Playfair Display', Georgia, serif; }
+      .easy-process { background: rgba(255,255,255,.25); }
+      .process-line { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--easy-blue); }
+      .process-step { position: relative; padding: 34px 36px 0 0; }
+      .process-step::before { content: ""; position: absolute; width: 11px; height: 11px; top: -6px; left: 0; border-radius: 50%; background: var(--easy-blue); box-shadow: 0 0 0 6px var(--easy-pale); }
+      .process-step strong { display: block; margin-bottom: 10px; color: var(--easy-blue); font: 800 11px/1.2 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+      .process-step h3 { margin: 0 0 10px; }
+      .process-step p { margin: 0; font: 400 16px/1.65 'Playfair Display', Georgia, serif; }
+      .easy-callout { padding: 60px 0; border-block: 1px solid rgba(17,61,106,.28); background: rgba(255,255,255,.28); color: var(--easy-blue); }
+      .callout-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 48px; }
+      .easy-callout h2, .easy-callout p { color: var(--easy-blue); }
+      .easy-callout h2 { max-width: 760px; margin-bottom: 12px; }
+      .easy-callout p { margin: 0; font: 400 18px/1.65 'Playfair Display', Georgia, serif; }
+      .easy-callout .button { background: rgba(255,255,255,.48); border-color: var(--easy-blue); color: var(--easy-blue); }
+      .easy-business { background: var(--easy-sky); }
+      .business-layout, .storage-layout { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 76px; }
+      .business-panel { padding: 38px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: rgba(255,255,255,.42); color: var(--easy-blue); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .business-panel h3, .business-panel p, .business-panel li { color: var(--easy-blue); }
+      .business-panel ul { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 24px; margin: 24px 0 0; padding: 0; list-style: none; }
+      .business-panel li { position: relative; padding-left: 18px; font: 700 14px/1.45 Arial, sans-serif; opacity: .9; }
+      .business-panel li::before { content: ""; position: absolute; left: 0; top: .48em; width: 7px; height: 7px; border-radius: 50%; background: var(--easy-gold); }
+      .easy-storage { background: rgba(255,255,255,.2); }
+      .storage-mark { min-height: 300px; display: grid; place-items: center; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: rgba(255,255,255,.42); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); text-align: center; }
+      .storage-mark span { display: block; max-width:100%; color: var(--easy-blue); font: 400 clamp(38px,5vw,50px)/1 'Niconne', 'Brush Script MT', cursive; overflow-wrap:anywhere; }
+      .storage-mark strong { display: block; margin-top: 8px; color: var(--easy-navy); font: 800 20px/1.25 Arial, sans-serif; letter-spacing: .04em; }
+      .easy-final { padding: 88px 0; border-top: 1px solid rgba(17,61,106,.28); background: var(--easy-sky); text-align: center; }
+      .easy-final h2 { max-width: 840px; margin-inline: auto; }
+      .easy-final p { max-width: 680px; margin: 0 auto 28px; font: 400 19px/1.7 'Playfair Display', Georgia, serif; }
+      .easy-final .actions { justify-content: center; }
+      .legacy-home { display: none !important; }
+      @media (max-width: 820px) {
+        .business-layout, .storage-layout, .callout-row { grid-template-columns: 1fr; gap: 34px; }
+        .ai-console-grid { grid-template-columns: 1fr; }
+        .ai-guide { order: 2; }
+        .needs-list { column-gap: 36px; }
+        .process-step { padding-right: 22px; }
+      }
+      @media (max-width: 640px) {
+        .container { width: min(100% - 30px, 1080px); }
+        .hero { padding: 58px 0 98px; }
+        h1 { max-width: 100%; margin-top: 10px; font-size: clamp(44px, 14vw, 62px); line-height: 1; overflow-wrap: normal; }
+        h2 { font-size: clamp(34px, 10vw, 46px); }
+        .hero p { font-size: 18px; }
+        #assistant { margin-top: -48px; padding-bottom: 68px; }
+        .assistant-shell { padding: 24px 20px; border-radius: 16px; }
+        .ai-console-bar { margin: -24px -20px 24px; padding: 15px 16px; border-radius: 16px 16px 0 0; }
+        .ai-mark { width: 38px; height: 38px; border-radius: 12px; }
+        .ai-subtitle { max-width: 150px; }
+        .ai-live { padding: 7px 9px; }
+        .ai-console-grid { gap: 22px; }
+        .ai-guide { padding: 19px 17px; }
+        .assistant-intro { grid-template-columns: 1fr; gap: 12px; }
+        .assistant-steps { flex-wrap: wrap; }
+        .assistant-form { grid-template-columns: 1fr; }
+        .assistant-form .button { width: 100%; }
+        .composer-footer { align-items: stretch; flex-direction: column; }
+        .composer-actions { display: grid; grid-template-columns: 1fr 1fr; }
+        .composer-tool { justify-content: center; }
+        .composer-send { width: 100%; }
+        .suggestions { display: grid; grid-template-columns: 1fr 1fr; }
+        .suggestion { min-height: 44px; border-radius: 8px; text-align: left; }
+        .section { padding: 68px 0; }
+        .section-head { margin-bottom: 34px; }
+        .needs-list, .process-line { grid-template-columns: 1fr; }
+        .need, .need:nth-child(-n+2) { border-top: 1px solid var(--easy-line); }
+        .need:first-child { border-top: 0; }
+        .process-line { border-top: 0; border-left: 1px solid var(--easy-blue); margin-left: 6px; }
+        .process-step { padding: 0 0 34px 30px; }
+        .process-step::before { top: 5px; left: -6px; }
+        .easy-callout { padding: 62px 0; }
+        .business-panel { padding: 28px 22px; }
+        .business-panel ul { grid-template-columns: 1fr; }
+        .storage-mark { min-height: 220px; }
+        .easy-final { padding: 76px 0; }
+        .actions .button { width: 100%; }
+      }
+      @media (max-width: 370px) {
+        .suggestions { grid-template-columns: 1fr; }
+        .assistant-shell { padding-inline: 17px; }
+        .need { grid-template-columns: 34px 1fr; gap: 12px; }
+      }
+      .lighthouse-doorway { padding: 18px 0 44px; background: var(--easy-sky); }
+      .lighthouse-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0,1.35fr) minmax(250px,.65fr); gap: 38px; align-items: center; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(225,237,252,.76)); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
+      .lighthouse-panel::after { content: "L"; position: absolute; right: -8px; bottom: -60px; color: rgba(17,61,106,.055); font: 400 210px/1 'Niconne','Brush Script MT',cursive; pointer-events:none; }
+      .lighthouse-panel h2 { margin: 7px 0 12px; }
+      .lighthouse-panel p { margin: 0; font-size: 18px; line-height: 1.65; }
+      .lighthouse-offer { position: relative; z-index:1; padding-left: 30px; border-left: 1px solid var(--easy-line); }
+      .lighthouse-price { display:block; color:var(--easy-navy); font:400 38px/1.1 'Playfair Display',Georgia,serif; }
+      .lighthouse-price small { font-size:14px; }
+      .lighthouse-state { min-height:42px; margin:14px 0!important; font:700 13px/1.5 Arial,sans-serif!important; }
+      .video-community { padding: 56px 0; border-block: 1px solid rgba(17,61,106,.28); background: linear-gradient(160deg,#082b4c 0%,#113d6a 62%,#164f84 100%); color:#fff; }
+      .video-community h2,.video-community h3,.video-community p,.video-community label { color:#fff; }
+      .video-community .eyebrow { color:#9fd0ff; }
+      .video-heading { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:32px; margin-bottom:30px; }
+      .video-heading p { max-width:720px; margin:0; font-size:17px; line-height:1.65; color:#dceeff; }
+      .video-safety { max-width:300px; padding:15px 17px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); font:700 12px/1.5 Arial,sans-serif; }
+      .video-layout { display:grid; grid-template-columns:minmax(320px,.88fr) minmax(0,1.12fr); gap:28px; align-items:start; }
+      .video-studio,.video-feed { padding:26px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); box-shadow:0 14px 35px rgba(0,0,0,.16); }
+      .video-studio h3,.video-feed h3 { margin-bottom:8px; }
+      .video-studio > p,.video-feed > p { margin:0 0 18px; color:#dceeff; font-size:14px; line-height:1.55; }
+      .video-form { display:grid; gap:13px; }
+      .video-form label { display:grid; gap:6px; font:700 12px/1.35 Arial,sans-serif; letter-spacing:.02em; }
+      .video-form input[type="text"],.video-form textarea,.video-form input[type="file"] { width:100%; padding:12px; border:1px solid rgba(255,255,255,.55); border-radius:3px; background:#fff; color:var(--easy-navy); font:15px/1.45 Arial,sans-serif; }
+      .video-form textarea { min-height:82px; resize:vertical; }
+      .video-form input[type="file"] { padding:9px; }
+      .video-check { display:grid!important; grid-template-columns:18px 1fr; align-items:start; gap:9px!important; font-weight:400!important; line-height:1.45!important; }
+      .video-check input { margin-top:2px; }
+      .video-preview { width:100%; max-height:260px; border:1px solid rgba(255,255,255,.35); background:#02070d; object-fit:contain; }
+      .video-submit { width:100%; background:#fff!important; color:var(--easy-navy)!important; border-color:#fff!important; }
+      .video-progress { min-height:20px; color:#dceeff; font:700 12px/1.5 Arial,sans-serif; }
+      .video-feed-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+      .video-card { overflow:hidden; border:1px solid rgba(255,255,255,.26); background:rgba(3,18,34,.42); }
+      .video-card video { display:block; width:100%; aspect-ratio:9/16; max-height:310px; background:#02070d; object-fit:cover; }
+      .video-card-body { padding:14px; }
+      .video-card h4 { margin:0 0 6px; color:#fff; font:700 16px/1.3 'Playfair Display',serif; }
+      .video-card p { margin:0 0 8px; color:#dceeff; font-size:12px; line-height:1.45; }
+      .video-meta { color:#9fd0ff!important; font:700 10px/1.4 Arial,sans-serif!important; text-transform:uppercase; letter-spacing:.06em; }
+      .video-report { padding:0; border:0; background:transparent; color:#dceeff; cursor:pointer; font:700 10px/1 Arial,sans-serif; text-decoration:underline; }
+      .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
+      .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
+      .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{grid-template-columns:1fr;padding:28px 22px}.lighthouse-offer{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
+          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
+          <p class="hero-note">No account needed to start exploring.</p>
+          <div class="grid journey-grid"><article class="card"><h3>Find Space</h3><p>Vehicles, fleets, equipment, contractor yards, containers, and indoor or outdoor space.</p><a class="button" href="/find-storage">FIND SPACE</a></article><article class="card"><h3>List Space</h3><p>Offer an unused lot, yard, parking area, warehouse, acreage, or other usable property.</p><a class="button" href="/copy-of-find-storage">LIST SPACE</a></article><article class="card"><h3>Lighthouse AI</h3><p>AI help for websites, projects, files, research, and everyday business work.</p><a class="button" href="#assistant">MEET LIGHTHOUSE</a></article></div>
+        </div>
+      </section>
+      <section class="section" id="assistant">
+        <div class="container">
+          <div class="assistant-shell">
+            <div class="ai-console-bar"><div class="ai-identity"><span class="ai-mark" aria-hidden="true"></span><div><strong class="ai-name">Lighthouse AI</strong><span class="ai-subtitle">Guidance for work, business, projects, and everyday needs</span></div></div><span class="ai-live">Online</span></div>
+            <div class="ai-console-grid">
+              <aside class="ai-guide" aria-label="What Lighthouse AI can do">
+                <h3>What Lighthouse can do</h3>
+                <p>Start here for helpful AI guidance without needing to choose a department or service first.</p>
+                <div class="ai-capabilities">
+                  <div class="ai-capability"><span>01</span><div><strong>Understand the need</strong><small>Turn an unfinished idea or messy problem into something clear.</small></div></div>
+                  <div class="ai-capability"><span>02</span><div><strong>Look at context</strong><small>Use pictures or sampled video frames to understand what you are showing.</small></div></div>
+                  <div class="ai-capability"><span>03</span><div><strong>Suggest a next step</strong><small>Organize practical options while keeping important decisions with you.</small></div></div>
+                </div>
+                <div class="ai-access"><strong>Want the complete AI workspace?</strong><p>Sign in and activate The Lighthouse Membership for saved cases, ongoing work, memory, files, approvals, and connected computer tools.</p><a class="button" href="/customer-portal">SIGN IN FOR FULL ACCESS</a></div>
+              </aside>
+              <div class="ai-chat">
+                <div class="assistant-intro"><div class="section-head"><div class="guest-label">Guest AI — start here</div><h2>What do you need help with?</h2><p>Describe the situation in ordinary words. Lighthouse will help you understand the need and organize a useful next step.</p></div></div>
+                <div class="ai-welcome"><span class="ai-avatar" aria-hidden="true">L</span><div class="ai-bubble"><strong>Hi, I’m Lighthouse.</strong><p>Tell me what you are trying to get done. You can type, add pictures, or attach a short video. You do not need to know which service comes first.</p></div></div>
+                <div class="assistant-composer">
+                  <form class="assistant-form" id="assistant-text-form">
+                    <label for="assistant-text-input">Message Lighthouse<textarea id="assistant-text-input" maxlength="2000" placeholder="For example: I have a damaged gate, I need help finding work, or I need to organize a business project…"></textarea></label>
+                    <div class="attachment-tray" id="assistant-attachment-tray" aria-live="polite" hidden></div>
+                    <label class="media-consent" id="assistant-media-consent-row" hidden><input type="checkbox" id="assistant-media-consent" /> I have permission to share this media and understand that Lighthouse will analyze the selected images or sampled video frames.</label>
+                    <div class="composer-footer"><div class="composer-actions"><button class="composer-tool" id="assistant-add-photo" type="button"><span class="composer-icon" aria-hidden="true">▧</span>Add pictures</button><button class="composer-tool" id="assistant-add-video" type="button"><span class="composer-icon" aria-hidden="true">▶</span>Add video</button></div><button class="button composer-send" id="assistant-send" type="submit" disabled>SEND TO LIGHTHOUSE →</button></div>
+                    <input id="assistant-photo-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden />
+                    <input id="assistant-video-input" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" hidden />
+                  </form>
+                </div>
+                <p class="media-help">Your original video is not sent to the AI. Lighthouse analyzes up to four compressed pictures or four sampled video frames.</p>
+                <p class="prompt-label">Try an example</p>
+                <div class="suggestions" aria-label="Ways to start"><button class="suggestion" type="button" data-prompt="I need work.">I need work</button><button class="suggestion" type="button" data-prompt="I need someone tomorrow.">I need someone tomorrow</button><button class="suggestion" type="button" data-prompt="Help me plan Christmas.">Plan Christmas</button><button class="suggestion" type="button" data-prompt="Help me run my business.">Help with my business</button><button class="suggestion" type="button" data-prompt="I need a plumber.">I need a plumber</button><button class="suggestion" type="button" data-prompt="I have no idea where to start.">I don't know where to start</button></div>
+                <div class="assistant-tools"><div class="voice-stage"><button class="voice-button" id="assistant-voice-toggle" type="button" data-state="checking" aria-pressed="false" aria-label="Ask Lighthouse by voice" disabled><span class="voice-icon" aria-hidden="true"></span><span class="voice-button-label">ASK BY VOICE</span></button><span class="assistant-status" id="assistant-status" role="status" aria-live="polite">Checking Lighthouse…</span></div><div class="voice-controls"><button class="button secondary" id="assistant-stop-speech" type="button" hidden>STOP SPEAKING</button></div></div>
+                <p class="voice-disclosure">Voice is optional and starts only when you tap the microphone. Transcripts may be retained for review; raw microphone audio is not stored by Easy Lot.</p>
+                <div class="voice-transcript" id="assistant-transcript" aria-live="polite" hidden><strong>You said</strong><p id="assistant-transcript-text"></p><p class="voice-warning" id="assistant-transcript-warning" hidden>Please review names, addresses, measurements, dates, phone numbers, plates, and VINs on screen before confirming.</p></div>
+                <div class="assistant-response" id="assistant-response" aria-live="polite" hidden></div>
+                <div class="assistant-confirm" id="assistant-confirm" hidden>
+                  <strong>Review and confirm before submitting</strong>
+                  <label><input type="checkbox" id="assistant-terms" /> I agree to the <a href="/policies-terms">Easy Lot terms</a> for this request.</label>
+                  <label><input type="checkbox" id="assistant-privacy" /> I acknowledge the <a href="/policies-terms">privacy notice</a> and consent to this request being recorded.</label>
+                  <label id="assistant-alert-row" hidden><input type="checkbox" id="assistant-alert" /> Alert me if Easy Lot finds a compatible space later.</label>
+                  <label id="assistant-authorization-row" hidden><input type="checkbox" id="assistant-authorization" /> I confirm I am authorized to request access or key-related service for this vehicle or property.</label>
+                  <button class="button" id="assistant-confirm-button" type="button">CONFIRM AND SUBMIT</button>
+                </div>
+                <details class="assistant-fallbacks" id="assistant-fallbacks"><summary>Prefer a standard form?</summary><div class="assistant-fallback-actions"><a class="button secondary" href="/solutions#request">GET HELP</a><a class="button secondary" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a></div></details>
+                <p class="assistant-disclaimer">Guest AI guidance is not saved as a private workspace. Full Lighthouse features require sign-in and an active membership. Services, availability, pricing, qualifications, and important actions remain subject to review and confirmation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
+        <div class="container"><div class="lighthouse-panel"><div><div class="eyebrow">For members</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Your private place to turn an idea, a problem, pictures, or a short video into organized work—then keep the decisions, evidence, and next steps together.</p></div><div class="lighthouse-offer"><span class="lighthouse-price">$19.99 <small>/ month</small></span><p>No trial. No per-message charge. No surprise overage.</p><p class="lighthouse-state" id="lighthouse-state" role="status">Checking your membership…</p><a class="button" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a></div></div></div>
+      </section>
+      <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
+        <div class="container">
+          <div class="video-heading"><div><div class="eyebrow">Lighthouse Video Community</div><h2 id="video-community-title">Create something worth sharing.</h2><p>Members can record or upload a short vertical video, preview it, add a title and story, and send it for review. Approved videos become part of the community watch feed.</p></div><div class="video-safety">Every upload is screened and held for human review. Nothing appears publicly the moment it is uploaded.</div></div>
+          <div class="video-layout">
+            <div class="video-studio">
+              <h3>Video Studio</h3>
+              <p>Record from your phone or choose a finished clip. Recommended format: vertical 9:16, up to 3 minutes and 100 MB.</p>
+              <div class="video-signin" id="video-signin"><p>Sign in with an active Lighthouse membership to create and submit videos.</p><a class="button light" href="/customer-portal">SIGN IN</a></div>
+              <form class="video-form" id="community-video-form" hidden>
+                <label>Video title<input id="community-video-title" type="text" maxlength="120" required placeholder="Give your video a clear title" /></label>
+                <label>What is this video about?<textarea id="community-video-description" maxlength="1200" required placeholder="Add helpful context for the community and the review team."></textarea></label>
+                <label>Record or choose video<input id="community-video-file" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" capture="environment" required /></label>
+                <video class="video-preview" id="community-video-preview" controls playsinline hidden></video>
+                <label class="video-check"><input id="community-video-rights" type="checkbox" required /><span>I made this video or have permission to share it.</span></label>
+                <label class="video-check"><input id="community-video-rules" type="checkbox" required /><span>No sexual content, exploitation, graphic violence, hate, harassment, dangerous illegal instructions, exposed private information, scams, or spam.</span></label>
+                <div class="video-progress" id="community-video-progress" role="status" aria-live="polite"></div>
+                <button class="button video-submit" id="community-video-submit" type="submit">SUBMIT FOR REVIEW</button>
+              </form>
+            </div>
+            <div class="video-feed">
+              <h3>Community Watch</h3><p>Short videos shared by Lighthouse members and approved before publication.</p>
+              <div class="video-feed-grid" id="community-video-feed"><p class="video-empty">Approved community videos will appear here.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section easy-needs" id="what-easy-does">
+        <div class="container">
+          <div class="section-head"><div class="eyebrow">Start where you are</div><h2>Bring the need. Lighthouse helps with the next step.</h2><p>You do not have to sort yourself into a product or department. Say what is happening, what you need, or what you are trying to get done.</p></div>
+          <div class="needs-list">
+            <article class="need"><span class="need-number">01</span><div><h3>Need work?</h3><p>Tell Lighthouse what you can do, when you are available, and the kind of work you want.</p></div></article>
+            <article class="need"><span class="need-number">02</span><div><h3>Need someone?</h3><p>Describe the job, errand, repair, delivery, or project. Lighthouse will help organize the request.</p></div></article>
+            <article class="need"><span class="need-number">03</span><div><h3>Running a business?</h3><p>Get help with customers, jobs, workers, follow-ups, files, websites, and the work behind the work.</p></div></article>
+            <article class="need"><span class="need-number">04</span><div><h3>Planning something?</h3><p>Birthdays, Christmas, events, trips, projects, and the details that are easy to lose track of.</p></div></article>
+            <article class="need"><span class="need-number">05</span><div><h3>Need space?</h3><p>Find storage, parking, contractor yards, equipment space, or a place that fits an unusual need.</p></div></article>
+            <article class="need"><span class="need-number">06</span><div><h3>Something else?</h3><p>Ask Lighthouse. If the answer is not obvious yet, figuring out where to start is part of the help.</p></div></article>
+          </div>
+        </div>
+      </section>
+      <section class="section easy-process" id="how-easy-works">
+        <div class="container">
+          <div class="section-head"><div class="eyebrow">How Lighthouse works</div><h2>Simple on your side.</h2><p>The complexity stays underneath. You get a clear conversation and a practical next step.</p></div>
+          <div class="process-line">
+            <article class="process-step"><strong>Understand</strong><h3>Tell Lighthouse what you need.</h3><p>Use ordinary words. Add details when you have them.</p></article>
+            <article class="process-step"><strong>Coordinate</strong><h3>Lighthouse figures out what comes next.</h3><p>The right tools, people, services, or plan are organized around the outcome.</p></article>
+            <article class="process-step"><strong>Follow through</strong><h3>Lighthouse stays with the problem.</h3><p>Review the next step and approve important actions before anything consequential happens.</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="section easy-business" id="for-business">
+        <div class="container business-layout">
+          <div><div class="eyebrow">For business</div><h2>Help with the work that keeps a business moving.</h2><p class="copy">Lighthouse can help find workers, organize jobs and customers, coordinate resources, handle follow-ups, and connect businesses with people who need what they do.</p><div class="actions"><a class="button" href="/copy-of-how-it-works">SEE LIGHTHOUSE FOR BUSINESS</a><a class="button secondary" href="#assistant">ASK ABOUT YOUR BUSINESS</a></div></div>
+          <aside class="business-panel"><h3>Bring Lighthouse into the real work.</h3><p>Not another dashboard to babysit. Start with the outcome you need.</p><ul><li>Find workers</li><li>Manage jobs</li><li>Organize customers</li><li>Coordinate resources</li><li>Handle follow-ups</li><li>Find new opportunities</li></ul></aside>
+        </div>
+      </section>
+      <section class="section easy-storage" id="storage">
+        <div class="container storage-layout">
+          <div class="storage-mark" aria-hidden="true"><div><span>Lighthouse</span><strong>STORAGE &amp; SPACE</strong></div></div>
+          <div><div class="eyebrow">One important part of Lighthouse</div><h2>Storage &amp; space.</h2><p class="copy">Need vehicle storage, truck parking, contractor space, container or equipment space, a commercial yard, or somewhere unusual? The storage business is still here—now as one capability inside Lighthouse.</p><div class="actions"><a class="button" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a></div></div>
+        </div>
+      </section>
+      <div class="legacy-home" hidden aria-hidden="true">
+      <section class="section soft" id="solutions">
+        <div class="container"><div class="section-head"><div class="eyebrow">Storage solutions</div><h2>Storage Solutions When You Need Them</h2><p>Finding space is only part of the problem. Easy Lot helps customers and hosts handle the things that often come with storing, moving, or managing vehicles and property.</p></div><div class="grid" id="support"><article class="card solution-card"><h3>Towing &amp; Vehicle Transport</h3><p>Need to get a vehicle to or from storage? Request towing or vehicle transport directly through Easy Lot.</p><ul><li>Tow to or from storage</li><li>Non-running vehicle transport</li><li>Vehicle relocation</li><li>Pickup and drop-off assistance</li></ul><a class="button" href="/solutions?service=TOWING_VEHICLE_TRANSPORT#request">REQUEST A TOW</a></article><article class="card solution-card"><h3>Vehicle Access &amp; Key Help</h3><p>Locked out, missing a key, or need access to a vehicle before it can be moved? Request vehicle-access or key assistance through Easy Lot.</p><ul><li>Vehicle lockout or lost key</li><li>Replacement key or supported programming</li><li>Access needed before towing</li><li>Basic access or diagnostic help</li></ul><a class="button" href="/solutions?service=LOCKSMITH_VEHICLE_ACCESS#request">GET KEY OR ACCESS HELP</a></article><article class="card solution-card"><h3>Dumpster Rental &amp; Cleanout</h3><p>Need to clear a garage, yard, property, or storage area? Request dumpster or cleanout help through Easy Lot.</p><ul><li>Garage and storage-area cleanout</li><li>Yard or property cleanup</li><li>Dumpster rental requests</li><li>Host and operator preparation</li></ul><a class="button" href="/solutions?service=DUMPSTER_RENTAL_CLEANOUT#request">REQUEST CLEANOUT HELP</a></article><article class="card solution-card"><h3>More Storage Solutions</h3><p>Browse vehicle, hauling, property, lot, and storage-support services without leaving the Easy Lot ecosystem.</p><a class="button" href="/solutions">MORE STORAGE SOLUTIONS</a></article></div><p class="solution-note">These solutions are available to storage customers, property hosts, and operators. Independent providers may fulfill requests; availability, pricing, qualifications, and response times are not guaranteed by Easy Lot.</p></div>
+      </section>
+      <section class="section">
+        <div class="container"><div class="section-head"><div class="eyebrow">Browse by need</div><h2>Space solutions, without the guesswork.</h2><p>Start with the closest group. Detailed space types and filters remain available in Find Space.</p></div><div class="grid four" id="space-groups"><article class="card category"><h3>Vehicle &amp; Trailer Storage</h3></article><article class="card category"><h3>Fleet &amp; Contractor Space</h3></article><article class="card category"><h3>Equipment, Container &amp; Commercial Storage</h3></article><article class="card category"><h3>Custom / Not Sure</h3></article></div><div class="actions" style="margin-top:28px"><a class="button" href="/find-storage">BROWSE ALL SPACE TYPES</a></div></div>
+      </section>
+      <section class="section soft">
+        <div class="container split"><div><div class="eyebrow">A clearer search</div><h2>Find the right kind of space.</h2><p class="copy">Easy Lot helps compare your storage requirements with available space using understandable, consistent factors.</p></div><ul class="checklist"><li>Location and distance</li><li>Storage category</li><li>Dimensions and clearance</li><li>Gate width and access</li><li>Indoor or outdoor preference</li><li>Amenities and availability</li><li>Budget</li><li>Duration</li></ul></div>
+      </section>
+      <section class="section sky">
+        <div class="container split"><div><div class="eyebrow">For hosts</div><h2>Have unused space?</h2><p class="copy">Tell us what type of space you have. Independent hosts control their advertised price, availability, access, and terms.</p><div class="actions"><a class="button" href="/copy-of-find-storage">LIST YOUR SPACE</a></div></div><div class="card"><h3>What type of space do you have?</h3><p>Garage, driveway, parking pad, fenced or open lot, contractor yard, warehouse, indoor commercial space, barn, acreage, trailer or equipment space, container area, or another usable property type.</p></div></div>
+      </section>
+      <section class="section">
+        <div class="container"><div class="section-head"><div class="eyebrow">Why Easy Lot</div><h2>Practical help for real operations.</h2></div><div class="grid four"><article class="card"><h3>Real Space, Real Operators</h3><p>Easy Lot-operated locations plus independent provider listings.</p></article><article class="card"><h3>Built for Business Needs</h3><p>Fleets, contractors, equipment, inventory, trailers, containers, and unusual requirements.</p></article><article class="card"><h3>Simple Matching</h3><p>Location, dimensions, clearance, access, amenities, budget, and duration.</p></article><article class="card"><h3>Human Review Where It Matters</h3><p>Approval and access stay controlled for consequential actions.</p></article></div><div class="actions" style="margin-top:28px"><a class="button secondary" href="/copy-of-how-it-works">EXPLORE BUSINESS STORAGE</a></div></div>
+      </section>
+      <section class="section sky">
+        <div class="container"><div class="section-head"><div class="eyebrow">Lighthouse AI</div><h2>Tell it what you need. It gets to work.</h2><p>One AI to talk to. A whole team behind it.</p></div><div class="grid four"><article class="card"><h3>Website work</h3><p>Plan, improve, and safely maintain business websites.</p></article><article class="card"><h3>Business admin</h3><p>Organize routine work and surface what needs attention.</p></article><article class="card"><h3>Research &amp; projects</h3><p>Turn questions and goals into reviewed, useful results.</p></article><article class="card"><h3>Files &amp; coding work</h3><p>Work inside approved folders with clear previews and approvals.</p></article></div><div class="actions" style="margin-top:28px"><a class="button" href="/customer-portal">SEE HOW LIGHTHOUSE WORKS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
+      </section>
+      <section class="section soft">
+        <div class="container"><div class="section-head"><div class="eyebrow">Easy Lot-operated options</div><h2>Easy Lot is one provider you can compare.</h2><p>Easy Lot-operated locations appear alongside independent-host listings and use the same practical compatibility factors.</p></div><div class="grid"><article class="card location-card"><span class="badge">PROVIDER: EASY LOT</span><h3>Hollins Ferry Road</h3><div class="address">2619 Hollins Ferry Road<br />Baltimore, MD 21230</div><p>Browse the shared listing system for current availability, space details, access information, and terms.</p><a class="button" href="/find-storage">BROWSE AVAILABLE SPACES</a></article><article class="card location-card"><span class="badge">PROVIDER: EASY LOT</span><h3>North Rose Street</h3><div class="address">1101 North Rose Street<br />Baltimore, MD 21213</div><p>Browse the shared listing system for current availability, space details, access information, and terms.</p><a class="button" href="/find-storage">BROWSE AVAILABLE SPACES</a></article><article class="card"><h3>Same marketplace process</h3><p>Customers can compare Easy Lot-operated and independent listings using the same location, size, access, amenity, availability, and compatibility factors.</p><p style="margin-top:16px">Provider ownership does not change organic marketplace fit or placement.</p></article></div></div>
+      </section>
+      <section class="section dark">
+        <div class="container"><div class="section-head"><div class="eyebrow">How it works</div><h2>From need to reviewed result.</h2></div><div class="grid four steps"><article class="model step"><h3>Tell us what you need.</h3></article><article class="model step"><h3>Easy Lot or Lighthouse routes it correctly.</h3></article><article class="model step"><h3>Review the options or planned work.</h3></article><article class="model step"><h3>Approve important actions when required.</h3></article></div></div>
+      </section>
+      <section class="section sky final"><div class="container"><h2>What do you want to get done?</h2><p class="copy">Find space, put space to work, or ask Lighthouse for help.</p><div class="actions"><a class="button" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a><a class="button secondary" href="#assistant">ASK LIGHTHOUSE</a></div></div></section>
+      </div>
+    </main>
+    <script>
+      const parentWindow = window.parent;
+      const publicOrigin = 'https://www.easylotstoragesolutions.com';
+      const referrerOrigin = (() => { try { return new URL(document.referrer).origin; } catch (error) { return ''; } })();
+      const referrerHost = (() => { try { return new URL(referrerOrigin).hostname; } catch (error) { return ''; } })();
+      const trustedParent = referrerOrigin === publicOrigin || referrerOrigin === 'https://easylotstoragesolutions.com' || /\.editor\.wix\.com$/.test(referrerHost);
+      const parentOrigin = trustedParent ? referrerOrigin : publicOrigin;
+      const postParent = payload => parentWindow.postMessage(payload, parentOrigin);
+      const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const newSessionKey = () => `${Date.now()}-${crypto.getRandomValues(new Uint32Array(4)).join('-')}`;
+      const ai = {
+        available: false,
+        busy: false,
+        confirmationToken: '',
+        pendingAction: '',
+        activeRequestId: '',
+        activeVoiceRequestId: '',
+        sessionKey: newSessionKey(),
+        peerConnection: null,
+        dataChannel: null,
+        mediaStream: null,
+        spokenAudio: null,
+        sessionTimer: null,
+        sessionStartedAt: 0,
+        voiceActive: false,
+        activeChannel: 'TEXT_WEB',
+        voiceStarting: false,
+        transcriptItems: new Set(),
+        attachments: []
+      };
+      const voiceToggle = document.getElementById('assistant-voice-toggle');
+      const voiceButtonLabel = voiceToggle.querySelector('.voice-button-label');
+      const textForm = document.getElementById('assistant-text-form');
+      const textInput = document.getElementById('assistant-text-input');
+      const textSend = document.getElementById('assistant-send');
+      const stopSpeechButton = document.getElementById('assistant-stop-speech');
+      const aiStatus = document.getElementById('assistant-status');
+      const aiResponse = document.getElementById('assistant-response');
+      const aiConfirm = document.getElementById('assistant-confirm');
+      const aiConfirmButton = document.getElementById('assistant-confirm-button');
+      const aiAuthorizationRow = document.getElementById('assistant-authorization-row');
+      const aiAlertRow = document.getElementById('assistant-alert-row');
+      const aiTranscript = document.getElementById('assistant-transcript');
+      const aiTranscriptText = document.getElementById('assistant-transcript-text');
+      const aiTranscriptWarning = document.getElementById('assistant-transcript-warning');
+      const fallbackDetails = document.getElementById('assistant-fallbacks');
+      const photoInput = document.getElementById('assistant-photo-input');
+      const videoInput = document.getElementById('assistant-video-input');
+      const addPhotoButton = document.getElementById('assistant-add-photo');
+      const addVideoButton = document.getElementById('assistant-add-video');
+      const attachmentTray = document.getElementById('assistant-attachment-tray');
+      const mediaConsentRow = document.getElementById('assistant-media-consent-row');
+      const mediaConsent = document.getElementById('assistant-media-consent');
+      const guestDraftKey = 'easy-agent-guest-draft-v1';
+      const lighthouseState = document.getElementById('lighthouse-state');
+      const lighthouseAction = document.getElementById('lighthouse-action');
+      const communityVideoForm = document.getElementById('community-video-form');
+      const communityVideoSignIn = document.getElementById('video-signin');
+      const communityVideoFile = document.getElementById('community-video-file');
+      const communityVideoPreview = document.getElementById('community-video-preview');
+      const communityVideoProgress = document.getElementById('community-video-progress');
+      const communityVideoSubmit = document.getElementById('community-video-submit');
+      const communityVideoFeed = document.getElementById('community-video-feed');
+      const communityVideo = { access: { entitled: false }, file: null, frames: [], durationSeconds: 0, objectUrl: '', requestId: '', videoId: '' };
+      try { textInput.value = sessionStorage.getItem(guestDraftKey) || ''; } catch (error) { void error; }
+      let aiStatusReceived = false;
+      const aiAvailabilityTimeout = setTimeout(() => {
+        if (!aiStatusReceived) {
+          ai.available = false;
+          setAssistantBusy(false, 'Lighthouse is temporarily unavailable. Please use a standard form below.');
+          showFallbacks();
+        }
+      }, 6000);
+      const requestId = () => `${Date.now()}-${crypto.getRandomValues(new Uint32Array(1))[0]}`;
+      const microphoneTrack = () => ai.mediaStream && ai.mediaStream.getAudioTracks()[0];
+      const mediaId = () => `media-${Date.now()}-${crypto.getRandomValues(new Uint32Array(1))[0]}`;
+      const waitForMedia = (target, event, timeoutMs = 8000) => new Promise((resolve, reject) => {
+        const timer = setTimeout(fail, timeoutMs);
+        function done() { cleanup(); resolve(); }
+        function fail() { cleanup(); reject(new Error('MEDIA_COULD_NOT_BE_READ')); }
+        function cleanup() { clearTimeout(timer); target.removeEventListener(event, done); target.removeEventListener('error', fail); }
+        target.addEventListener(event, done, { once: true });
+        target.addEventListener('error', fail, { once: true });
+      });
+      function updateComposerState() {
+        const hasMedia = ai.attachments.length > 0;
+        const hasMessage = String(textInput.value || '').trim().length > 0;
+        attachmentTray.hidden = !hasMedia;
+        mediaConsentRow.hidden = !hasMedia;
+        addPhotoButton.disabled = ai.busy || ai.attachments.some(item => item.source === 'video');
+        addVideoButton.disabled = ai.busy || ai.attachments.some(item => item.source === 'photo');
+        textSend.disabled = !ai.available || ai.busy || (!hasMessage && !hasMedia) || (hasMedia && !mediaConsent.checked);
+      }
+      function renderAttachments() {
+        attachmentTray.replaceChildren();
+        ai.attachments.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'attachment-item';
+          const preview = document.createElement('img');
+          preview.src = item.imageDataUrl;
+          preview.alt = '';
+          const copy = document.createElement('div');
+          const name = document.createElement('strong');
+          name.textContent = item.source === 'video' ? item.fileName : item.fileName;
+          const detail = document.createElement('small');
+          detail.textContent = item.source === 'video' ? `Video frame ${item.frameNumber} of ${item.frameTotal}` : 'Picture ready';
+          copy.append(name, detail);
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.className = 'attachment-remove';
+          remove.setAttribute('aria-label', `Remove ${item.fileName}`);
+          remove.textContent = '×';
+          remove.addEventListener('click', () => {
+            if (item.source === 'video') ai.attachments = [];
+            else ai.attachments = ai.attachments.filter(candidate => candidate.id !== item.id);
+            if (!ai.attachments.length) mediaConsent.checked = false;
+            renderAttachments();
+          });
+          row.append(preview, copy, remove);
+          attachmentTray.appendChild(row);
+        });
+        updateComposerState();
+      }
+      function canvasDataUrl(source, width, height) {
+        const scale = Math.min(1, 960 / Math.max(width, height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(width * scale));
+        canvas.height = Math.max(1, Math.round(height * scale));
+        canvas.getContext('2d').drawImage(source, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL('image/jpeg', .72);
+      }
+      async function preparePhoto(file) {
+        if (!/^image\/(jpeg|png|webp)$/i.test(file.type) || file.size > 12 * 1024 * 1024) throw new Error('PHOTO_NOT_SUPPORTED');
+        const url = URL.createObjectURL(file);
+        try {
+          const image = new Image();
+          image.src = url;
+          await waitForMedia(image, 'load');
+          return { id: mediaId(), type: 'image', source: 'photo', fileName: file.name.slice(0, 120), imageDataUrl: canvasDataUrl(image, image.naturalWidth, image.naturalHeight) };
+        } finally { URL.revokeObjectURL(url); }
+      }
+      async function prepareVideo(file) {
+        if (!/^video\/(mp4|webm|quicktime|x-m4v)$/i.test(file.type) || file.size > 50 * 1024 * 1024) throw new Error('VIDEO_NOT_SUPPORTED');
+        const url = URL.createObjectURL(file);
+        const video = document.createElement('video');
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.src = url;
+        try {
+          await waitForMedia(video, 'loadedmetadata');
+          const duration = Number(video.duration) || 0;
+          if (!duration || duration > 60) throw new Error('VIDEO_TOO_LONG');
+          const times = [0.05, duration * .33, duration * .66, Math.max(.05, duration - .1)].map(value => Math.min(value, Math.max(.05, duration - .05)));
+          const frames = [];
+          for (let index = 0; index < times.length; index += 1) {
+            video.currentTime = times[index];
+            await waitForMedia(video, 'seeked');
+            frames.push({ id: mediaId(), type: 'video-frame', source: 'video', fileName: file.name.slice(0, 120), frameNumber: index + 1, frameTotal: times.length, timestampSeconds: Math.round(times[index] * 10) / 10, imageDataUrl: canvasDataUrl(video, video.videoWidth, video.videoHeight) });
+          }
+          return frames;
+        } finally { URL.revokeObjectURL(url); video.removeAttribute('src'); video.load(); }
+      }
+      async function prepareCommunityVideo(file) {
+        if (!/^video\/(mp4|webm|quicktime|x-m4v)$/i.test(file.type) || file.size > 100 * 1024 * 1024) throw new Error('COMMUNITY_VIDEO_NOT_SUPPORTED');
+        if (communityVideo.objectUrl) URL.revokeObjectURL(communityVideo.objectUrl);
+        communityVideo.objectUrl = URL.createObjectURL(file);
+        communityVideoPreview.src = communityVideo.objectUrl;
+        communityVideoPreview.hidden = false;
+        await waitForMedia(communityVideoPreview, 'loadedmetadata');
+        const duration = Number(communityVideoPreview.duration) || 0;
+        if (!duration || duration > 180) throw new Error('COMMUNITY_VIDEO_TOO_LONG');
+        const times = [0.05, duration * .33, duration * .66, Math.max(.05, duration - .1)].map(value => Math.min(value, Math.max(.05, duration - .05)));
+        const frames = [];
+        for (let index = 0; index < times.length; index += 1) {
+          communityVideoPreview.currentTime = times[index];
+          await waitForMedia(communityVideoPreview, 'seeked');
+          frames.push({ timestampSeconds: Math.round(times[index] * 10) / 10, imageDataUrl: canvasDataUrl(communityVideoPreview, communityVideoPreview.videoWidth, communityVideoPreview.videoHeight) });
+        }
+        communityVideoPreview.currentTime = 0;
+        return { duration, frames };
+      }
+      function findUploadedVideoUrl(value, depth = 0) {
+        if (depth > 5 || value === null || value === undefined) return '';
+        if (typeof value === 'string') return value.startsWith('wix:video://') ? value : '';
+        if (Array.isArray(value)) {
+          for (const item of value) { const found = findUploadedVideoUrl(item, depth + 1); if (found) return found; }
+          return '';
+        }
+        if (typeof value === 'object') {
+          if (typeof value.fileUrl === 'string') return value.fileUrl;
+          for (const item of Object.values(value)) { const found = findUploadedVideoUrl(item, depth + 1); if (found) return found; }
+        }
+        return '';
+      }
+      function resetCommunityVideoForm(message = '') {
+        communityVideoForm.reset();
+        communityVideo.file = null;
+        communityVideo.frames = [];
+        communityVideo.durationSeconds = 0;
+        communityVideo.videoId = '';
+        communityVideoSubmit.disabled = false;
+        communityVideoPreview.hidden = true;
+        communityVideoPreview.removeAttribute('src');
+        if (communityVideo.objectUrl) URL.revokeObjectURL(communityVideo.objectUrl);
+        communityVideo.objectUrl = '';
+        communityVideoProgress.textContent = message;
+      }
+      function renderCommunityVideos(videos = []) {
+        communityVideoFeed.replaceChildren();
+        if (!videos.length) {
+          const empty = document.createElement('p');
+          empty.className = 'video-empty';
+          empty.textContent = 'Approved community videos will appear here.';
+          communityVideoFeed.appendChild(empty);
+          return;
+        }
+        videos.forEach(item => {
+          const card = document.createElement('article');
+          card.className = 'video-card';
+          const player = document.createElement('video');
+          player.controls = true;
+          player.playsInline = true;
+          player.preload = 'metadata';
+          player.src = item.videoUrl;
+          if (item.thumbnailUrl) player.poster = item.thumbnailUrl;
+          const body = document.createElement('div');
+          body.className = 'video-card-body';
+          const title = document.createElement('h4');
+          title.textContent = item.title || 'Community video';
+          const description = document.createElement('p');
+          description.textContent = item.description || '';
+          const meta = document.createElement('p');
+          meta.className = 'video-meta';
+          meta.textContent = `By ${item.creatorName || 'Lighthouse member'}${item.durationSeconds ? ` · ${Math.round(item.durationSeconds)} sec` : ''}`;
+          const report = document.createElement('button');
+          report.type = 'button';
+          report.className = 'video-report';
+          report.textContent = 'Report video';
+          report.addEventListener('click', () => {
+            const reason = window.prompt('Briefly tell us what is wrong with this video.');
+            if (!reason || reason.trim().length < 3) return;
+            communityVideo.requestId = requestId();
+            postParent({ type: 'lighthouse-video:report', requestId: communityVideo.requestId, videoId: item.id, reason: reason.trim().slice(0, 500) });
+          });
+          body.append(title, description, meta, report);
+          card.append(player, body);
+          communityVideoFeed.appendChild(card);
+        });
+      }
+      async function uploadCommunityVideo(upload) {
+        if (!communityVideo.file || !upload?.uploadUrl || !upload?.videoId) throw new Error('COMMUNITY_VIDEO_UPLOAD_NOT_READY');
+        communityVideo.videoId = upload.videoId;
+        communityVideoProgress.textContent = 'Uploading securely…';
+        const body = new FormData();
+        body.append('upload_url', upload.uploadUrl);
+        body.append('file', communityVideo.file, communityVideo.file.name);
+        const response = await fetch(upload.uploadUrl, { method: 'POST', body });
+        if (!response.ok) throw new Error(`COMMUNITY_VIDEO_UPLOAD_${response.status}`);
+        const fileUrl = findUploadedVideoUrl(await response.json());
+        if (!fileUrl) throw new Error('COMMUNITY_VIDEO_UPLOAD_RESULT_MISSING');
+        communityVideoProgress.textContent = 'Screening the sampled frames…';
+        postParent({ type: 'lighthouse-video:complete', requestId: communityVideo.requestId, input: { videoId: upload.videoId, fileUrl, frames: communityVideo.frames } });
+      }
+      function postTelemetry(eventType, values = {}) {
+        postParent({ type: 'easy-lot-voice:telemetry', input: { sessionKey: ai.sessionKey, eventType, ...values } });
+      }
+      function setVoiceState(state, label) {
+        voiceToggle.dataset.state = state;
+        voiceToggle.setAttribute('aria-pressed', String(ai.voiceActive));
+        voiceToggle.setAttribute('aria-label', ai.voiceActive ? 'End the Lighthouse voice session' : 'Ask Lighthouse by voice');
+        voiceButtonLabel.textContent = ai.voiceActive ? 'END VOICE' : 'ASK BY VOICE';
+        voiceToggle.disabled = !ai.available || ai.voiceStarting;
+        aiConfirmButton.disabled = ai.busy;
+        aiStatus.textContent = label;
+        updateComposerState();
+      }
+      function setAssistantBusy(busy, label) {
+        ai.busy = busy;
+        setVoiceState(busy ? 'thinking' : (ai.voiceActive ? 'listening' : 'ready'), label || (ai.voiceActive ? 'Listening. Speak naturally.' : 'Ready. Tap the microphone to begin.'));
+      }
+      function showFallbacks() {
+        fallbackDetails.open = true;
+      }
+      function showVoiceError(message, eventType = 'VOICE_FALLBACK', recordEvent = true) {
+        ai.voiceStarting = false;
+        setAssistantBusy(false, message);
+        showFallbacks();
+        if (recordEvent) postTelemetry(eventType, { success: false });
+      }
+      function setMicrophoneEnabled(enabled) {
+        const track = microphoneTrack();
+        if (track) track.enabled = enabled;
+      }
+      function stopSpokenAudio(interrupted = false) {
+        if (ai.spokenAudio) {
+          ai.spokenAudio.pause();
+          ai.spokenAudio.removeAttribute('src');
+          ai.spokenAudio.load();
+          ai.spokenAudio = null;
+          if (interrupted) postTelemetry('VOICE_SPEECH_INTERRUPTED', { success: true });
+        }
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        stopSpeechButton.hidden = true;
+      }
+      function resumeListening() {
+        ai.busy = false;
+        if (!ai.voiceActive) {
+          setVoiceState('ready', ai.confirmationToken ? 'Voice ended. Review the details and tap Confirm and Submit when ready.' : 'Ready. Tap the microphone to begin.');
+          return;
+        }
+        setMicrophoneEnabled(true);
+        setVoiceState(ai.confirmationToken ? 'confirmation' : 'listening', ai.confirmationToken ? 'Confirmation required. Review the details and tap Confirm and Submit when ready.' : 'Listening. Speak naturally.');
+      }
+      function speakWithBrowser(message) {
+        if (!('speechSynthesis' in window) || !message) {
+          resumeListening();
+          return;
+        }
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.rate = 1;
+        utterance.onend = resumeListening;
+        utterance.onerror = resumeListening;
+        stopSpeechButton.hidden = false;
+        setVoiceState('speaking', 'Speaking. Tap Stop Speaking to interrupt.');
+        window.speechSynthesis.speak(utterance);
+      }
+      async function playVoiceReply(voice, message) {
+        stopSpokenAudio(false);
+        setMicrophoneEnabled(false);
+        if (!voice || !voice.audioBase64) {
+          postTelemetry('VOICE_TTS_FAILED', { success: false, errorCode: 'NO_AUDIO_RETURNED' });
+          speakWithBrowser(message);
+          return;
+        }
+        const audio = new Audio(`data:${voice.contentType || 'audio/mpeg'};base64,${voice.audioBase64}`);
+        ai.spokenAudio = audio;
+        stopSpeechButton.hidden = false;
+        audio.onplaying = () => setVoiceState('speaking', 'Speaking. Tap Stop Speaking to interrupt.');
+        audio.onended = () => { ai.spokenAudio = null; resumeListening(); };
+        audio.onerror = () => {
+          ai.spokenAudio = null;
+          postTelemetry('VOICE_TTS_FAILED', { success: false, errorCode: 'AUDIO_PLAYBACK_FAILED' });
+          speakWithBrowser(message);
+        };
+        try {
+          await audio.play();
+        } catch (error) {
+          ai.spokenAudio = null;
+          postTelemetry('VOICE_TTS_FAILED', { success: false, errorCode: 'AUTOPLAY_BLOCKED' });
+          speakWithBrowser(message);
+        }
+      }
+      function transcriptNeedsReview(event, transcript) {
+        const criticalValue = /\b(?:VIN|plate|address|street|road|avenue|phone|tomorrow|today|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|feet|foot|inches|dollars?)\b|\b\d{3,}\b/i.test(transcript);
+        const logprobs = Array.isArray(event.logprobs) ? event.logprobs.map(item => Number(item.logprob)).filter(Number.isFinite) : [];
+        const average = logprobs.length ? logprobs.reduce((sum, value) => sum + value, 0) / logprobs.length : 0;
+        return criticalValue || (logprobs.length > 0 && average < -0.65);
+      }
+      function showTranscript(transcript, needsReview) {
+        aiTranscriptText.textContent = transcript;
+        aiTranscriptWarning.hidden = !needsReview;
+        aiTranscript.hidden = false;
+      }
+      function submitMessage(raw, channel = 'TEXT_WEB', needsReview = false) {
+        const attachments = channel === 'TEXT_WEB' ? ai.attachments.map(item => ({ type: item.type, imageDataUrl: item.imageDataUrl, fileName: item.fileName, timestampSeconds: item.timestampSeconds })) : [];
+        const message = String(raw || '').trim().slice(0, 2000) || (attachments.length ? 'Please help me understand what is shown in the attached picture or video frames and what I should do next.' : '');
+        if (!message) {
+          postTelemetry('VOICE_EMPTY_TRANSCRIPT', { success: false });
+          resumeListening();
+          return;
+        }
+        if (attachments.length && !mediaConsent.checked) {
+          aiStatus.textContent = 'Please confirm you have permission to share this picture or video.';
+          return;
+        }
+        if (ai.busy) return;
+        if (channel === 'VOICE_WEB') {
+          showTranscript(message, needsReview);
+          setMicrophoneEnabled(false);
+        }
+        setAssistantBusy(true, needsReview ? 'Checking what I heard. Review critical details on screen.' : 'Thinking…');
+        ai.activeRequestId = requestId();
+        ai.activeChannel = channel;
+        postParent({ type: 'easy-lot-ai:send', requestId: ai.activeRequestId, input: { message, attachments, mediaConsentAccepted: attachments.length ? true : undefined, sessionKey: ai.sessionKey, anonymousSessionId: ai.sessionKey, channel } });
+      }
+      function submitTranscript(transcript, needsReview) {
+        submitMessage(transcript, 'VOICE_WEB', needsReview);
+      }
+      function handleRealtimeEvent(event) {
+        if (event.type === 'input_audio_buffer.speech_started' && !ai.busy) {
+          aiTranscriptText.textContent = '';
+          aiTranscriptWarning.hidden = true;
+          setVoiceState('listening', 'Listening…');
+        }
+        if (event.type === 'input_audio_buffer.speech_stopped' && !ai.busy) setVoiceState('thinking', 'Finishing what I heard…');
+        if (event.type === 'conversation.item.input_audio_transcription.delta' && event.delta) {
+          aiTranscriptText.textContent += event.delta;
+          aiTranscript.hidden = false;
+        }
+        if (event.type === 'conversation.item.input_audio_transcription.completed') {
+          if (ai.transcriptItems.has(event.item_id)) return;
+          ai.transcriptItems.add(event.item_id);
+          const transcript = String(event.transcript || '').trim();
+          submitTranscript(transcript, transcriptNeedsReview(event, transcript));
+        }
+        if (event.type === 'conversation.item.input_audio_transcription.failed' || event.type === 'error') {
+          postTelemetry('VOICE_STT_FAILED', { success: false, errorCode: String(event.error && (event.error.code || event.error.type) || event.type).slice(0, 80) });
+          stopVoiceSession('VOICE_STT_FAILED');
+          showVoiceError('I couldn’t hear that clearly. Tap the microphone to try again, call Easy Lot, or use a standard form.', 'VOICE_STT_FAILED', false);
+        }
+      }
+      async function connectVoiceSession(voiceSession) {
+        const pc = new RTCPeerConnection();
+        ai.peerConnection = pc;
+        ai.mediaStream.getTracks().forEach(track => pc.addTrack(track, ai.mediaStream));
+        const dc = pc.createDataChannel('oai-events');
+        ai.dataChannel = dc;
+        dc.addEventListener('message', messageEvent => {
+          try { handleRealtimeEvent(JSON.parse(messageEvent.data)); } catch (error) { void error; }
+        });
+        dc.addEventListener('open', () => {
+          ai.voiceStarting = false;
+          ai.voiceActive = true;
+          ai.sessionStartedAt = Date.now();
+          const maximumSeconds = Math.min(Number(voiceSession.maximumSessionSeconds) || 600, 600);
+          ai.sessionTimer = setTimeout(() => stopVoiceSession('VOICE_SESSION_TIMEOUT'), maximumSeconds * 1000);
+          setVoiceState('listening', 'Listening. Say what you need.');
+          postTelemetry('VOICE_CONNECTED', { success: true, model: voiceSession.model });
+          setMicrophoneEnabled(false);
+          speakWithBrowser('Hi, I’m Lighthouse AI assistant. Tell me what you need help with.');
+        });
+        pc.addEventListener('connectionstatechange', () => {
+          if (['failed', 'disconnected'].includes(pc.connectionState) && ai.voiceActive) {
+            stopVoiceSession('VOICE_DISCONNECTED');
+            showVoiceError('The voice connection ended. Tap the microphone to try again.', 'VOICE_DISCONNECTED', false);
+          }
+        });
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        const response = await fetch('https://api.openai.com/v1/realtime/calls', {
+          method: 'POST',
+          body: pc.localDescription.sdp,
+          headers: {
+            Authorization: `Bearer ${voiceSession.clientSecret}`,
+            'Content-Type': 'application/sdp'
+          }
+        });
+        if (!response.ok) throw new Error(`VOICE_CONNECT_${response.status}`);
+        await pc.setRemoteDescription({ type: 'answer', sdp: await response.text() });
+      }
+      function microphoneFailure(error) {
+        const name = error && error.name;
+        if (name === 'NotAllowedError' || name === 'SecurityError') {
+          return {
+            code: 'VOICE_MIC_DENIED',
+            message: 'Microphone access is blocked in your browser. Open the lock or site-controls icon, allow Microphone for Easy Lot, then reload this page.'
+          };
+        }
+        if (name === 'NotFoundError' || name === 'DevicesNotFoundError') {
+          return {
+            code: 'VOICE_MIC_NOT_FOUND',
+            message: 'No microphone was found. Connect or enable a microphone, then try again.'
+          };
+        }
+        if (name === 'NotReadableError' || name === 'TrackStartError' || name === 'AbortError') {
+          return {
+            code: 'VOICE_MIC_UNAVAILABLE',
+            message: 'Your microphone is unavailable or is being used by another app. Close other apps using it, check your selected input device, then try again.'
+          };
+        }
+        return {
+          code: 'VOICE_MIC_FAILED',
+          message: 'The microphone could not start. Check this browser’s microphone access and selected input device, then try again.'
+        };
+      }
+      async function requestMicrophone() {
+        try {
+          return await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+        } catch (error) {
+          const constraintError = error && (error.name === 'OverconstrainedError' || error.name === 'ConstraintNotSatisfiedError');
+          if (!constraintError) throw error;
+          return navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        }
+      }
+      async function startVoiceSession() {
+        if (!ai.available || ai.voiceStarting || ai.voiceActive) return;
+        if (!window.RTCPeerConnection || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          showVoiceError('This browser cannot start a secure voice session. Please call Easy Lot or use a standard form.');
+          return;
+        }
+        ai.voiceStarting = true;
+        setVoiceState('starting', 'Waiting for microphone permission…');
+        try {
+          ai.mediaStream = await requestMicrophone();
+          setVoiceState('starting', 'Connecting securely…');
+          ai.activeVoiceRequestId = requestId();
+          postParent({ type: 'easy-lot-voice:start', requestId: ai.activeVoiceRequestId, input: { sessionKey: ai.sessionKey, anonymousSessionId: ai.sessionKey } });
+        } catch (error) {
+          ai.voiceStarting = false;
+          const failure = microphoneFailure(error);
+          showVoiceError(failure.message, failure.code);
+        }
+      }
+      function stopVoiceSession(eventType = 'VOICE_SESSION_ENDED') {
+        const latencyMs = ai.sessionStartedAt ? Date.now() - ai.sessionStartedAt : 0;
+        stopSpokenAudio(eventType === 'VOICE_SPEECH_INTERRUPTED');
+        if (ai.sessionTimer) clearTimeout(ai.sessionTimer);
+        if (ai.dataChannel) ai.dataChannel.close();
+        if (ai.peerConnection) ai.peerConnection.close();
+        if (ai.mediaStream) ai.mediaStream.getTracks().forEach(track => track.stop());
+        ai.peerConnection = null;
+        ai.dataChannel = null;
+        ai.mediaStream = null;
+        ai.sessionTimer = null;
+        ai.sessionStartedAt = 0;
+        ai.voiceStarting = false;
+        ai.voiceActive = false;
+        ai.busy = false;
+        ai.transcriptItems.clear();
+        postTelemetry(eventType, { success: true, latencyMs });
+        setVoiceState('ready', ai.confirmationToken ? 'Voice ended. Review the details and tap Confirm and Submit when ready.' : 'Voice ended. Tap the microphone to start again.');
+      }
+      function addMatch(match) {
+        const card = document.createElement('article');
+        card.className = 'assistant-match';
+        const title = document.createElement('h3');
+        title.textContent = match.title || 'Compatible space';
+        card.appendChild(title);
+        [match.generalLocation, match.propertyType, Number.isFinite(match.advertisedMonthlyPrice) ? `$${match.advertisedMonthlyPrice} advertised monthly` : '', match.disclosure].filter(Boolean).forEach(value => {
+          const line = document.createElement('p');
+          line.textContent = value;
+          card.appendChild(line);
+        });
+        if (Array.isArray(match.matchReasons) && match.matchReasons.length) {
+          const reason = document.createElement('p');
+          reason.textContent = `Why it matched: ${match.matchReasons.join('; ')}`;
+          card.appendChild(reason);
+        }
+        return card;
+      }
+      function renderAssistantResult(result = {}) {
+        aiResponse.replaceChildren();
+        const message = document.createElement('p');
+        message.textContent = result.message || (result.status === 'COMPLETED' ? 'Your request was submitted for review.' : 'Please continue with one of the standard forms below.');
+        aiResponse.appendChild(message);
+        const summary = Array.isArray(result.summary) ? result.summary : [];
+        if (summary.length) {
+          const review = document.createElement('div');
+          review.className = 'assistant-matches';
+          const card = document.createElement('article');
+          card.className = 'assistant-match';
+          const title = document.createElement('h3');
+          title.textContent = 'Request details';
+          card.appendChild(title);
+          summary.forEach(item => {
+            const line = document.createElement('p');
+            const strong = document.createElement('strong');
+            strong.textContent = `${item.label}: `;
+            line.append(strong, document.createTextNode(item.value));
+            card.appendChild(line);
+          });
+          review.appendChild(card);
+          aiResponse.appendChild(review);
+        }
+        const matches = result.result && Array.isArray(result.result.matches) ? result.result.matches : [];
+        if (matches.length) {
+          const list = document.createElement('div');
+          list.className = 'assistant-matches';
+          matches.forEach(match => list.appendChild(addMatch(match)));
+          aiResponse.appendChild(list);
+        }
+        if (result.result && result.result.disclaimer) {
+          const disclaimer = document.createElement('p');
+          disclaimer.className = 'assistant-disclaimer';
+          disclaimer.textContent = result.result.disclaimer;
+          aiResponse.appendChild(disclaimer);
+        }
+        const proposedNeeds = result.result && Array.isArray(result.result.needs) ? result.result.needs : [];
+        if (proposedNeeds.length) {
+          const list = document.createElement('div');
+          list.className = 'assistant-matches';
+          proposedNeeds.forEach(need => {
+            const card = document.createElement('article');
+            card.className = 'assistant-match';
+            const title = document.createElement('h3');
+            title.textContent = `Step ${Number(need.phase) || 1}: ${need.label || 'Suggested need'}`;
+            const rationale = document.createElement('p');
+            rationale.textContent = need.rationale || 'Suggested from the information provided.';
+            card.append(title, rationale);
+            if (Array.isArray(need.dependsOn) && need.dependsOn.length) {
+              const dependency = document.createElement('p');
+              dependency.textContent = `Depends on: ${need.dependsOn.join(', ')}`;
+              card.appendChild(dependency);
+            }
+            list.appendChild(card);
+          });
+          aiResponse.appendChild(list);
+        }
+        const routeHint = result.result && result.result.routeHint;
+        const allowedRoutes = new Map([
+          ['/find-storage', 'EXPLORE FIND SPACE'],
+          ['/copy-of-find-storage', 'EXPLORE LIST SPACE'],
+          ['/become-a-service-provider', 'EXPLORE WORK OPPORTUNITIES'],
+          ['/solutions#request', 'EXPLORE GETTING HELP']
+        ]);
+        if (allowedRoutes.has(routeHint)) {
+          const link = document.createElement('a');
+          link.className = 'button';
+          link.href = routeHint;
+          link.textContent = allowedRoutes.get(routeHint);
+          aiResponse.appendChild(link);
+        }
+        if (result.signInRequired === true) {
+          const signIn = document.createElement('button');
+          signIn.className = 'button';
+          signIn.type = 'button';
+          signIn.textContent = 'SIGN IN TO SAVE';
+          signIn.addEventListener('click', () => {
+            setAssistantBusy(true, 'Opening secure sign in…');
+            ai.activeRequestId = requestId();
+            postParent({ type: 'easy-lot-ai:signin', requestId: ai.activeRequestId });
+          });
+          aiResponse.appendChild(signIn);
+        }
+        aiResponse.hidden = false;
+        ai.confirmationToken = result.confirmationToken || '';
+        ai.pendingAction = result.pendingAction || result.action || '';
+        aiConfirm.hidden = !result.confirmationRequired;
+        aiConfirmButton.textContent = ai.pendingAction === 'SAVE_SOLUTION_CASE' ? 'SAVE PRIVATE SOLUTION CASE' : 'CONFIRM AND SUBMIT';
+        aiAlertRow.hidden = !(ai.pendingAction === 'CREATE_SPACE_REQUEST' && result.result && result.result.noMatch === true);
+        aiAuthorizationRow.hidden = result.serviceAuthorizationRequired !== true;
+      }
+      function renderDiscovery(data = {}) {
+        const categories = Array.isArray(data.categories) ? data.categories : [];
+        void categories;
+        const services = Array.isArray(data.supportServices) ? data.supportServices : [];
+        const serviceMeta = item => {
+          const name = String(item.title || '').toLowerCase();
+          if (name.includes('tow') || name.includes('transport')) return { key: 'TOWING_VEHICLE_TRANSPORT', label: 'REQUEST A TOW', uses: ['Tow to or from storage', 'Non-running vehicle transport', 'Vehicle relocation', 'Pickup and drop-off assistance'] };
+          if (name.includes('key') || name.includes('access') || name.includes('diagnostic')) return { key: 'LOCKSMITH_VEHICLE_ACCESS', label: 'GET KEY OR ACCESS HELP', uses: ['Vehicle lockout or lost key', 'Replacement key or supported programming', 'Access needed before towing', 'Basic access or diagnostic help'] };
+          if (name.includes('dumpster') || name.includes('clean')) return { key: 'DUMPSTER_RENTAL_CLEANOUT', label: 'REQUEST CLEANOUT HELP', uses: ['Garage and storage-area cleanout', 'Yard or property cleanup', 'Dumpster rental requests', 'Host and operator preparation'] };
+          return { key: String(item.slug || item.title || '').toUpperCase().replace(/[^A-Z0-9]+/g, '_'), label: item.callToAction || 'REQUEST HELP', uses: [] };
+        };
+        if (services.length) document.getElementById('support').innerHTML = services.slice(0, 3).map(item => { const meta = serviceMeta(item); return `<article class="card solution-card"><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p>${meta.uses.length ? `<ul>${meta.uses.map(use => `<li>${esc(use)}</li>`).join('')}</ul>` : ''}<a class="button" href="/solutions?service=${encodeURIComponent(meta.key)}#request">${esc(item.callToAction || meta.label)}</a></article>`; }).join('') + `<article class="card solution-card"><h3>More Storage Solutions</h3><p>Browse vehicle, hauling, property, lot, and storage-support services.</p><a class="button" href="/solutions">MORE STORAGE SOLUTIONS</a></article>`;
+        const legal = Array.isArray(data.legalDocuments) ? data.legalDocuments : [];
+        void legal;
+        renderCommunityVideos(Array.isArray(data.communityVideos) ? data.communityVideos : []);
+      }
+      window.addEventListener('message', event => {
+        if (event.source !== parentWindow || event.origin !== parentOrigin) return;
+        const payload = event.data || {};
+        if (payload.type === 'home:data') renderDiscovery(payload.data);
+        if (payload.type === 'lighthouse:access') {
+          const access = payload.access || {};
+          communityVideo.access = access;
+          const videoCreationAllowed = access.entitled === true;
+          communityVideoForm.hidden = !videoCreationAllowed;
+          communityVideoSignIn.hidden = videoCreationAllowed;
+          const presentation = {
+            SIGNED_OUT: ['Sign in to see your Lighthouse access.', 'SIGN IN', '/customer-portal'],
+            NO_PLAN: ['Membership enrollment is being readied now.', 'MEMBERSHIP OPENING SOON', '/plans-pricing'],
+            ACTIVE: ['Your membership is active.', 'OPEN LIGHTHOUSE', '/customer-portal'],
+            CANCELED_ACTIVE: ['Your access remains active through the end of your paid period.', 'OPEN LIGHTHOUSE', '/customer-portal'],
+            PAYMENT_ISSUE: ['Your membership needs billing attention.', 'REVIEW MEMBERSHIP', '/my-subscriptions'],
+            EXPIRED: ['Your previous membership has ended.', 'MEMBERSHIP OPENING SOON', '/plans-pricing'],
+            SUSPENDED: ['Your membership is currently paused.', 'REVIEW MEMBERSHIP', '/my-subscriptions'],
+            OWNER: ['Owner access is ready.', 'OPEN LIGHTHOUSE', '/customer-portal']
+          }[access.state] || ['Membership status is temporarily unavailable.', 'SIGN IN', '/customer-portal'];
+          lighthouseState.textContent = presentation[0];
+          lighthouseAction.textContent = presentation[1];
+          lighthouseAction.href = presentation[2];
+        }
+        if (payload.type === 'lighthouse-video:upload-ready') {
+          if (payload.requestId !== communityVideo.requestId) return;
+          uploadCommunityVideo(payload.upload).catch(error => {
+            void error;
+            communityVideoProgress.textContent = 'The video could not be uploaded. Nothing was published. Please try again.';
+            communityVideoSubmit.disabled = false;
+          });
+        }
+        if (payload.type === 'lighthouse-video:submitted') {
+          if (payload.requestId !== communityVideo.requestId) return;
+          resetCommunityVideoForm(payload.result?.message || 'Video submitted for review. It is not public yet.');
+        }
+        if (payload.type === 'lighthouse-video:reported') {
+          if (payload.requestId !== communityVideo.requestId) return;
+          communityVideoProgress.textContent = 'Thank you. The video was reported for review.';
+        }
+        if (payload.type === 'lighthouse-video:error') {
+          if (payload.requestId !== communityVideo.requestId) return;
+          const messages = {
+            MEMBER_SIGN_IN_REQUIRED: 'Please sign in before creating a video.',
+            LIGHTHOUSE_ACCESS_NO_PLAN: 'An active Lighthouse membership is required to submit videos.',
+            VIDEO_CONTENT_NOT_ALLOWED: 'This video cannot be uploaded to the Lighthouse community.',
+            VIDEO_RULES_REQUIRED: 'Confirm the ownership and community-safety rules first.'
+          };
+          communityVideoProgress.textContent = messages[payload.message] || 'The video could not be submitted. Nothing was published.';
+          communityVideoSubmit.disabled = false;
+        }
+        if (payload.type === 'easy-lot-ai:status') {
+          aiStatusReceived = true;
+          clearTimeout(aiAvailabilityTimeout);
+          ai.available = payload.status && payload.status.available === true;
+          setAssistantBusy(false, ai.available ? 'Lighthouse is ready. Important actions still require your on-screen confirmation.' : 'Lighthouse is temporarily unavailable. Please use a standard form below.');
+          if (!ai.available) showFallbacks();
+        }
+        if (payload.type === 'easy-lot-voice:session') {
+          if (payload.requestId !== ai.activeVoiceRequestId) return;
+          connectVoiceSession(payload.voiceSession).catch(error => {
+            void error;
+            stopVoiceSession('VOICE_FALLBACK');
+            showVoiceError('The secure voice connection could not start. Please try again or use a standard form.', 'VOICE_FALLBACK', false);
+          });
+        }
+        if (payload.type === 'easy-lot-voice:error') {
+          if (payload.requestId !== ai.activeVoiceRequestId) return;
+          if (ai.mediaStream) ai.mediaStream.getTracks().forEach(track => track.stop());
+          ai.mediaStream = null;
+          showVoiceError(payload.message || 'Voice is temporarily unavailable. Please use a standard form.');
+        }
+        if (payload.type === 'easy-lot-ai:response') {
+          if (payload.requestId !== ai.activeRequestId) return;
+          renderAssistantResult(payload.result);
+          ai.attachments = [];
+          mediaConsent.checked = false;
+          photoInput.value = '';
+          videoInput.value = '';
+          renderAttachments();
+          const message = payload.result && payload.result.message || 'Please review the result on screen.';
+          if (ai.voiceActive) playVoiceReply(payload.voice, message);
+          else setAssistantBusy(false, payload.result && payload.result.confirmationRequired ? 'Review the details below, then confirm when ready.' : 'Lighthouse is ready for another question.');
+        }
+        if (payload.type === 'easy-lot-ai:error') {
+          if (payload.requestId !== ai.activeRequestId) return;
+          renderAssistantResult({ message: payload.message, fallbackMode: true });
+          setAssistantBusy(false, 'Lighthouse could not complete that request. Please try again or use a standard form below.');
+          showFallbacks();
+        }
+        if (payload.type === 'easy-lot-ai:signed-in') {
+          if (payload.requestId !== ai.activeRequestId) return;
+          setAssistantBusy(false, 'Signed in. Tap Save Private Solution Case to finish.');
+        }
+        if (payload.type === 'easy-lot-ai:signin-cancelled') {
+          if (payload.requestId !== ai.activeRequestId) return;
+          setAssistantBusy(false, 'Sign in was cancelled. Your proposed plan is still here.');
+        }
+      });
+      voiceToggle.addEventListener('click', () => {
+        if (ai.voiceActive) stopVoiceSession('VOICE_SESSION_ENDED');
+        else startVoiceSession();
+      });
+      textForm.addEventListener('submit', event => {
+        event.preventDefault();
+        try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
+        submitMessage(textInput.value, 'TEXT_WEB');
+      });
+      textInput.addEventListener('input', () => {
+        try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
+        updateComposerState();
+      });
+      mediaConsent.addEventListener('change', updateComposerState);
+      addPhotoButton.addEventListener('click', () => photoInput.click());
+      addVideoButton.addEventListener('click', () => videoInput.click());
+      photoInput.addEventListener('change', async () => {
+        const files = Array.from(photoInput.files || []).slice(0, 4);
+        if (!files.length) return;
+        setAssistantBusy(true, 'Preparing your pictures…');
+        try {
+          ai.attachments = await Promise.all(files.map(preparePhoto));
+          renderAttachments();
+          setAssistantBusy(false, `${ai.attachments.length} picture${ai.attachments.length === 1 ? '' : 's'} ready. Add a note or ask Lighthouse.`);
+        } catch (error) {
+          ai.attachments = [];
+          renderAttachments();
+          setAssistantBusy(false, 'Use up to four JPG, PNG, or WebP pictures, each smaller than 12 MB.');
+        }
+      });
+      videoInput.addEventListener('change', async () => {
+        const file = videoInput.files && videoInput.files[0];
+        if (!file) return;
+        setAssistantBusy(true, 'Preparing four private video frames…');
+        try {
+          ai.attachments = await prepareVideo(file);
+          renderAttachments();
+          setAssistantBusy(false, 'Video frames ready. The raw video will not be sent to Lighthouse AI.');
+        } catch (error) {
+          ai.attachments = [];
+          renderAttachments();
+          setAssistantBusy(false, error && error.message === 'VIDEO_TOO_LONG' ? 'Choose a video that is 60 seconds or shorter.' : 'Use an MP4, WebM, MOV, or M4V video smaller than 50 MB.');
+        }
+      });
+      communityVideoFile.addEventListener('change', async () => {
+        const file = communityVideoFile.files && communityVideoFile.files[0];
+        if (!file) return;
+        communityVideoProgress.textContent = 'Preparing a private preview and four review frames…';
+        communityVideoSubmit.disabled = true;
+        try {
+          const prepared = await prepareCommunityVideo(file);
+          communityVideo.file = file;
+          communityVideo.durationSeconds = prepared.duration;
+          communityVideo.frames = prepared.frames;
+          communityVideoProgress.textContent = 'Video ready. Add the details and submit it for review.';
+        } catch (error) {
+          communityVideo.file = null;
+          communityVideo.frames = [];
+          communityVideoProgress.textContent = error?.message === 'COMMUNITY_VIDEO_TOO_LONG'
+            ? 'Choose a video that is 3 minutes or shorter.'
+            : 'Choose an MP4, WebM, MOV, or M4V video smaller than 100 MB.';
+          communityVideoFile.value = '';
+          communityVideoPreview.hidden = true;
+        } finally {
+          communityVideoSubmit.disabled = false;
+        }
+      });
+      communityVideoForm.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!communityVideo.access?.entitled) {
+          communityVideoProgress.textContent = 'Sign in with an active Lighthouse membership to submit a video.';
+          return;
+        }
+        if (!communityVideo.file || !communityVideo.frames.length) {
+          communityVideoProgress.textContent = 'Choose a video and wait for the preview to finish first.';
+          return;
+        }
+        const title = document.getElementById('community-video-title').value.trim();
+        const description = document.getElementById('community-video-description').value.trim();
+        const rightsConfirmed = document.getElementById('community-video-rights').checked;
+        const rulesAccepted = document.getElementById('community-video-rules').checked;
+        if (title.length < 3 || description.length < 10 || !rightsConfirmed || !rulesAccepted) {
+          communityVideoProgress.textContent = 'Add a title and description, then confirm both safety checks.';
+          return;
+        }
+        communityVideoSubmit.disabled = true;
+        communityVideoProgress.textContent = 'Preparing a secure upload…';
+        communityVideo.requestId = requestId();
+        postParent({
+          type: 'lighthouse-video:prepare',
+          requestId: communityVideo.requestId,
+          input: {
+            title,
+            description,
+            fileName: communityVideo.file.name,
+            mimeType: communityVideo.file.type,
+            sizeBytes: communityVideo.file.size,
+            durationSeconds: communityVideo.durationSeconds,
+            rightsConfirmed,
+            rulesAccepted
+          }
+        });
+      });
+      document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => {
+        textInput.value = button.dataset.prompt;
+        try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
+        textInput.focus();
+      }));
+      stopSpeechButton.addEventListener('click', () => {
+        stopSpokenAudio(true);
+        resumeListening();
+      });
+      aiConfirmButton.addEventListener('click', () => {
+        const termsAccepted = document.getElementById('assistant-terms').checked;
+        const privacyAcknowledged = document.getElementById('assistant-privacy').checked;
+        const needsAuthorization = !aiAuthorizationRow.hidden;
+        const serviceAuthorizationConfirmed = document.getElementById('assistant-authorization').checked;
+        const saveAlertRequested = document.getElementById('assistant-alert').checked;
+        if (!termsAccepted || !privacyAcknowledged || (needsAuthorization && !serviceAuthorizationConfirmed)) {
+          aiStatus.textContent = 'Please check each required confirmation before submitting.';
+          return;
+        }
+        stopSpokenAudio(false);
+        setMicrophoneEnabled(false);
+        setAssistantBusy(true, 'Submitting your confirmed request…');
+        ai.activeRequestId = requestId();
+        postParent({ type: 'easy-lot-ai:confirm', requestId: ai.activeRequestId, input: { sessionKey: ai.sessionKey, userConfirmed: true, termsAccepted, privacyAcknowledged, serviceAuthorizationConfirmed, saveAlertRequested, confirmationToken: ai.confirmationToken, channel: ai.activeChannel } });
+      });
+      document.addEventListener('click', event => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (href === '#assistant') {
+          event.preventDefault();
+          postParent({ type: 'easy-lot:scrollToAssistant' });
+          return;
+        }
+        if (href === '#what-easy-does') {
+          event.preventDefault();
+          postParent({ type: 'easy-lot:scrollToWhatEasyDoes' });
+          return;
+        }
+        if (!href || !href.startsWith('/')) return;
+        event.preventDefault();
+        postParent({ type: 'easy-lot:navigate', href });
+      });
+      window.addEventListener('beforeunload', () => {
+        if (ai.mediaStream) ai.mediaStream.getTracks().forEach(track => track.stop());
+        if (ai.peerConnection) ai.peerConnection.close();
+        if (communityVideo.objectUrl) URL.revokeObjectURL(communityVideo.objectUrl);
+      });
+      postParent({ type: 'home:ready' });
+    </script>
+  </body>
+</html>

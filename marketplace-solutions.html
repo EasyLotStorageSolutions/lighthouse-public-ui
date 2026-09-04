@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+    :root{--blue:#113d6a;--sky:#d6e6fe;--paper:rgba(255,255,255,.42);--line:rgba(17,61,106,.68);--shadow:0 13px 10px -12px rgba(17,61,106,.6)}
+    *{box-sizing:border-box}html,body{margin:0;background:var(--sky);color:var(--blue);font-family:"Playfair Display",Georgia,serif}body{font-size:18px;line-height:1.55}
+    main{max-width:980px;margin:auto;padding:42px 30px 80px}.eyebrow{font:700 10px/1.4 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+    h1{font:400 clamp(38px,5vw,52px)/1.08 "Playfair Display",Georgia,serif;margin:8px 0 18px}h2{font:italic 400 clamp(42px,5vw,60px)/1.05 Niconne,cursive;margin:0 0 16px}h3{font:600 24px/1.2 "Playfair Display",Georgia,serif;margin:0 0 10px}
+    p{margin:0 0 18px}.lead{font-size:22px;max-width:760px}.featured,.categories,.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:32px 0}
+    .card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:24px}.card p{font-size:16px}.featured .card{min-height:180px;display:flex;flex-direction:column}.featured .button{margin-top:auto;align-self:flex-start}
+    button,.button{min-height:44px;border:1px solid var(--blue);border-radius:4px;background:rgba(255,255,255,.55);color:var(--blue);font:400 11px/1 Arial,sans-serif;letter-spacing:.05em;padding:0 20px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button:hover,.button:hover,button[aria-pressed="true"]{background:var(--blue);color:white}
+    .category-button{text-align:left;display:block;width:100%;height:auto;padding:22px;font-family:"Playfair Display",Georgia,serif;font-size:21px;letter-spacing:0}.category-button small{display:block;font:400 14px/1.4 Arial,sans-serif;margin-top:8px}
+    .services{margin-top:24px}.service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.service{min-height:142px}.service button{margin-top:10px}.hidden{display:none!important}
+    .request{margin-top:46px}.role-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 26px}.role-row button{min-width:150px}
+    form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}label{display:grid;gap:7px;font-weight:600}label.full,.full{grid-column:1/-1}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:3px;background:rgba(255,255,255,.65);color:#16334f;padding:12px;font:16px/1.35 "Playfair Display",Georgia,serif}textarea{min-height:110px;resize:vertical}.checks{display:grid;gap:10px}.check{display:flex;align-items:flex-start;gap:9px;font-weight:400}.check input{width:auto;margin-top:5px}.status{grid-column:1/-1;padding:14px;border:1px solid var(--line);background:rgba(255,255,255,.55)}
+    @media(max-width:720px){main{padding:32px 18px 60px}.featured,.categories,.service-grid,form{grid-template-columns:1fr}.lead{font-size:19px}.role-row button{width:100%}.card,.panel{padding:20px}h1{font-size:39px}h2{font-size:44px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Easy Lot Solutions Network</div>
+  <h1>Storage Solutions When You Need Them</h1>
+  <p class="lead">Easy Lot helps you find the space, get your stuff there, and solve the problems that come with storage.</p>
+
+  <section class="featured" aria-label="Featured solutions">
+    <article class="card"><h3>Towing &amp; Vehicle Transport</h3><p>Move a vehicle, trailer, RV, boat, or equipment to or from storage.</p><button data-service="TOWING_VEHICLE_TRANSPORT">REQUEST A TOW</button></article>
+    <article class="card"><h3>Locksmith / Vehicle Access</h3><p>Request vehicle access, lost-key, or supported locksmith help.</p><button data-service="LOCKSMITH_VEHICLE_ACCESS">GET KEY OR ACCESS HELP</button></article>
+    <article class="card"><h3>Dumpster Rental &amp; Cleanout</h3><p>Clear a garage, lot, yard, storage area, or operating property.</p><button data-service="DUMPSTER_RENTAL_CLEANOUT">REQUEST CLEANOUT HELP</button></article>
+    <article class="card"><h3>More Storage Solutions</h3><p>Browse vehicle, hauling, property, lot, and storage-support services.</p><button id="browseAll">MORE STORAGE SOLUTIONS</button></article>
+  </section>
+
+  <section id="catalog" aria-labelledby="catalogTitle">
+    <div class="eyebrow">Browse by category</div><h2 id="catalogTitle">What kind of help do you need?</h2>
+    <div id="categoryGrid" class="categories"><p>Loading available solutions…</p></div>
+    <div id="servicePanel" class="services hidden"><h3 id="servicePanelTitle"></h3><div id="serviceGrid" class="service-grid"></div></div>
+  </section>
+
+  <section id="request" class="request panel hidden" aria-labelledby="requestTitle">
+    <div class="eyebrow">Request a solution</div><h2 id="requestTitle">Tell us what you need.</h2>
+    <p>Choose who is requesting help. The same provider network serves storage customers, hosts, and operators.</p>
+    <div class="role-row" role="group" aria-label="Requester role"><button type="button" data-role="CUSTOMER" aria-pressed="true">CUSTOMER</button><button type="button" data-role="HOST">HOST</button><button type="button" data-role="OPERATOR">OPERATOR</button></div>
+    <form id="requestForm">
+      <input type="hidden" name="serviceTypeKey" />
+      <input type="hidden" name="requesterRole" value="CUSTOMER" />
+      <label>Service requested<input name="serviceLabel" readonly /></label>
+      <label>When is it needed?<input type="datetime-local" name="neededWhen" /></label>
+      <label>Name<input name="name" autocomplete="name" required /></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+      <label>Urgency<select name="urgency"><option value="NORMAL">Normal</option><option value="URGENT">Urgent</option><option value="EMERGENCY">Emergency</option></select></label>
+      <label class="full">Service address or location<input name="serviceLocation" autocomplete="street-address" required /></label>
+      <label>City<input name="city" autocomplete="address-level2" required /></label>
+      <label>State<input name="state" maxlength="2" autocomplete="address-level1" required /></label>
+      <label>ZIP / postal code<input name="zip" autocomplete="postal-code" required /></label>
+      <div></div>
+      <div id="adaptiveFields" class="full"></div>
+      <label class="full">Anything else the provider should know?<textarea name="customerNotes"></textarea></label>
+      <div class="checks full"><label class="check"><input type="checkbox" name="termsAccepted" required /> I agree to the Easy Lot support-service terms.</label><label class="check"><input type="checkbox" name="privacyAcknowledged" required /> I acknowledge the privacy notice and consent to sharing necessary job details only with the provider receiving or accepting this opportunity.</label></div>
+      <div id="status" class="status hidden" role="status"></div>
+      <button class="full" type="submit">SUBMIT REQUEST</button>
+    </form>
+  </section>
+</main>
+<script>
+const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();  const parentWindow=window.parent;let catalog=[],role='CUSTOMER';
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm=v=>String(v||'').trim().toUpperCase().replace(/[^A-Z0-9]+/g,'_').replace(/^_|_$/g,'');
+  const categoryFor=key=>catalog.find(c=>(c.services||[]).some(s=>s.key===key));
+  function renderCatalog(data){catalog=Array.isArray(data)?data:[];const grid=document.getElementById('categoryGrid');grid.innerHTML=catalog.length?catalog.map(c=>`<button class="category-button" data-category="${esc(c.key)}"><strong>${esc(c.title)}</strong><small>${esc(c.description)}</small></button>`).join(''):'<p>Solutions are temporarily unavailable. Please try again shortly.</p>';grid.querySelectorAll('button').forEach(b=>b.onclick=()=>showCategory(b.dataset.category));const selected=new URLSearchParams(location.search).get('service');if(selected)chooseService(selected);}
+  function showCategory(key){const c=catalog.find(i=>i.key===key);if(!c)return;document.getElementById('servicePanelTitle').textContent=c.title;const grid=document.getElementById('serviceGrid');grid.innerHTML=(c.services||[]).map(s=>`<article class="card service"><h3>${esc(s.title)}</h3><p>${esc(s.description||'Request this service through the Easy Lot Solutions Network.')}</p><button data-service="${esc(s.key)}">SELECT</button></article>`).join('');grid.querySelectorAll('button').forEach(b=>b.onclick=()=>chooseService(b.dataset.service));document.getElementById('servicePanel').classList.remove('hidden');document.getElementById('servicePanel').scrollIntoView({behavior:'smooth',block:'start'});}
+  const labelFor=key=>{for(const c of catalog){const s=(c.services||[]).find(i=>i.key===key);if(s)return s.title}return key.replaceAll('_',' ')};
+  function adaptiveMarkup(key){const category=norm((categoryFor(key)||{}).key);if(category==='VEHICLE_EQUIPMENT')return `<div class="service-grid"><label>Vehicle/equipment type<input name="vehicleClass"></label><label>Year<input type="number" min="1900" max="2100" name="year"></label><label>Make<input name="make"></label><label>Model<input name="model"></label><label>Problem or service needed<input name="capabilityRequirements" placeholder="Example: lockout, lost key, non-running tow"></label><label>Running status<select name="runningStatus"><option value="">Choose</option><option>Running</option><option>Non-running</option><option>Unknown</option></select></label><label>Destination, if transport<input name="destination"></label><label>Urgent access conditions<input name="accessConditions"></label><label class="check full"><input type="checkbox" name="ownershipAuthorization"> I can provide ownership or authorization when vehicle access or key work requires it.</label></div>`;
+    if(key==='DUMPSTER_RENTAL_CLEANOUT')return `<div class="service-grid"><label>Dumpster or cleanout type<input name="cleanoutType"></label><label>Property type<input name="propertyType"></label><label>Material description<input name="materialDescription"></label><label>Approximate volume<input name="approximateVolume"></label><label>Preferred dumpster size<input name="dumpsterSize"></label><label>Placement / delivery location<input name="deliveryLocation"></label><label class="full">Placement and access notes<textarea name="placementNotes"></textarea></label><label class="check full"><input type="checkbox" name="hazardousAcknowledged"> I will identify prohibited or hazardous materials before service.</label></div>`;
+    if(category==='MOVING_HAULING')return `<div class="service-grid"><label>Item or equipment type<input name="itemType"></label><label>Approximate dimensions / weight<input name="dimensionsWeight"></label><label>Origin<input name="origin"></label><label>Destination<input name="destination"></label><label>Loading assistance needed?<select name="loadingAssistance"><option value="">Choose</option><option>Yes</option><option>No</option><option>Unsure</option></select></label><label>Trailer / equipment requirements<input name="equipmentRequirements"></label></div>`;
+    if(category==='PROPERTY_LOT')return `<div class="service-grid"><label>Property type<input name="propertyType"></label><label>Work requested<input name="workRequested"></label><label>Approximate area / length<input name="areaLength"></label><label>Access details<input name="propertyAccess"></label><label class="full">Desired timeframe<input name="desiredTimeframe"></label></div>`;
+    return `<div class="service-grid"><label>Item, property, or storage type<input name="supportSubject"></label><label>Approximate size or volume<input name="sizeVolume"></label><label class="full">Access or placement details<textarea name="supportAccess"></textarea></label></div>`;}
+  function chooseService(key){const form=document.getElementById('requestForm');form.serviceTypeKey.value=key;form.serviceLabel.value=labelFor(key);document.getElementById('adaptiveFields').innerHTML=adaptiveMarkup(key);document.getElementById('request').classList.remove('hidden');document.getElementById('request').scrollIntoView({behavior:'smooth',block:'start'});}
+  document.querySelectorAll('[data-service]').forEach(b=>b.onclick=()=>chooseService(b.dataset.service));document.getElementById('browseAll').onclick=()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{role=b.dataset.role;document.querySelectorAll('[data-role]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.getElementById('requestForm').requesterRole.value=role;});
+  document.getElementById('requestForm').onsubmit=e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;const fd=new FormData(e.currentTarget),data={};for(const [k,v] of fd.entries()){if(['serviceTypeKey','requesterRole','serviceLabel','neededWhen','name','phone','email','urgency','serviceLocation','city','state','zip','customerNotes','termsAccepted','privacyAcknowledged'].includes(k))data[k]=v;else(data.categoryDetails||(data.categoryDetails={}))[k]=v}data.termsAccepted=fd.has('termsAccepted');data.privacyAcknowledged=fd.has('privacyAcknowledged');data.sourceClientRequestId=`web-${Date.now()}-${Math.random().toString(36).slice(2)}`;const status=document.getElementById('status');status.textContent='Submitting your private request…';status.classList.remove('hidden');e.currentTarget.querySelector('button[type=submit]').disabled=true;parentWindow.postMessage({type:'solutions:submitRequest',data},parentOrigin);};
+  window.addEventListener('message',event=>{if(event.source!==window.parent||event.origin!==parentOrigin)return;const d=event.data||{};if(d.type==='solutions:catalog')renderCatalog(d.catalog);if(d.type==='solutions:result'){const status=document.getElementById('status');status.classList.remove('hidden');status.textContent=d.error?d.error:(d.result.message||'Request received.');document.getElementById('requestForm').querySelector('button[type=submit]').disabled=false;if(!d.error)document.getElementById('requestForm').reset();}});
+  parentWindow.postMessage({type:'solutions:ready'},parentOrigin);
+</script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #586879;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+      }
+      main {
+        max-width: 1140px;
+        margin: auto;
+        padding: 48px 24px 70px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, serif;
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 60px);
+        margin: 10px 0;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      .lead,
+      p {
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .filters,
+      .form,
+      .card,
+      .notice {
+        border: 1px solid var(--line);
+        padding: 20px;
+      }
+      .filters {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        gap: 10px;
+        background: var(--wash);
+      }
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #aab9c5;
+        margin: 5px 0 11px;
+      }
+      .primary {
+        min-height: 44px;
+        padding: 0 18px;
+        border: 0;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 700;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin: 24px 0;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+      }
+      .price {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--blue);
+      }
+      .details {
+        display: none;
+      }
+      .details.on {
+        display: block;
+      }
+      .browse.off {
+        display: none;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .checks label {
+        display: block;
+      }
+      .checks input {
+        width: auto;
+      }
+      .notice {
+        background: var(--wash);
+        border-left: 5px solid var(--gold);
+        margin: 20px 0;
+      }
+      .status {
+        padding: 20px;
+        background: var(--wash);
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 16px;
+        }
+        .filters,
+        .grid,
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      :root {
+        --blue: #113d6a;
+        --gold: #113d6a;
+        --ink: #113d6a;
+        --muted: #294f76;
+        --line: rgba(17, 61, 106, 0.48);
+        --wash: rgba(255, 255, 255, 0.32);
+      }
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      p,
+      .lead,
+      .meta {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .card,
+      .thread,
+      .composer,
+      .status,
+      .notice,
+      .document,
+      .channels,
+      .nav {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      button,
+      a,
+      .primary {
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+        letter-spacing: 0.06em;
+        border: 1px solid #113d6a;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .primary:hover,
+      button:hover,
+      a:hover {
+        background: #fff;
+        color: #113d6a;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid rgba(17, 61, 106, 0.62);
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.68);
+        color: #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">STORAGE PROPERTY CLASSIFIEDS</div>
+      <h1>Property opportunities.</h1>
+      <p class="lead">
+        Browse approved storage-oriented property classifieds or submit a
+        property for review. Exact private seller details are never shown in
+        public results.
+      </p>
+      <div id="status" class="status">Checking classifieds availability…</div>
+      <section id="browse" class="browse" hidden>
+        <form id="filters" class="filters">
+          <input id="location" placeholder="City, county, or ZIP" /><select
+            id="propertyType"
+          >
+            <option value="">All property types</option>
+            <option>Land</option>
+            <option>Warehouse</option>
+            <option>Commercial</option>
+            <option>Industrial</option>
+            <option>Parking</option></select
+          ><input
+            id="maxPrice"
+            type="number"
+            min="0"
+            placeholder="Maximum price"
+          /><button class="primary">SEARCH</button>
+        </form>
+        <div id="grid" class="grid"></div>
+        <div class="notice">
+          Listings are seller supplied and advertising only. Buyers must
+          independently verify ownership, zoning, condition, utilities, taxes,
+          financing, and suitability.
+        </div>
+        <section class="form">
+          <h2>Submit a property classified</h2>
+          <form id="sellerForm">
+            <div class="two">
+              <label
+                >Seller or business name<input
+                  id="sellerName"
+                  required /></label
+              ><label
+                >Email<input id="sellerEmail" type="email" required /></label
+              ><label>Phone<input id="sellerPhone" /></label
+              ><label
+                >Property title<input
+                  id="listingTitle"
+                  minlength="5"
+                  required /></label
+              ><label>Property type<input id="listingType" /></label
+              ><label
+                >Public location<input
+                  id="publicLocation"
+                  placeholder="City, state or county only" /></label
+              ><label
+                >Asking price<input
+                  id="askingPrice"
+                  type="number"
+                  min="0" /></label
+              ><label
+                >Acreage<input id="acreage" type="number" min="0" step="0.01"
+              /></label>
+            </div>
+            <label
+              >Description<textarea
+                id="description"
+                minlength="30"
+                required
+              ></textarea>
+            </label>
+            <div class="checks">
+              <label
+                ><input id="authority" type="checkbox" required /> I am the
+                owner or an authorized representative.</label
+              ><label
+                ><input id="terms" type="checkbox" required /> I accept the
+                Property Classified Terms.</label
+              ><label
+                ><input id="privacy" type="checkbox" required /> I acknowledge
+                the Privacy Policy.</label
+              >
+            </div>
+            <button class="primary">SUBMIT FOR REVIEW</button>
+          </form>
+        </section>
+      </section>
+      <section id="details" class="details">
+        <button id="back">BACK TO CLASSIFIEDS</button>
+        <div id="detailBody"></div>
+        <form id="inquiryForm" class="form">
+          <h2>Ask about this property</h2>
+          <label>Email<input id="inquiryEmail" type="email" required /></label
+          ><label>Phone<input id="inquiryPhone" /></label
+          ><label
+            >Message<textarea
+              id="inquiryMessage"
+              minlength="10"
+              required
+            ></textarea></label
+          ><button class="primary">SEND INQUIRY</button>
+        </form>
+      </section>
+    </main>
+    <script>
+const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      (() => {
+        const status = document.getElementById("status"),
+          browse = document.getElementById("browse"),
+          filters = document.getElementById("filters"),
+          location = document.getElementById("location"),
+          propertyType = document.getElementById("propertyType"),
+          maxPrice = document.getElementById("maxPrice"),
+          grid = document.getElementById("grid"),
+          sellerForm = document.getElementById("sellerForm"),
+          sellerName = document.getElementById("sellerName"),
+          sellerEmail = document.getElementById("sellerEmail"),
+          sellerPhone = document.getElementById("sellerPhone"),
+          listingTitle = document.getElementById("listingTitle"),
+          listingType = document.getElementById("listingType"),
+          publicLocation = document.getElementById("publicLocation"),
+          askingPrice = document.getElementById("askingPrice"),
+          acreage = document.getElementById("acreage"),
+          description = document.getElementById("description"),
+          authority = document.getElementById("authority"),
+          terms = document.getElementById("terms"),
+          privacy = document.getElementById("privacy"),
+          details = document.getElementById("details"),
+          back = document.getElementById("back"),
+          detailBody = document.getElementById("detailBody"),
+          inquiryForm = document.getElementById("inquiryForm"),
+          inquiryEmail = document.getElementById("inquiryEmail"),
+          inquiryPhone = document.getElementById("inquiryPhone"),
+          inquiryMessage = document.getElementById("inquiryMessage");
+        const p = window.parent,
+          e = (v) =>
+            String(v ?? "").replace(
+              /[&<>"']/g,
+              (c) =>
+                ({
+                  "&": "&amp;",
+                  "<": "&lt;",
+                  ">": "&gt;",
+                  '"': "&quot;",
+                  "'": "&#39;",
+                })[c],
+            );
+        let selected = "",
+          timer = setInterval(
+            () => p.postMessage({ type: "classifieds:ready" }, parentOrigin),
+            750,
+          );
+        function listingCards(items) {
+          grid.innerHTML = items.length
+            ? items
+                .map(
+                  (x) =>
+                    `<article class="card"><h3>${e(x.title)}</h3><p>${e(x.propertyType)} • ${e(x.location)}</p><div class="price">${x.askingPrice ? "$" + Number(x.askingPrice).toLocaleString() : "Contact seller"}</div><p>${e(x.description).slice(0, 180)}</p><button class="primary" data-open="${e(x.slug || x.id)}">VIEW PROPERTY</button></article>`,
+                )
+                .join("")
+            : '<div class="status">No approved property classifieds match yet.</div>';
+          document
+            .querySelectorAll("[data-open]")
+            .forEach(
+              (b) =>
+                (b.onclick = () =>
+                  p.postMessage(
+                    { type: "classifieds:detail", reference: b.dataset.open },
+                    parentOrigin,
+                  )),
+            );
+        }
+        filters.onsubmit = (x) => {
+          x.preventDefault();
+          p.postMessage(
+            {
+              type: "classifieds:search",
+              filters: {
+                location: location.value,
+                propertyType: propertyType.value,
+                maxPrice: maxPrice.value ? Number(maxPrice.value) : undefined,
+              },
+            },
+            parentOrigin,
+          );
+        };
+        sellerForm.onsubmit = (x) => {
+          x.preventDefault();
+          p.postMessage({
+            type: "classifieds:submit",
+            input: {
+              sellerName: sellerName.value,
+              email: sellerEmail.value,
+              phone: sellerPhone.value,
+              title: listingTitle.value,
+              propertyType: listingType.value,
+              publicLocation: publicLocation.value,
+              askingPrice: askingPrice.value,
+              acreage: acreage.value,
+              description: description.value,
+              authorityCertified: authority.checked,
+              termsAccepted: terms.checked,
+              privacyAcknowledged: privacy.checked,
+              termsVersion: "v1",
+            },
+          }, parentOrigin);
+        };
+        inquiryForm.onsubmit = (x) => {
+          x.preventDefault();
+          p.postMessage({
+            type: "classifieds:inquire",
+            input: {
+              classifiedId: selected,
+              email: inquiryEmail.value,
+              phone: inquiryPhone.value,
+              message: inquiryMessage.value,
+            },
+          }, parentOrigin);
+        };
+        back.onclick = () => {
+          details.classList.remove("on");
+          browse.classList.remove("off");
+        };
+        window.addEventListener("message", (x) => {
+          if (x.source !== window.parent || x.origin !== parentOrigin) return;
+          const m = x.data || {};
+          if (typeof m.type === "string" && m.type.startsWith("classifieds:")) {
+            clearInterval(timer);
+            timer = null;
+          }
+          if (m.type === "classifieds:disabled") {
+            status.textContent =
+              m.message ||
+              "Property classifieds are being prepared for launch.";
+            browse.hidden = true;
+          }
+          if (m.type === "classifieds:list") {
+            status.hidden = true;
+            browse.hidden = false;
+            listingCards(m.items || []);
+          }
+          if (m.type === "classifieds:item" && m.item) {
+            selected = m.item.id;
+            detailBody.innerHTML = `<h2>${e(m.item.title)}</h2><div class="price">${m.item.askingPrice ? "$" + Number(m.item.askingPrice).toLocaleString() : "Contact seller"}</div><p>${e(m.item.location)} • ${e(m.item.propertyType)}</p><p>${e(m.item.description)}</p><div class="notice">${e(m.item.disclosure)}</div>`;
+            browse.classList.add("off");
+            details.classList.add("on");
+          }
+          if (m.type === "classifieds:notice") {
+            status.hidden = false;
+            status.textContent = m.message;
+          }
+        });
+        p.postMessage({ type: "classifieds:ready" }, parentOrigin);
+        setTimeout(() => {
+          if (browse.hidden && status.textContent.includes("Checking"))
+            status.textContent =
+              "Property classifieds are configured but remain paused until launch approval.";
+        }, 3500);
+      })();
+    </script>
+  </body>
+</html>

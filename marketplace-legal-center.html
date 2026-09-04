@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #506071;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+      }
+      main {
+        max-width: 1120px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      h1,
+      h2 {
+        font-family: Georgia, serif;
+        color: var(--blue);
+      }
+      h1 {
+        font-size: clamp(38px, 5vw, 64px);
+        margin: 10px 0 16px;
+      }
+      .lead {
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--muted);
+        max-width: 780px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 28px;
+        margin-top: 34px;
+      }
+      .nav {
+        border: 1px solid var(--line);
+        background: var(--wash);
+        padding: 12px;
+      }
+      .nav button {
+        display: block;
+        width: 100%;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--blue);
+        font-weight: 700;
+        text-align: left;
+        padding: 14px;
+        cursor: pointer;
+      }
+      .nav button:hover,
+      .nav button:focus,
+      .nav button.on {
+        background: var(--blue);
+        color: #fff;
+      }
+      .document {
+        border: 1px solid var(--line);
+        padding: 30px;
+        min-height: 420px;
+      }
+      .document h2 {
+        font-size: 34px;
+        margin-top: 0;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 16px;
+        margin-bottom: 22px;
+      }
+      .body {
+        white-space: pre-wrap;
+        line-height: 1.7;
+      }
+      .status {
+        padding: 40px;
+        background: var(--wash);
+        color: var(--muted);
+      }
+      @media (max-width: 720px) {
+        main {
+          padding: 38px 16px 50px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .nav {
+          display: flex;
+          overflow-x: auto;
+        }
+        .nav button {
+          min-width: 190px;
+        }
+        .document {
+          padding: 22px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      :root {
+        --blue: #113d6a;
+        --gold: #113d6a;
+        --ink: #113d6a;
+        --muted: #294f76;
+        --line: rgba(17, 61, 106, 0.48);
+        --wash: rgba(255, 255, 255, 0.32);
+      }
+      html,
+      body {
+        background: #d6e6fe;
+        color: #113d6a;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+      }
+      main {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: #113d6a;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #113d6a;
+      }
+      h1 {
+        font-size: clamp(44px, 7vw, 64px);
+      }
+      p,
+      .lead,
+      .meta {
+        color: #113d6a;
+      }
+      .lead {
+        font-size: 24px;
+        font-style: italic;
+        line-height: 1.45;
+      }
+      .card,
+      .thread,
+      .composer,
+      .status,
+      .notice,
+      .document,
+      .channels,
+      .nav {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        box-shadow: none;
+      }
+      button,
+      a,
+      .primary {
+        font:
+          700 10px/1.2 Arial,
+          sans-serif;
+        letter-spacing: 0.06em;
+        border: 1px solid #113d6a;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .primary:hover,
+      button:hover,
+      a:hover {
+        background: #fff;
+        color: #113d6a;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid rgba(17, 61, 106, 0.62);
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.68);
+        color: #113d6a;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 36px 18px 50px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">EASY LOT POLICIES & TERMS</div>
+      <h1>Legal information.</h1>
+      <p class="lead">
+        Review the current marketplace, host, renter, support-service, privacy,
+        prohibited-items, operated-storage, and advertising-plan documents.
+      </p>
+      <div class="layout">
+        <nav class="nav" id="nav" aria-label="Legal documents"></nav>
+        <article class="document" id="document">
+          <div class="status" role="status">Loading legal documents…</div>
+        </article>
+      </div>
+    </main>
+    <script>
+const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      const parentWindow = window.parent;
+      const nav = document.getElementById("nav");
+      const documentPanel = document.getElementById("document");
+      const esc = (v) =>
+        String(v ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      let documents = [];
+      function renderDocument(slug) {
+        const item =
+          documents.find((document) => document.slug === slug) || documents[0];
+        if (!item) {
+          documentPanel.innerHTML =
+            '<div class="status">No published legal document is available.</div>';
+          return;
+        }
+        nav
+          .querySelectorAll("button")
+          .forEach((button) =>
+            button.classList.toggle("on", button.dataset.slug === item.slug),
+          );
+        const effective = item.effectiveDate
+          ? new Date(item.effectiveDate).toLocaleDateString()
+          : "";
+        documentPanel.innerHTML = `<h2>${esc(item.title)}</h2><div class="meta">Version ${esc(item.version || "current")} ${effective ? `• Effective ${esc(effective)}` : ""}</div><div class="body">${esc(item.content || "")}</div>`;
+        history.replaceState(null, "", `#${item.slug}`);
+      }
+      window.addEventListener("message", (event) => { if (event.source !== window.parent || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type !== "legal:documents") return;
+        documents = data.documents || [];
+        nav.innerHTML = documents
+          .map(
+            (item) =>
+              `<button type="button" data-slug="${esc(item.slug)}">${esc(item.title)}</button>`,
+          )
+          .join("");
+        nav
+          .querySelectorAll("button")
+          .forEach(
+            (button) =>
+              (button.onclick = () => renderDocument(button.dataset.slug)),
+          );
+        renderDocument(location.hash.slice(1));
+      });
+      parentWindow.postMessage({ type: "legal:ready" }, parentOrigin);
+    </script>
+  </body>
+</html>

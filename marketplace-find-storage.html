@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --blue: #113d6a;
+        --blue2: #0a2b4c;
+        --gold: #bd8d3a;
+        --ink: #1d2d3c;
+        --muted: #637181;
+        --line: #d9e0e6;
+        --wash: #f4f7fa;
+        --white: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Arial, sans-serif;
+        background: var(--white);
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      .shell {
+        max-width: 1180px;
+        margin: auto;
+        padding: 54px 24px 70px;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        font-size: 13px;
+      }
+      .hero h1 {
+        font:
+          700 clamp(38px, 5.2vw, 68px) / 1.04 Georgia,
+          serif;
+        color: var(--blue);
+        margin: 10px 0 16px;
+      }
+      .hero p {
+        max-width: 780px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+      .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0 34px; }
+      .path { padding: 22px; border: 1px solid var(--blue); background: rgba(255,255,255,.42); }
+      .path .option { color: var(--blue); font: 700 10px/1.2 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+      .path h2 { margin: 8px 0 8px; color: var(--blue); font: italic 500 30px/1.15 "Playfair Display", Georgia, serif; }
+      .path p { margin: 0 0 18px; color: var(--blue); font-size: 17px; line-height: 1.5; }
+      .path a, .path button { min-height: 46px; padding: 12px 18px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--blue); background: rgba(255,255,255,.58); color: #000; cursor: pointer; font: 700 10px/1.2 Arial, sans-serif; letter-spacing: .07em; text-decoration: none; }
+      .path:first-child a { background: var(--blue); color: #fff; }
+      .filters {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr auto;
+        gap: 12px;
+        padding: 20px;
+        background: var(--wash);
+        border: 1px solid var(--line);
+        margin: 28px 0 18px;
+      }
+      .filters input,
+      .filters select {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid #b8c4ce;
+        background: #fff;
+        padding: 0 13px;
+      }
+      .primary {
+        min-height: 48px;
+        border: 0;
+        border-radius: 0;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 0 22px;
+        cursor: pointer;
+      }
+      .primary:hover,
+      .primary:focus {
+        background: var(--blue2);
+      }
+      .checks {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding: 0 2px 28px;
+        color: #425363;
+        font-size: 14px;
+      }
+      .checks label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .checks input {
+        accent-color: var(--blue);
+      }
+      .question { margin: 30px 0 8px; }
+      .question h2 { margin: 0 0 8px; color: var(--blue); font: italic 500 34px/1.15 "Playfair Display", Georgia, serif; }
+      .question p { margin: 0 0 18px; color: var(--blue); }
+      .choice-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+      .choice { min-height: 70px; padding: 12px; border: 1px solid var(--blue); background: rgba(255, 255, 255, .5); color: var(--blue); cursor: pointer; font: 700 11px/1.35 Arial, sans-serif; letter-spacing: .04em; }
+      .choice[aria-pressed="true"], .choice:hover, .choice:focus { background: var(--blue); color: #fff; }
+      .advanced { margin: 0 0 26px; border: 1px solid rgba(17, 61, 106, .45); background: rgba(255, 255, 255, .3); }
+      .advanced summary { padding: 14px 16px; cursor: pointer; color: var(--blue); font: 700 11px/1 Arial, sans-serif; letter-spacing: .06em; }
+      .advanced-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px 16px; }
+      .advanced-inner select, .advanced-inner input[type="number"] { width: 100%; min-height: 46px; border: 1px solid #113d6a; background: rgba(255,255,255,.58); padding: 0 12px; }
+      .selected-need { min-height: 24px; margin: 12px 0 0; color: var(--blue); font-style: italic; }
+      .summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 12px 0 18px;
+      }
+      .summary h2 {
+        font:
+          700 28px Georgia,
+          serif;
+        color: var(--blue);
+        margin: 0;
+      }
+      .summary span {
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        min-height: 350px;
+        box-shadow: 0 8px 20px rgba(17, 61, 106, 0.07);
+      }
+      .photo {
+        height: 170px;
+        background: linear-gradient(145deg, #d7e3ed, #edf2f6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--blue);
+        font-weight: 700;
+        overflow: hidden;
+      }
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .body {
+        padding: 18px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+      .badge {
+        align-self: flex-start;
+        background: var(--blue);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        padding: 7px 9px;
+      }
+      .badge.independent {
+        background: #5d6770;
+      }
+      .card h3 {
+        font:
+          700 23px/1.18 Georgia,
+          serif;
+        color: var(--blue);
+        margin: 14px 0 7px;
+      }
+      .location,
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .price {
+        font-weight: 700;
+        color: var(--ink);
+        font-size: 19px;
+        margin: 12px 0;
+      }
+      .amenities {
+        font-size: 13px;
+        color: #425363;
+        margin-bottom: 18px;
+      }
+      .card button {
+        margin-top: auto;
+        width: 100%;
+      }
+      .empty {
+        grid-column: 1/-1;
+        padding: 46px;
+        border: 1px dashed #aab8c5;
+        text-align: center;
+        background: var(--wash);
+      }
+      .empty h3 {
+        font:
+          700 26px Georgia,
+          serif;
+        color: var(--blue);
+        margin: 0 0 9px;
+      }
+      .status {
+        padding: 24px;
+        color: var(--muted);
+      }
+      .need {
+        margin-top: 38px;
+        padding: 30px;
+        background: var(--blue);
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+      .need h2 {
+        font:
+          700 30px Georgia,
+          serif;
+        margin: 0 0 8px;
+      }
+      .need p {
+        margin: 0;
+        line-height: 1.5;
+      }
+      .need button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 22px;
+        background: #fff;
+        color: var(--blue);
+        font-weight: 700;
+        border: 0;
+        cursor: pointer;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .detail {
+        display: none;
+      }
+      .detail.on {
+        display: block;
+      }
+      .browse.off {
+        display: none;
+      }
+      .back {
+        border: 0;
+        background: none;
+        color: var(--blue);
+        font-weight: 700;
+        padding: 0;
+        margin-bottom: 24px;
+        cursor: pointer;
+      }
+      .detail-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 34px;
+      }
+      .detail-photo {
+        min-height: 350px;
+        background: var(--wash);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--blue);
+        font-weight: 700;
+      }
+      .detail-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .detail h1 {
+        font:
+          700 42px/1.08 Georgia,
+          serif;
+        color: var(--blue);
+        margin: 14px 0 10px;
+      }
+      .disclosure {
+        margin-top: 25px;
+        padding: 16px;
+        border-left: 4px solid var(--gold);
+        background: var(--wash);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 22px 0;
+      }
+      .fact {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0;
+      }
+      .fact b {
+        display: block;
+        color: var(--blue);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .detail-copy {
+        line-height: 1.65;
+        color: #425363;
+      }
+      @media (max-width: 850px) {
+        .filters {
+          grid-template-columns: 1fr 1fr;
+        }
+        .filters .location {
+          grid-column: 1/-1;
+        }
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .detail-grid {
+          grid-template-columns: 1fr;
+        }
+        .need {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 560px) {
+        .shell {
+          padding: 38px 16px 50px;
+        }
+        .filters {
+          grid-template-columns: 1fr;
+        }
+        .filters .location {
+          grid-column: auto;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .summary {
+          align-items: flex-start;
+          gap: 8px;
+          flex-direction: column;
+        }
+        .checks {
+          gap: 11px;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        .detail h1 {
+          font-size: 34px;
+        }
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
+      :root {
+        --blue: #113d6a;
+        --blue2: #0b2f54;
+        --gold: #113d6a;
+        --ink: #113d6a;
+        --muted: #294f76;
+        --line: rgba(17, 61, 106, 0.48);
+        --wash: rgba(255, 255, 255, 0.38);
+        --white: #fff;
+      }
+      html,
+      body {
+        background: #d6e6fe;
+        color: var(--blue);
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 18px;
+      }
+      .shell {
+        max-width: 980px;
+        padding: 50px 34px 70px;
+      }
+      .eyebrow {
+        font:
+          700 10px/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        color: var(--blue);
+      }
+      .hero h1,
+      .detail h1,
+      .summary h2,
+      .empty h3,
+      .need h2,
+      .card h3 {
+        font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: var(--blue);
+      }
+      .hero h1 {
+        font-size: clamp(44px, 7vw, 64px);
+        line-height: 1.03;
+        margin: 12px 0 18px;
+      }
+      .hero p {
+        font-size: 24px;
+        line-height: 1.45;
+        font-style: italic;
+        color: var(--blue);
+      }
+      .filters {
+        background: rgba(255, 255, 255, 0.28);
+        border: 1px solid var(--blue);
+        box-shadow: none;
+      }
+      .filters input,
+      .filters select {
+        border: 1px solid rgba(17, 61, 106, 0.65);
+        background: rgba(255, 255, 255, 0.68);
+        color: var(--blue);
+      }
+      .checks,
+      .summary span,
+      .location,
+      .meta,
+      .amenities,
+      .status,
+      .detail-copy {
+        color: var(--blue);
+      }
+      .primary,
+      .need button {
+        font:
+          700 10px/1 Arial,
+          sans-serif;
+        letter-spacing: 0.08em;
+        border: 1px solid var(--blue);
+        background: rgba(255, 255, 255, 0.58);
+        color: #000;
+      }
+      .primary:hover,
+      .primary:focus,
+      .need button:hover,
+      .need button:focus {
+        background: #fff;
+        color: var(--blue);
+      }
+      .card {
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        background: rgba(255, 255, 255, 0.32);
+        box-shadow: none;
+      }
+      .photo,
+      .detail-photo {
+        background: rgba(255, 255, 255, 0.35);
+      }
+      .badge,
+      .badge.independent {
+        background: var(--blue);
+      }
+      .need {
+        background: rgba(255, 255, 255, 0.32);
+        border: 1px solid var(--blue);
+        color: var(--blue);
+      }
+      .need h2,
+      .need p {
+        color: var(--blue);
+      }
+      .empty,
+      .disclosure {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: var(--blue);
+      }
+      @media (max-width: 560px) {
+        .shell {
+          padding: 36px 18px 50px;
+        }
+        .hero h1 {
+          font-size: clamp(32px, 12vw, 42px);
+          overflow-wrap: anywhere;
+        }
+        .hero p {
+          font-size: 21px;
+        }
+        .paths { grid-template-columns: 1fr; }
+        .path a, .path button { width: 100%; }
+        .filters {
+          padding: 16px;
+          grid-template-columns: 1fr;
+        }
+        .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .advanced-inner { grid-template-columns: 1fr; }
+        .checks {
+          font-size: 15px;
+        }
+        .card h3 {
+          font-size: 25px;
+        }
+        .need {
+          min-width: 0;
+          width: 100%;
+        }
+        .need button {
+          display: block;
+          max-width: 100%;
+          width: 100%;
+          min-height: 48px;
+          padding: 12px 14px;
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="browse" id="browse">
+        <header class="hero">
+          <div class="eyebrow">FIND COMMERCIAL SPACE</div>
+          <h1>Browse what is available—or tell us what you need.</h1>
+          <p>
+            See approved Easy Lot-operated and independent-host listings now.
+            If the current inventory does not fit, submit a request and Easy Lot
+            can help look for a match.
+          </p>
+        </header>
+        <section class="paths" aria-label="Ways to find space">
+          <article class="path">
+            <div class="option">Option 1</div>
+            <h2>Browse Available Spaces</h2>
+            <p>View the approved spaces that are currently listed, then filter by location, type, size, access, and other needs.</p>
+            <a href="#available">BROWSE AVAILABLE SPACES</a>
+          </article>
+          <article class="path">
+            <div class="option">Option 2</div>
+            <h2>Tell Us What You Need</h2>
+            <p>Use this when nothing currently listed fits. Easy Lot will collect the details needed to help locate a match.</p>
+            <button id="topRequest" type="button">TELL US WHAT YOU NEED</button>
+          </article>
+        </section>
+        <section class="question" aria-labelledby="needQuestion">
+          <h2 id="needQuestion">Filter the available spaces</h2>
+          <p>Choose what you need to store, then narrow the current listings. You can change it at any time.</p>
+          <div class="choice-grid" id="needChoices">
+            <button class="choice" type="button" data-category="vehicle">Cars / Vans</button>
+            <button class="choice" type="button" data-category="truck">Trucks</button>
+            <button class="choice" type="button" data-category="trailer">Trailers</button>
+            <button class="choice" type="button" data-category="rv">RV / Boat</button>
+            <button class="choice" type="button" data-category="equipment">Equipment</button>
+            <button class="choice" type="button" data-category="container">Containers</button>
+            <button class="choice" type="button" data-category="fleet">Fleet / Multiple Vehicles</button>
+            <button class="choice" type="button" data-category="indoor">Warehouse / Indoor</button>
+            <button class="choice" type="button" data-category="contractor yard">Contractor Yard</button>
+            <button class="choice" type="button" data-category="">Other / Not Sure</button>
+          </div>
+          <div class="selected-need" id="selectedNeed">Not sure? Choose “Other / Not Sure” and tell Easy Lot what you need.</div>
+        </section>
+        <form class="filters" id="filters">
+          <input
+            class="location"
+            id="location"
+            aria-label="City, county, or ZIP"
+            placeholder="City, county, or ZIP"
+          /><input id="amount" aria-label="How big or how many?" placeholder="How big or how many?" />
+          <input id="startDate" aria-label="When do you need it?" placeholder="When do you need it?" />
+          <button class="primary" type="submit">SEARCH AVAILABLE SPACES</button>
+          <select id="category" aria-label="What are you storing?" hidden><option value="">Other / Not Sure</option></select>
+        </form>
+        <details class="advanced">
+          <summary>ACCESS &amp; IMPORTANT FEATURES</summary>
+          <div class="advanced-inner">
+            <select id="indoorOutdoor" aria-label="Indoor, covered, or outdoor">
+              <option value="">Indoor, covered, or outdoor</option><option>Indoor</option><option>Covered</option><option>Outdoor</option>
+            </select>
+            <input id="maxPrice" type="number" min="0" aria-label="Maximum monthly price" placeholder="Maximum monthly budget" />
+            <div class="checks">
+              <label><input id="access24x7" type="checkbox" /> 24/7 access (reported)</label>
+              <label><input id="fenced" type="checkbox" /> Fenced</label>
+              <label><input id="gated" type="checkbox" /> Gated</label>
+              <label><input id="cameras" type="checkbox" /> Cameras</label>
+              <label><input id="lighting" type="checkbox" /> Lighting</label>
+              <label><input id="electricity" type="checkbox" /> Electricity</label>
+              <label><input id="covered" type="checkbox" /> Covered</label>
+              <label><input id="climateControlled" type="checkbox" /> Climate controlled</label>
+              <label><input id="vehicleAllowed" type="checkbox" /> Vehicle allowed</label>
+            </div>
+          </div>
+        </details>
+        <div class="summary" id="available">
+          <h2>Browse Available Spaces</h2>
+          <span id="count">Loading approved listings…</span>
+        </div>
+        <div class="grid" id="grid">
+          <div class="status">Loading approved listings…</div>
+        </div>
+        <aside class="need">
+          <div>
+            <h2>Nothing currently listed fits?</h2>
+            <p>
+              Let Easy Lot look for one. With your permission, we can keep a
+              private Storage Passport on file and alert eligible operators
+              without sharing your contact information.
+            </p>
+          </div>
+          <button id="openRequest" type="button">TELL US WHAT YOU NEED</button>
+        </aside>
+      </section>
+      <section class="detail" id="detail">
+        <button class="back" id="back">← Back to all spaces</button>
+        <div id="detailBody"></div>
+      </section>
+    </main>
+    <script>
+      const parentWindow = window.parent;
+      const parentOrigin = (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
+      const grid = document.getElementById("grid");
+      const count = document.getElementById("count");
+      const esc = (v) =>
+        String(v ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const imageUrl = (v) => (typeof v === "string" ? v : (v && v.src) || "");
+      const fields = {
+        location: document.getElementById("location"),
+        category: document.getElementById("category"),
+        indoorOutdoor: document.getElementById("indoorOutdoor"),
+        maxPrice: document.getElementById("maxPrice"),
+        amount: document.getElementById("amount"),
+        startDate: document.getElementById("startDate"),
+        access24x7: document.getElementById("access24x7"),
+        fenced: document.getElementById("fenced"),
+        gated: document.getElementById("gated"),
+        cameras: document.getElementById("cameras"),
+        lighting: document.getElementById("lighting"),
+        electricity: document.getElementById("electricity"),
+        covered: document.getElementById("covered"),
+        climateControlled: document.getElementById("climateControlled"),
+        vehicleAllowed: document.getElementById("vehicleAllowed"),
+      };
+      function filterValues() {
+        return {
+          location: fields.location.value,
+          category: fields.category.value,
+          indoorOutdoor: fields.indoorOutdoor.value,
+          maxPrice: fields.maxPrice.value
+            ? Number(fields.maxPrice.value)
+            : undefined,
+          amountOrSize: fields.amount.value,
+          requestedStart: fields.startDate.value,
+          access24x7: fields.access24x7.checked,
+          fenced: fields.fenced.checked,
+          gated: fields.gated.checked,
+          cameras: fields.cameras.checked,
+          lighting: fields.lighting.checked,
+          electricity: fields.electricity.checked,
+          covered: fields.covered.checked,
+          climateControlled: fields.climateControlled.checked,
+          vehicleAllowed: fields.vehicleAllowed.checked,
+        };
+      }
+      document.querySelectorAll("[data-category]").forEach((button) => {
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", () => {
+          document.querySelectorAll("[data-category]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+          button.setAttribute("aria-pressed", "true");
+          const value = button.dataset.category || "";
+          let option = Array.from(fields.category.options).find((item) => item.value === value);
+          if (!option) {
+            option = new Option(button.textContent.trim(), value);
+            fields.category.add(option);
+          }
+          fields.category.value = value;
+          document.getElementById("selectedNeed").textContent = value
+            ? `Selected: ${button.textContent.trim()}`
+            : "Tell Lighthouse Lot what you need and we’ll help shape the request.";
+        });
+      });
+      document.getElementById("filters").addEventListener("submit", (e) => {
+        e.preventDefault();
+        grid.innerHTML =
+          '<div class="status" role="status">Searching approved listings…</div>';
+        parentWindow.postMessage(
+          { type: "marketplace:filter", filters: filterValues() },
+          parentOrigin,
+        );
+      });
+      document.getElementById("openRequest").addEventListener("click", () => {
+        parentWindow.postMessage(
+          { type: "marketplace:open-request", filters: filterValues() },
+          parentOrigin,
+        );
+      });
+      document.getElementById("topRequest").addEventListener("click", () => {
+        document.getElementById("openRequest").click();
+      });
+      function renderListings(items) {
+        count.textContent = `${items.length} approved ${items.length === 1 ? "space" : "spaces"}`;
+        if (!items.length) {
+          grid.innerHTML =
+            '<div class="empty"><h3>We don’t have the right space listed yet.</h3><p>Let Easy Lot look for one. Create a storage request so we can search the network and learn where more capacity is needed.</p><button class="primary" type="button" id="emptyRequest">CREATE STORAGE REQUEST</button></div>';
+          document.getElementById("emptyRequest").onclick = () => document.getElementById("openRequest").click();
+          return;
+        }
+        grid.innerHTML = items
+          .map((item) => {
+            const amenities = [
+              item.fenced && "Fenced",
+              item.gated && "Gated",
+              item.cameras && "Cameras",
+              item.lighting && "Lighting",
+              item.electricity && "Electricity",
+              item.covered && "Covered",
+              item.climateControlled && "Climate controlled",
+            ]
+              .filter(Boolean)
+              .join(" • ");
+            const img = imageUrl(item.primaryImage);
+            const price = item.advertisedMonthlyPrice
+              ? `$${Number(item.advertisedMonthlyPrice).toLocaleString()}/month`
+              : item.publicPriceText ||
+                "Contact operator for current availability and pricing";
+            return `<article class="card"><div class="photo">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}">` : "SPACE PHOTO"}</div><div class="body"><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h3>${esc(item.title || "Storage space")}</h3><div class="location">${esc(item.location || "General location available on inquiry")}</div><div class="price">${esc(price)}</div><div class="meta">${esc([item.propertyType, item.indoorOutdoor, item.dimensions].filter(Boolean).join(" • "))}</div><div class="amenities">${esc(amenities)}</div><button class="primary" data-ref="${esc(item.slug || item.id)}">VIEW SPACE</button></div></article>`;
+          })
+          .join("");
+        grid
+          .querySelectorAll("[data-ref]")
+          .forEach(
+            (b) =>
+              (b.onclick = () =>
+                parentWindow.postMessage(
+                  { type: "marketplace:detail", reference: b.dataset.ref },
+                  parentOrigin,
+                )),
+          );
+      }
+      function renderDiscovery(data) {
+        const categories = (data && data.categories) || [];
+        fields.category.insertAdjacentHTML(
+          "beforeend",
+          categories
+            .map(
+              (item) =>
+                `<option value="${esc(item.title)}">${esc(item.title)}</option>`,
+            )
+            .join(""),
+        );
+      }
+      function renderDetail(item) {
+        if (!item) return;
+        document.getElementById("browse").classList.add("off");
+        document.getElementById("detail").classList.add("on");
+        const img = imageUrl(item.primaryImage);
+        const price = item.advertisedMonthlyPrice
+          ? `$${Number(item.advertisedMonthlyPrice).toLocaleString()}/month`
+          : item.publicPriceText ||
+            "Contact operator for current availability and pricing";
+        const facts = [
+          ["Location", item.location],
+          ["Price", price],
+          ["Space type", item.propertyType || item.listingType],
+          ["Dimensions", item.dimensions],
+          ["Square feet", item.squareFeet],
+          ["Access", item.accessHours],
+          ["Surface", item.surfaceType],
+          ["Availability", item.availabilityStatus],
+        ].filter((x) => x[1]);
+        document.getElementById("detailBody").innerHTML =
+          `<div class="detail-grid"><div class="detail-photo">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}">` : "SPACE PHOTO"}</div><div><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h1>${esc(item.title)}</h1><div class="location">${esc(item.location)}</div><div class="facts">${facts.map((f) => `<div class="fact"><b>${esc(f[0])}</b>${esc(f[1])}</div>`).join("")}</div><p class="detail-copy">${esc(item.description || "Contact Easy Lot for additional host-reported details about this space.")}</p><a class="primary" style="display:flex;text-decoration:none;align-items:center;justify-content:center" href="https://www.easylotstoragesolutions.com/contact" target="_top">ASK ABOUT THIS SPACE</a>${item.disclosure ? `<div class="disclosure">${esc(item.disclosure)}</div>` : ""}</div></div>`;
+        window.scrollTo(0, 0);
+      }
+      back.onclick = () => {
+        detail.classList.remove("on");
+        browse.classList.remove("off");
+        window.scrollTo(0, 0);
+      };
+      let readyTimer = setInterval(
+        () => parentWindow.postMessage({ type: "marketplace:ready" }, parentOrigin),
+        750,
+      );
+      window.addEventListener("message", (event) => {
+        if (event.source !== parentWindow || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type.startsWith("marketplace:")) {
+          clearInterval(readyTimer);
+          readyTimer = null;
+        }
+        if (data.type === "marketplace:listings")
+          renderListings(data.items || []);
+        if (data.type === "marketplace:listing") renderDetail(data.item);
+        if (data.type === "marketplace:discovery") renderDiscovery(data.data);
+      });
+      parentWindow.postMessage({ type: "marketplace:ready" }, parentOrigin);
+    </script>
+  </body>
+</html>
