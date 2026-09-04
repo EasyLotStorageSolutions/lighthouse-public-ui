@@ -537,9 +537,28 @@
       .starting-choice.primary { background: var(--easy-navy); color: #fff; }
       .starting-choice.primary small { color: #dceeff; }
       .starting-line-note { margin: 13px 2px 0; color: var(--easy-muted); font: 12px/1.5 Arial,sans-serif; }
+      .starting-journey { margin-top: 14px; padding: 22px; border: 1px solid rgba(17,61,106,.32); border-radius: 6px; background: #fff; }
+      .starting-journey[hidden] { display: none; }
+      .starting-journey-head { display: flex; align-items: start; justify-content: space-between; gap: 22px; }
+      .starting-journey-head h2 { margin: 0 0 7px; color: var(--easy-navy); font-size: clamp(24px,3vw,34px); }
+      .starting-journey-head p { max-width: 720px; margin: 0; color: var(--easy-muted); font: 14px/1.55 Arial,sans-serif; }
+      .starting-close { min-width: 42px; min-height: 42px; border: 1px solid rgba(17,61,106,.3); border-radius: 50%; background: #fff; color: var(--easy-navy); cursor: pointer; font: 700 20px/1 Arial,sans-serif; }
+      .starting-question { margin-top: 18px; }
+      .starting-question > strong { display: block; margin-bottom: 9px; color: var(--easy-navy); font: 700 14px/1.35 Arial,sans-serif; }
+      .starting-options { display: flex; flex-wrap: wrap; gap: 9px; }
+      .starting-option { position: relative; }
+      .starting-option input { position: absolute; opacity: 0; pointer-events: none; }
+      .starting-option span { display: flex; min-height: 44px; align-items: center; padding: 10px 13px; border: 1px solid rgba(17,61,106,.32); border-radius: 999px; background: var(--easy-pale); color: var(--easy-navy); cursor: pointer; font: 700 12px/1.3 Arial,sans-serif; }
+      .starting-option input:checked + span { border-color: var(--easy-blue); background: var(--easy-blue); color: #fff; }
+      .starting-option input:focus-visible + span { outline: 3px solid rgba(159,208,255,.72); outline-offset: 2px; }
+      .starting-detail { display: block; margin-top: 18px; color: var(--easy-navy); font: 700 14px/1.35 Arial,sans-serif; }
+      .starting-detail textarea { width: 100%; min-height: 94px; margin-top: 8px; padding: 13px; border: 1px solid rgba(17,61,106,.42); border-radius: 5px; color: var(--easy-navy); background: #fff; font: 15px/1.5 Arial,sans-serif; resize: vertical; }
+      .starting-result { margin-top: 14px; padding: 13px 15px; border-left: 4px solid var(--easy-gold); background: var(--easy-pale); color: var(--easy-navy); font: 700 13px/1.5 Arial,sans-serif; }
+      .starting-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+      .starting-safety { margin: 12px 0 0; color: var(--easy-muted); font: 12px/1.5 Arial,sans-serif; }
       @media(max-width:760px){.ai-conversation{max-height:none}.ai-turn.user{padding-left:22px}.ai-upgrade-actions .button{width:100%}}
       @media(max-width:980px){.starting-line-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.starting-choice:last-child{grid-column:1/-1}}
-      @media(max-width:560px){.starting-line{margin-top:26px;padding:13px}.starting-line-title{display:block}.starting-line-title span{display:block;margin-top:5px}.starting-line-actions{grid-template-columns:1fr}.starting-choice,.starting-choice:last-child{grid-column:auto;min-height:72px}.hero .actions{display:grid}.hero .actions .button{width:100%}}
+      @media(max-width:560px){.starting-line{margin-top:26px;padding:13px}.starting-line-title{display:block}.starting-line-title span{display:block;margin-top:5px}.starting-line-actions{grid-template-columns:1fr}.starting-choice,.starting-choice:last-child{grid-column:auto;min-height:72px}.starting-journey{padding:18px 14px}.starting-actions{display:grid}.starting-actions .button{width:100%}.hero .actions{display:grid}.hero .actions .button{width:100%}}
     </style>
   </head>
   <body>
@@ -552,13 +571,21 @@
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
             <div class="starting-line-actions">
-              <a class="starting-choice primary" href="#assistant" data-starting-prompt="I need to earn today. Help me find the fastest safe path that fits what I can do and when I am available."><b>I NEED TO EARN</b><small>Work, delivery, or another practical earning path</small></a>
-              <a class="starting-choice" href="#assistant" data-starting-prompt="I need someone to help. Help me explain the job, timing, requirements, and outcome."><b>I NEED SOMEONE</b><small>People, skills, crews, or business support</small></a>
-              <a class="starting-choice" href="#assistant" data-starting-prompt="I need something delivered. Help me structure the pickup, destination area, timing, item category, and requirements."><b>I NEED DELIVERY</b><small>Courier, food, or local-business delivery</small></a>
-              <a class="starting-choice" href="#assistant" data-starting-prompt="I have something that could help someone, such as time, skills, a vehicle, equipment, tools, or space."><b>I HAVE SOMETHING</b><small>Offer a resource without making it public</small></a>
-              <a class="starting-choice" href="#assistant" data-starting-prompt="I need help, but I am not sure which Lighthouse path fits yet."><b>OTHER HELP</b><small>Start with the outcome and figure it out together</small></a>
+              <a class="starting-choice primary" href="/?easyStart=earn" data-starting-path="earn"><b>I NEED TO EARN</b><small>See practical paths based on what you can do</small></a>
+              <a class="starting-choice" href="/?easyStart=someone" data-starting-path="someone"><b>I NEED SOMEONE</b><small>Describe the work, timing, and people needed</small></a>
+              <a class="starting-choice" href="/?easyStart=delivery" data-starting-path="delivery"><b>I NEED DELIVERY</b><small>Plan a delivery or get ready to deliver</small></a>
+              <a class="starting-choice" href="/?easyStart=resource" data-starting-path="resource"><b>I HAVE SOMETHING</b><small>Offer time, skills, equipment, vehicles, or space</small></a>
+              <a class="starting-choice" href="/?easyStart=other" data-starting-path="other"><b>OTHER HELP</b><small>Start with the outcome, even if it is unclear</small></a>
             </div>
             <p class="starting-line-note">Lighthouse can suggest and organize options. You stay in control of commitments, hiring, payments, and other important decisions.</p>
+            <section class="starting-journey" id="starting-journey" aria-live="polite" hidden>
+              <div class="starting-journey-head"><div><h2 id="starting-journey-title">Tell Lighthouse what you need.</h2><p id="starting-journey-copy"></p></div><button class="starting-close" id="starting-journey-close" type="button" aria-label="Close this starting path">×</button></div>
+              <div class="starting-question" id="starting-question" hidden><strong id="starting-question-label"></strong><div class="starting-options" id="starting-options"></div></div>
+              <label class="starting-detail" for="starting-detail"><span id="starting-detail-label">What is happening?</span><textarea id="starting-detail" maxlength="1200"></textarea></label>
+              <div class="starting-result" id="starting-result" role="status">Share only what you know. Lighthouse can ask for the missing detail that matters.</div>
+              <div class="starting-actions"><button class="button" id="starting-continue" type="button">SHOW ME THE NEXT STEP →</button><button class="button secondary" id="starting-delivery-ready" type="button" hidden>GET READY TO DELIVER</button></div>
+              <p class="starting-safety" id="starting-safety"></p>
+            </section>
           </div>
           <div class="grid journey-grid"><article class="card"><h3>Find Space</h3><p>Vehicles, fleets, equipment, contractor yards, containers, and indoor or outdoor space.</p><a class="button" href="/find-storage">FIND SPACE</a></article><article class="card"><h3>List Space</h3><p>Offer an unused lot, yard, parking area, warehouse, acreage, or other usable property.</p><a class="button" href="/copy-of-find-storage">LIST SPACE</a></article><article class="card"><h3>Lighthouse AI</h3><p>AI help for websites, projects, files, research, and everyday business work.</p><a class="button" href="#assistant">MEET LIGHTHOUSE</a></article></div>
         </div>
@@ -824,6 +851,46 @@
       const deliveryFormStatus = document.getElementById('delivery-form-status');
       const deliveryFormSubmit = document.getElementById('delivery-form-submit');
       const deliveryState = { role: '', requestId: '', formStartedAt: 0, sourceButton: '' };
+      const startingJourney = document.getElementById('starting-journey');
+      const startingJourneyTitle = document.getElementById('starting-journey-title');
+      const startingJourneyCopy = document.getElementById('starting-journey-copy');
+      const startingJourneyClose = document.getElementById('starting-journey-close');
+      const startingQuestion = document.getElementById('starting-question');
+      const startingQuestionLabel = document.getElementById('starting-question-label');
+      const startingOptions = document.getElementById('starting-options');
+      const startingDetail = document.getElementById('starting-detail');
+      const startingDetailLabel = document.getElementById('starting-detail-label');
+      const startingResult = document.getElementById('starting-result');
+      const startingContinue = document.getElementById('starting-continue');
+      const startingDeliveryReady = document.getElementById('starting-delivery-ready');
+      const startingState = { path: '' };
+      const startingPaths = {
+        earn: {
+          title: "Let's find your fastest path to earning.", copy: 'Choose everything you are open to. Lighthouse will rank lawful options; it will not promise work or earnings.', question: 'What are you open to?', multiple: true,
+          options: ['Delivery / driving', 'Restaurant / hospitality', 'Warehouse / operations', 'Trades / maintenance', 'Office / customer service', 'Local jobs / helping businesses', 'Other', 'Anything that can help me earn'],
+          label: 'Tell us what matters most right now.', placeholder: 'For example: I was laid off today, need to earn $150, live near Baltimore, have a pickup truck, and I am free today.',
+          result: 'Lighthouse will look for more than one safe path and tell you whether each is ready today, needs one more thing, or is not available yet—with another option when possible.', safety: 'Lighthouse does not make hiring decisions or guarantee work, timing, or earnings.'
+        },
+        someone: {
+          title: 'What do you need help with?', copy: 'Start with the work and when it needs to happen. Lighthouse will ask only for details needed to identify a useful fit.', question: 'How soon do you need help?', multiple: false,
+          options: ['Today', 'Tomorrow', 'This week', 'A later date', 'Not sure yet'], label: 'Describe the work in one sentence.', placeholder: 'For example: I need two people to unload a truck tomorrow from 9–11 AM in Baltimore.',
+          result: 'Lighthouse will organize the task, timing, location, number of people, and terms. You keep the final decision about who to hire or select.', safety: 'Recommendations are not automatic hiring decisions. You review and choose any proposed match.'
+        },
+        delivery: {
+          title: 'What do you need delivered?', copy: 'Planning and early access are available. Live delivery work and Lighthouse payment processing are not active yet.', question: 'Which side are you on?', multiple: false,
+          options: ['My business needs deliveries', 'I need an item delivered', 'I want to get ready to deliver'], label: 'Tell us the item, pickup area, destination area, and timing you know.', placeholder: 'For example: My restaurant needs six local deliveries tonight from 6–9 PM.',
+          result: 'Lighthouse will separate what can be planned now from what must wait for legal, insurance, and launch approval.', safety: 'Joining or getting ready does not authorize live deliveries. Lighthouse takes no percentage commission and does not process delivery payments.', deliveryReady: true
+        },
+        resource: {
+          title: 'What do you have that could help someone?', copy: 'Choose any useful resources. Nothing is shown publicly unless you clearly allow it.', question: 'What could you make available?', multiple: true,
+          options: ['Pickup truck', 'Van', 'Trailer', 'Tools / equipment', 'Warehouse', 'Parking / storage space', 'Land / office', 'Skills', 'Available time', 'Business capacity', 'Other'], label: 'Where and when could it help?', placeholder: 'For example: I have a pickup truck near Baltimore and I am free today. Can I use it to earn money?',
+          result: 'Lighthouse will keep the offer private, compare only the minimum details needed, and ask before showing you a possible fit.', safety: 'You control whether a resource is available and what may be shared. You can change or revoke that permission.'
+        },
+        other: {
+          title: 'What do you need help with?', copy: 'You do not need to know the service or category. Start with the outcome you want.', question: '', multiple: false, options: [], label: 'What is happening, and what would a good result look like?', placeholder: "For example: My business is overwhelmed and I don't know what kind of help would make the biggest difference.",
+          result: 'Lighthouse will clarify the goal, what is getting in the way, what you already have, and how urgent it is—then offer a direct path, a combined option, an alternative, or safe human review.', safety: 'If there is no safe path, Lighthouse will say so clearly and look for useful alternatives.'
+        }
+      };
       const deliverySessionKey = (() => {
         try {
           const existing = localStorage.getItem('lighthouse-delivery-session-v1');
@@ -1838,12 +1905,72 @@
         try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
         textInput.focus();
       }));
-      document.querySelectorAll('[data-starting-prompt]').forEach(link => link.addEventListener('click', () => {
-        textInput.value = link.dataset.startingPrompt;
+      function openStartingPath(path, focus = true) {
+        const config = startingPaths[path];
+        if (!config) return;
+        startingState.path = path;
+        startingJourneyTitle.textContent = config.title;
+        startingJourneyCopy.textContent = config.copy;
+        startingQuestionLabel.textContent = config.question;
+        startingQuestion.hidden = !config.options.length;
+        startingOptions.replaceChildren();
+        config.options.forEach((option, index) => {
+          const label = document.createElement('label');
+          label.className = 'starting-option';
+          const input = document.createElement('input');
+          input.type = config.multiple ? 'checkbox' : 'radio';
+          input.name = 'starting-choice-detail';
+          input.value = option;
+          input.id = `starting-option-${path}-${index}`;
+          const span = document.createElement('span');
+          span.textContent = option;
+          label.append(input, span);
+          startingOptions.appendChild(label);
+        });
+        startingDetailLabel.textContent = config.label;
+        startingDetail.placeholder = config.placeholder;
+        startingDetail.value = '';
+        startingResult.textContent = config.result;
+        startingSafety.textContent = config.safety;
+        startingDeliveryReady.hidden = !config.deliveryReady;
+        startingJourney.hidden = false;
+        document.querySelectorAll('[data-starting-path]').forEach(item => item.setAttribute('aria-current', item.dataset.startingPath === path ? 'step' : 'false'));
+        startingJourney.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (focus) setTimeout(() => (config.options.length ? startingOptions.querySelector('input') : startingDetail).focus(), 150);
+      }
+      const selectedStartingOptions = () => Array.from(startingOptions.querySelectorAll('input:checked')).map(input => input.value);
+      document.querySelectorAll('[data-starting-path]').forEach(link => link.addEventListener('click', event => {
+        event.preventDefault();
+        openStartingPath(link.dataset.startingPath);
+      }));
+      startingJourneyClose.addEventListener('click', () => {
+        startingJourney.hidden = true;
+        document.querySelectorAll('[data-starting-path]').forEach(item => item.removeAttribute('aria-current'));
+      });
+      startingContinue.addEventListener('click', () => {
+        const config = startingPaths[startingState.path];
+        const detail = startingDetail.value.trim();
+        const selected = selectedStartingOptions();
+        if (!detail) {
+          startingResult.textContent = 'Add one sentence about what is happening so Lighthouse can give you a useful next step.';
+          startingDetail.focus();
+          return;
+        }
+        const selection = selected.length ? ` I am open to or selected: ${selected.join(', ')}.` : '';
+        textInput.value = `${config.title}${selection} ${detail}`.slice(0, 2000);
         try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
         updateComposerState();
-        setTimeout(() => textInput.focus(), 120);
-      }));
+        startingResult.textContent = 'Ready. Lighthouse will use this once and ask only for a missing detail that changes the answer.';
+        postParent({ type: 'easy-lot:scrollToAssistant' });
+        setTimeout(() => {
+          textInput.focus();
+          if (ai.available && !ai.busy) submitMessage(textInput.value);
+        }, 180);
+      });
+      startingDeliveryReady.addEventListener('click', () => {
+        const trigger = document.querySelector('[data-delivery-role="DRIVER"]');
+        if (trigger) openDeliveryForm(trigger);
+      });
       stopSpeechButton.addEventListener('click', () => {
         stopSpokenAudio(true);
         resumeListening();
@@ -1887,6 +2014,13 @@
         if (ai.mediaStream) ai.mediaStream.getTracks().forEach(track => track.stop());
         if (ai.peerConnection) ai.peerConnection.close();
         if (communityVideo.objectUrl) URL.revokeObjectURL(communityVideo.objectUrl);
+      });
+      window.addEventListener('message', event => {
+        if (event.origin !== parentOrigin && event.origin !== publicOrigin) return;
+        const payload = event.data || {};
+        if (payload.type !== 'lighthouse-starting-line:open') return;
+        if (payload.path === 'assistant') postParent({ type: 'easy-lot:scrollToAssistant' });
+        else openStartingPath(payload.path, false);
       });
       updateGuestExperience();
       postParent({ type: 'home:ready' });
