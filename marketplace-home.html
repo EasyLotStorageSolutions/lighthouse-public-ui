@@ -525,7 +525,21 @@
       .ai-upgrade ul { margin: 0 0 17px; padding-left: 20px; }
       .ai-upgrade li { margin: 5px 0; font: 13px/1.45 Arial, sans-serif; }
       .ai-upgrade-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+      .starting-line { max-width: 1060px; margin: 34px auto 0; padding: 18px; border: 1px solid rgba(17,61,106,.4); border-radius: 6px; background: rgba(255,255,255,.68); box-shadow: 0 18px 44px rgba(8,43,76,.11); text-align: left; }
+      .starting-line-title { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; margin: 0 2px 14px; }
+      .starting-line-title strong { color: var(--easy-navy); font: 700 17px/1.35 'Playfair Display',Georgia,serif; }
+      .starting-line-title span { color: var(--easy-muted); font: 700 11px/1.35 Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+      .starting-line-actions { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 9px; }
+      .starting-choice { min-height: 92px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 15px; border: 1px solid rgba(17,61,106,.32); border-radius: 4px; background: #fff; color: var(--easy-navy); text-decoration: none; transition: transform .16s ease,box-shadow .16s ease,border-color .16s ease; }
+      .starting-choice:hover,.starting-choice:focus-visible { transform: translateY(-2px); border-color: var(--easy-blue); box-shadow: 0 10px 22px rgba(8,43,76,.12); outline: 3px solid rgba(159,208,255,.55); outline-offset: 2px; }
+      .starting-choice b { font: 800 12px/1.35 Arial,sans-serif; letter-spacing: .045em; }
+      .starting-choice small { color: var(--easy-muted); font: 12px/1.4 Arial,sans-serif; }
+      .starting-choice.primary { background: var(--easy-navy); color: #fff; }
+      .starting-choice.primary small { color: #dceeff; }
+      .starting-line-note { margin: 13px 2px 0; color: var(--easy-muted); font: 12px/1.5 Arial,sans-serif; }
       @media(max-width:760px){.ai-conversation{max-height:none}.ai-turn.user{padding-left:22px}.ai-upgrade-actions .button{width:100%}}
+      @media(max-width:980px){.starting-line-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.starting-choice:last-child{grid-column:1/-1}}
+      @media(max-width:560px){.starting-line{margin-top:26px;padding:13px}.starting-line-title{display:block}.starting-line-title span{display:block;margin-top:5px}.starting-line-actions{grid-template-columns:1fr}.starting-choice,.starting-choice:last-child{grid-column:auto;min-height:72px}.hero .actions{display:grid}.hero .actions .button{width:100%}}
     </style>
   </head>
   <body>
@@ -535,6 +549,17 @@
           <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
           <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
+          <div class="starting-line" aria-label="Start with what you need">
+            <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
+            <div class="starting-line-actions">
+              <a class="starting-choice primary" href="#assistant" data-starting-prompt="I need to earn today. Help me find the fastest safe path that fits what I can do and when I am available."><b>I NEED TO EARN</b><small>Work, delivery, or another practical earning path</small></a>
+              <a class="starting-choice" href="#assistant" data-starting-prompt="I need someone to help. Help me explain the job, timing, requirements, and outcome."><b>I NEED SOMEONE</b><small>People, skills, crews, or business support</small></a>
+              <a class="starting-choice" href="#assistant" data-starting-prompt="I need something delivered. Help me structure the pickup, destination area, timing, item category, and requirements."><b>I NEED DELIVERY</b><small>Courier, food, or local-business delivery</small></a>
+              <a class="starting-choice" href="#assistant" data-starting-prompt="I have something that could help someone, such as time, skills, a vehicle, equipment, tools, or space."><b>I HAVE SOMETHING</b><small>Offer a resource without making it public</small></a>
+              <a class="starting-choice" href="#assistant" data-starting-prompt="I need help, but I am not sure which Lighthouse path fits yet."><b>OTHER HELP</b><small>Start with the outcome and figure it out together</small></a>
+            </div>
+            <p class="starting-line-note">Lighthouse can suggest and organize options. You stay in control of commitments, hiring, payments, and other important decisions.</p>
+          </div>
           <div class="grid journey-grid"><article class="card"><h3>Find Space</h3><p>Vehicles, fleets, equipment, contractor yards, containers, and indoor or outdoor space.</p><a class="button" href="/find-storage">FIND SPACE</a></article><article class="card"><h3>List Space</h3><p>Offer an unused lot, yard, parking area, warehouse, acreage, or other usable property.</p><a class="button" href="/copy-of-find-storage">LIST SPACE</a></article><article class="card"><h3>Lighthouse AI</h3><p>AI help for websites, projects, files, research, and everyday business work.</p><a class="button" href="#assistant">MEET LIGHTHOUSE</a></article></div>
         </div>
       </section>
@@ -1812,6 +1837,12 @@
         textInput.value = button.dataset.prompt;
         try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
         textInput.focus();
+      }));
+      document.querySelectorAll('[data-starting-prompt]').forEach(link => link.addEventListener('click', () => {
+        textInput.value = link.dataset.startingPrompt;
+        try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
+        updateComposerState();
+        setTimeout(() => textInput.focus(), 120);
       }));
       stopSpeechButton.addEventListener('click', () => {
         stopSpokenAudio(true);
