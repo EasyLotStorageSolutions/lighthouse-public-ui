@@ -345,6 +345,53 @@
           ><button class="primary">SEND INQUIRY</button>
         </form>
       </section>
+      <section id="auctionArea" hidden style="margin-top:54px;border-top:1px solid var(--line);padding-top:42px">
+        <div class="eyebrow">LIGHTHOUSE MARKETPLACE AUCTIONS</div>
+        <h2>Offer it fairly. Bid with clarity.</h2>
+        <p class="lead">Reviewed auctions for property, vehicles, equipment, goods, and storage contents. Lighthouse records the auction and connects the participants—it does not hold the purchase money or take a percentage of the sale.</p>
+        <div id="auctionStatus" class="status">Checking auction availability…</div>
+        <form id="auctionFilters" class="filters" hidden>
+          <select id="auctionSubject"><option value="">All auction types</option><option value="PROPERTY">Property</option><option value="VEHICLE">Vehicles</option><option value="EQUIPMENT">Equipment</option><option value="GOODS">Goods</option><option value="STORAGE_CONTENTS">Storage contents</option></select>
+          <input id="auctionLocation" placeholder="City, county, or ZIP" />
+          <select id="auctionState"><option value="">All stages</option><option value="LIVE">Live now</option><option value="SCHEDULED">Coming soon</option><option value="ENDED">Ended</option></select>
+          <button class="primary">FIND AUCTIONS</button>
+        </form>
+        <div id="auctionGrid" class="grid"></div>
+        <section id="auctionDetail" class="details form">
+          <button id="auctionBack" type="button">BACK TO AUCTIONS</button>
+          <div id="auctionDetailBody"></div>
+          <form id="bidForm" hidden>
+            <h3>Place your bid</h3>
+            <label>Your bid in dollars<input id="bidAmount" type="number" min="0" step="0.01" required /></label>
+            <div class="checks"><label><input id="bidTerms" type="checkbox" required /> I understand this bid is an offer to purchase, the seller cannot bid, Lighthouse does not hold funds, and closing happens outside Lighthouse after seller confirmation.</label></div>
+            <button class="primary">PLACE BID</button>
+          </form>
+        </section>
+        <section id="auctionSubmission" class="form" hidden>
+          <h2>Submit an auction for review</h2>
+          <p>Nothing is published automatically. Ownership, safety, prohibited-item, and legal review must pass first.</p>
+          <form id="auctionForm">
+            <div class="two">
+              <label>Title<input id="auctionTitle" minlength="5" required /></label>
+              <label>Type<select id="auctionType" required><option value="">Choose one</option><option value="PROPERTY">Property</option><option value="VEHICLE">Vehicle</option><option value="EQUIPMENT">Equipment</option><option value="GOODS">Goods</option><option value="STORAGE_CONTENTS">Storage contents</option></select></label>
+              <label>Public location<input id="auctionPublicLocation" placeholder="City, state, or county only" /></label>
+              <label>Opening bid ($)<input id="auctionOpening" type="number" min="0" step="0.01" required /></label>
+              <label>Private reserve ($)<input id="auctionReserve" type="number" min="0" step="0.01" /></label>
+              <label>Minimum increase ($)<input id="auctionIncrement" type="number" min="0.01" step="0.01" value="5.00" required /></label>
+              <label>Starts<input id="auctionStarts" type="datetime-local" required /></label>
+              <label>Ends<input id="auctionEnds" type="datetime-local" required /></label>
+            </div>
+            <label>Description<textarea id="auctionDescription" minlength="30" required></textarea></label>
+            <label>Condition and known issues<textarea id="auctionCondition"></textarea></label>
+            <label>Pickup or transfer terms<textarea id="auctionTransfer"></textarea></label>
+            <div class="checks">
+              <label><input id="auctionOwnership" type="checkbox" required /> I own this property/item or am legally authorized to offer it.</label>
+              <label><input id="auctionTerms" type="checkbox" required /> I accept the Lighthouse Auction Terms and truthful-listing requirements.</label>
+            </div>
+            <button class="primary">SUBMIT AUCTION FOR REVIEW</button>
+          </form>
+        </section>
+      </section>
     </main>
     <script>
 const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      (() => {
@@ -499,6 +546,92 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
             status.textContent =
               "Property classifieds are configured but remain paused until launch approval.";
         }, 3500);
+      })();
+    </script>
+    <script>
+      (() => {
+        const p = window.parent;
+        const area = document.getElementById('auctionArea');
+        const status = document.getElementById('auctionStatus');
+        const filters = document.getElementById('auctionFilters');
+        const grid = document.getElementById('auctionGrid');
+        const detail = document.getElementById('auctionDetail');
+        const detailBody = document.getElementById('auctionDetailBody');
+        const bidForm = document.getElementById('bidForm');
+        const submission = document.getElementById('auctionSubmission');
+        const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+        const money = cents => cents === null || cents === undefined ? 'No bids yet' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents) / 100);
+        const cents = value => Math.round(Number(value || 0) * 100);
+        let selected = null;
+        let biddingEnabled = false;
+        function cards(items) {
+          grid.innerHTML = items.length ? items.map(item => `<article class="card"><div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'Location supplied after participant routing')}</p><div class="price">${money(item.currentBidCents ?? item.openingBidCents)}</div><p>${esc(item.bidCount)} bid${item.bidCount === 1 ? '' : 's'} • Reserve ${esc(item.reserveStatus.toLowerCase().replaceAll('_', ' '))}</p><button class="primary" data-auction="${esc(item.id)}">VIEW AUCTION</button></article>`).join('') : '<div class="status">No reviewed auctions match these filters yet.</div>';
+          grid.querySelectorAll('[data-auction]').forEach(button => button.onclick = () => p.postMessage({ type: 'auctions:detail', reference: button.dataset.auction }, parentOrigin));
+        }
+        filters.onsubmit = event => {
+          event.preventDefault();
+          p.postMessage({ type: 'auctions:search', filters: { subjectType: document.getElementById('auctionSubject').value, location: document.getElementById('auctionLocation').value, status: document.getElementById('auctionState').value } }, parentOrigin);
+        };
+        document.getElementById('auctionBack').onclick = () => { detail.classList.remove('on'); grid.hidden = false; filters.hidden = false; };
+        bidForm.onsubmit = event => {
+          event.preventDefault();
+          if (!selected) return;
+          p.postMessage({ type: 'auctions:bid', input: { auctionId: selected.id, amountCents: cents(document.getElementById('bidAmount').value), termsAccepted: document.getElementById('bidTerms').checked, termsVersion: 'auction-terms-v1', idempotencyKey: globalThis.crypto?.randomUUID?.() || `bid-${Date.now()}` } }, parentOrigin);
+          status.hidden = false;
+          status.textContent = 'Recording your bid securely…';
+        };
+        document.getElementById('auctionForm').onsubmit = event => {
+          event.preventDefault();
+          p.postMessage({ type: 'auctions:submit', input: {
+            title: document.getElementById('auctionTitle').value,
+            subjectType: document.getElementById('auctionType').value,
+            publicLocation: document.getElementById('auctionPublicLocation').value,
+            openingBidCents: cents(document.getElementById('auctionOpening').value),
+            reservePriceCents: cents(document.getElementById('auctionReserve').value),
+            minimumIncrementCents: cents(document.getElementById('auctionIncrement').value),
+            startsAt: document.getElementById('auctionStarts').value,
+            endsAt: document.getElementById('auctionEnds').value,
+            description: document.getElementById('auctionDescription').value,
+            conditionSummary: document.getElementById('auctionCondition').value,
+            pickupOrTransferTerms: document.getElementById('auctionTransfer').value,
+            ownershipCertified: document.getElementById('auctionOwnership').checked,
+            termsAccepted: document.getElementById('auctionTerms').checked,
+            termsVersion: 'auction-terms-v1'
+          } }, parentOrigin);
+          status.hidden = false;
+          status.textContent = 'Submitting for private owner review…';
+        };
+        window.addEventListener('message', event => {
+          if (event.source !== window.parent || event.origin !== parentOrigin) return;
+          const message = event.data || {};
+          if (message.type === 'auctions:disabled') { area.hidden = true; return; }
+          if (message.type === 'auctions:list') {
+            area.hidden = false;
+            filters.hidden = false;
+            submission.hidden = message.submissionsEnabled !== true;
+            biddingEnabled = message.biddingEnabled === true;
+            status.hidden = true;
+            cards(message.items || []);
+          }
+          if (message.type === 'auctions:item' && message.item) {
+            selected = message.item;
+            detailBody.innerHTML = `<div class="eyebrow">${esc(selected.status.replaceAll('_', ' '))}</div><h2>${esc(selected.title)}</h2><div class="price">${money(selected.currentBidCents ?? selected.openingBidCents)}</div><p>${esc(selected.publicLocation)} • ${esc(selected.subjectType.replaceAll('_', ' '))}</p><p>${esc(selected.description)}</p><p><strong>Minimum next bid:</strong> ${money((selected.currentBidCents ?? (selected.openingBidCents - selected.minimumIncrementCents)) + selected.minimumIncrementCents)}</p><div class="notice">${esc(selected.disclosure)}</div>`;
+            bidForm.hidden = !(biddingEnabled && selected.status === 'LIVE');
+            grid.hidden = true;
+            filters.hidden = true;
+            detail.classList.add('on');
+          }
+          if (message.type === 'auctions:notice') { area.hidden = false; status.hidden = false; status.textContent = message.message; }
+          if (message.type === 'auctions:bidResult') {
+            status.hidden = false;
+            status.textContent = message.result?.leading ? 'Bid recorded — you are currently leading.' : 'Bid recorded. Another valid bid is currently leading.';
+            if (message.result?.auction) {
+              selected = message.result.auction;
+              p.postMessage({ type: 'auctions:detail', reference: selected.id }, parentOrigin);
+            }
+          }
+        });
+        p.postMessage({ type: 'auctions:ready' }, parentOrigin);
       })();
     </script>
   </body>

@@ -459,6 +459,18 @@
       .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
       .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
       .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
+      .auction-home { position:relative; overflow:hidden; padding:64px 0; border-block:1px solid rgba(17,61,106,.3); background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(214,230,254,.82)); }
+      .auction-home::after { content:"A"; position:absolute; right:-16px; bottom:-92px; color:rgba(17,61,106,.045); font:400 270px/1 'Playfair Display',Georgia,serif; pointer-events:none; }
+      .auction-home-grid { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.12fr) minmax(310px,.88fr); gap:52px; align-items:center; }
+      .auction-home h2 { margin:8px 0 18px; }
+      .auction-home-copy { max-width:680px; margin:0 0 25px; color:var(--easy-blue); font:18px/1.65 'Playfair Display',Georgia,serif; }
+      .auction-home .actions { align-items:center; }
+      .auction-home-note { margin:15px 0 0; color:var(--easy-muted); font:12px/1.55 Arial,sans-serif; }
+      .auction-home-panel { padding:26px; border:1px solid rgba(17,61,106,.45); border-radius:5px; background:rgba(255,255,255,.74); box-shadow:0 15px 30px -24px rgba(8,43,76,.8); }
+      .auction-home-panel h3 { margin:0 0 15px; font-size:24px; }
+      .auction-home-points { display:grid; gap:13px; margin:0; padding:0; list-style:none; }
+      .auction-home-points li { position:relative; padding:12px 12px 12px 38px; border-top:1px solid var(--easy-line); color:var(--easy-navy); font:700 13px/1.45 Arial,sans-serif; }
+      .auction-home-points li::before { content:"✓"; position:absolute; left:13px; color:var(--easy-blue); }
       .delivery-coming-soon { position:relative; overflow:hidden; padding:64px 0; border-block:1px solid var(--easy-line); background:rgba(255,255,255,.2); }
       .delivery-coming-soon::before { content:"L"; position:absolute; right:-8px; bottom:-72px; color:rgba(17,61,106,.045); font:400 230px/1 'Niconne','Brush Script MT',cursive; pointer-events:none; }
       .delivery-heading { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); gap:54px; align-items:end; }
@@ -503,7 +515,8 @@
       .delivery-gate-list li { margin:6px 0; font:13px/1.45 Arial,sans-serif; }
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
       @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}}
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
+      @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home-panel{padding:22px 18px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
       .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
       .ai-turn { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 11px; align-items: start; }
       .ai-turn.user { grid-template-columns: minmax(0,1fr) 34px; padding-left: 54px; }
@@ -678,6 +691,21 @@
           <button class="button" id="delivery-form-submit" type="submit">Join Early Access</button>
         </form>
       </dialog>
+      <section class="auction-home" id="lighthouse-auctions" aria-labelledby="auction-home-title">
+        <div class="container auction-home-grid">
+          <div>
+            <div class="eyebrow">Lighthouse Marketplace</div>
+            <h2 id="auction-home-title">A fairer way to buy and sell by auction.</h2>
+            <p class="auction-home-copy">Explore reviewed auctions for property, vehicles, equipment, goods, and storage contents—or submit something you own for review. The rules and current bid are shown clearly before you take part.</p>
+            <div class="actions"><a class="button" href="/property-classifieds">EXPLORE AUCTIONS</a><a class="button secondary" href="/property-classifieds">SUBMIT AN AUCTION</a></div>
+            <p class="auction-home-note">Lighthouse does not hold auction money or take a percentage of the sale. Jobs, labor, services, delivery, and rides are not auction items.</p>
+          </div>
+          <aside class="auction-home-panel" aria-label="How Lighthouse auctions work">
+            <h3>Clear from the first bid.</h3>
+            <ul class="auction-home-points"><li>Listings are reviewed before they go live</li><li>Bid rules and closing time stay visible</li><li>Buyer and seller arrange payment directly after a valid close</li></ul>
+          </aside>
+        </div>
+      </section>
       <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
           <div class="video-heading"><div><div class="eyebrow">Lighthouse Video Community</div><h2 id="video-community-title">Create something worth sharing.</h2><p>Members can record or upload a short vertical video, preview it, add a title and story, and send it for review. Approved videos become part of the community watch feed.</p></div><div class="video-safety">Every upload is screened and held for human review. Nothing appears publicly the moment it is uploaded.</div></div>
