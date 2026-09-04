@@ -1226,7 +1226,7 @@
         ai.confirmationToken = result.confirmationToken || '';
         ai.pendingAction = result.pendingAction || result.action || '';
         aiConfirm.hidden = !result.confirmationRequired;
-        aiConfirmButton.textContent = ai.pendingAction === 'SAVE_SOLUTION_CASE' ? 'SAVE PRIVATE SOLUTION CASE' : 'CONFIRM AND SUBMIT';
+        aiConfirmButton.textContent = ai.pendingAction === 'SAVE_SOLUTION_CASE' ? 'SAVE PRIVATE REQUEST' : 'CONFIRM AND SUBMIT';
         aiAlertRow.hidden = !(ai.pendingAction === 'CREATE_SPACE_REQUEST' && result.result && result.result.noMatch === true);
         aiAuthorizationRow.hidden = result.serviceAuthorizationRequired !== true;
       }
@@ -1338,7 +1338,7 @@
         }
         if (payload.type === 'easy-lot-ai:signed-in') {
           if (payload.requestId !== ai.activeRequestId) return;
-          setAssistantBusy(false, 'Signed in. Tap Save Private Solution Case to finish.');
+          setAssistantBusy(false, 'Signed in. Tap Save Private Request to finish.');
         }
         if (payload.type === 'easy-lot-ai:signin-cancelled') {
           if (payload.requestId !== ai.activeRequestId) return;

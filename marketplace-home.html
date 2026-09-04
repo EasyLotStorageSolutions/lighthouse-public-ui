@@ -657,7 +657,7 @@
       <section class="delivery-coming-soon" id="local-delivery" aria-labelledby="local-delivery-title">
         <div class="container">
           <div class="delivery-heading">
-            <div><div class="eyebrow">EARN TODAY · EARLY ACCESS</div><h2 id="local-delivery-title">Drive deliveries. Find local work. Build more than one way to earn.</h2><p class="delivery-intro">Deliver Today is the Lighthouse fast lane for independent drivers and local businesses. Drivers choose every offer freely and see the route, time, and guaranteed pay before accepting.</p><p class="delivery-intro">Businesses keep their customer sales and pay drivers directly. Lighthouse earns through membership—not a percentage of each delivery.</p></div>
+            <div><div class="eyebrow">EARN TODAY · EARLY ACCESS</div><h2 id="local-delivery-title">Drive deliveries. Find local work. Build more than one way to earn.</h2><p class="delivery-intro">Deliver Today is Lighthouse's early-access path for independent drivers and local businesses. Drivers choose every offer freely and see the route, time, and guaranteed pay before accepting.</p><p class="delivery-intro">Businesses keep their customer sales and pay drivers directly. Lighthouse earns through membership—not a percentage of each delivery.</p></div>
             <aside class="delivery-status" aria-label="Launch status"><strong>Signup is open.</strong> Live deliveries are not active yet.<ul class="delivery-gate-list"><li>No resume or interview to start</li><li>Accept or pass without penalty</li><li>Finish verification before offers</li></ul></aside>
           </div>
           <div class="delivery-cards">
@@ -1590,7 +1590,7 @@
         ai.confirmationToken = result.confirmationToken || '';
         ai.pendingAction = result.pendingAction || result.action || '';
         aiConfirm.hidden = !result.confirmationRequired;
-        aiConfirmButton.textContent = ai.pendingAction === 'SAVE_SOLUTION_CASE' ? 'SAVE PRIVATE SOLUTION CASE' : 'CONFIRM AND SUBMIT';
+        aiConfirmButton.textContent = ai.pendingAction === 'SAVE_SOLUTION_CASE' ? 'SAVE PRIVATE REQUEST' : 'CONFIRM AND SUBMIT';
         aiAlertRow.hidden = !(ai.pendingAction === 'CREATE_SPACE_REQUEST' && result.result && result.result.noMatch === true);
         aiAuthorizationRow.hidden = result.serviceAuthorizationRequired !== true;
       }
@@ -1736,7 +1736,7 @@
         }
         if (payload.type === 'easy-lot-ai:signed-in') {
           if (payload.requestId !== ai.activeRequestId) return;
-          setAssistantBusy(false, 'Signed in. Tap Save Private Solution Case to finish.');
+          setAssistantBusy(false, 'Signed in. Tap Save Private Request to finish.');
         }
         if (payload.type === 'easy-lot-ai:signin-cancelled') {
           if (payload.requestId !== ai.activeRequestId) return;
