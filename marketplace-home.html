@@ -465,7 +465,7 @@
       .delivery-coming-soon h2 { margin:8px 0 20px; max-width:780px; font:400 clamp(44px,5.4vw,64px)/1.02 'Niconne','Brush Script MT',cursive; letter-spacing:-.015em; }
       .delivery-intro { margin:0; color:var(--easy-blue); font:18px/1.68 'Playfair Display',Georgia,serif; }
       .delivery-status { padding:22px 24px; border:1px solid rgba(17,61,106,.52); border-radius:4px; background:rgba(255,255,255,.48); color:var(--easy-navy); font:700 14px/1.55 Arial,sans-serif; box-shadow:0 13px 10px -12px rgba(17,61,106,.6); }
-      .delivery-cards { position:relative; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:40px; }
+      .delivery-cards { position:relative; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:40px; }
       .delivery-card { display:flex; flex-direction:column; min-height:100%; padding:28px 25px 25px; border:1px solid rgba(17,61,106,.35); border-radius:6px; background:rgba(255,255,255,.74); box-shadow:none; }
       .delivery-role { display:inline-flex; align-items:center; gap:9px; margin-bottom:22px; color:var(--easy-blue); font:800 10px/1 Arial,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
       .delivery-role::before { content:""; width:25px; height:1px; background:var(--easy-blue); }
@@ -496,9 +496,14 @@
       .delivery-form-status { min-height:22px; margin:0; color:var(--easy-navy); font:700 13px/1.5 Arial,sans-serif; }
       .delivery-form > .button { width:100%; background:var(--easy-navy); border-color:var(--easy-navy); color:#fff; }
       .delivery-honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
+      .delivery-choice-row { display:flex; flex-wrap:wrap; gap:10px; grid-column:1/-1; }
+      .delivery-choice { display:flex!important; grid-template-columns:none!important; flex-direction:row; align-items:center!important; width:auto; padding:11px 13px; border:1px solid rgba(17,61,106,.35); border-radius:4px; background:#fff; font-weight:700!important; }
+      .delivery-choice input { width:18px; min-height:18px; margin:0; }
+      .delivery-gate-list { margin:12px 0 0; padding-left:18px; }
+      .delivery-gate-list li { margin:6px 0; font:13px/1.45 Arial,sans-serif; }
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
-      @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}.delivery-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-card:last-child{grid-column:1/-1;max-width:calc(50% - 9px);width:100%;justify-self:center}}
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card:last-child{grid-column:auto;max-width:none}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}}
+      @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
       .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
       .ai-turn { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 11px; align-items: start; }
       .ai-turn.user { grid-template-columns: minmax(0,1fr) 34px; padding-left: 54px; }
@@ -600,21 +605,20 @@
       <section class="delivery-coming-soon" id="local-delivery" aria-labelledby="local-delivery-title">
         <div class="container">
           <div class="delivery-heading">
-            <div><div class="eyebrow">COMING SOON</div><h2 id="local-delivery-title">Local Food &amp; Delivery — Fair by Design</h2><p class="delivery-intro">The Lighthouse by Easy Lot Storage Solutions is building a better way for customers, local businesses, restaurants, and independent drivers to connect.</p><p class="delivery-intro">Restaurants and merchants keep the money from what they sell. Drivers see the job and guaranteed pay before accepting and keep 100% of their tips. Customers see the real cost before committing.</p><p class="delivery-intro">Easy earns through business membership — not by taking a percentage from every order.</p></div>
-            <aside class="delivery-status" aria-label="Launch status">Ordering and delivery are not live yet. Join the correct early-access list below.</aside>
+            <div><div class="eyebrow">EARN TODAY · EARLY ACCESS</div><h2 id="local-delivery-title">Drive deliveries. Find local work. Build more than one way to earn.</h2><p class="delivery-intro">Deliver Today is the Lighthouse fast lane for independent drivers and local businesses. Drivers choose every offer freely and see the route, time, and guaranteed pay before accepting.</p><p class="delivery-intro">Businesses keep their customer sales and pay drivers directly. Lighthouse earns through membership—not a percentage of each delivery.</p></div>
+            <aside class="delivery-status" aria-label="Launch status"><strong>Signup is open.</strong> Live deliveries are not active yet.<ul class="delivery-gate-list"><li>No resume or interview to start</li><li>Accept or pass without penalty</li><li>Finish verification before offers</li></ul></aside>
           </div>
           <div class="delivery-cards">
-            <article class="delivery-card"><span class="delivery-role">Customers</span><h3>For Customers</h3><p>Be among the first to know when local ordering opens. Discover participating restaurants and businesses, see the real total before ordering, and choose the option that works best for you.</p><button class="button delivery-interest-open" type="button" data-delivery-role="CUSTOMER">Join the Customer Waitlist</button></article>
-            <article class="delivery-card"><span class="delivery-role">Local business</span><h3>For Restaurants &amp; Local Businesses</h3><p>Join the founding network, reach local customers, keep the revenue from what you sell, and use transparent delivery and business tools without giving Easy a percentage of every sale.</p><button class="button delivery-interest-open" type="button" data-delivery-role="RESTAURANT_MERCHANT">Join as a Restaurant or Merchant</button></article>
-            <article class="delivery-card"><span class="delivery-role">Drivers</span><h3>For Independent Drivers</h3><p>Get early access to a delivery network designed to show distance, estimated time, expected wait, and guaranteed pay before you accept. Keep 100% of your tips.</p><button class="button delivery-interest-open" type="button" data-delivery-role="DRIVER">Apply for Driver Early Access</button></article>
+            <article class="delivery-card"><span class="delivery-role">Independent drivers</span><h3>I want to deliver</h3><p>Fast signup for courier, food, and local-business delivery. Tell us where and how you want to work. No mandatory shifts, exclusivity, or acceptance-rate punishment.</p><button class="button delivery-interest-open" type="button" data-delivery-role="DRIVER">I WANT TO DELIVER</button></article>
+            <article class="delivery-card"><span class="delivery-role">Restaurants &amp; local business</span><h3>I need delivery drivers</h3><p>Prepare to post clear delivery offers while keeping control of customer orders. You set guaranteed driver pay and pay the driver directly.</p><button class="button delivery-interest-open" type="button" data-delivery-role="RESTAURANT_MERCHANT">I NEED DELIVERY DRIVERS</button></article>
           </div>
-          <div class="fair-promise"><h3>The Easy Fair Exchange Promise</h3><p>Everyone should understand what they are paying, earning, and agreeing to before the work begins. Easy does not take a transaction commission, does not keep driver tips, and does not charge hidden Easy fees simply because people did business through the network.</p><div class="promise-points"><div class="promise-point">Clear terms before commitment</div><div class="promise-point">100% of tips stay with drivers</div><div class="promise-point">Easy earns through membership, not transaction cuts</div></div></div>
+          <div class="fair-promise"><h3>The Lighthouse Fair Exchange Promise</h3><p>Everyone sees what they are agreeing to before work begins. Lighthouse takes zero delivery commission, never keeps driver tips, and never reduces an accepted offer.</p><div class="promise-points"><div class="promise-point">Guaranteed pay shown before acceptance</div><div class="promise-point">100% of tips stay with drivers</div><div class="promise-point">Membership revenue, not transaction cuts</div></div></div>
         </div>
       </section>
       <dialog class="delivery-dialog" id="delivery-interest-dialog" aria-labelledby="delivery-form-title">
         <div class="delivery-dialog-head"><div><div class="eyebrow">THE LIGHTHOUSE · EARLY ACCESS</div><h2 id="delivery-form-title">Join the early-access list</h2></div><button class="delivery-close" type="button" id="delivery-dialog-close" aria-label="Close early-access form">×</button></div>
         <form class="delivery-form" id="delivery-interest-form" novalidate>
-          <p class="delivery-required">Fields marked * are required. No payment information is collected.</p>
+          <p class="delivery-required">Fields marked * are required. No SSN, bank information, license image, registration image, or insurance document is collected here.</p>
           <div class="delivery-form-grid" id="delivery-form-fields"></div>
           <label class="delivery-honeypot" aria-hidden="true">Company website<input type="text" name="companyWebsite" tabindex="-1" autocomplete="off" /></label>
           <div id="delivery-consent"></div>
@@ -805,20 +809,15 @@
         } catch (error) { return newSessionKey(); }
       })();
       const deliveryRoleConfig = {
-        CUSTOMER: {
-          title: 'Join the Customer Waitlist', submit: 'Join the Waitlist', event: 'customer_waitlist_clicked',
-          consent: 'I agree that Easy Lot Storage Solutions may contact me about The Lighthouse local ordering and delivery launch. Joining this list does not create a paid membership or place an order.',
-          fields: `<label>Full name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email address *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Mobile phone number <input name="phone" type="tel" autocomplete="tel" maxlength="32" /></label><label>ZIP code *<input name="zipCode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required /></label><label class="full">Preferred launch notification method *<select name="preferredContactMethod" required><option value="">Choose one</option><option value="EMAIL">Email</option><option value="TEXT">Text message</option><option value="EMAIL_AND_TEXT">Email and text message</option></select></label><label class="full">What would you like to order locally? <textarea name="notes" maxlength="1200"></textarea></label>`
-        },
         RESTAURANT_MERCHANT: {
-          title: 'Join the Founding Network', submit: 'Join the Founding Network', event: 'restaurant_interest_clicked',
-          consent: 'I agree that Easy Lot Storage Solutions may contact me about joining The Lighthouse founding restaurant and merchant network. This is an interest form, not a live membership purchase or delivery agreement.',
-          fields: `<label>Business name *<input name="businessName" autocomplete="organization" maxlength="160" required /></label><label>Contact name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>Business type *<select name="businessType" required><option value="">Choose one</option><option>Restaurant</option><option>Bakery</option><option>Café</option><option>Grocery</option><option>Convenience Store</option><option>Florist</option><option>Local Retailer</option><option>Other Local Business</option></select></label><label>Number of locations *<input name="locationCount" type="number" min="1" max="5000" value="1" required /></label><label class="full">Business address or ZIP code *<input name="businessAddress" autocomplete="street-address" maxlength="240" required /></label><label class="full">Current pickup or delivery method <textarea name="currentDeliveryMethod" maxlength="500"></textarea></label><label class="full">Restaurant or merchant website <input name="website" type="url" autocomplete="url" maxlength="240" placeholder="https://" /></label><label class="full">Interest notes <textarea name="notes" maxlength="1200"></textarea></label>`
+          title: 'Prepare your business for Deliver Today', submit: 'SUBMIT BUSINESS INTAKE', event: 'restaurant_interest_clicked',
+          consent: 'I agree that Lighthouse may contact me about delivery onboarding. This intake does not activate live delivery, billing, or driver payment processing.',
+          fields: `<label>Business name *<input name="businessName" autocomplete="organization" maxlength="160" required /></label><label>Authorized contact name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>Business type *<select name="businessType" required><option value="">Choose one</option><option>Restaurant</option><option>Bakery</option><option>Café</option><option>Grocery</option><option>Convenience Store</option><option>Florist</option><option>Local Retailer</option><option>Other Local Business</option></select></label><label>Number of locations *<input name="locationCount" type="number" min="1" max="5000" value="1" required /></label><label class="full">Business address or ZIP code *<input name="businessAddress" autocomplete="street-address" maxlength="240" required /></label><label class="full">Pickup process *<textarea name="pickupProcess" maxlength="500" required placeholder="Where drivers check in, expected wait, and who releases the order"></textarea></label><label class="full">How will you pay drivers directly? *<input name="paymentMethod" maxlength="120" required placeholder="For example: cashless payment app or weekly invoice payment" /></label><label class="delivery-check full"><input name="authorityConfirmed" type="checkbox" required /><span>I am authorized to enroll this business. *</span></label><label class="delivery-check full"><input name="lawfulPackagingConfirmed" type="checkbox" required /><span>The business will package orders lawfully and will not offer prohibited or age-restricted items. *</span></label><label class="delivery-check full"><input name="directPaymentConfirmed" type="checkbox" required /><span>The business—not Lighthouse—will pay each driver the accepted guaranteed amount directly. *</span></label><label class="full">Business website <input name="website" type="url" autocomplete="url" maxlength="240" placeholder="https://" /></label><label class="full">Anything else we should know? <textarea name="notes" maxlength="1200"></textarea></label>`
         },
         DRIVER: {
-          title: 'Apply for Driver Early Access', submit: 'Apply for Early Access', event: 'driver_interest_clicked',
-          consent: 'I confirm that I am at least 18 years old and agree that Easy Lot Storage Solutions may contact me about future independent delivery opportunities. This interest form is not a job offer, contractor agreement, background check, or guarantee of access to delivery work.',
-          fields: `<label>Full name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>ZIP code or preferred delivery area *<input name="zipCode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required /></label><label class="full">Vehicle type *<select name="vehicleType" required><option value="">Choose one</option><option>Car</option><option>SUV</option><option>Van</option><option>Pickup Truck</option><option>Bicycle</option><option>Scooter</option><option>Other</option></select></label><label class="full">Delivery experience <textarea name="deliveryExperience" maxlength="700"></textarea></label><label class="full">Availability interest <textarea name="availabilityInterest" maxlength="500"></textarea></label><label class="delivery-check full"><input name="age18Confirmed" type="checkbox" required /><span>I confirm that I am at least 18 years old. *</span></label>`
+          title: 'Start the Deliver Today fast lane', submit: 'START MY VERIFICATION', event: 'driver_interest_clicked',
+          consent: 'I agree that Lighthouse may contact me about independent delivery onboarding. This signup is not employment, a job guarantee, or clearance to perform live deliveries.',
+          fields: `<label>Full name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>Home ZIP code *<input name="zipCode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required /></label><label>Vehicle or travel type *<select name="vehicleType" required><option value="">Choose one</option><option>Car</option><option>SUV</option><option>Van</option><option>Pickup Truck</option><option>Bicycle</option><option>Walk</option><option>Scooter</option><option>Motorcycle</option><option>Other</option></select></label><label>Available today? *<select name="availabilityToday" required><option value="">Choose one</option><option value="YES">Yes</option><option value="LATER_TODAY">Later today</option><option value="NOT_TODAY">Not today</option></select></label><label>Preferred radius in miles *<input name="radiusMiles" type="number" min="1" max="250" value="15" required /></label><div class="delivery-choice-row" role="group" aria-label="Delivery types"><label class="delivery-choice"><input name="deliveryTypes" type="checkbox" value="COURIER" />Courier</label><label class="delivery-choice"><input name="deliveryTypes" type="checkbox" value="FOOD_DELIVERY" />Food delivery</label><label class="delivery-choice"><input name="deliveryTypes" type="checkbox" value="LOCAL_BUSINESS_DELIVERY" />Local business delivery</label></div><label class="full">Other platforms you use <input name="otherPlatforms" maxlength="300" placeholder="Optional" /></label><label class="full">Delivery experience <textarea name="deliveryExperience" maxlength="700" placeholder="Optional—no resume required"></textarea></label><label class="delivery-check full"><input name="age18Confirmed" type="checkbox" required /><span>I confirm that I am at least 18 years old. *</span></label><label class="delivery-check full motor-confirm"><input name="licenseConfirmed" type="checkbox" /><span>If using a motor vehicle, I have a valid driver license.</span></label><label class="delivery-check full motor-confirm"><input name="registrationConfirmed" type="checkbox" /><span>If using a motor vehicle, it is currently registered.</span></label><label class="delivery-check full motor-confirm"><input name="compensatedInsuranceConfirmed" type="checkbox" /><span>If using a motor vehicle, my insurance permits compensated delivery or business use.</span></label>`
         }
       };
       function trackDelivery(eventName, role) {
@@ -1522,6 +1521,15 @@
         if (event.source !== parentWindow || event.origin !== parentOrigin) return;
         const payload = event.data || {};
         if (payload.type === 'home:data') renderDiscovery(payload.data);
+        if (payload.type === 'lighthouse-delivery:open') {
+          const button = document.querySelector(`.delivery-interest-open[data-delivery-role="${String(payload.role || '')}"]`);
+          if (button) {
+            deliveryFormFields.hidden = false;
+            deliveryConsent.hidden = false;
+            deliveryFormSubmit.hidden = false;
+            openDeliveryForm(button);
+          }
+        }
         if (payload.type === 'lighthouse-delivery:submitted') {
           if (payload.requestId !== deliveryState.requestId) return;
           deliveryFormStatus.textContent = payload.result?.message || 'Your early-access interest has been received.';
@@ -1762,9 +1770,26 @@
           deliveryFormStatus.textContent = 'Please correct the highlighted fields before submitting.';
           return;
         }
-        const values = Object.fromEntries(new FormData(deliveryForm).entries());
+        const formData = new FormData(deliveryForm);
+        if (deliveryState.role === 'DRIVER' && formData.getAll('deliveryTypes').length === 0) {
+          deliveryFormStatus.textContent = 'Choose at least one delivery type.';
+          return;
+        }
+        const motorVehicle = deliveryState.role === 'DRIVER' && !['Bicycle', 'Walk'].includes(String(formData.get('vehicleType') || ''));
+        if (motorVehicle && !['licenseConfirmed', 'registrationConfirmed', 'compensatedInsuranceConfirmed'].every(name => deliveryForm.elements[name]?.checked === true)) {
+          deliveryFormStatus.textContent = 'Motor-vehicle drivers must confirm license, registration, and insurance that permits compensated delivery or business use.';
+          return;
+        }
+        const values = Object.fromEntries(formData.entries());
+        values.deliveryTypes = formData.getAll('deliveryTypes');
         values.marketingConsent = deliveryForm.elements.marketingConsent?.checked === true;
         values.age18Confirmed = deliveryForm.elements.age18Confirmed?.checked === true;
+        values.licenseConfirmed = deliveryForm.elements.licenseConfirmed?.checked === true;
+        values.registrationConfirmed = deliveryForm.elements.registrationConfirmed?.checked === true;
+        values.compensatedInsuranceConfirmed = deliveryForm.elements.compensatedInsuranceConfirmed?.checked === true;
+        values.authorityConfirmed = deliveryForm.elements.authorityConfirmed?.checked === true;
+        values.lawfulPackagingConfirmed = deliveryForm.elements.lawfulPackagingConfirmed?.checked === true;
+        values.directPaymentConfirmed = deliveryForm.elements.directPaymentConfirmed?.checked === true;
         values.role = deliveryState.role;
         values.formStartedAt = deliveryState.formStartedAt;
         values.sourceSessionId = deliverySessionKey;
