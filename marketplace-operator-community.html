@@ -433,7 +433,7 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
             (data.profiles || [])
               .map(
                 (p) =>
-                  `<article class="thread"><h3>${esc(p.businessName || p.displayName || "Approved operator")}</h3><div class="meta">${esc([p.roleType, p.serviceArea].filter(Boolean).join(" • "))}</div><p>${esc(p.bio || "Approved Easy Lot operator-network member.")}</p><button data-connect="${esc(p.id)}">REQUEST CONNECTION</button></article>`,
+                  `<article class="thread"><h3>${esc(p.businessName || p.displayName || "Approved operator")}</h3><div class="meta">${esc([p.roleType, p.serviceArea].filter(Boolean).join(" • "))}</div><p>${esc(p.bio || "Approved Lighthouse operator-network member.")}</p><button data-connect="${esc(p.id)}">REQUEST CONNECTION</button></article>`,
               )
               .join("") ||
             '<div class="status">No directory profiles are available yet.</div>';
@@ -447,7 +447,7 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
                   o.estimatedRequiredSquareFeet && `${o.estimatedRequiredSquareFeet} estimated sq. ft.`,
                   o.storageDuration,
                 ].filter(Boolean).join(" • ");
-                return `<article class="thread"><h3>${esc(o.storageCategory || "Storage opportunity")}</h3><div class="meta">${esc(facts || "Details available after Easy Lot review")}</div><p>${esc(o.fitDisclaimer || "All dimensions, access, availability, legality, zoning, and suitability require verification.")}</p><div class="thread-actions"><button data-dispatch="${esc(d.id)}" data-exchange-response="AVAILABLE">AVAILABLE</button><button data-dispatch="${esc(d.id)}" data-exchange-response="POTENTIAL_FIT">POTENTIAL FIT</button><button data-dispatch="${esc(d.id)}" data-exchange-response="NOT_AVAILABLE">NOT AVAILABLE</button></div></article>`;
+                return `<article class="thread"><h3>${esc(o.storageCategory || "Storage opportunity")}</h3><div class="meta">${esc(facts || "Details available after Lighthouse review")}</div><p>${esc(o.fitDisclaimer || "All dimensions, access, availability, legality, zoning, and suitability require verification.")}</p><div class="thread-actions"><button data-dispatch="${esc(d.id)}" data-exchange-response="AVAILABLE">AVAILABLE</button><button data-dispatch="${esc(d.id)}" data-exchange-response="POTENTIAL_FIT">POTENTIAL FIT</button><button data-dispatch="${esc(d.id)}" data-exchange-response="NOT_AVAILABLE">NOT AVAILABLE</button></div></article>`;
               })
               .join("") ||
             '<div class="status">No privacy-safe storage opportunities are open for your operator profile right now.</div>';

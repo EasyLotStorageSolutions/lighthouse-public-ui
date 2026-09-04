@@ -547,8 +547,8 @@
           <div class="eyebrow">FIND COMMERCIAL SPACE</div>
           <h1>Browse what is available—or tell us what you need.</h1>
           <p>
-            See approved Easy Lot-operated and independent-host listings now.
-            If the current inventory does not fit, submit a request and Easy Lot
+            See approved Lighthouse-operated and independent-host listings now.
+            If the current inventory does not fit, submit a request and Lighthouse
             can help look for a match.
           </p>
         </header>
@@ -562,7 +562,7 @@
           <article class="path">
             <div class="option">Option 2</div>
             <h2>Tell Us What You Need</h2>
-            <p>Use this when nothing currently listed fits. Easy Lot will collect the details needed to help locate a match.</p>
+            <p>Use this when nothing currently listed fits. Lighthouse will collect the details needed to help locate a match.</p>
             <button id="topRequest" type="button">TELL US WHAT YOU NEED</button>
           </article>
         </section>
@@ -581,7 +581,7 @@
             <button class="choice" type="button" data-category="contractor yard">Contractor Yard</button>
             <button class="choice" type="button" data-category="">Other / Not Sure</button>
           </div>
-          <div class="selected-need" id="selectedNeed">Not sure? Choose “Other / Not Sure” and tell Easy Lot what you need.</div>
+          <div class="selected-need" id="selectedNeed">Not sure? Choose “Other / Not Sure” and tell Lighthouse what you need.</div>
         </section>
         <form class="filters" id="filters">
           <input
@@ -625,7 +625,7 @@
           <div>
             <h2>Nothing currently listed fits?</h2>
             <p>
-              Let Easy Lot look for one. With your permission, we can keep a
+              Let Lighthouse look for one. With your permission, we can keep a
               private Storage Passport on file and alert eligible operators
               without sharing your contact information.
             </p>
@@ -733,7 +733,7 @@
         count.textContent = `${items.length} approved ${items.length === 1 ? "space" : "spaces"}`;
         if (!items.length) {
           grid.innerHTML =
-            '<div class="empty"><h3>We don’t have the right space listed yet.</h3><p>Let Easy Lot look for one. Create a storage request so we can search the network and learn where more capacity is needed.</p><button class="primary" type="button" id="emptyRequest">CREATE STORAGE REQUEST</button></div>';
+            '<div class="empty"><h3>We don’t have the right space listed yet.</h3><p>Let Lighthouse look for one. Create a storage request so we can search the network and learn where more capacity is needed.</p><button class="primary" type="button" id="emptyRequest">CREATE STORAGE REQUEST</button></div>';
           document.getElementById("emptyRequest").onclick = () => document.getElementById("openRequest").click();
           return;
         }
@@ -801,7 +801,7 @@
           ["Availability", item.availabilityStatus],
         ].filter((x) => x[1]);
         document.getElementById("detailBody").innerHTML =
-          `<div class="detail-grid"><div class="detail-photo">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}">` : "SPACE PHOTO"}</div><div><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h1>${esc(item.title)}</h1><div class="location">${esc(item.location)}</div><div class="facts">${facts.map((f) => `<div class="fact"><b>${esc(f[0])}</b>${esc(f[1])}</div>`).join("")}</div><p class="detail-copy">${esc(item.description || "Contact Easy Lot for additional host-reported details about this space.")}</p><a class="primary" style="display:flex;text-decoration:none;align-items:center;justify-content:center" href="https://www.easylotstoragesolutions.com/contact" target="_top">ASK ABOUT THIS SPACE</a>${item.disclosure ? `<div class="disclosure">${esc(item.disclosure)}</div>` : ""}</div></div>`;
+          `<div class="detail-grid"><div class="detail-photo">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}">` : "SPACE PHOTO"}</div><div><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h1>${esc(item.title)}</h1><div class="location">${esc(item.location)}</div><div class="facts">${facts.map((f) => `<div class="fact"><b>${esc(f[0])}</b>${esc(f[1])}</div>`).join("")}</div><p class="detail-copy">${esc(item.description || "Contact Lighthouse for additional host-reported details about this space.")}</p><a class="primary" style="display:flex;text-decoration:none;align-items:center;justify-content:center" href="https://www.easylotstoragesolutions.com/contact" target="_top">ASK ABOUT THIS SPACE</a>${item.disclosure ? `<div class="disclosure">${esc(item.disclosure)}</div>` : ""}</div></div>`;
         window.scrollTo(0, 0);
       }
       back.onclick = () => {
