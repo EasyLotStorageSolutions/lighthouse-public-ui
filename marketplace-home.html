@@ -418,16 +418,16 @@
       .lighthouse-price { display:block; color:var(--easy-navy); font:400 38px/1.1 'Playfair Display',Georgia,serif; }
       .lighthouse-price small { font-size:14px; }
       .lighthouse-trial { margin:8px 0 14px!important; color:var(--easy-navy); font:800 12px/1.35 Arial,sans-serif!important; letter-spacing:.05em; text-transform:uppercase; }
-      .lighthouse-plan-copy { min-height:70px; margin:0 0 17px!important; color:var(--muted); font:15px/1.55 Arial,sans-serif!important; }
+      .lighthouse-plan-copy { min-height:70px; margin:0 0 17px!important; color:var(--easy-muted); font:15px/1.55 Arial,sans-serif!important; }
       .lighthouse-plan ul { flex:1; margin:0 0 22px; padding:16px 0 0; border-top:1px solid var(--easy-line); list-style:none; }
-      .lighthouse-plan li { position:relative; margin:9px 0; padding-left:22px; color:var(--ink); font:14px/1.45 Arial,sans-serif; }
+      .lighthouse-plan li { position:relative; margin:9px 0; padding-left:22px; color:var(--easy-ink); font:14px/1.45 Arial,sans-serif; }
       .lighthouse-plan li::before { content:"✓"; position:absolute; left:0; color:var(--easy-navy); font-weight:800; }
       .lighthouse-plan .button { width:100%; }
       .lighthouse-plan.recommended .button { border-color:var(--easy-navy); background:var(--easy-navy); color:#fff; }
       .lighthouse-plan.recommended .button:hover { border-color:var(--easy-blue); background:var(--easy-blue); }
       .lighthouse-plan .button[disabled] { cursor:wait; opacity:.65; }
       .lighthouse-state { min-height:22px; margin:12px 0 0!important; font:700 13px/1.5 Arial,sans-serif!important; }
-      .lighthouse-fine-print { position:relative; z-index:1; margin:20px 0 0!important; color:var(--muted); text-align:center; font:12px/1.5 Arial,sans-serif!important; }
+      .lighthouse-fine-print { position:relative; z-index:1; margin:20px 0 0!important; color:var(--easy-muted); text-align:center; font:12px/1.5 Arial,sans-serif!important; }
       .video-community { padding: 56px 0; border-block: 1px solid rgba(17,61,106,.28); background: linear-gradient(160deg,#082b4c 0%,#113d6a 62%,#164f84 100%); color:#fff; }
       .video-community h2,.video-community h3,.video-community p,.video-community label { color:#fff; }
       .video-community .eyebrow { color:#9fd0ff; }
@@ -459,8 +459,46 @@
       .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
       .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
       .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
+      .delivery-coming-soon { position:relative; overflow:hidden; padding:72px 0; border-block:1px solid rgba(17,61,106,.3); background:linear-gradient(145deg,#f8f3e9 0%,#edf4ff 54%,#d6e6fe 100%); }
+      .delivery-coming-soon::before { content:""; position:absolute; top:-220px; right:-100px; width:720px; height:420px; border-radius:50%; border:1px solid rgba(177,123,31,.2); box-shadow:0 0 90px 24px rgba(247,183,49,.12); transform:rotate(-15deg); pointer-events:none; }
+      .delivery-heading { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); gap:54px; align-items:end; }
+      .delivery-coming-soon h2 { margin:8px 0 20px; max-width:780px; font-family:'Playfair Display',Georgia,serif; font-style:normal; font-size:clamp(38px,5vw,58px); }
+      .delivery-intro { margin:0; color:var(--easy-blue); font:18px/1.68 'Playfair Display',Georgia,serif; }
+      .delivery-status { padding:23px 24px; border-left:4px solid var(--easy-gold); background:rgba(255,255,255,.7); color:var(--easy-navy); font:700 15px/1.55 Arial,sans-serif; box-shadow:0 12px 32px rgba(8,43,76,.08); }
+      .delivery-cards { position:relative; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:40px; }
+      .delivery-card { display:flex; flex-direction:column; min-height:100%; padding:28px 25px 25px; border:1px solid rgba(17,61,106,.38); border-radius:5px; background:rgba(255,255,255,.86); box-shadow:0 16px 30px -25px rgba(8,43,76,.7); }
+      .delivery-role { display:inline-flex; align-items:center; gap:9px; margin-bottom:22px; color:var(--easy-blue); font:800 10px/1 Arial,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+      .delivery-role::before { content:""; width:25px; height:1px; background:var(--easy-gold); }
+      .delivery-card h3 { min-height:56px; margin:0 0 14px; font-size:24px; }
+      .delivery-card p { flex:1; margin:0 0 24px; color:var(--easy-muted); font:15px/1.62 Arial,sans-serif; }
+      .delivery-card .button { width:100%; min-height:54px; padding:10px 15px; white-space:normal; text-align:center; }
+      .fair-promise { position:relative; margin-top:28px; padding:28px; border:1px solid rgba(17,61,106,.42); background:#0a2c4e; color:#fff; }
+      .fair-promise h3,.fair-promise p { color:#fff; }
+      .fair-promise h3 { margin:0 0 8px; font-size:23px; }
+      .fair-promise p { margin:0; color:#dceeff; font:14px/1.6 Arial,sans-serif; }
+      .promise-points { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:22px; }
+      .promise-point { position:relative; padding:13px 14px 13px 35px; border-top:1px solid rgba(255,255,255,.28); color:#fff; font:700 13px/1.4 Arial,sans-serif; }
+      .promise-point::before { content:"✓"; position:absolute; left:10px; color:#f7d68a; }
+      .delivery-dialog { width:min(700px,calc(100% - 28px)); max-height:min(88vh,820px); padding:0; border:1px solid var(--easy-blue); border-radius:7px; background:#f8fbff; color:var(--easy-navy); box-shadow:0 28px 90px rgba(3,18,34,.42); }
+      .delivery-dialog::backdrop { background:rgba(3,18,34,.68); backdrop-filter:blur(3px); }
+      .delivery-dialog-head { display:flex; justify-content:space-between; gap:24px; padding:26px 28px 22px; border-bottom:1px solid var(--easy-line); background:linear-gradient(120deg,#d6e6fe,#fff7e7); }
+      .delivery-dialog-head h2 { margin:5px 0 0; font-family:'Playfair Display',Georgia,serif; font-style:normal; font-size:32px; }
+      .delivery-close { align-self:flex-start; width:42px; height:42px; border:1px solid var(--easy-blue); border-radius:50%; background:#fff; color:var(--easy-blue); cursor:pointer; font:26px/1 Arial,sans-serif; }
+      .delivery-form { display:grid; gap:18px; padding:26px 28px 30px; overflow:auto; }
+      .delivery-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 18px; }
+      .delivery-form label { display:grid; gap:7px; color:var(--easy-navy); font:700 13px/1.4 Arial,sans-serif; }
+      .delivery-form label.full { grid-column:1/-1; }
+      .delivery-form input,.delivery-form select,.delivery-form textarea { width:100%; min-height:46px; padding:11px 12px; border:1px solid rgba(17,61,106,.58); border-radius:3px; background:#fff; color:var(--easy-navy); font:15px/1.4 Arial,sans-serif; }
+      .delivery-form textarea { min-height:94px; resize:vertical; }
+      .delivery-check { display:grid!important; grid-template-columns:20px 1fr!important; align-items:start; gap:10px!important; font-weight:400!important; line-height:1.5!important; }
+      .delivery-check input { width:18px; min-height:18px; margin-top:2px; padding:0; }
+      .delivery-required { margin:0; color:var(--easy-muted); font:12px/1.45 Arial,sans-serif; }
+      .delivery-form-status { min-height:22px; margin:0; color:var(--easy-navy); font:700 13px/1.5 Arial,sans-serif; }
+      .delivery-form > .button { width:100%; background:var(--easy-navy); border-color:var(--easy-navy); color:#fff; }
+      .delivery-honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}}
+      @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}.delivery-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.delivery-card:last-child{grid-column:1/-1;max-width:calc(50% - 9px);width:100%;justify-self:center}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-heading,.video-layout{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card:last-child{grid-column:auto;max-width:none}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}}
     </style>
   </head>
   <body>
@@ -534,6 +572,31 @@
           <p class="lighthouse-fine-print">Each plan starts with a 7-day free trial, then renews monthly at the price shown. Cancel through your account.</p>
         </div></div>
       </section>
+      <section class="delivery-coming-soon" id="local-delivery" aria-labelledby="local-delivery-title">
+        <div class="container">
+          <div class="delivery-heading">
+            <div><div class="eyebrow">COMING SOON</div><h2 id="local-delivery-title">Local Food &amp; Delivery — Fair by Design</h2><p class="delivery-intro">The Lighthouse by Easy Lot Storage Solutions is building a better way for customers, local businesses, restaurants, and independent drivers to connect.</p><p class="delivery-intro">Restaurants and merchants keep the money from what they sell. Drivers see the job and guaranteed pay before accepting and keep 100% of their tips. Customers see the real cost before committing.</p><p class="delivery-intro">Easy earns through business membership — not by taking a percentage from every order.</p></div>
+            <aside class="delivery-status" aria-label="Launch status">Ordering and delivery are not live yet. Join the correct early-access list below.</aside>
+          </div>
+          <div class="delivery-cards">
+            <article class="delivery-card"><span class="delivery-role">Customers</span><h3>For Customers</h3><p>Be among the first to know when local ordering opens. Discover participating restaurants and businesses, see the real total before ordering, and choose the option that works best for you.</p><button class="button delivery-interest-open" type="button" data-delivery-role="CUSTOMER">Join the Customer Waitlist</button></article>
+            <article class="delivery-card"><span class="delivery-role">Local business</span><h3>For Restaurants &amp; Local Businesses</h3><p>Join the founding network, reach local customers, keep the revenue from what you sell, and use transparent delivery and business tools without giving Easy a percentage of every sale.</p><button class="button delivery-interest-open" type="button" data-delivery-role="RESTAURANT_MERCHANT">Join as a Restaurant or Merchant</button></article>
+            <article class="delivery-card"><span class="delivery-role">Drivers</span><h3>For Independent Drivers</h3><p>Get early access to a delivery network designed to show distance, estimated time, expected wait, and guaranteed pay before you accept. Keep 100% of your tips.</p><button class="button delivery-interest-open" type="button" data-delivery-role="DRIVER">Apply for Driver Early Access</button></article>
+          </div>
+          <div class="fair-promise"><h3>The Easy Fair Exchange Promise</h3><p>Everyone should understand what they are paying, earning, and agreeing to before the work begins. Easy does not take a transaction commission, does not keep driver tips, and does not charge hidden Easy fees simply because people did business through the network.</p><div class="promise-points"><div class="promise-point">Clear terms before commitment</div><div class="promise-point">100% of tips stay with drivers</div><div class="promise-point">Easy earns through membership, not transaction cuts</div></div></div>
+        </div>
+      </section>
+      <dialog class="delivery-dialog" id="delivery-interest-dialog" aria-labelledby="delivery-form-title">
+        <div class="delivery-dialog-head"><div><div class="eyebrow">THE LIGHTHOUSE · EARLY ACCESS</div><h2 id="delivery-form-title">Join the early-access list</h2></div><button class="delivery-close" type="button" id="delivery-dialog-close" aria-label="Close early-access form">×</button></div>
+        <form class="delivery-form" id="delivery-interest-form" novalidate>
+          <p class="delivery-required">Fields marked * are required. No payment information is collected.</p>
+          <div class="delivery-form-grid" id="delivery-form-fields"></div>
+          <label class="delivery-honeypot" aria-hidden="true">Company website<input type="text" name="companyWebsite" tabindex="-1" autocomplete="off" /></label>
+          <div id="delivery-consent"></div>
+          <p class="delivery-form-status" id="delivery-form-status" role="status" aria-live="polite"></p>
+          <button class="button" id="delivery-form-submit" type="submit">Join Early Access</button>
+        </form>
+      </dialog>
       <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
           <div class="video-heading"><div><div class="eyebrow">Lighthouse Video Community</div><h2 id="video-community-title">Create something worth sharing.</h2><p>Members can record or upload a short vertical video, preview it, add a title and story, and send it for review. Approved videos become part of the community watch feed.</p></div><div class="video-safety">Every upload is screened and held for human review. Nothing appears publicly the moment it is uploaded.</div></div>
@@ -688,6 +751,69 @@
       const communityVideoSubmit = document.getElementById('community-video-submit');
       const communityVideoFeed = document.getElementById('community-video-feed');
       const communityVideo = { access: { entitled: false }, file: null, frames: [], durationSeconds: 0, objectUrl: '', requestId: '', videoId: '' };
+      const deliverySection = document.getElementById('local-delivery');
+      const deliveryDialog = document.getElementById('delivery-interest-dialog');
+      const deliveryDialogClose = document.getElementById('delivery-dialog-close');
+      const deliveryForm = document.getElementById('delivery-interest-form');
+      const deliveryFormTitle = document.getElementById('delivery-form-title');
+      const deliveryFormFields = document.getElementById('delivery-form-fields');
+      const deliveryConsent = document.getElementById('delivery-consent');
+      const deliveryFormStatus = document.getElementById('delivery-form-status');
+      const deliveryFormSubmit = document.getElementById('delivery-form-submit');
+      const deliveryState = { role: '', requestId: '', formStartedAt: 0, sourceButton: '' };
+      const deliverySessionKey = (() => {
+        try {
+          const existing = localStorage.getItem('lighthouse-delivery-session-v1');
+          if (existing) return existing;
+          const created = newSessionKey();
+          localStorage.setItem('lighthouse-delivery-session-v1', created);
+          return created;
+        } catch (error) { return newSessionKey(); }
+      })();
+      const deliveryRoleConfig = {
+        CUSTOMER: {
+          title: 'Join the Customer Waitlist', submit: 'Join the Waitlist', event: 'customer_waitlist_clicked',
+          consent: 'I agree that Easy Lot Storage Solutions may contact me about The Lighthouse local ordering and delivery launch. Joining this list does not create a paid membership or place an order.',
+          fields: `<label>Full name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email address *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Mobile phone number <input name="phone" type="tel" autocomplete="tel" maxlength="32" /></label><label>ZIP code *<input name="zipCode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required /></label><label class="full">Preferred launch notification method *<select name="preferredContactMethod" required><option value="">Choose one</option><option value="EMAIL">Email</option><option value="TEXT">Text message</option><option value="EMAIL_AND_TEXT">Email and text message</option></select></label><label class="full">What would you like to order locally? <textarea name="notes" maxlength="1200"></textarea></label>`
+        },
+        RESTAURANT_MERCHANT: {
+          title: 'Join the Founding Network', submit: 'Join the Founding Network', event: 'restaurant_interest_clicked',
+          consent: 'I agree that Easy Lot Storage Solutions may contact me about joining The Lighthouse founding restaurant and merchant network. This is an interest form, not a live membership purchase or delivery agreement.',
+          fields: `<label>Business name *<input name="businessName" autocomplete="organization" maxlength="160" required /></label><label>Contact name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>Business type *<select name="businessType" required><option value="">Choose one</option><option>Restaurant</option><option>Bakery</option><option>Café</option><option>Grocery</option><option>Convenience Store</option><option>Florist</option><option>Local Retailer</option><option>Other Local Business</option></select></label><label>Number of locations *<input name="locationCount" type="number" min="1" max="5000" value="1" required /></label><label class="full">Business address or ZIP code *<input name="businessAddress" autocomplete="street-address" maxlength="240" required /></label><label class="full">Current pickup or delivery method <textarea name="currentDeliveryMethod" maxlength="500"></textarea></label><label class="full">Restaurant or merchant website <input name="website" type="url" autocomplete="url" maxlength="240" placeholder="https://" /></label><label class="full">Interest notes <textarea name="notes" maxlength="1200"></textarea></label>`
+        },
+        DRIVER: {
+          title: 'Apply for Driver Early Access', submit: 'Apply for Early Access', event: 'driver_interest_clicked',
+          consent: 'I confirm that I am at least 18 years old and agree that Easy Lot Storage Solutions may contact me about future independent delivery opportunities. This interest form is not a job offer, contractor agreement, background check, or guarantee of access to delivery work.',
+          fields: `<label>Full name *<input name="fullName" autocomplete="name" maxlength="120" required /></label><label>Email *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label><label>Phone *<input name="phone" type="tel" autocomplete="tel" maxlength="32" required /></label><label>ZIP code or preferred delivery area *<input name="zipCode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required /></label><label class="full">Vehicle type *<select name="vehicleType" required><option value="">Choose one</option><option>Car</option><option>SUV</option><option>Van</option><option>Pickup Truck</option><option>Bicycle</option><option>Scooter</option><option>Other</option></select></label><label class="full">Delivery experience <textarea name="deliveryExperience" maxlength="700"></textarea></label><label class="full">Availability interest <textarea name="availabilityInterest" maxlength="500"></textarea></label><label class="delivery-check full"><input name="age18Confirmed" type="checkbox" required /><span>I confirm that I am at least 18 years old. *</span></label>`
+        }
+      };
+      function trackDelivery(eventName, role) {
+        postParent({ type: 'lighthouse-delivery:analytics', eventName, role });
+      }
+      function openDeliveryForm(button) {
+        const role = button.dataset.deliveryRole;
+        const config = deliveryRoleConfig[role];
+        if (!config) return;
+        deliveryState.role = role;
+        deliveryState.requestId = '';
+        deliveryState.formStartedAt = Date.now();
+        deliveryState.sourceButton = button.textContent.trim();
+        deliveryFormTitle.textContent = config.title;
+        deliveryFormFields.innerHTML = config.fields;
+        deliveryConsent.innerHTML = `<label class="delivery-check"><input name="marketingConsent" type="checkbox" required /><span>${esc(config.consent)} *</span></label>`;
+        deliveryFormStatus.textContent = '';
+        deliveryFormSubmit.textContent = config.submit;
+        deliveryFormSubmit.disabled = false;
+        deliveryForm.hidden = false;
+        trackDelivery(config.event, role);
+        if (typeof deliveryDialog.showModal === 'function') deliveryDialog.showModal();
+        else deliveryDialog.setAttribute('open', '');
+        setTimeout(() => deliveryForm.querySelector('input:not([type="hidden"])')?.focus(), 0);
+      }
+      function closeDeliveryForm() {
+        if (typeof deliveryDialog.close === 'function') deliveryDialog.close();
+        else deliveryDialog.removeAttribute('open');
+      }
       lighthousePlanActions.forEach(button => button.addEventListener('click', () => {
         lighthousePlanActions.forEach(action => { action.disabled = true; });
         lighthouseState.textContent = `Opening the secure ${button.dataset.planName} checkout…`;
@@ -1282,6 +1408,20 @@
         if (event.source !== parentWindow || event.origin !== parentOrigin) return;
         const payload = event.data || {};
         if (payload.type === 'home:data') renderDiscovery(payload.data);
+        if (payload.type === 'lighthouse-delivery:submitted') {
+          if (payload.requestId !== deliveryState.requestId) return;
+          deliveryFormStatus.textContent = payload.result?.message || 'Your early-access interest has been received.';
+          deliveryFormFields.hidden = true;
+          deliveryConsent.hidden = true;
+          deliveryFormSubmit.hidden = true;
+          trackDelivery('delivery_interest_submitted', deliveryState.role);
+        }
+        if (payload.type === 'lighthouse-delivery:error') {
+          if (payload.requestId !== deliveryState.requestId) return;
+          deliveryFormStatus.textContent = payload.message || 'The form could not be submitted. Please check the fields and try again.';
+          deliveryFormSubmit.disabled = false;
+          trackDelivery('delivery_interest_submit_failed', deliveryState.role);
+        }
         if (payload.type === 'lighthouse:access') {
           const access = payload.access || {};
           communityVideo.access = access;
@@ -1484,6 +1624,44 @@
           }
         });
       });
+      document.querySelectorAll('.delivery-interest-open').forEach(button => button.addEventListener('click', () => {
+        deliveryFormFields.hidden = false;
+        deliveryConsent.hidden = false;
+        deliveryFormSubmit.hidden = false;
+        openDeliveryForm(button);
+      }));
+      deliveryDialogClose.addEventListener('click', closeDeliveryForm);
+      deliveryDialog.addEventListener('click', event => {
+        if (event.target === deliveryDialog) closeDeliveryForm();
+      });
+      deliveryForm.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!deliveryForm.checkValidity()) {
+          deliveryForm.reportValidity();
+          deliveryFormStatus.textContent = 'Please correct the highlighted fields before submitting.';
+          return;
+        }
+        const values = Object.fromEntries(new FormData(deliveryForm).entries());
+        values.marketingConsent = deliveryForm.elements.marketingConsent?.checked === true;
+        values.age18Confirmed = deliveryForm.elements.age18Confirmed?.checked === true;
+        values.role = deliveryState.role;
+        values.formStartedAt = deliveryState.formStartedAt;
+        values.sourceSessionId = deliverySessionKey;
+        values.sourcePage = '/';
+        values.sourceButton = deliveryState.sourceButton;
+        deliveryState.requestId = requestId();
+        deliveryFormSubmit.disabled = true;
+        deliveryFormStatus.textContent = 'Submitting your early-access interest securely…';
+        postParent({ type: 'lighthouse-delivery:submit', requestId: deliveryState.requestId, input: values });
+      });
+      if ('IntersectionObserver' in window) {
+        const deliveryObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          trackDelivery('delivery_section_viewed', 'COMING_SOON');
+          deliveryObserver.disconnect();
+        }, { threshold: .35 });
+        deliveryObserver.observe(deliverySection);
+      }
       document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => {
         textInput.value = button.dataset.prompt;
         try { sessionStorage.setItem(guestDraftKey, textInput.value); } catch (error) { void error; }
