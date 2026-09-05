@@ -40,7 +40,7 @@ test('Marketplace phone is a coded, interactive six-step listing demo', () => {
   assert.match(source, /data-sale-type="Buy Now"/);
   assert.match(source, /data-sale-type="Auction"/);
   assert.match(source, /id="phone-price"[^>]*type="number"/);
-  assert.match(source, /marketplacePhone\.addEventListener\('pointerdown', stopPhoneDemo/);
+  assert.match(source, /marketplacePhone\.addEventListener\('click', stopPhoneDemo/);
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.doesNotMatch(source, /<video[^>]+marketplace-phone/i);
 });

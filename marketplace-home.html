@@ -2179,7 +2179,7 @@
           schedulePhoneDemo();
         }, phoneDemo.step === phoneScreens.length - 1 ? 3200 : 2200);
       }
-      marketplacePhone.addEventListener('pointerdown', stopPhoneDemo, { once: true });
+      marketplacePhone.addEventListener('click', stopPhoneDemo, { once: true, capture: true });
       marketplacePhone.addEventListener('keydown', stopPhoneDemo, { once: true });
       phoneTabs.forEach(tab => tab.addEventListener('click', () => renderPhoneDemo(Number(tab.dataset.phoneStep))));
       phoneBack.addEventListener('click', () => renderPhoneDemo(phoneDemo.step - 1));
