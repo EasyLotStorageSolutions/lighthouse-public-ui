@@ -385,6 +385,16 @@
           font-size: 34px;
         }
       }
+      /* Spatial Marketplace modes */
+      html{overflow-x:hidden}body{overflow-x:hidden;background:#f7f9fb}.shell{max-width:none;padding:0}.browse>header,.browse>.experience-bar,.browse>.district-bar,.browse>.paths,.browse>.question,.browse>.filters,.browse>.advanced,.browse>.summary,.browse>#grid,.browse>.need{width:min(1180px,calc(100% - 48px));margin-left:auto;margin-right:auto}.browse>header{padding-top:54px}
+      .experience-bar{position:sticky;top:0;z-index:20;padding:12px;border:1px solid rgba(17,61,106,.2);border-radius:16px;background:rgba(255,255,255,.9);box-shadow:0 12px 30px rgba(8,24,39,.09);backdrop-filter:blur(14px)}.experience-bar button{border-radius:999px}.experience-bar .sound-control{margin-left:auto}
+      .market-world{display:none;position:relative;min-height:min(780px,92vh);margin:34px auto 42px;overflow:hidden;border-radius:36px;background:radial-gradient(circle at 50% 25%,#183b57,#0a1827 42%,#050c14 78%);color:#f7fbff;box-shadow:0 35px 90px rgba(4,12,20,.3)}.market-world::after{content:"";position:absolute;inset:58% -20% -25%;background:linear-gradient(180deg,rgba(24,55,77,.15),rgba(2,7,12,.95));transform:perspective(700px) rotateX(64deg);transform-origin:center top}.market-world-sky{position:absolute;inset:0;background:radial-gradient(circle at 18% 22%,rgba(158,227,255,.13),transparent 20%),radial-gradient(circle at 76% 31%,rgba(131,230,186,.09),transparent 17%)}.market-world-heading{position:absolute;top:34px;left:50%;z-index:4;width:min(760px,86%);transform:translateX(-50%);text-align:center}.market-world-heading span{color:#9ee3ff;font:800 11px/1 Arial,sans-serif;letter-spacing:.18em}.market-world-heading h2{margin:8px 0;color:#fff;font:700 clamp(34px,4vw,54px)/1.05 Georgia,serif}.market-world-heading p{margin:0;color:rgba(231,241,250,.72)}.market-world-stage{width:min(1180px,94%);min-height:720px;margin:auto;padding:190px 24px 70px;position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;align-content:center;perspective:1200px;transition:transform .22s ease}.district{position:relative;min-width:0;min-height:190px;padding:22px;border-radius:24px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));backdrop-filter:blur(18px);box-shadow:0 30px 70px rgba(0,0,0,.32);color:#fff;text-align:left;cursor:pointer;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}.district:nth-child(2n){transform:translateY(22px)}.district:nth-child(5n){transform:translateY(-12px)}.district:hover,.district:focus-visible{transform:translateY(-10px) scale(1.035);border-color:rgba(158,227,255,.52);box-shadow:0 38px 90px rgba(0,0,0,.42)}.district[aria-pressed=true]{border-color:#9ee3ff;background:linear-gradient(145deg,rgba(105,191,248,.25),rgba(255,255,255,.05))}.district-icon{display:block;margin-bottom:18px;color:#9ee3ff;font-size:28px}.district strong{display:block;font:700 19px/1.2 Georgia,serif}.district small{display:block;margin-top:7px;color:rgba(231,241,250,.68);line-height:1.4}.district-auction{text-decoration:none}.district-transition .market-world{filter:brightness(.72) blur(2px);transform:scale(1.015)}
+      html[data-market-mode=explore] .market-world,html[data-market-mode=immersive] .market-world{display:block}html[data-market-mode=explore] .district-bar,html[data-market-mode=immersive] .district-bar{display:none}html[data-market-mode=quick] .paths{display:grid}html[data-market-mode=explore] .paths,html[data-market-mode=immersive] .paths{display:none}html[data-market-mode=immersive] .market-world{box-shadow:0 40px 120px rgba(0,0,0,.5),0 0 80px rgba(105,191,248,.13)}html[data-market-mode=immersive] body{background:#07111f}html[data-market-mode=immersive] .browse>.question,html[data-market-mode=immersive] .browse>.filters,html[data-market-mode=immersive] .browse>.advanced,html[data-market-mode=immersive] .browse>.summary,html[data-market-mode=immersive] .browse>.need{color:#eef6ff}
+      html:not([data-market-mode=quick]) .grid .card{overflow:hidden;border:1px solid rgba(17,61,106,.16);border-radius:22px;box-shadow:0 24px 55px rgba(5,20,33,.15);transition:transform .25s ease,box-shadow .25s ease}html:not([data-market-mode=quick]) .grid .card:hover{transform:translateY(-8px);box-shadow:0 32px 70px rgba(5,20,33,.22)}html:not([data-market-mode=quick]) .photo{height:240px}html:not([data-market-mode=quick]) .body{padding:22px}html:not([data-market-mode=quick]) .primary{border-radius:12px}
+      .detail{display:none}.detail.on{position:fixed;inset:0;z-index:100;display:block;overflow:auto;padding:clamp(20px,5vw,70px);background:rgba(2,7,12,.86);backdrop-filter:blur(12px)}.detail.on>.back,.detail.on>#detailBody{width:min(1120px,100%);margin-left:auto;margin-right:auto}.detail.on>.back{display:block;margin-bottom:12px;padding:12px 16px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:#fff;color:#0a2b4c;font-weight:700;cursor:pointer}.detail.on>#detailBody{padding:clamp(22px,4vw,46px);border:1px solid rgba(255,255,255,.14);border-radius:28px;background:#f7fbff;box-shadow:0 50px 140px rgba(0,0,0,.45)}body.inspection-open{overflow:hidden}.detail-grid{align-items:start}
+      @media(max-width:1000px) and (min-width:701px){.market-world-stage{grid-template-columns:repeat(3,minmax(0,1fr));padding-top:190px}.market-world{min-height:1050px}.district:nth-child(n){transform:none}}
+      @media(max-width:700px){.browse>header,.browse>.experience-bar,.browse>.district-bar,.browse>.paths,.browse>.question,.browse>.filters,.browse>.advanced,.browse>.summary,.browse>#grid,.browse>.need{width:min(100% - 28px,1180px)}.experience-bar{position:relative}.experience-bar .sound-control{margin-left:0}.market-world{min-height:520px;border-radius:24px}.market-world-heading{position:relative;top:auto;padding:30px 18px 5px}.market-world-stage{width:100%;min-height:0;padding:25px 18px 46px;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;perspective:none}.market-world-stage::-webkit-scrollbar{display:none}.district,.district:nth-child(n){position:relative;inset:auto;flex:0 0 78vw;min-height:190px;transform:none;scroll-snap-align:center}.detail.on{padding:12px}.detail.on>#detailBody{min-height:calc(100vh - 75px);border-radius:20px}.photo{height:190px!important}}
+      @media(prefers-reduced-motion:reduce){.market-world-stage,.district,.grid .card{transition:none!important}.district:hover,.grid .card:hover{transform:none!important}}
     </style>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
@@ -558,8 +568,20 @@
             can help look for a match.
           </p>
         </header>
-        <nav class="experience-bar" aria-label="Marketplace experience"><button type="button" data-market-mode="quick" aria-pressed="true">QUICK</button><button type="button" data-market-mode="explore" aria-pressed="false">EXPLORE</button><button type="button" data-market-mode="immersive" aria-pressed="false">IMMERSIVE</button><button type="button" id="marketBandwidth" aria-pressed="false">LOW BANDWIDTH</button></nav>
+        <nav class="experience-bar" aria-label="Marketplace experience"><button type="button" data-market-mode="quick" aria-pressed="true">QUICK</button><button type="button" data-market-mode="explore" aria-pressed="false">EXPLORE</button><button type="button" data-market-mode="immersive" aria-pressed="false">IMMERSIVE</button><button type="button" id="marketBandwidth" aria-pressed="false">LOW BANDWIDTH</button><button class="sound-control" type="button" id="marketSound" aria-pressed="false">SOUND OFF</button></nav>
         <nav class="district-bar" aria-label="Marketplace districts"><button type="button" data-category="" aria-pressed="true">MARKETPLACE SQUARE</button><button type="button" data-category="vehicle">MOTOR ROW</button><button type="button" data-category="equipment">EQUIPMENT YARD</button><button type="button" data-category="indoor">HOME HALL</button><button type="button" data-category="electricity">TECH HALL</button><button type="button" data-category="contractor yard">BUSINESS EXCHANGE</button><button type="button" data-category="free">FREE CORNER</button><button type="button" data-category="trade">TRADE ROW</button><button type="button" data-category="wanted">WANTED BOARD</button><a class="primary" href="/property-classifieds#auctionArea" target="_top">AUCTION HALL</a></nav>
+        <section class="market-world" aria-labelledby="marketWorldTitle"><div class="market-world-sky" aria-hidden="true"></div><div class="market-world-heading"><span>THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketWorldTitle">Choose a district.</h2><p>Every destination is a different view of the same real Marketplace inventory.</p></div><div class="market-world-stage" id="marketWorldStage">
+          <button class="district district-square" type="button" data-category="" aria-pressed="true"><span class="district-icon">◈</span><strong>Marketplace Square</strong><small>Everything in one place</small></button>
+          <button class="district district-motor" type="button" data-category="vehicle"><span class="district-icon">◉</span><strong>Motor Row</strong><small>Cars, trucks and trailers</small></button>
+          <button class="district district-equipment" type="button" data-category="equipment"><span class="district-icon">▣</span><strong>Equipment Yard</strong><small>Equipment and commercial gear</small></button>
+          <button class="district district-home" type="button" data-category="indoor"><span class="district-icon">⌂</span><strong>Home Hall</strong><small>Home and indoor listings</small></button>
+          <button class="district district-tech" type="button" data-category="electricity"><span class="district-icon">✦</span><strong>Tech Hall</strong><small>Powered and connected spaces</small></button>
+          <button class="district district-business" type="button" data-category="contractor yard"><span class="district-icon">▤</span><strong>Business Exchange</strong><small>Commercial and contractor space</small></button>
+          <button class="district district-free" type="button" data-category="free"><span class="district-icon">○</span><strong>Free Corner</strong><small>Free listings when available</small></button>
+          <button class="district district-trade" type="button" data-category="trade"><span class="district-icon">⇄</span><strong>Trade Row</strong><small>Trades when available</small></button>
+          <button class="district district-wanted" type="button" data-category="wanted"><span class="district-icon">?</span><strong>Wanted Board</strong><small>Needs posted by real people</small></button>
+          <a class="district district-auction" href="/property-classifieds#auctionArea" target="_top"><span class="district-icon">◇</span><strong>Auction House</strong><small>Public view-only Auction Hall</small></a>
+        </div></section>
         <section class="paths" aria-label="Ways to find space">
           <article class="path">
             <div class="option">Option 1</div>
@@ -641,7 +663,7 @@
           <button id="openRequest" type="button">TELL US WHAT YOU NEED</button>
         </aside>
       </section>
-      <section class="detail" id="detail">
+      <section class="detail" id="detail" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Marketplace Inspection Room">
         <button class="back" id="back">← Back to all spaces</button>
         <div id="detailBody"></div>
       </section>
@@ -666,6 +688,9 @@
       const imageUrl = (v) => (typeof v === "string" ? v : (v && v.src) || "");
       let lowBandwidth = localStorage.getItem('lighthouse-low-bandwidth') === 'true';
       let currentItems = [];
+      let marketAudioContext = null;
+      let marketSoundMode = 'off';
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const fields = {
         location: document.getElementById("location"),
         category: document.getElementById("category"),
@@ -720,15 +745,54 @@
             ? `Selected: ${button.textContent.trim()}`
             : "Tell Lighthouse Lot what you need and we’ll help shape the request.";
           parentWindow.postMessage({ type: "marketplace:filter", filters: filterValues() }, parentOrigin);
+          if (button.classList.contains('district')) {
+            document.body.classList.add('district-transition');
+            window.setTimeout(() => {
+              document.body.classList.remove('district-transition');
+              document.getElementById('available')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+            }, reducedMotion ? 0 : 420);
+            playMarketTone(330, .07);
+          }
         });
       });
       function setMarketMode(mode) {
         mode = ['quick','explore','immersive'].includes(mode) ? mode : 'quick';
+        if (reducedMotion && mode === 'immersive') mode = 'explore';
+        document.documentElement.dataset.marketMode = mode;
         document.getElementById('browse').classList.toggle('explore-mode', mode !== 'quick');
         document.querySelectorAll('[data-market-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.marketMode === mode)));
         localStorage.setItem('lighthouse-market-mode', mode);
+        localStorage.setItem('lighthouseMarketplaceExperienceMode', mode);
       }
       document.querySelectorAll('[data-market-mode]').forEach(button => button.onclick = () => setMarketMode(button.dataset.marketMode));
+      function playMarketTone(frequency = 392, duration = .08) {
+        if (marketSoundMode === 'off') return;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        marketAudioContext ||= new AudioContext();
+        const oscillator = marketAudioContext.createOscillator(), gain = marketAudioContext.createGain();
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(.0001, marketAudioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.025, marketAudioContext.currentTime + .01);
+        gain.gain.exponentialRampToValueAtTime(.0001, marketAudioContext.currentTime + duration);
+        oscillator.connect(gain).connect(marketAudioContext.destination);
+        oscillator.start(); oscillator.stop(marketAudioContext.currentTime + duration);
+      }
+      document.getElementById('marketSound').onclick = event => {
+        marketSoundMode = marketSoundMode === 'off' ? 'normal' : marketSoundMode === 'normal' ? 'immersive' : 'off';
+        event.currentTarget.textContent = marketSoundMode === 'off' ? 'SOUND OFF' : marketSoundMode === 'normal' ? 'SOUND NORMAL' : 'SOUND IMMERSIVE';
+        event.currentTarget.setAttribute('aria-pressed', String(marketSoundMode !== 'off'));
+        playMarketTone(marketSoundMode === 'immersive' ? 466 : 392, .1);
+      };
+      const worldStage = document.getElementById('marketWorldStage');
+      if (worldStage && !reducedMotion) {
+        worldStage.addEventListener('pointermove', event => {
+          if (document.documentElement.dataset.marketMode === 'quick') return;
+          const rect = worldStage.getBoundingClientRect(), x = (event.clientX - rect.left) / rect.width - .5, y = (event.clientY - rect.top) / rect.height - .5;
+          worldStage.style.transform = `rotateY(${x * 3}deg) rotateX(${y * -2}deg)`;
+        });
+        worldStage.addEventListener('pointerleave', () => { worldStage.style.transform = ''; });
+      }
       document.getElementById('marketBandwidth').onclick = event => { lowBandwidth = !lowBandwidth; localStorage.setItem('lighthouse-low-bandwidth', String(lowBandwidth)); event.currentTarget.setAttribute('aria-pressed', String(lowBandwidth)); renderListings(currentItems); };
       document.getElementById("filters").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -775,7 +839,7 @@
               ? `$${Number(item.advertisedMonthlyPrice).toLocaleString()}/month`
               : item.publicPriceText ||
                 "Contact operator for current availability and pricing";
-            return `<article class="card"><div class="photo">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}">` : "SPACE PHOTO"}</div><div class="body"><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h3>${esc(item.title || "Storage space")}</h3><div class="location">${esc(item.location || "General location available on inquiry")}</div><div class="price">${esc(price)}</div><div class="meta">${esc([item.propertyType, item.indoorOutdoor, item.dimensions].filter(Boolean).join(" • "))}</div><div class="amenities">${esc(amenities)}</div><button class="primary" data-ref="${esc(item.slug || item.id)}">VIEW SPACE</button></div></article>`;
+            return `<article class="card world-listing-card"><div class="photo listing-media">${img ? `<img src="${esc(img)}" alt="${esc(item.title)}" loading="lazy">` : "LISTING PHOTO"}</div><div class="body listing-info"><span class="badge ${item.operated ? "" : "independent"}">${esc(item.badge)}</span><h3>${esc(item.title || "Marketplace listing")}</h3><div class="location">${esc(item.location || "General location available on inquiry")}</div><div class="price">${esc(price)}</div><div class="meta">${esc([item.propertyType, item.indoorOutdoor, item.dimensions].filter(Boolean).join(" • "))}</div><div class="amenities">${esc(amenities)}</div><button class="primary" data-ref="${esc(item.slug || item.id)}">INSPECT LISTING</button></div></article>`;
           })
           .join("");
         grid
@@ -801,12 +865,15 @@
             .join(""),
         );
       }
-      setMarketMode(new URLSearchParams(location.search).get('mode') || localStorage.getItem('lighthouse-market-mode') || 'quick');
+      setMarketMode(new URLSearchParams(location.search).get('mode') || localStorage.getItem('lighthouseMarketplaceExperienceMode') || localStorage.getItem('lighthouse-market-mode') || 'quick');
       document.getElementById('marketBandwidth').setAttribute('aria-pressed', String(lowBandwidth));
       function renderDetail(item) {
         if (!item) return;
         document.getElementById("browse").classList.add("off");
         document.getElementById("detail").classList.add("on");
+        document.getElementById("detail").setAttribute('aria-hidden', 'false');
+        document.body.classList.add('inspection-open');
+        playMarketTone(523, .1);
         const img = imageUrl(item.primaryImage);
         const price = item.advertisedMonthlyPrice
           ? `$${Number(item.advertisedMonthlyPrice).toLocaleString()}/month`
@@ -828,9 +895,12 @@
       }
       back.onclick = () => {
         detail.classList.remove("on");
+        detail.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('inspection-open');
         browse.classList.remove("off");
         window.scrollTo(0, 0);
       };
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && detail.classList.contains('on')) back.click(); });
       let readyTimer = setInterval(
         () => parentWindow.postMessage({ type: "marketplace:ready" }, parentOrigin),
         750,
