@@ -502,6 +502,14 @@
       .studio-demo-cta { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:18px; padding:18px; border-radius:5px; background:#eaf2fd; }
       .studio-demo-cta p { margin:0; color:var(--easy-navy); font:700 13px/1.5 Arial,sans-serif; }
       .auction-home { position:relative; overflow:hidden; padding:64px 0; border-block:1px solid rgba(17,61,106,.3); background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(214,230,254,.82)); }
+      .marketplace-showcase { padding:64px 0; background:linear-gradient(180deg,#082b4c,#113d6a); color:#fff; }
+      .marketplace-showcase h2,.marketplace-showcase h3,.marketplace-showcase p { color:#fff; }
+      .marketplace-showcase .eyebrow { color:#d9b56f; }
+      .marketplace-entry-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:28px; }
+      .marketplace-entry { display:flex; min-height:230px; flex-direction:column; padding:24px; border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.07); }
+      .marketplace-entry h3 { margin:0 0 10px; font-size:25px; }
+      .marketplace-entry p { flex:1; margin:0 0 18px; opacity:.88; }
+      .marketplace-entry .button { align-self:flex-start; background:#fff; color:#082b4c; }
       .auction-home::after { content:"A"; position:absolute; right:-16px; bottom:-92px; color:rgba(17,61,106,.045); font:400 270px/1 'Playfair Display',Georgia,serif; pointer-events:none; }
       .auction-home-grid { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.12fr) minmax(310px,.88fr); gap:52px; align-items:center; }
       .auction-home h2 { margin:8px 0 18px; }
@@ -557,9 +565,10 @@
       .delivery-gate-list li { margin:6px 0; font:13px/1.45 Arial,sans-serif; }
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
       @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}}
-      @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}}
+      @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}.marketplace-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
       @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout,.studio-demo-head{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.studio-public-demo{padding:20px 15px}.studio-demo-workspace{grid-template-columns:1fr}.studio-demo-library{display:none}.studio-demo-main{padding:12px}.studio-demo-offers{grid-template-columns:1fr 1fr}.studio-demo-cta{align-items:stretch;flex-direction:column}.studio-demo-cta .button{width:100%}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home-panel{padding:22px 18px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
       @media(max-width:430px){.studio-demo-offers{grid-template-columns:1fr}.studio-demo-type{flex:1}.studio-demo-preview strong{font-size:24px}.studio-demo-tools{display:grid;grid-template-columns:1fr 1fr}.studio-demo-tool{width:100%}}
+      @media(max-width:760px){.marketplace-entry-grid{grid-template-columns:1fr}.marketplace-entry{min-height:0}}
       .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
       .ai-turn { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 11px; align-items: start; }
       .ai-turn.user { grid-template-columns: minmax(0,1fr) 34px; padding-left: 54px; }
@@ -645,6 +654,14 @@
           </div>
           <div class="grid journey-grid"><article class="card"><h3>Find Space</h3><p>Vehicles, fleets, equipment, contractor yards, containers, and indoor or outdoor space.</p><a class="button" href="/find-storage">FIND SPACE</a></article><article class="card"><h3>List Space</h3><p>Offer an unused lot, yard, parking area, warehouse, acreage, or other usable property.</p><a class="button" href="/copy-of-find-storage">LIST SPACE</a></article><article class="card"><h3>Lighthouse AI</h3><p>AI help for websites, projects, files, research, and everyday business work.</p><a class="button" href="#assistant">MEET LIGHTHOUSE</a></article></div>
         </div>
+      </section>
+      <section class="marketplace-showcase" id="marketplace-showcase" aria-labelledby="marketplace-showcase-title">
+        <div class="container"><div class="eyebrow">LIGHTHOUSE MARKETPLACE</div><h2 id="marketplace-showcase-title">Choose how you want to explore.</h2><p>Start with a familiar list, step into visual districts, or enter the view-only Auction Hall. Every visible result comes from reviewed marketplace records.</p><div class="marketplace-entry-grid">
+          <article class="marketplace-entry"><h3>Sell Something</h3><p>Start the existing reviewed listing path. Nothing is published automatically.</p><a class="button" href="/copy-of-find-storage">START A LISTING</a></article>
+          <article class="marketplace-entry"><h3>Explore Marketplace</h3><p>Move through visual districts built as lightweight views over real inventory.</p><a class="button" href="/find-storage?mode=explore">EXPLORE</a></article>
+          <article class="marketplace-entry"><h3>Quick Browse</h3><p>Use the fast, accessible grid and filters with no immersive assets required.</p><a class="button" href="/find-storage?mode=quick">BROWSE NOW</a></article>
+          <article class="marketplace-entry"><h3>Auction Hall</h3><p>Watch countdowns and inspect reviewed lots. Public access is strictly view-only.</p><a class="button" href="/property-classifieds#auctionArea">ENTER VIEW-ONLY HALL</a></article>
+        </div></div>
       </section>
       <section class="section" id="assistant">
         <div class="container">
@@ -738,14 +755,14 @@
         <div class="container auction-home-grid">
           <div>
             <div class="eyebrow">Lighthouse Marketplace</div>
-            <h2 id="auction-home-title">A fairer way to buy and sell by auction.</h2>
-            <p class="auction-home-copy">Explore reviewed auctions for property, vehicles, equipment, goods, and storage contents—or submit something you own for review. The rules and current bid are shown clearly before you take part.</p>
-            <div class="actions"><a class="button" href="/property-classifieds">EXPLORE AUCTIONS</a><a class="button secondary" href="/property-classifieds">SUBMIT AN AUCTION</a></div>
-            <p class="auction-home-note">Lighthouse does not hold auction money or take a percentage of the sale. Jobs, labor, services, delivery, and rides are not auction items.</p>
+            <h2 id="auction-home-title">A fairer way to experience auctions.</h2>
+            <p class="auction-home-copy">Explore reviewed auctions for property, vehicles, equipment, goods, and storage contents. See real current-bid and countdown information when it exists, and inspect lots without entering a transaction.</p>
+            <div class="actions"><a class="button" href="/property-classifieds#auctionArea">ENTER THE VIEW-ONLY HALL</a></div>
+            <p class="auction-home-note">Public auction access is view-only. Bidding, offers, payments, and contract formation are unavailable. Jobs, labor, services, delivery, and rides are not auction items.</p>
           </div>
           <aside class="auction-home-panel" aria-label="How Lighthouse auctions work">
-            <h3>Clear from the first bid.</h3>
-            <ul class="auction-home-points"><li>Listings are reviewed before they go live</li><li>Bid rules and closing time stay visible</li><li>Buyer and seller arrange payment directly after a valid close</li></ul>
+            <h3>Clear from the first look.</h3>
+            <ul class="auction-home-points"><li>Listings are reviewed before they go live</li><li>Countdown and recorded activity stay visible</li><li>No public transaction control is shown or accepted</li></ul>
           </aside>
         </div>
       </section>

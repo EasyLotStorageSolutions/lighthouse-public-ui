@@ -128,16 +128,39 @@
         padding: 20px;
         background: var(--wash);
       }
+      .auction-hall { position:relative; overflow:hidden; margin-top:54px; padding:42px 24px; border:1px solid var(--line); background:radial-gradient(circle at 50% -10%,rgba(255,255,255,.9),rgba(214,230,254,.45) 48%,rgba(17,61,106,.08)); }
+      .auction-hall::before { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(90deg,transparent 0 72px,rgba(17,61,106,.035) 73px); }
+      .auction-hall > * { position:relative; z-index:1; }
+      .mode-bar,.districts,.auction-actions { display:flex; flex-wrap:wrap; gap:9px; margin:18px 0; }
+      .mode-bar button[aria-pressed="true"],.districts button[aria-pressed="true"] { background:var(--blue); color:#fff; }
+      .view-lock { display:flex; gap:12px; align-items:flex-start; margin:20px 0; padding:16px; border:2px solid var(--blue); background:rgba(255,255,255,.72); }
+      .view-lock strong { display:block; color:var(--blue); }
+      .auction-card { min-height:300px; display:flex; flex-direction:column; transition:transform .2s ease,box-shadow .2s ease; }
+      .auction-card.ending { border-color:#9c5d00; box-shadow:0 0 0 2px rgba(189,141,58,.2); }
+      .auction-card img { width:100%; aspect-ratio:16/9; object-fit:cover; margin-bottom:14px; background:#c7d8ea; }
+      .auction-card .primary { margin-top:auto; }
+      .countdown { font:700 13px/1.4 Arial,sans-serif; letter-spacing:.06em; color:var(--blue); }
+      .immersive .auction-card { transform:perspective(900px) rotateX(1deg); box-shadow:0 18px 38px -30px #082b4c; }
+      .immersive #auctionGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .inspection-media { display:grid; grid-template-columns:2fr 1fr; gap:12px; margin:18px 0; }
+      .inspection-media img { width:100%; aspect-ratio:16/10; object-fit:contain; background:rgba(17,61,106,.08); }
+      .thumbs { display:grid; gap:8px; max-height:420px; overflow:auto; }
+      .thumbs button { padding:0; }
+      .thumbs img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+      .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
       @media (max-width: 760px) {
         main {
           padding: 36px 16px;
         }
         .filters,
         .grid,
-        .two {
+        .two,
+        .immersive #auctionGrid,
+        .inspection-media {
           grid-template-columns: 1fr;
         }
       }
+      @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } .immersive .auction-card { transform:none; } }
     </style>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap");
@@ -346,52 +369,24 @@
           ><button class="primary">SEND INQUIRY</button>
         </form>
       </section>
-      <section id="auctionArea" hidden style="margin-top:54px;border-top:1px solid var(--line);padding-top:42px">
+      <section id="auctionArea" class="auction-hall" hidden aria-labelledby="auctionHallTitle">
         <div class="eyebrow">LIGHTHOUSE MARKETPLACE AUCTIONS</div>
-        <h2>Offer it fairly. Bid with clarity.</h2>
-        <p class="lead">Reviewed auctions for property, vehicles, equipment, goods, and storage contents. Lighthouse records the auction and connects the participants—it does not hold the purchase money or take a percentage of the sale.</p>
+        <h2 id="auctionHallTitle">Enter the Auction Hall.</h2>
+        <p class="lead">Browse and inspect reviewed lots in a visual, spectator-friendly hall. Every visible lot comes from the real MarketplaceAuctions collection.</p>
+        <div class="view-lock" role="status"><span aria-hidden="true">◉</span><div><strong>PUBLIC AUCTION — VIEW ONLY</strong>No bidding, offers, payments, contract formation, or closing actions are available here.</div></div>
+        <div class="mode-bar" aria-label="Auction viewing mode"><button type="button" data-mode="quick" aria-pressed="true">QUICK</button><button type="button" data-mode="explore" aria-pressed="false">EXPLORE</button><button type="button" data-mode="immersive" aria-pressed="false">IMMERSIVE</button><button id="soundToggle" type="button" aria-pressed="false">SOUND OFF</button><button id="bandwidthToggle" type="button" aria-pressed="false">LOW BANDWIDTH</button></div>
+        <div class="districts" aria-label="Auction hall districts"><button type="button" data-district="" aria-pressed="true">ALL LOTS</button><button type="button" data-district="PROPERTY" aria-pressed="false">MARKETPLACE SQUARE</button><button type="button" data-district="VEHICLE" aria-pressed="false">MOTOR ROW</button><button type="button" data-district="EQUIPMENT" aria-pressed="false">EQUIPMENT YARD</button><button type="button" data-district="GOODS" aria-pressed="false">HOME &amp; TECH HALL</button><button type="button" data-district="STORAGE_CONTENTS" aria-pressed="false">AUCTION HALL</button></div>
         <div id="auctionStatus" class="status">Checking auction availability…</div>
         <form id="auctionFilters" class="filters" hidden>
           <select id="auctionSubject"><option value="">All auction types</option><option value="PROPERTY">Property</option><option value="VEHICLE">Vehicles</option><option value="EQUIPMENT">Equipment</option><option value="GOODS">Goods</option><option value="STORAGE_CONTENTS">Storage contents</option></select>
           <input id="auctionLocation" placeholder="City, county, or ZIP" />
           <select id="auctionState"><option value="">All stages</option><option value="LIVE">Live now</option><option value="SCHEDULED">Coming soon</option><option value="ENDED">Ended</option></select>
           <button class="primary">FIND AUCTIONS</button>
-          <button id="auctionAccountButton" type="button">MY AUCTIONS &amp; BIDS</button>
         </form>
-        <div id="auctionGrid" class="grid"></div>
+        <div id="auctionGrid" class="grid" aria-live="polite"></div>
         <section id="auctionDetail" class="details form">
           <button id="auctionBack" type="button">BACK TO AUCTIONS</button>
           <div id="auctionDetailBody"></div>
-          <form id="bidForm" hidden>
-            <h3>Place your bid</h3>
-            <label>Your bid in dollars<input id="bidAmount" type="number" min="0" step="0.01" required /></label>
-            <div class="checks"><label><input id="bidTerms" type="checkbox" required /> I understand this bid is an offer to purchase, the seller cannot bid, Lighthouse does not hold funds, and closing happens outside Lighthouse after seller confirmation.</label></div>
-            <button class="primary">PLACE BID</button>
-          </form>
-        </section>
-        <section id="auctionSubmission" class="form" hidden>
-          <h2>Submit an auction for review</h2>
-          <p>Nothing is published automatically. Ownership, safety, prohibited-item, and legal review must pass first.</p>
-          <form id="auctionForm">
-            <div class="two">
-              <label>Title<input id="auctionTitle" minlength="5" required /></label>
-              <label>Type<select id="auctionType" required><option value="">Choose one</option><option value="PROPERTY">Property</option><option value="VEHICLE">Vehicle</option><option value="EQUIPMENT">Equipment</option><option value="GOODS">Goods</option><option value="STORAGE_CONTENTS">Storage contents</option></select></label>
-              <label>Public location<input id="auctionPublicLocation" placeholder="City, state, or county only" /></label>
-              <label>Opening bid ($)<input id="auctionOpening" type="number" min="0" step="0.01" required /></label>
-              <label>Private reserve ($)<input id="auctionReserve" type="number" min="0" step="0.01" /></label>
-              <label>Minimum increase ($)<input id="auctionIncrement" type="number" min="0.01" step="0.01" value="5.00" required /></label>
-              <label>Starts<input id="auctionStarts" type="datetime-local" required /></label>
-              <label>Ends<input id="auctionEnds" type="datetime-local" required /></label>
-            </div>
-            <label>Description<textarea id="auctionDescription" minlength="30" required></textarea></label>
-            <label>Condition and known issues<textarea id="auctionCondition"></textarea></label>
-            <label>Pickup or transfer terms<textarea id="auctionTransfer"></textarea></label>
-            <div class="checks">
-              <label><input id="auctionOwnership" type="checkbox" required /> I own this property/item or am legally authorized to offer it.</label>
-              <label><input id="auctionTerms" type="checkbox" required /> I accept the Lighthouse Auction Terms and truthful-listing requirements.</label>
-            </div>
-            <button class="primary">SUBMIT AUCTION FOR REVIEW</button>
-          </form>
         </section>
       </section>
     </main>
@@ -559,56 +554,63 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
         const grid = document.getElementById('auctionGrid');
         const detail = document.getElementById('auctionDetail');
         const detailBody = document.getElementById('auctionDetailBody');
-        const bidForm = document.getElementById('bidForm');
-        const submission = document.getElementById('auctionSubmission');
         const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
         const money = cents => cents === null || cents === undefined ? 'No bids yet' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents) / 100);
-        const cents = value => Math.round(Number(value || 0) * 100);
+        const safeUrl = value => { try { const url = new URL(String(value || ''), location.href); return ['https:','http:'].includes(url.protocol) ? url.href : ''; } catch { return ''; } };
         let selected = null;
-        let biddingEnabled = false;
-        let submissionsEnabled = false;
-        const accountButton = document.getElementById('auctionAccountButton');
+        let lots = [];
+        let timer = null;
+        let audio = null;
+        let lowBandwidth = localStorage.getItem('lighthouse-low-bandwidth') === 'true';
+        const storedMode = localStorage.getItem('lighthouse-auction-mode') || 'quick';
+        const remaining = item => Math.max(0, new Date(item.endsAt).getTime() - Date.now());
+        const duration = ms => {
+          if (ms <= 0) return 'Closed';
+          const seconds = Math.floor(ms / 1000), days = Math.floor(seconds / 86400), hours = Math.floor(seconds % 86400 / 3600), minutes = Math.floor(seconds % 3600 / 60);
+          return days ? `${days}d ${hours}h` : hours ? `${hours}h ${minutes}m` : `${minutes}m ${seconds % 60}s`;
+        };
+        function imageOf(item) {
+          const value = item.primaryImage && (item.primaryImage.src || item.primaryImage.url || item.primaryImage);
+          return lowBandwidth ? '' : safeUrl(value);
+        }
         function cards(items) {
-          grid.innerHTML = items.length ? items.map(item => `<article class="card"><div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'Location supplied after participant routing')}</p><div class="price">${money(item.currentBidCents ?? item.openingBidCents)}</div><p>${esc(item.bidCount)} bid${item.bidCount === 1 ? '' : 's'} • Reserve ${esc(item.reserveStatus.toLowerCase().replaceAll('_', ' '))}</p><button class="primary" data-auction="${esc(item.id)}">VIEW AUCTION</button></article>`).join('') : '<div class="status">No reviewed auctions match these filters yet.</div>';
+          lots = items;
+          grid.innerHTML = items.length ? items.map(item => { const image = imageOf(item); const ms = remaining(item); return `<article class="card auction-card ${ms > 0 && ms < 3600000 ? 'ending' : ''}" data-lot="${esc(item.id)}">${image ? `<img src="${esc(image)}" alt="${esc(item.title)}" loading="lazy" />` : ''}<div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'Approximate location not supplied')}</p><div class="price">${money(item.currentBidCents ?? item.openingBidCents)}</div><p>${esc(item.bidCount)} recorded bid${item.bidCount === 1 ? '' : 's'} • Reserve ${esc(item.reserveStatus.toLowerCase().replaceAll('_', ' '))}</p><p class="countdown" data-ends="${esc(new Date(item.endsAt).toISOString())}">${esc(duration(ms))}</p><button class="primary" data-auction="${esc(item.id)}">INSPECT LOT</button></article>`; }).join('') : '<div class="status">No reviewed auction records match these filters yet. No activity has been invented.</div>';
           grid.querySelectorAll('[data-auction]').forEach(button => button.onclick = () => p.postMessage({ type: 'auctions:detail', reference: button.dataset.auction }, parentOrigin));
+          startCountdowns();
+        }
+        function startCountdowns() {
+          clearInterval(timer);
+          const update = () => grid.querySelectorAll('[data-ends]').forEach(node => node.textContent = duration(Math.max(0, new Date(node.dataset.ends).getTime() - Date.now())));
+          update(); timer = setInterval(update, 1000);
+        }
+        function setMode(mode) {
+          const allowed = ['quick','explore','immersive'];
+          mode = allowed.includes(mode) ? mode : 'quick';
+          area.classList.toggle('immersive', mode === 'immersive');
+          document.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
+          localStorage.setItem('lighthouse-auction-mode', mode);
+          if (mode !== 'quick') requestAnimationFrame(() => area.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start' }));
         }
         filters.onsubmit = event => {
           event.preventDefault();
           p.postMessage({ type: 'auctions:search', filters: { subjectType: document.getElementById('auctionSubject').value, location: document.getElementById('auctionLocation').value, status: document.getElementById('auctionState').value } }, parentOrigin);
         };
-        accountButton.onclick = () => {
-          status.hidden = false;
-          status.textContent = 'Loading your private auction activity…';
-          p.postMessage({ type: 'auctions:mine' }, parentOrigin);
+        document.getElementById('auctionBack').onclick = () => { detail.classList.remove('on'); grid.hidden = false; filters.hidden = false; };
+        document.querySelectorAll('[data-mode]').forEach(button => button.onclick = () => setMode(button.dataset.mode));
+        document.querySelectorAll('[data-district]').forEach(button => button.onclick = () => {
+          document.querySelectorAll('[data-district]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          document.getElementById('auctionSubject').value = button.dataset.district;
+          p.postMessage({ type: 'auctions:search', filters: { subjectType: button.dataset.district } }, parentOrigin);
+        });
+        document.getElementById('bandwidthToggle').onclick = event => {
+          lowBandwidth = !lowBandwidth; localStorage.setItem('lighthouse-low-bandwidth', String(lowBandwidth));
+          event.currentTarget.setAttribute('aria-pressed', String(lowBandwidth)); cards(lots);
         };
-        document.getElementById('auctionBack').onclick = () => { detail.classList.remove('on'); grid.hidden = false; filters.hidden = false; submission.hidden = !submissionsEnabled; };
-        bidForm.onsubmit = event => {
-          event.preventDefault();
-          if (!selected) return;
-          p.postMessage({ type: 'auctions:bid', input: { auctionId: selected.id, amountCents: cents(document.getElementById('bidAmount').value), termsAccepted: document.getElementById('bidTerms').checked, termsVersion: 'auction-terms-v1', idempotencyKey: globalThis.crypto?.randomUUID?.() || `bid-${Date.now()}` } }, parentOrigin);
-          status.hidden = false;
-          status.textContent = 'Recording your bid securely…';
-        };
-        document.getElementById('auctionForm').onsubmit = event => {
-          event.preventDefault();
-          p.postMessage({ type: 'auctions:submit', input: {
-            title: document.getElementById('auctionTitle').value,
-            subjectType: document.getElementById('auctionType').value,
-            publicLocation: document.getElementById('auctionPublicLocation').value,
-            openingBidCents: cents(document.getElementById('auctionOpening').value),
-            reservePriceCents: cents(document.getElementById('auctionReserve').value),
-            minimumIncrementCents: cents(document.getElementById('auctionIncrement').value),
-            startsAt: document.getElementById('auctionStarts').value,
-            endsAt: document.getElementById('auctionEnds').value,
-            description: document.getElementById('auctionDescription').value,
-            conditionSummary: document.getElementById('auctionCondition').value,
-            pickupOrTransferTerms: document.getElementById('auctionTransfer').value,
-            ownershipCertified: document.getElementById('auctionOwnership').checked,
-            termsAccepted: document.getElementById('auctionTerms').checked,
-            termsVersion: 'auction-terms-v1'
-          } }, parentOrigin);
-          status.hidden = false;
-          status.textContent = 'Submitting for private owner review…';
+        document.getElementById('soundToggle').onclick = event => {
+          const enabled = event.currentTarget.getAttribute('aria-pressed') !== 'true';
+          event.currentTarget.setAttribute('aria-pressed', String(enabled)); event.currentTarget.textContent = enabled ? 'SOUND ON' : 'SOUND OFF';
+          if (enabled) { audio ||= new (window.AudioContext || window.webkitAudioContext)(); const oscillator = audio.createOscillator(), gain = audio.createGain(); oscillator.frequency.value = 392; gain.gain.setValueAtTime(.025, audio.currentTime); gain.gain.exponentialRampToValueAtTime(.0001, audio.currentTime + .18); oscillator.connect(gain).connect(audio.destination); oscillator.start(); oscillator.stop(audio.currentTime + .18); }
         };
         window.addEventListener('message', event => {
           if (event.source !== window.parent || event.origin !== parentOrigin) return;
@@ -617,67 +619,25 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
           if (message.type === 'auctions:list') {
             area.hidden = false;
             filters.hidden = false;
-            submission.hidden = message.submissionsEnabled !== true;
-            submissionsEnabled = message.submissionsEnabled === true;
-            biddingEnabled = message.biddingEnabled === true;
             status.hidden = true;
             cards(message.items || []);
           }
           if (message.type === 'auctions:item' && message.item) {
             selected = message.item;
-            detailBody.innerHTML = `<div class="eyebrow">${esc(selected.status.replaceAll('_', ' '))}</div><h2>${esc(selected.title)}</h2><div class="price">${money(selected.currentBidCents ?? selected.openingBidCents)}</div><p>${esc(selected.publicLocation)} • ${esc(selected.subjectType.replaceAll('_', ' '))}</p><p>${esc(selected.description)}</p><p><strong>Minimum next bid:</strong> ${money((selected.currentBidCents ?? (selected.openingBidCents - selected.minimumIncrementCents)) + selected.minimumIncrementCents)}</p><div class="notice">${esc(selected.disclosure)}</div>`;
-            bidForm.hidden = !(biddingEnabled && selected.status === 'LIVE');
+            const media = [selected.primaryImage, ...(selected.photos || [])].map(value => value && (value.src || value.url || value)).map(safeUrl).filter(Boolean);
+            const trust = selected.sellerDisplayName || selected.sellerTrustLabel ? `<div class="notice"><strong>Seller information supplied with this record</strong><br>${esc(selected.sellerDisplayName || '')}${selected.sellerTrustLabel ? ` • ${esc(selected.sellerTrustLabel)}` : ''}</div>` : '';
+            detailBody.innerHTML = `<div class="eyebrow">SPECTATOR INSPECTION • ${esc(selected.status.replaceAll('_', ' '))}</div><h2>${esc(selected.title)}</h2>${media.length && !lowBandwidth ? `<div class="inspection-media"><img id="inspectionMain" src="${esc(media[0])}" alt="${esc(selected.title)}" /><div class="thumbs">${media.map((src,index) => `<button type="button" data-photo="${esc(src)}" aria-label="View photo ${index + 1}"><img src="${esc(src)}" alt="" loading="lazy" /></button>`).join('')}</div></div>` : ''}<div class="price">${money(selected.currentBidCents ?? selected.openingBidCents)}</div><p>${esc(selected.publicLocation || 'Approximate location not supplied')} • ${esc(selected.subjectType.replaceAll('_', ' '))}</p><p>${esc(selected.description)}</p>${selected.conditionSummary ? `<h3>Condition &amp; known issues</h3><p>${esc(selected.conditionSummary)}</p>` : ''}${selected.pickupOrTransferTerms ? `<h3>Inspection / transfer notes</h3><p>${esc(selected.pickupOrTransferTerms)}</p>` : ''}${trust}<div class="notice"><strong>VIEW ONLY</strong><br>${esc(selected.disclosure)}</div><div class="auction-actions"><button type="button" id="watchLot">WATCH ON THIS DEVICE</button><button type="button" id="shareLot">SHARE LOT</button></div>`;
+            detailBody.querySelectorAll('[data-photo]').forEach(button => button.onclick = () => { const main = document.getElementById('inspectionMain'); if (main) main.src = button.dataset.photo; });
+            document.getElementById('watchLot').onclick = event => { const saved = new Set(JSON.parse(localStorage.getItem('lighthouse-watched-lots') || '[]')); saved.add(selected.id); localStorage.setItem('lighthouse-watched-lots', JSON.stringify([...saved])); event.currentTarget.textContent = 'WATCHING'; };
+            document.getElementById('shareLot').onclick = async () => { const url = `${location.origin}${location.pathname}?auction=${encodeURIComponent(selected.id)}#auctionArea`; if (navigator.share) await navigator.share({ title:selected.title, url }); else { await navigator.clipboard.writeText(url); status.hidden = false; status.textContent = 'Auction link copied.'; } };
             grid.hidden = true;
             filters.hidden = true;
             detail.classList.add('on');
-          }
-          if (message.type === 'auctions:account') {
-            status.hidden = true;
-            grid.hidden = true;
-            filters.hidden = true;
-            submission.hidden = true;
-            selected = null;
-            bidForm.hidden = true;
-            if (message.signedIn !== true) {
-              detailBody.innerHTML = '<h2>Sign in to manage your auctions</h2><p>Your submissions, bids, results, and seller confirmations are private member information.</p><p><a class="primary" href="/customer-portal" target="_top">SIGN IN TO LIGHTHOUSE</a></p>';
-            } else {
-              const activity = message.activity || { selling: [], bids: [] };
-              const selling = (activity.selling || []).map(item => `<article class="card"><div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'No public location')}</p><p>${esc(item.bidCount)} bid${item.bidCount === 1 ? '' : 's'} • Current ${money(item.currentBidCents)}</p>${item.sellerConfirmationRequired ? `<div class="notice">The auction ended with an eligible offer. Review the result, then confirm or decline it. Lighthouse does not create or hold payment.</div><div class="actions"><button class="primary" data-confirm="accept" data-auction-id="${esc(item.id)}">CONFIRM OUTCOME</button><button data-confirm="decline" data-auction-id="${esc(item.id)}">DECLINE OUTCOME</button></div>` : ''}${item.closingConfirmationRequired ? `<div class="notice">After you and the buyer complete the private handoff and payment outside Lighthouse, record whether closing completed.</div><div class="actions"><button class="primary" data-closing="complete" data-auction-id="${esc(item.id)}">HANDOFF COMPLETED</button><button data-closing="issue" data-auction-id="${esc(item.id)}">REPORT A CLOSING ISSUE</button></div>` : ''}</article>`).join('') || '<p>You have not submitted an auction yet.</p>';
-              const bids = (activity.bids || []).map(item => `<article class="card"><div class="eyebrow">${esc(item.auctionStatus.replaceAll('_', ' '))}</div><h3>${esc(item.auctionTitle)}</h3><p>Your bid: ${money(item.amountCents)}</p><p>${item.winning ? 'Winning bid after close' : item.leading ? 'Currently leading' : 'Recorded bid'}</p>${item.closingConfirmationRequired ? `<div class="notice">After you and the seller complete the private handoff and payment outside Lighthouse, record whether closing completed.</div><div class="actions"><button class="primary" data-closing="complete" data-auction-id="${esc(item.auctionId)}">HANDOFF COMPLETED</button><button data-closing="issue" data-auction-id="${esc(item.auctionId)}">REPORT A CLOSING ISSUE</button></div>` : ''}</article>`).join('') || '<p>You have not placed a bid yet.</p>';
-              detailBody.innerHTML = `<h2>Your auction activity</h2><h3>Selling</h3><div class="grid">${selling}</div><h3 style="margin-top:30px">Bidding</h3><div class="grid">${bids}</div>`;
-              detailBody.querySelectorAll('[data-confirm]').forEach(button => button.onclick = () => {
-                status.hidden = false;
-                status.textContent = 'Recording your decision…';
-                p.postMessage({ type: 'auctions:confirm', auctionId: button.dataset.auctionId, accepted: button.dataset.confirm === 'accept' }, parentOrigin);
-              });
-              detailBody.querySelectorAll('[data-closing]').forEach(button => button.onclick = () => {
-                status.hidden = false;
-                status.textContent = 'Recording the private closing update…';
-                p.postMessage({ type: 'auctions:closing', auctionId: button.dataset.auctionId, completed: button.dataset.closing === 'complete' }, parentOrigin);
-              });
-            }
-            detail.classList.add('on');
-          }
-          if (message.type === 'auctions:confirmed') {
-            status.hidden = false;
-            status.textContent = `Auction result updated: ${message.result?.status || 'recorded'}. No payment was created.`;
-            p.postMessage({ type: 'auctions:mine' }, parentOrigin);
-          }
-          if (message.type === 'auctions:closingRecorded') {
-            status.hidden = false;
-            status.textContent = `Private closing update recorded: ${message.result?.status || 'recorded'}. Lighthouse did not create or hold payment.`;
-            p.postMessage({ type: 'auctions:mine' }, parentOrigin);
           }
           if (message.type === 'auctions:notice') { area.hidden = false; status.hidden = false; status.textContent = message.message; }
-          if (message.type === 'auctions:bidResult') {
-            status.hidden = false;
-            status.textContent = message.result?.leading ? 'Bid recorded — you are currently leading.' : 'Bid recorded. Another valid bid is currently leading.';
-            if (message.result?.auction) {
-              selected = message.result.auction;
-              p.postMessage({ type: 'auctions:detail', reference: selected.id }, parentOrigin);
-            }
-          }
         });
+        setMode(storedMode);
+        document.getElementById('bandwidthToggle').setAttribute('aria-pressed', String(lowBandwidth));
         p.postMessage({ type: 'auctions:ready' }, parentOrigin);
       })();
     </script>

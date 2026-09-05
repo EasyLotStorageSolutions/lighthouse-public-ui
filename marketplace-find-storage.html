@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="https://www.easylotstoragesolutions.com/" />
     <style>
       :root {
         --blue: #113d6a;
@@ -54,6 +55,11 @@
         margin: 0 0 28px;
       }
       .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0 34px; }
+      .experience-bar,.district-bar { display:flex; flex-wrap:wrap; gap:9px; margin:18px 0; }
+      .experience-bar button,.district-bar button { min-height:42px; padding:9px 14px; border:1px solid var(--blue); background:#fff; color:var(--blue); font-weight:700; cursor:pointer; }
+      .experience-bar button[aria-pressed="true"],.district-bar button[aria-pressed="true"] { background:var(--blue); color:#fff; }
+      .explore-mode { padding:28px; border:1px solid var(--blue); background:radial-gradient(circle at 50% 0,rgba(255,255,255,.9),rgba(214,230,254,.55)); }
+      .explore-mode .card { transform:perspective(850px) rotateX(1deg); }
       .path { padding: 22px; border: 1px solid var(--blue); background: rgba(255,255,255,.42); }
       .path .option { color: var(--blue); font: 700 10px/1.2 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
       .path h2 { margin: 8px 0 8px; color: var(--blue); font: italic 500 30px/1.15 "Playfair Display", Georgia, serif; }
@@ -552,6 +558,8 @@
             can help look for a match.
           </p>
         </header>
+        <nav class="experience-bar" aria-label="Marketplace experience"><button type="button" data-market-mode="quick" aria-pressed="true">QUICK</button><button type="button" data-market-mode="explore" aria-pressed="false">EXPLORE</button><button type="button" data-market-mode="immersive" aria-pressed="false">IMMERSIVE</button><button type="button" id="marketBandwidth" aria-pressed="false">LOW BANDWIDTH</button></nav>
+        <nav class="district-bar" aria-label="Marketplace districts"><button type="button" data-category="" aria-pressed="true">MARKETPLACE SQUARE</button><button type="button" data-category="vehicle">MOTOR ROW</button><button type="button" data-category="equipment">EQUIPMENT YARD</button><button type="button" data-category="indoor">HOME HALL</button><button type="button" data-category="electricity">TECH HALL</button><button type="button" data-category="contractor yard">BUSINESS EXCHANGE</button><button type="button" data-category="free">FREE CORNER</button><button type="button" data-category="trade">TRADE ROW</button><button type="button" data-category="wanted">WANTED BOARD</button><a class="primary" href="/property-classifieds#auctionArea" target="_top">AUCTION HALL</a></nav>
         <section class="paths" aria-label="Ways to find space">
           <article class="path">
             <div class="option">Option 1</div>
@@ -656,6 +664,8 @@
             })[c],
         );
       const imageUrl = (v) => (typeof v === "string" ? v : (v && v.src) || "");
+      let lowBandwidth = localStorage.getItem('lighthouse-low-bandwidth') === 'true';
+      let currentItems = [];
       const fields = {
         location: document.getElementById("location"),
         category: document.getElementById("category"),
@@ -709,8 +719,17 @@
           document.getElementById("selectedNeed").textContent = value
             ? `Selected: ${button.textContent.trim()}`
             : "Tell Lighthouse Lot what you need and we’ll help shape the request.";
+          parentWindow.postMessage({ type: "marketplace:filter", filters: filterValues() }, parentOrigin);
         });
       });
+      function setMarketMode(mode) {
+        mode = ['quick','explore','immersive'].includes(mode) ? mode : 'quick';
+        document.getElementById('browse').classList.toggle('explore-mode', mode !== 'quick');
+        document.querySelectorAll('[data-market-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.marketMode === mode)));
+        localStorage.setItem('lighthouse-market-mode', mode);
+      }
+      document.querySelectorAll('[data-market-mode]').forEach(button => button.onclick = () => setMarketMode(button.dataset.marketMode));
+      document.getElementById('marketBandwidth').onclick = event => { lowBandwidth = !lowBandwidth; localStorage.setItem('lighthouse-low-bandwidth', String(lowBandwidth)); event.currentTarget.setAttribute('aria-pressed', String(lowBandwidth)); renderListings(currentItems); };
       document.getElementById("filters").addEventListener("submit", (e) => {
         e.preventDefault();
         grid.innerHTML =
@@ -730,6 +749,7 @@
         document.getElementById("openRequest").click();
       });
       function renderListings(items) {
+        currentItems = items;
         count.textContent = `${items.length} approved ${items.length === 1 ? "space" : "spaces"}`;
         if (!items.length) {
           grid.innerHTML =
@@ -750,7 +770,7 @@
             ]
               .filter(Boolean)
               .join(" • ");
-            const img = imageUrl(item.primaryImage);
+            const img = lowBandwidth ? '' : imageUrl(item.primaryImage);
             const price = item.advertisedMonthlyPrice
               ? `$${Number(item.advertisedMonthlyPrice).toLocaleString()}/month`
               : item.publicPriceText ||
@@ -781,6 +801,8 @@
             .join(""),
         );
       }
+      setMarketMode(new URLSearchParams(location.search).get('mode') || localStorage.getItem('lighthouse-market-mode') || 'quick');
+      document.getElementById('marketBandwidth').setAttribute('aria-pressed', String(lowBandwidth));
       function renderDetail(item) {
         if (!item) return;
         document.getElementById("browse").classList.add("off");
