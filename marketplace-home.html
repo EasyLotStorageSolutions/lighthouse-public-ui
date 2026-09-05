@@ -2174,6 +2174,7 @@
         if (!phoneDemo.automatic) return;
         if (phoneDemo.timer) clearTimeout(phoneDemo.timer);
         phoneDemo.timer = setTimeout(() => {
+          if (!phoneDemo.automatic) return;
           renderPhoneDemo((phoneDemo.step + 1) % phoneScreens.length);
           schedulePhoneDemo();
         }, phoneDemo.step === phoneScreens.length - 1 ? 3200 : 2200);
