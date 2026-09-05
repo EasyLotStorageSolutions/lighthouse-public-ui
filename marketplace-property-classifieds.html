@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="https://www.easylotstoragesolutions.com/" />
     <style>
       :root {
         --blue: #113d6a;
@@ -355,6 +356,7 @@
           <input id="auctionLocation" placeholder="City, county, or ZIP" />
           <select id="auctionState"><option value="">All stages</option><option value="LIVE">Live now</option><option value="SCHEDULED">Coming soon</option><option value="ENDED">Ended</option></select>
           <button class="primary">FIND AUCTIONS</button>
+          <button id="auctionAccountButton" type="button">MY AUCTIONS &amp; BIDS</button>
         </form>
         <div id="auctionGrid" class="grid"></div>
         <section id="auctionDetail" class="details form">
@@ -564,6 +566,8 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
         const cents = value => Math.round(Number(value || 0) * 100);
         let selected = null;
         let biddingEnabled = false;
+        let submissionsEnabled = false;
+        const accountButton = document.getElementById('auctionAccountButton');
         function cards(items) {
           grid.innerHTML = items.length ? items.map(item => `<article class="card"><div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'Location supplied after participant routing')}</p><div class="price">${money(item.currentBidCents ?? item.openingBidCents)}</div><p>${esc(item.bidCount)} bid${item.bidCount === 1 ? '' : 's'} • Reserve ${esc(item.reserveStatus.toLowerCase().replaceAll('_', ' '))}</p><button class="primary" data-auction="${esc(item.id)}">VIEW AUCTION</button></article>`).join('') : '<div class="status">No reviewed auctions match these filters yet.</div>';
           grid.querySelectorAll('[data-auction]').forEach(button => button.onclick = () => p.postMessage({ type: 'auctions:detail', reference: button.dataset.auction }, parentOrigin));
@@ -572,7 +576,12 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
           event.preventDefault();
           p.postMessage({ type: 'auctions:search', filters: { subjectType: document.getElementById('auctionSubject').value, location: document.getElementById('auctionLocation').value, status: document.getElementById('auctionState').value } }, parentOrigin);
         };
-        document.getElementById('auctionBack').onclick = () => { detail.classList.remove('on'); grid.hidden = false; filters.hidden = false; };
+        accountButton.onclick = () => {
+          status.hidden = false;
+          status.textContent = 'Loading your private auction activity…';
+          p.postMessage({ type: 'auctions:mine' }, parentOrigin);
+        };
+        document.getElementById('auctionBack').onclick = () => { detail.classList.remove('on'); grid.hidden = false; filters.hidden = false; submission.hidden = !submissionsEnabled; };
         bidForm.onsubmit = event => {
           event.preventDefault();
           if (!selected) return;
@@ -609,6 +618,7 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
             area.hidden = false;
             filters.hidden = false;
             submission.hidden = message.submissionsEnabled !== true;
+            submissionsEnabled = message.submissionsEnabled === true;
             biddingEnabled = message.biddingEnabled === true;
             status.hidden = true;
             cards(message.items || []);
@@ -620,6 +630,33 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
             grid.hidden = true;
             filters.hidden = true;
             detail.classList.add('on');
+          }
+          if (message.type === 'auctions:account') {
+            status.hidden = true;
+            grid.hidden = true;
+            filters.hidden = true;
+            submission.hidden = true;
+            selected = null;
+            bidForm.hidden = true;
+            if (message.signedIn !== true) {
+              detailBody.innerHTML = '<h2>Sign in to manage your auctions</h2><p>Your submissions, bids, results, and seller confirmations are private member information.</p><p><a class="primary" href="/customer-portal" target="_top">SIGN IN TO LIGHTHOUSE</a></p>';
+            } else {
+              const activity = message.activity || { selling: [], bids: [] };
+              const selling = (activity.selling || []).map(item => `<article class="card"><div class="eyebrow">${esc(item.status.replaceAll('_', ' '))}</div><h3>${esc(item.title)}</h3><p>${esc(item.subjectType.replaceAll('_', ' '))} • ${esc(item.publicLocation || 'No public location')}</p><p>${esc(item.bidCount)} bid${item.bidCount === 1 ? '' : 's'} • Current ${money(item.currentBidCents)}</p>${item.sellerConfirmationRequired ? `<div class="notice">The auction ended with an eligible offer. Review the result, then confirm or decline it. Lighthouse does not create or hold payment.</div><div class="actions"><button class="primary" data-confirm="accept" data-auction-id="${esc(item.id)}">CONFIRM OUTCOME</button><button data-confirm="decline" data-auction-id="${esc(item.id)}">DECLINE OUTCOME</button></div>` : ''}</article>`).join('') || '<p>You have not submitted an auction yet.</p>';
+              const bids = (activity.bids || []).map(item => `<article class="card"><div class="eyebrow">${esc(item.auctionStatus.replaceAll('_', ' '))}</div><h3>${esc(item.auctionTitle)}</h3><p>Your bid: ${money(item.amountCents)}</p><p>${item.winning ? 'Winning bid after close' : item.leading ? 'Currently leading' : 'Recorded bid'}</p></article>`).join('') || '<p>You have not placed a bid yet.</p>';
+              detailBody.innerHTML = `<h2>Your auction activity</h2><h3>Selling</h3><div class="grid">${selling}</div><h3 style="margin-top:30px">Bidding</h3><div class="grid">${bids}</div>`;
+              detailBody.querySelectorAll('[data-confirm]').forEach(button => button.onclick = () => {
+                status.hidden = false;
+                status.textContent = 'Recording your decision…';
+                p.postMessage({ type: 'auctions:confirm', auctionId: button.dataset.auctionId, accepted: button.dataset.confirm === 'accept' }, parentOrigin);
+              });
+            }
+            detail.classList.add('on');
+          }
+          if (message.type === 'auctions:confirmed') {
+            status.hidden = false;
+            status.textContent = `Auction result updated: ${message.result?.status || 'recorded'}. No payment was created.`;
+            p.postMessage({ type: 'auctions:mine' }, parentOrigin);
           }
           if (message.type === 'auctions:notice') { area.hidden = false; status.hidden = false; status.textContent = message.message; }
           if (message.type === 'auctions:bidResult') {
