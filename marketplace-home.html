@@ -622,7 +622,7 @@
       <section class="hero">
         <div class="container">
           <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
-          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">TRY STUDIO DEMO</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
+          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">SEE STUDIO HERE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
@@ -2035,6 +2035,9 @@
         startingJourney.hidden = true;
         document.querySelectorAll('[data-starting-path]').forEach(item => item.removeAttribute('aria-current'));
       });
+      const studioSection = document.getElementById('lighthouse-video-studio');
+      const membershipSection = document.querySelector('.lighthouse-doorway');
+      if (studioSection && membershipSection) membershipSection.before(studioSection);
       const studioDemo = {
         type: 'VIDEO', playing: false, progress: 18, caption: false, music: true, extraClips: 0, history: [], timer: null,
         copy: {
