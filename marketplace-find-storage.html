@@ -569,7 +569,7 @@
           </p>
         </header>
         <nav class="experience-bar" aria-label="Marketplace experience"><button type="button" data-market-mode="quick" aria-pressed="true">QUICK</button><button type="button" data-market-mode="explore" aria-pressed="false">EXPLORE</button><button type="button" data-market-mode="immersive" aria-pressed="false">IMMERSIVE</button><button type="button" id="marketBandwidth" aria-pressed="false">LOW BANDWIDTH</button><button class="sound-control" type="button" id="marketSound" aria-pressed="false">SOUND OFF</button></nav>
-        <nav class="district-bar" aria-label="Marketplace districts"><button type="button" data-category="" aria-pressed="true">MARKETPLACE SQUARE</button><button type="button" data-category="vehicle">MOTOR ROW</button><button type="button" data-category="equipment">EQUIPMENT YARD</button><button type="button" data-category="indoor">HOME HALL</button><button type="button" data-category="electricity">TECH HALL</button><button type="button" data-category="contractor yard">BUSINESS EXCHANGE</button><button type="button" data-category="free">FREE CORNER</button><button type="button" data-category="trade">TRADE ROW</button><button type="button" data-category="wanted">WANTED BOARD</button><a class="primary" href="/property-classifieds#auctionArea" target="_top">AUCTION HALL</a></nav>
+        <nav class="district-bar" aria-label="Marketplace districts"><button type="button" data-category="" aria-pressed="true">MARKETPLACE SQUARE</button><button type="button" data-category="vehicle">MOTOR ROW</button><button type="button" data-category="equipment">EQUIPMENT YARD</button><button type="button" data-category="indoor">HOME HALL</button><button type="button" data-category="electricity">TECH HALL</button><button type="button" data-category="contractor yard">BUSINESS EXCHANGE</button><button type="button" data-category="free">FREE CORNER</button><button type="button" data-category="trade">TRADE ROW</button><button type="button" data-category="wanted">WANTED BOARD</button><a class="primary" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-property-classifieds.html#auctionArea" target="_top">AUCTION HALL</a></nav>
         <section class="market-world" aria-labelledby="marketWorldTitle"><div class="market-world-sky" aria-hidden="true"></div><div class="market-world-heading"><span>THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketWorldTitle">Choose a district.</h2><p>Every destination is a different view of the same real Marketplace inventory.</p></div><div class="market-world-stage" id="marketWorldStage">
           <button class="district district-square" type="button" data-category="" aria-pressed="true"><span class="district-icon">◈</span><strong>Marketplace Square</strong><small>Everything in one place</small></button>
           <button class="district district-motor" type="button" data-category="vehicle"><span class="district-icon">◉</span><strong>Motor Row</strong><small>Cars, trucks and trailers</small></button>
@@ -580,7 +580,7 @@
           <button class="district district-free" type="button" data-category="free"><span class="district-icon">○</span><strong>Free Corner</strong><small>Free listings when available</small></button>
           <button class="district district-trade" type="button" data-category="trade"><span class="district-icon">⇄</span><strong>Trade Row</strong><small>Trades when available</small></button>
           <button class="district district-wanted" type="button" data-category="wanted"><span class="district-icon">?</span><strong>Wanted Board</strong><small>Needs posted by real people</small></button>
-          <a class="district district-auction" href="/property-classifieds#auctionArea" target="_top"><span class="district-icon">◇</span><strong>Auction House</strong><small>Public view-only Auction Hall</small></a>
+          <a class="district district-auction" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-property-classifieds.html#auctionArea" target="_top"><span class="district-icon">◇</span><strong>Auction House</strong><small>Public view-only Auction Hall</small></a>
         </div></section>
         <section class="paths" aria-label="Ways to find space">
           <article class="path">
@@ -670,7 +670,8 @@
     </main>
     <script>
       const parentWindow = window.parent;
-      const parentOrigin = (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
+      const standalone = window.parent === window;
+      const parentOrigin = standalone ? location.origin : (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
       const grid = document.getElementById("grid");
       const count = document.getElementById("count");
       const esc = (v) =>
@@ -916,7 +917,19 @@
           renderListings(data.items || []);
         if (data.type === "marketplace:listing") renderDetail(data.item);
         if (data.type === "marketplace:discovery") renderDiscovery(data.data);
+        if (standalone && data.type === 'marketplace:filter') loadStandalone(data.filters || {});
+        if (standalone && data.type === 'marketplace:detail') loadStandalone({}, data.reference);
       });
+      async function loadStandalone(filters = {}, reference = '') {
+        const query = new URLSearchParams({ ...filters, ...(reference ? { reference } : {}) });
+        try {
+          const response = await fetch(`https://www.easylotstoragesolutions.com/_functions/marketplaceLaunch?${query}`);
+          if (!response.ok) throw new Error('MARKETPLACE_LOAD_FAILED');
+          const data = await response.json();
+          if (reference) renderDetail(data.item); else { renderListings(data.items || []); renderDiscovery(data.discovery || {}); }
+        } catch (error) { renderListings([]); }
+      }
+      if (standalone) { clearInterval(readyTimer); readyTimer = null; loadStandalone(); }
       parentWindow.postMessage({ type: "marketplace:ready" }, parentOrigin);
     </script>
   </body>

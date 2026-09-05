@@ -395,7 +395,7 @@
       </section>
     </main>
     <script>
-const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      (() => {
+const standalone=window.parent===window;const parentOrigin=standalone?location.origin:(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();      (() => {
         const status = document.getElementById("status"),
           browse = document.getElementById("browse"),
           filters = document.getElementById("filters"),
@@ -668,6 +668,21 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
         if (window.parent === window && ['localhost', '127.0.0.1'].includes(location.hostname)) {
           area.hidden = false; filters.hidden = false; status.hidden = true; cards([]);
         }
+        async function loadStandaloneAuctions(filters = {}, reference = '') {
+          const query = new URLSearchParams({ kind: 'auction', ...filters, ...(reference ? { reference } : {}) });
+          try {
+            const response = await fetch(`https://www.easylotstoragesolutions.com/_functions/marketplaceLaunch?${query}`);
+            if (!response.ok) throw new Error('AUCTION_LOAD_FAILED');
+            const data = await response.json();
+            window.postMessage(reference ? { type: 'auctions:item', item: data.item } : { type: 'auctions:list', items: data.items || [] }, location.origin);
+          } catch (error) { area.hidden = false; filters.hidden = false; status.hidden = true; cards([]); }
+        }
+        window.addEventListener('message', event => {
+          if (!standalone || event.source !== window || event.origin !== location.origin) return;
+          if (event.data?.type === 'auctions:search') loadStandaloneAuctions(event.data.filters || {});
+          if (event.data?.type === 'auctions:detail') loadStandaloneAuctions({}, event.data.reference);
+        });
+        if (standalone && !['localhost', '127.0.0.1'].includes(location.hostname)) loadStandaloneAuctions();
         p.postMessage({ type: 'auctions:ready' }, parentOrigin);
       })();
     </script>
