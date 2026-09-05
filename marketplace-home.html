@@ -516,11 +516,65 @@
       .auction-home-copy { max-width:680px; margin:0 0 25px; color:var(--easy-blue); font:18px/1.65 'Playfair Display',Georgia,serif; }
       .auction-home .actions { align-items:center; }
       .auction-home-note { margin:15px 0 0; color:var(--easy-muted); font:12px/1.55 Arial,sans-serif; }
-      .auction-home-panel { padding:26px; border:1px solid rgba(17,61,106,.45); border-radius:5px; background:rgba(255,255,255,.74); box-shadow:0 15px 30px -24px rgba(8,43,76,.8); }
-      .auction-home-panel h3 { margin:0 0 15px; font-size:24px; }
-      .auction-home-points { display:grid; gap:13px; margin:0; padding:0; list-style:none; }
-      .auction-home-points li { position:relative; padding:12px 12px 12px 38px; border-top:1px solid var(--easy-line); color:var(--easy-navy); font:700 13px/1.45 Arial,sans-serif; }
-      .auction-home-points li::before { content:"✓"; position:absolute; left:13px; color:var(--easy-blue); }
+      .marketplace-phone-wrap { display:grid; justify-items:center; gap:12px; min-width:0; }
+      .marketplace-phone { position:relative; width:min(100%,326px); aspect-ratio:326/650; padding:10px; border:1px solid #526170; border-radius:48px; background:linear-gradient(145deg,#697682 0%,#18212a 15%,#05080b 56%,#4a5661 100%); box-shadow:0 34px 54px -30px rgba(4,20,35,.78),inset 0 0 0 1px rgba(255,255,255,.32),inset 0 0 0 3px #090d11; font-family:Arial,Helvetica,sans-serif; transform:perspective(1000px) rotateY(-2deg) rotateX(1deg); }
+      .marketplace-phone::before,.marketplace-phone::after { content:""; position:absolute; left:-3px; width:3px; border-radius:2px 0 0 2px; background:#29343e; }
+      .marketplace-phone::before { top:112px; height:54px; }
+      .marketplace-phone::after { top:180px; height:82px; }
+      .marketplace-phone-screen { position:relative; height:100%; overflow:hidden; border-radius:39px; background:#f5f8fc; color:#112b43; box-shadow:inset 0 0 0 1px rgba(255,255,255,.15); }
+      .marketplace-phone-island { position:absolute; z-index:5; top:10px; left:50%; width:94px; height:27px; transform:translateX(-50%); border-radius:18px; background:#050607; box-shadow:inset -14px 0 16px rgba(20,28,35,.55); }
+      .marketplace-phone-island::after { content:""; position:absolute; right:10px; top:9px; width:7px; height:7px; border-radius:50%; background:#11243c; box-shadow:inset 0 0 2px #4f78a5; }
+      .phone-status { height:46px; display:flex; justify-content:space-between; align-items:center; padding:0 22px 0 20px; background:#fff; color:#112b43; font:700 10px/1 Arial,sans-serif; }
+      .phone-status-icons { letter-spacing:2px; }
+      .phone-appbar { display:flex; align-items:center; gap:9px; height:46px; padding:0 15px; border-bottom:1px solid #dce5ef; background:#fff; }
+      .phone-app-mark { width:27px; height:27px; display:grid; place-items:center; border-radius:9px; background:#0d3b66; color:#fff; font:400 17px/1 'Niconne',cursive; }
+      .phone-appbar strong { display:block; color:#082b4c; font:800 12px/1.15 Arial,sans-serif; }
+      .phone-appbar small { display:block; margin-top:2px; color:#698095; font:700 8px/1 Arial,sans-serif; letter-spacing:.06em; text-transform:uppercase; }
+      .phone-demo { height:calc(100% - 92px); display:flex; flex-direction:column; }
+      .phone-progress { display:grid; grid-template-columns:repeat(6,1fr); gap:4px; padding:12px 14px 9px; background:#fff; }
+      .phone-step-tab { min-width:0; padding:0; border:0; background:transparent; color:#7a8c9e; cursor:pointer; font:700 7px/1.2 Arial,sans-serif; text-align:center; }
+      .phone-step-tab::before { content:""; display:block; height:3px; margin-bottom:5px; border-radius:3px; background:#d9e2ec; transition:background .3s ease; }
+      .phone-step-tab.active { color:#0d3b66; }
+      .phone-step-tab.active::before,.phone-step-tab.complete::before { background:#e8b45c; }
+      .phone-demo-stage { position:relative; flex:1; min-height:0; overflow:hidden; }
+      .phone-demo-screen { position:absolute; inset:0; display:flex; flex-direction:column; padding:17px 18px 12px; opacity:0; transform:translateX(18px); pointer-events:none; transition:opacity .34s ease,transform .34s ease; }
+      .phone-demo-screen.active { opacity:1; transform:none; pointer-events:auto; }
+      .phone-kicker { margin-bottom:5px; color:#668097; font:800 8px/1.2 Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+      .phone-demo-screen h3 { margin:0 0 6px; color:#082b4c; font:700 22px/1.08 'Playfair Display',Georgia,serif; }
+      .phone-demo-screen p { margin:0 0 12px; color:#60778d; font:11px/1.42 Arial,sans-serif; }
+      .phone-photo { position:relative; min-height:210px; display:grid; place-items:center; overflow:hidden; border:1px solid #ccdae7; border-radius:16px; background:linear-gradient(160deg,#deebf6 0 58%,#bdc9d4 58%); }
+      .phone-photo::before { content:""; width:118px; height:80px; border-radius:12px 12px 5px 5px; background:#b9784a; box-shadow:0 54px 0 -34px #765038,48px 54px 0 -34px #765038,-48px 54px 0 -34px #765038,0 8px 18px rgba(31,43,52,.2); transform:translateY(18px); }
+      .phone-photo::after { content:"Vintage leather chair"; position:absolute; left:10px; bottom:10px; padding:6px 8px; border-radius:7px; background:rgba(5,18,30,.76); color:#fff; font:700 9px/1 Arial,sans-serif; }
+      .phone-camera-button { width:100%; min-height:42px; margin-top:11px; border:0; border-radius:11px; background:#0d3b66; color:#fff; cursor:pointer; font:800 10px/1 Arial,sans-serif; }
+      .phone-field { display:grid; gap:5px; margin:7px 0; color:#29465f; font:800 9px/1.2 Arial,sans-serif; }
+      .phone-field span,.phone-input { min-height:42px; display:flex; align-items:center; padding:10px 11px; border:1px solid #cbd8e4; border-radius:10px; background:#fff; color:#183650; font:600 11px/1.35 Arial,sans-serif; }
+      .phone-input { width:100%; outline:none; }
+      .phone-input:focus { border-color:#0d3b66; box-shadow:0 0 0 3px rgba(13,59,102,.12); }
+      .phone-choice-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:12px 0; }
+      .phone-choice { min-height:78px; padding:11px 8px; border:1px solid #c9d7e4; border-radius:12px; background:#fff; color:#29465f; cursor:pointer; font:800 10px/1.3 Arial,sans-serif; }
+      .phone-choice span { display:block; margin-top:5px; color:#71859a; font-size:8px; font-weight:600; }
+      .phone-choice.active { border-color:#0d3b66; background:#e8f1fb; color:#082b4c; box-shadow:inset 0 0 0 1px #0d3b66; }
+      .phone-price-wrap { position:relative; margin-top:13px; }
+      .phone-price-wrap::before { content:"$"; position:absolute; z-index:1; left:15px; top:14px; color:#082b4c; font:700 25px/1 Arial,sans-serif; }
+      .phone-price { width:100%; height:58px; padding:8px 12px 8px 36px; border:1px solid #bdccda; border-radius:12px; background:#fff; color:#082b4c; outline:none; font:700 25px/1 Arial,sans-serif; }
+      .phone-price:focus { border-color:#0d3b66; box-shadow:0 0 0 3px rgba(13,59,102,.12); }
+      .phone-preview-card { overflow:hidden; border:1px solid #c8d6e3; border-radius:14px; background:#fff; box-shadow:0 9px 22px rgba(15,47,75,.1); }
+      .phone-preview-image { height:142px; background:linear-gradient(160deg,#deebf6 0 58%,#bdc9d4 58%); position:relative; }
+      .phone-preview-image::before { content:""; position:absolute; left:50%; top:44px; width:94px; height:60px; transform:translateX(-50%); border-radius:10px 10px 4px 4px; background:#b9784a; box-shadow:0 40px 0 -27px #765038; }
+      .phone-preview-body { padding:12px; }
+      .phone-preview-body strong { display:block; color:#082b4c; font:700 15px/1.25 'Playfair Display',Georgia,serif; }
+      .phone-preview-meta { display:flex; justify-content:space-between; margin-top:8px; color:#557087; font:700 9px/1 Arial,sans-serif; }
+      .phone-listed { flex:1; display:grid; align-content:center; justify-items:center; text-align:center; }
+      .phone-listed-check { width:70px; height:70px; display:grid; place-items:center; margin-bottom:17px; border-radius:50%; background:#dcefe8; color:#17664c; font:700 34px/1 Arial,sans-serif; box-shadow:0 0 0 10px #edf8f4; }
+      .phone-listed h3 { font-size:27px; }
+      .phone-listed-badge { padding:7px 10px; border-radius:999px; background:#e8f1fb; color:#0d3b66; font:800 8px/1 Arial,sans-serif; letter-spacing:.07em; }
+      .phone-demo-controls { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; padding:9px 14px 16px; border-top:1px solid #dce5ef; background:#fff; }
+      .phone-nav { min-height:38px; padding:8px; border:1px solid #c6d5e2; border-radius:10px; background:#fff; color:#0d3b66; cursor:pointer; font:800 9px/1 Arial,sans-serif; }
+      .phone-nav.next { border-color:#0d3b66; background:#0d3b66; color:#fff; }
+      .phone-nav:disabled { opacity:.38; cursor:default; }
+      .phone-play-state { color:#6a8094; font:700 8px/1.25 Arial,sans-serif; text-align:center; }
+      .marketplace-phone-hint { margin:0; color:var(--easy-muted); font:700 11px/1.45 Arial,sans-serif; text-align:center; }
+      .marketplace-phone button:focus-visible { outline:3px solid #f2b84b; outline-offset:2px; }
       .delivery-coming-soon { position:relative; overflow:hidden; padding:64px 0; border-block:1px solid var(--easy-line); background:rgba(255,255,255,.2); }
       .delivery-coming-soon::before { content:"L"; position:absolute; right:-8px; bottom:-72px; color:rgba(17,61,106,.045); font:400 230px/1 'Niconne','Brush Script MT',cursive; pointer-events:none; }
       .delivery-heading { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); gap:54px; align-items:end; }
@@ -565,8 +619,9 @@
       .delivery-gate-list li { margin:6px 0; font:13px/1.45 Arial,sans-serif; }
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
       @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}}
-      @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}.marketplace-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout,.studio-demo-head{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.studio-public-demo{padding:20px 15px}.studio-demo-workspace{grid-template-columns:1fr}.studio-demo-library{display:none}.studio-demo-main{padding:12px}.studio-demo-offers{grid-template-columns:1fr 1fr}.studio-demo-cta{align-items:stretch;flex-direction:column}.studio-demo-cta .button{width:100%}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home-panel{padding:22px 18px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
+      @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}.marketplace-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.marketplace-phone{transform:none}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout,.studio-demo-head{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.studio-public-demo{padding:20px 15px}.studio-demo-workspace{grid-template-columns:1fr}.studio-demo-library{display:none}.studio-demo-main{padding:12px}.studio-demo-offers{grid-template-columns:1fr 1fr}.studio-demo-cta{align-items:stretch;flex-direction:column}.studio-demo-cta .button{width:100%}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
+      @media(prefers-reduced-motion:reduce){.marketplace-phone,.phone-demo-screen,.phone-step-tab::before{transition:none;transform:none}}
       @media(max-width:430px){.studio-demo-offers{grid-template-columns:1fr}.studio-demo-type{flex:1}.studio-demo-preview strong{font-size:24px}.studio-demo-tools{display:grid;grid-template-columns:1fr 1fr}.studio-demo-tool{width:100%}}
       @media(max-width:760px){.marketplace-entry-grid{grid-template-columns:1fr}.marketplace-entry{min-height:0}}
       .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
@@ -643,9 +698,9 @@
       .demo-scene{position:absolute;inset:0;padding:66px 24px 28px;opacity:0;transform:translateY(24px) scale(.985);pointer-events:none;transition:opacity .55s ease,transform .55s ease}.demo-scene.is-active{opacity:1;transform:none}.demo-label{margin-bottom:20px;color:var(--lh-muted);font:800 11px/1.2 Arial,sans-serif;letter-spacing:.18em}.demo-scene h3{color:#fff;font:700 25px/1.25 Arial,sans-serif}.demo-photo-placeholder{height:300px;border:1px dashed rgba(255,255,255,.3);border-radius:24px;display:grid;place-items:center;text-align:center;background:linear-gradient(150deg,rgba(255,255,255,.04),rgba(105,191,248,.1));font:700 16px/1.4 Arial,sans-serif}.demo-photo-placeholder span{display:block;font-size:48px}.demo-photo-placeholder.photo-ready{background:linear-gradient(145deg,rgba(13,27,44,.1),rgba(13,27,44,.35)),url('https://static.wixstatic.com/media/cb1c6a_4c708782781c4a2880566a4b9ab1e117~mv2.jpg') center/cover}.demo-input,.demo-choice{padding:17px 18px;margin-top:14px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font:700 15px/1.3 Arial,sans-serif}.demo-choice.active{border-color:var(--lh-accent);background:rgba(105,191,248,.16)}.demo-card{margin-top:20px;border-radius:24px;overflow:hidden;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}.demo-card-photo{height:260px;display:grid;place-items:end start;padding:18px;background:linear-gradient(135deg,#172d43,#294d69);color:rgba(255,255,255,.7);font:800 11px/1 Arial,sans-serif;letter-spacing:.12em}.demo-card-body{padding:18px;display:grid;gap:6px;font-family:Arial,sans-serif}.demo-card-body span{color:var(--lh-muted)}.demo-action-stack{display:grid;gap:12px;margin-top:42px}.demo-action-stack span{padding:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:15px;font:700 14px/1.3 Arial,sans-serif}.demo-auction{margin-top:60px;padding:28px;border-radius:24px;background:linear-gradient(150deg,rgba(105,191,248,.13),rgba(255,255,255,.035));display:grid;gap:10px;font-family:Arial,sans-serif}.view-only{width:max-content;margin-top:12px;padding:7px 11px;border-radius:999px;font-size:11px;letter-spacing:.1em;background:rgba(255,255,255,.1)}.demo-success{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:130px auto 30px;font-size:38px;background:rgba(131,230,186,.14);color:var(--lh-success)}.demo-scene:last-child{text-align:center}.demo-scene:last-child p{color:var(--lh-muted)}
       .market-portal{width:min(var(--lh-max),calc(100% - 48px));margin:0 auto;padding:0 0 clamp(80px,10vw,140px)}.portal-heading{max-width:760px;margin-bottom:34px}.portal-heading h2{margin:10px 0 15px;color:var(--lh-text);font:700 clamp(40px,5vw,68px)/1 'Playfair Display',Georgia,serif}.portal-heading p{color:var(--lh-muted);font:18px/1.6 Arial,sans-serif}.experience-switcher{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.experience-mode{min-height:260px;position:relative;overflow:hidden;padding:30px;border:1px solid var(--lh-border);border-radius:var(--lh-radius);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));color:var(--lh-text);text-align:left;cursor:pointer;box-shadow:var(--lh-shadow);transition:transform .3s ease,border-color .3s ease,background .3s ease}.experience-mode::after{content:"";position:absolute;right:-50px;bottom:-70px;width:190px;height:190px;border:1px solid rgba(158,227,255,.16);border-radius:50%;box-shadow:0 0 0 34px rgba(158,227,255,.025),0 0 0 68px rgba(158,227,255,.018)}.experience-mode:hover,.experience-mode:focus-visible{transform:translateY(-10px);border-color:rgba(158,227,255,.5)}.experience-mode[aria-pressed=true]{background:linear-gradient(145deg,rgba(105,191,248,.2),rgba(255,255,255,.04));border-color:var(--lh-accent)}.experience-mode small{display:block;margin-bottom:38px;color:var(--lh-accent-2);font:800 11px/1 Arial,sans-serif;letter-spacing:.18em}.experience-mode strong{display:block;margin-bottom:12px;font:700 30px/1.1 'Playfair Display',Georgia,serif}.experience-mode span{display:block;max-width:250px;color:var(--lh-muted);font:14px/1.55 Arial,sans-serif}.portal-enter{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:18px;padding:22px 26px;border:1px solid var(--lh-border);border-radius:18px;background:rgba(255,255,255,.035);color:var(--lh-muted);font:14px/1.5 Arial,sans-serif}.portal-enter .button{flex:0 0 auto;border-color:var(--lh-accent);background:var(--lh-accent);color:#061321}
       .lighthouse-plan{border-radius:18px}.lighthouse-plan.recommended{border-color:var(--easy-gold)}.lighthouse-plan-action[disabled]{cursor:not-allowed;opacity:.72}.membership-separation{margin:18px 0 0;color:var(--easy-muted);font:700 12px/1.55 Arial,sans-serif}
-      @media(max-width:850px){.lh-market-intro{grid-template-columns:1fr}.lh-market-copy{text-align:center}.lh-market-copy p{margin-left:auto;margin-right:auto}.lh-market-actions{justify-content:center}.lh-phone-stage{min-height:590px}.experience-switcher{grid-template-columns:1fr}.experience-mode{min-height:190px}.portal-enter{align-items:stretch;flex-direction:column}.portal-enter .button{width:100%}}
-      @media(max-width:520px){.lh-market-intro,.market-portal{width:min(100% - 28px,var(--lh-max))}.lh-market-copy h2{font-size:42px}.lh-phone{width:min(310px,88vw)}.lh-phone-stage{min-height:610px}.experience-mode{padding:24px}.lh-market-actions{display:grid}.lh-market-actions .button{width:100%}.lighthouse-plan{min-width:0}}
-      @media(prefers-reduced-motion:reduce){.demo-scene,.experience-mode{transition:none!important}.lh-phone{transform:none}.experience-mode:hover{transform:none}}
+      @media(max-width:850px){.lh-market-intro{grid-template-columns:1fr}.lh-market-copy{text-align:center}.lh-market-copy p{margin-left:auto;margin-right:auto}.lh-market-actions{justify-content:center}.lh-phone-stage{min-height:700px}.marketplace-phone{transform:none}.experience-switcher{grid-template-columns:1fr}.experience-mode{min-height:190px}.portal-enter{align-items:stretch;flex-direction:column}.portal-enter .button{width:100%}}
+      @media(max-width:520px){.lh-market-intro,.market-portal{width:min(100% - 28px,var(--lh-max))}.lh-market-copy h2{font-size:42px}.marketplace-phone{width:min(310px,88vw)}.lh-phone-stage{min-height:660px}.experience-mode{padding:24px}.lh-market-actions{display:grid}.lh-market-actions .button{width:100%}.lighthouse-plan{min-width:0}}
+      @media(prefers-reduced-motion:reduce){.phone-demo-screen,.phone-step-tab::before,.experience-mode{transition:none!important}.marketplace-phone{transform:none}.experience-mode:hover{transform:none}}
     </style>
   </head>
   <body>
@@ -680,15 +735,22 @@
       <section class="marketplace-showcase" id="marketplace-showcase" aria-labelledby="marketplace-showcase-title">
         <div class="lh-market-intro" id="marketplaceExperience">
           <div class="lh-market-copy"><span class="lh-eyebrow">THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketplace-showcase-title">Buy it. Sell it. Auction it.<span>All in one Marketplace.</span></h2><p>List in minutes. Sell your way. Browse normally or step inside the Lighthouse Marketplace experience.</p><div class="lh-market-actions"><a class="button" href="/copy-of-find-storage">Sell Something</a><a class="button secondary" href="/find-storage?mode=explore">Explore Marketplace</a></div><button class="lh-demo-link" id="phone-demo-replay" type="button">See how it works</button></div>
-          <div class="lh-phone-stage" aria-label="Animated preview of creating a Marketplace listing"><div class="lh-phone-glow" aria-hidden="true"></div><div class="lh-phone"><div class="lh-phone-top" aria-hidden="true"></div><div class="lh-phone-screen" aria-live="off">
-            <div class="demo-scene is-active" data-scene="0"><div class="demo-label">SELL SOMETHING</div><div class="demo-photo-placeholder"><div><span>+</span>Add a photo</div></div></div>
-            <div class="demo-scene" data-scene="1"><div class="demo-label">CREATE LISTING</div><h3>What are you selling?</h3><div class="demo-input">2017 Utility Trailer</div></div>
-            <div class="demo-scene" data-scene="2"><div class="demo-label">SELL YOUR WAY</div><h3>How should people buy it?</h3><div class="demo-choice active">Set a Price</div><div class="demo-choice">Auction It</div></div>
-            <div class="demo-scene" data-scene="3"><div class="demo-card"><div class="demo-card-photo">LISTING PHOTO</div><div class="demo-card-body"><strong>2017 Utility Trailer</strong><span>Marketplace listing</span></div></div></div>
-            <div class="demo-scene" data-scene="4"><div class="demo-label">MARKETPLACE</div><div class="demo-action-stack"><span>♡ Saved</span><span>Message seller</span><span>Viewed</span></div></div>
-            <div class="demo-scene" data-scene="5"><div class="demo-label">AUCTION HALL</div><div class="demo-auction"><strong>Auction</strong><span>Ends Saturday</span><span class="view-only">VIEW ONLY</span></div></div>
-            <div class="demo-scene" data-scene="6"><div class="demo-success">✓</div><h3>Listed.</h3><p>Your Marketplace. Your way.</p></div>
-          </div></div></div>
+          <div class="lh-phone-stage"><div class="lh-phone-glow" aria-hidden="true"></div><div class="marketplace-phone-wrap">
+            <div class="marketplace-phone" id="marketplace-phone" aria-label="Interactive Lighthouse Marketplace listing demonstration"><div class="marketplace-phone-screen">
+              <div class="marketplace-phone-island" aria-hidden="true"></div><div class="phone-status"><span>9:41</span><span class="phone-status-icons" aria-hidden="true">● ◒ ▰</span></div>
+              <div class="phone-appbar"><span class="phone-app-mark" aria-hidden="true">L</span><div><strong>Lighthouse Marketplace</strong><small>Create a listing</small></div></div>
+              <div class="phone-demo"><div class="phone-progress" role="tablist" aria-label="Listing steps">
+                <button class="phone-step-tab active" type="button" role="tab" aria-selected="true" data-phone-step="0">Photo</button><button class="phone-step-tab" type="button" role="tab" aria-selected="false" data-phone-step="1">Details</button><button class="phone-step-tab" type="button" role="tab" aria-selected="false" data-phone-step="2">Sale</button><button class="phone-step-tab" type="button" role="tab" aria-selected="false" data-phone-step="3">Price</button><button class="phone-step-tab" type="button" role="tab" aria-selected="false" data-phone-step="4">Preview</button><button class="phone-step-tab" type="button" role="tab" aria-selected="false" data-phone-step="5">Listed</button>
+              </div><div class="phone-demo-stage" aria-live="polite">
+                <section class="phone-demo-screen active" data-phone-screen="0"><span class="phone-kicker">Step 1 of 6</span><h3>Add a photo</h3><p>Start with a clear view of what you own.</p><div class="phone-photo" role="img" aria-label="Sample vintage leather chair photograph"></div><button class="phone-camera-button" type="button" data-phone-next>Use this photo</button></section>
+                <section class="phone-demo-screen" data-phone-screen="1"><span class="phone-kicker">Step 2 of 6</span><h3>Describe it</h3><p>Keep the important details clear for buyers.</p><label class="phone-field">Title<span>Vintage leather reading chair</span></label><label class="phone-field">Condition<span>Good · light wear on arms</span></label><label class="phone-field">Pickup<span>Baltimore, Maryland</span></label></section>
+                <section class="phone-demo-screen" data-phone-screen="2"><span class="phone-kicker">Step 3 of 6</span><h3>Choose how to sell</h3><p>You control the format before review.</p><div class="phone-choice-row" role="group" aria-label="Sale format"><button class="phone-choice active" type="button" data-sale-type="Buy Now">Buy Now<span>One clear price</span></button><button class="phone-choice" type="button" data-sale-type="Auction">Auction<span>Reviewed bidding</span></button></div><label class="phone-field">Buyer arrangement<span>Pickup arranged directly</span></label></section>
+                <section class="phone-demo-screen" data-phone-screen="3"><span class="phone-kicker">Step 4 of 6</span><h3>Set your price</h3><p id="phone-price-help">Choose the Buy Now price buyers will see.</p><div class="phone-price-wrap"><input class="phone-price" id="phone-price" type="number" min="1" max="999999" value="240" inputmode="numeric" aria-label="Listing price in dollars" /></div><label class="phone-field">Payment<span>Buyer pays seller directly</span></label></section>
+                <section class="phone-demo-screen" data-phone-screen="4"><span class="phone-kicker">Step 5 of 6</span><h3>Review listing</h3><p>Check every detail before submitting.</p><div class="phone-preview-card"><div class="phone-preview-image" role="img" aria-label="Vintage leather chair listing image"></div><div class="phone-preview-body"><strong>Vintage leather reading chair</strong><div class="phone-preview-meta"><span id="phone-preview-type">Buy Now</span><span id="phone-preview-price">$240</span></div></div></div></section>
+                <section class="phone-demo-screen" data-phone-screen="5"><div class="phone-listed"><div class="phone-listed-check" aria-hidden="true">✓</div><span class="phone-kicker">Submitted for review</span><h3>Your listing is in.</h3><p>Lighthouse reviews it before it goes live.</p><span class="phone-listed-badge">LISTING LH-2048</span></div></section>
+              </div><div class="phone-demo-controls"><button class="phone-nav" id="phone-back" type="button" disabled>Back</button><span class="phone-play-state" id="phone-play-state">Demo playing</span><button class="phone-nav next" id="phone-next" type="button">Next</button></div></div>
+            </div></div><p class="marketplace-phone-hint" id="marketplace-phone-hint">Tap the phone to take control of the sample.</p>
+          </div></div>
         </div>
         <div class="market-portal" aria-labelledby="market-portal-title"><div class="portal-heading"><span class="lh-eyebrow">CHOOSE YOUR WAY IN</span><h2 id="market-portal-title">Enter the Marketplace</h2><p>Browse fast. Explore visually. Step inside when you want the full experience.</p></div><div class="experience-switcher" role="group" aria-label="Marketplace experience mode">
           <button class="experience-mode" type="button" data-home-mode="quick" aria-pressed="false"><small>QUICK</small><strong>Browse without waiting.</strong><span>A clean, conventional grid with filters and minimal effects.</span></button>
@@ -2071,26 +2133,77 @@
         startingJourney.hidden = true;
         document.querySelectorAll('[data-starting-path]').forEach(item => item.removeAttribute('aria-current'));
       });
+      const marketplacePhone = document.getElementById('marketplace-phone');
+      const phoneScreens = [...document.querySelectorAll('[data-phone-screen]')];
+      const phoneTabs = [...document.querySelectorAll('[data-phone-step]')];
+      const phoneBack = document.getElementById('phone-back');
+      const phoneNext = document.getElementById('phone-next');
+      const phonePlayState = document.getElementById('phone-play-state');
+      const phoneHint = document.getElementById('marketplace-phone-hint');
+      const phonePrice = document.getElementById('phone-price');
+      const phonePreviewPrice = document.getElementById('phone-preview-price');
+      const phonePreviewType = document.getElementById('phone-preview-type');
+      const phonePriceHelp = document.getElementById('phone-price-help');
+      const phoneDemo = { step: 0, saleType: 'Buy Now', automatic: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, timer: null };
+      function stopPhoneDemo() {
+        phoneDemo.automatic = false;
+        if (phoneDemo.timer) clearTimeout(phoneDemo.timer);
+        phoneDemo.timer = null;
+        phonePlayState.textContent = 'You’re in control';
+        phoneHint.textContent = 'Interactive sample · nothing is uploaded or saved.';
+      }
+      function renderPhoneDemo(step = phoneDemo.step) {
+        phoneDemo.step = Math.max(0, Math.min(phoneScreens.length - 1, step));
+        phoneScreens.forEach((screen, index) => screen.classList.toggle('active', index === phoneDemo.step));
+        phoneTabs.forEach((tab, index) => {
+          const active = index === phoneDemo.step;
+          tab.classList.toggle('active', active);
+          tab.classList.toggle('complete', index < phoneDemo.step);
+          tab.setAttribute('aria-selected', String(active));
+          tab.setAttribute('tabindex', active ? '0' : '-1');
+        });
+        phoneBack.disabled = phoneDemo.step === 0;
+        phoneNext.disabled = phoneDemo.step === phoneScreens.length - 1;
+        phoneNext.textContent = phoneDemo.step === phoneScreens.length - 2 ? 'Submit' : 'Next';
+        const amount = Math.max(1, Number(phonePrice.value) || 1).toLocaleString('en-US');
+        phonePreviewPrice.textContent = `$${amount}`;
+        phonePreviewType.textContent = phoneDemo.saleType;
+        phonePriceHelp.textContent = phoneDemo.saleType === 'Auction' ? 'Choose the opening bid buyers will see.' : 'Choose the Buy Now price buyers will see.';
+      }
+      function schedulePhoneDemo() {
+        if (!phoneDemo.automatic) return;
+        if (phoneDemo.timer) clearTimeout(phoneDemo.timer);
+        phoneDemo.timer = setTimeout(() => {
+          renderPhoneDemo((phoneDemo.step + 1) % phoneScreens.length);
+          schedulePhoneDemo();
+        }, phoneDemo.step === phoneScreens.length - 1 ? 3200 : 2200);
+      }
+      marketplacePhone.addEventListener('pointerdown', stopPhoneDemo, { once: true });
+      marketplacePhone.addEventListener('keydown', stopPhoneDemo, { once: true });
+      phoneTabs.forEach(tab => tab.addEventListener('click', () => renderPhoneDemo(Number(tab.dataset.phoneStep))));
+      phoneBack.addEventListener('click', () => renderPhoneDemo(phoneDemo.step - 1));
+      phoneNext.addEventListener('click', () => renderPhoneDemo(phoneDemo.step + 1));
+      document.querySelectorAll('[data-phone-next]').forEach(button => button.addEventListener('click', () => renderPhoneDemo(phoneDemo.step + 1)));
+      document.querySelectorAll('[data-sale-type]').forEach(button => button.addEventListener('click', () => {
+        phoneDemo.saleType = button.dataset.saleType;
+        document.querySelectorAll('[data-sale-type]').forEach(choice => choice.classList.toggle('active', choice === button));
+        renderPhoneDemo();
+      }));
+      phonePrice.addEventListener('input', () => renderPhoneDemo());
+      if (phoneDemo.automatic) schedulePhoneDemo();
+      else { phonePlayState.textContent = 'Choose a step'; phoneHint.textContent = 'Interactive sample · autoplay is off for reduced motion.'; }
       const studioSection = document.getElementById('lighthouse-video-studio');
       const MARKETPLACE_EXPERIENCE_KEY = 'lighthouseMarketplaceExperienceMode';
-      const phoneScenes = [...document.querySelectorAll('.demo-scene')];
-      let phoneSceneIndex = 0;
-      let phoneDemoTimer = null;
       const reduceMarketplaceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function showPhoneScene(index) {
-        phoneSceneIndex = index % phoneScenes.length;
-        phoneScenes.forEach((scene, sceneIndex) => scene.classList.toggle('is-active', sceneIndex === phoneSceneIndex));
-      }
-      function startPhoneDemo() {
-        if (!phoneScenes.length) return;
-        clearInterval(phoneDemoTimer);
-        if (reduceMarketplaceMotion) { showPhoneScene(3); return; }
-        showPhoneScene(0);
-        phoneDemoTimer = setInterval(() => showPhoneScene(phoneSceneIndex + 1), 1700);
-      }
-      document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(phoneDemoTimer) : startPhoneDemo());
-      document.getElementById('phone-demo-replay')?.addEventListener('click', () => { startPhoneDemo(); document.querySelector('.lh-phone')?.scrollIntoView({ behavior: reduceMarketplaceMotion ? 'auto' : 'smooth', block: 'center' }); });
-      startPhoneDemo();
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && phoneDemo.timer) clearTimeout(phoneDemo.timer);
+        else if (!document.hidden && phoneDemo.automatic) schedulePhoneDemo();
+      });
+      document.getElementById('phone-demo-replay')?.addEventListener('click', () => {
+        renderPhoneDemo(0);
+        if (!reduceMarketplaceMotion) { phoneDemo.automatic = true; phonePlayState.textContent = 'Demo playing'; schedulePhoneDemo(); }
+        marketplacePhone.scrollIntoView({ behavior: reduceMarketplaceMotion ? 'auto' : 'smooth', block: 'center' });
+      });
       const portalCopy = {
         quick: ['Quick mode keeps everything fast, familiar, and screen-reader friendly.', 'BROWSE QUICKLY'],
         explore: ['Explore mode opens the visual Marketplace campus. You can switch modes at any time.', 'ENTER EXPLORE MODE'],
@@ -2252,6 +2365,7 @@
         postParent({ type: 'easy-lot:navigate', href });
       });
       window.addEventListener('beforeunload', () => {
+        if (phoneDemo.timer) clearTimeout(phoneDemo.timer);
         stopStudioDemo();
         if (ai.mediaStream) ai.mediaStream.getTracks().forEach(track => track.stop());
         if (ai.peerConnection) ai.peerConnection.close();
