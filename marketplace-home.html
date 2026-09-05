@@ -622,7 +622,7 @@
       <section class="hero">
         <div class="container">
           <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
-          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
+          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">TRY STUDIO DEMO</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
@@ -2163,6 +2163,12 @@
         if (href === '#what-easy-does') {
           event.preventDefault();
           postParent({ type: 'easy-lot:scrollToWhatEasyDoes' });
+          return;
+        }
+        if (href === '#lighthouse-video-studio') {
+          event.preventDefault();
+          const section = document.getElementById('lighthouse-video-studio');
+          postParent({ type: 'easy-lot:scrollToOffset', offset: Math.max(0, Math.round(section?.offsetTop || 0)) });
           return;
         }
         if (!href || !href.startsWith('/')) return;
