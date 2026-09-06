@@ -249,9 +249,9 @@
       :root {
         --easy-navy: #09263f;
         --easy-blue: #164a66;
-        --easy-sky: #dbe9ec;
-        --easy-pale: #f3efe6;
-        --easy-white: #fffaf0;
+        --easy-sky: #cfe1e7;
+        --easy-pale: #f6f3ec;
+        --easy-white: #fffdf7;
         --easy-gold: #e5b85f;
         --easy-ink: #10283a;
         --easy-muted: #536c78;
@@ -339,7 +339,11 @@
       .front-door-clean .video-community .studio-public-demo,
       .front-door-clean .video-community .channel-strip ~ h3,
       .front-door-clean .video-community .channel-strip ~ p,
+      .front-door-clean .video-community .video-layout,
+      .front-door-clean .video-community .video-studio,
       .front-door-clean .video-community .video-signin,
+      .front-door-clean .video-community .video-form,
+      .front-door-clean .video-community .video-feed,
       .front-door-clean .video-community .video-feed-grid { display:none; }
       .front-door-clean .video-heading { margin-bottom: 22px; }
       .front-door-clean .channel-strip { grid-template-columns: minmax(280px,.8fr) minmax(420px,1.2fr); }
@@ -823,10 +827,10 @@
       @media(prefers-reduced-motion:reduce){.work-phone *{scroll-behavior:auto!important;transition:none!important}}
 
       /* Coastal memorial canvas preview: the header's sky and water continue through the page. */
-      html,body{background:#d9e7ec;color:#10344b}
-      body{position:relative;background:linear-gradient(180deg,#f3efe6 0%,#dbe9ec 42%,#b8d1d6 100%);isolation:isolate}
-      body::after{content:"";position:fixed;z-index:0;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(9,38,63,.18),rgba(255,250,240,.14) 34%,rgba(9,38,63,.18)),url("https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-coastal-canvas-v1.png") center/cover no-repeat;filter:saturate(1.08) contrast(1.02)}
-      body::before{content:"";position:fixed;z-index:1;inset:-2%;pointer-events:none;background:radial-gradient(circle at 78% 11%,rgba(255,221,142,.42),transparent 24%),radial-gradient(circle at 17% 6%,rgba(255,250,240,.28),transparent 25%),linear-gradient(180deg,rgba(243,239,230,.52),rgba(219,233,236,.58) 44%,rgba(130,170,181,.4));opacity:.92;animation:coastalWaterLight 28s ease-in-out infinite alternate}
+      html,body{background:#cfe1e7;color:#10344b}
+      body{position:relative;background:linear-gradient(180deg,#d9e7eb 0%,#cfe1e7 45%,#b6cfd8 100%);isolation:isolate}
+      body::after{content:"";position:fixed;z-index:0;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(9,38,63,.16),rgba(255,253,247,.1) 34%,rgba(9,38,63,.14)),url("https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-coastal-canvas-v1.png") center/cover no-repeat;filter:saturate(1.04) contrast(1.02)}
+      body::before{content:"";position:fixed;z-index:1;inset:-2%;pointer-events:none;background:radial-gradient(circle at 78% 11%,rgba(229,184,95,.27),transparent 24%),radial-gradient(circle at 17% 6%,rgba(255,253,247,.22),transparent 25%),linear-gradient(180deg,rgba(246,243,236,.28),rgba(207,225,231,.66) 44%,rgba(118,159,174,.38));opacity:.92;animation:coastalWaterLight 28s ease-in-out infinite alternate}
       main{position:relative;z-index:2}
       .hero,.section,.easy-storage,.easy-business,.easy-final,.lighthouse-doorway,.lighthouse-work,.marketplace-showcase,.video-community{background:transparent}
       .easy-callout,.delivery-coming-soon,.auction-home{background:rgba(255,255,255,.2)}
@@ -841,6 +845,8 @@
       .front-door-clean .video-community .studio-public-demo,
       .front-door-clean .video-community .channel-strip~h3,
       .front-door-clean .video-community .channel-strip~p,
+      .front-door-clean .video-community .video-layout,
+      .front-door-clean .video-community .video-studio,
       .front-door-clean .video-community .video-signin,
       .front-door-clean .video-community .video-form,
       .front-door-clean .video-community .video-feed,
