@@ -9,7 +9,27 @@
       :root{--ink:#09233a;--blue:#113d6a;--night:#06131e;--paper:#f7fbfd;--wash:#d6e6fe;--line:#8fb4c8;--gold:#d6a84a}
       *{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#06131e,#113d6a 54%,#d6e6fe);color:#fff;font-family:Arial,Helvetica,sans-serif}a{color:inherit}.shell{width:min(1160px,calc(100% - 32px));margin:auto;padding:30px 0 80px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}.brand{font:600 30px Georgia,serif;text-decoration:none}.nav{display:flex;gap:8px;flex-wrap:wrap}.pill,.button{min-height:42px;padding:12px 15px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:#ffffff16;color:#fff;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:.08em}.button.primary{background:#fff;color:var(--blue);border-color:#fff}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;padding:68px 0 32px}.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;font-weight:900;color:#a8dcff}h1{margin:12px 0 18px;font:600 clamp(48px,8vw,88px)/.9 Georgia,serif;letter-spacing:-.035em}h2{margin:0 0 12px;font:600 clamp(28px,4vw,42px)/1.05 Georgia,serif}h3{margin:0 0 8px;font:600 23px/1.2 Georgia,serif}.lead,.copy,p{line-height:1.62}.lead{font-size:18px;color:#e9f7ff}.panel,.card{border:1px solid rgba(255,255,255,.28);border-radius:18px;background:rgba(255,255,255,.1);box-shadow:0 22px 60px rgba(0,0,0,.22)}.panel{padding:24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 28px}.card{padding:20px;min-height:170px}.card p,.muted{color:#dceeff}.stage{display:grid;grid-template-columns:1fr 1fr;gap:16px}.screen{aspect-ratio:16/9;border:1px solid rgba(255,255,255,.3);border-radius:14px;background:radial-gradient(circle at 20% 20%,#456f8e,#06131e 62%);display:grid;place-items:center;text-align:center;padding:22px}.dial{display:grid;gap:11px}.dial div{padding:14px;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.08)}.rule{margin-top:20px;padding:18px;border:1px dashed rgba(255,255,255,.34);border-radius:14px;background:rgba(255,255,255,.08);color:#e9f7ff}.footer{margin-top:32px;border-top:1px solid rgba(255,255,255,.22);padding-top:18px;color:#dceeff;font-size:13px}@media(max-width:860px){.hero,.grid,.stage{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:50px}}:focus-visible{outline:3px solid #ffd166;outline-offset:3px}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
     </style>
-  </head>
+  <style id="lighthouse-brand-type-pass">
+  @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  html, body, main, section, article, aside, div, p, li, label, input, select, textarea, button, a, span, small, strong, summary, option {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  h1, h2, .brand, .brand-title, .brand-the, .script-title, .lighthouse-script {
+    font-family: 'Niconne', 'Brush Script MT', cursive !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+  }
+  h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  .eyebrow, .pill, .button, nav a, .nav a, .status, .tag, .badge, [class*="kicker"], [class*="label"], [class*="meta"] {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: .015em !important;
+  }
+</style>
+</head>
   <body>
     <main class="shell">
       <nav class="top" aria-label="Lighthouse Channel navigation">

@@ -39,7 +39,27 @@
 @media(max-width:520px){.zone:not(.is-focus){opacity:.1!important;pointer-events:none}.zone.is-focus{left:12%!important;right:auto!important;top:23%!important;bottom:auto!important;width:76%!important;transform:scale(1)!important;z-index:5!important}.zone.is-focus .zone-title{width:auto;min-width:180px}.zone.is-focus .spaces{top:76%}.lot-guidance{z-index:7}.scene-controls{z-index:8}}
 @media(prefers-reduced-motion:reduce){.viewport:before{animation:none}}
 .facility-reality-video{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;opacity:.78;filter:saturate(1.05) contrast(1.03)}.facility{z-index:2}.facility-reality-label{position:absolute;z-index:6;left:14px;top:14px;padding:7px 9px;border-radius:999px;background:rgba(4,18,33,.82);color:#fff;font:800 8px/1 Arial,sans-serif;letter-spacing:.09em}.viewport[data-night=true] .facility-reality-video{filter:brightness(.38) saturate(.8)}
-</style></head><body><main class="shell">
+</style><style id="lighthouse-brand-type-pass">
+  @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  html, body, main, section, article, aside, div, p, li, label, input, select, textarea, button, a, span, small, strong, summary, option {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  h1, h2, .brand, .brand-title, .brand-the, .script-title, .lighthouse-script {
+    font-family: 'Niconne', 'Brush Script MT', cursive !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+  }
+  h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  .eyebrow, .pill, .button, nav a, .nav a, .status, .tag, .badge, [class*="kicker"], [class*="label"], [class*="meta"] {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: .015em !important;
+  }
+</style>
+</head><body><main class="shell">
 <header class="hero"><div><div class="eyebrow">Storage &amp; Space</div><h1>Drive in. Find your space.</h1><p>The facility is the interface. Move through real approved spaces, select one, and see what fits, what is current, and what still needs confirmation.</p></div><div class="hero-actions"><a class="button secondary" href="/customer-portal?view=storage" target="_top">My Easy Lot</a><a class="button secondary" href="/operator-community" target="_top">For Storage Operators</a></div></header>
 <form class="need-box" id="needForm"><label>What kind of space do you need?<textarea id="needText" maxlength="600" placeholder="Example: Outdoor space near Baltimore for a 40 ft bus, wide gate and 24/7 access."></textarea></label><div class="need-actions"><button class="button" type="submit">Show My Fit</button><button class="button secondary" id="browseButton" type="button">Browse Spaces</button><button class="button secondary" id="wantedButton" type="button">Wanted Space</button></div><div class="chips"><button class="chip" type="button" data-kind="vehicle">Vehicle &amp; fleet</button><button class="chip" type="button" data-kind="rv">RV / boat</button><button class="chip" type="button" data-kind="equipment">Equipment</button><button class="chip" type="button" data-kind="contractor yard">Contractor yard</button><button class="chip" type="button" data-kind="indoor">Warehouse / indoor</button><button class="chip" type="button" data-kind="">Not sure</button></div></form>
 <section class="request-box" id="storageRequestBox" aria-labelledby="storageRequestTitle"><div class="request-head"><div><div class="eyebrow">Easy Lot request</div><h2 id="storageRequestTitle">Request storage for owner review.</h2><p>Submitting this starts a real private request. Easy Lot still confirms availability, final price, agreement, payment step and access before anything is active.</p></div><button class="button secondary" id="closeRequest" type="button">Close</button></div><form id="storageRequestForm" class="request-grid">

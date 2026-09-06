@@ -10,7 +10,27 @@ body.quick .hero{min-height:320px}body.quick .lighthouse,body.quick .world{displ
 @media(max-width:900px){.hero{grid-template-columns:1fr .55fr}.map{grid-template-columns:repeat(2,1fr);grid-template-rows:none}.district,.square,.motor,.equipment,.home,.business,.free,.trade,.wanted,.maker,.storage,.auction{grid-column:auto;grid-row:auto;min-height:220px}.square{grid-column:1/-1;min-height:300px}.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.top{height:auto;min-height:74px;padding:15px}.brand{font-size:21px}.links a:not(:last-child){display:none}.links a{font-size:8px;padding:9px}.hero{display:block;min-height:565px;padding:52px 18px 20px}.hero h1{font-size:58px}.hero p{font-size:15px}.lighthouse{position:absolute;width:275px;right:-35px;bottom:0;opacity:.72}.controls{padding:11px 12px}.mode{width:100%}.mode .pill{flex:1}.hint{display:none}.world{padding:40px 9px 54px}.worldhead{display:block;padding:0 8px}.worldhead p{text-align:left}.map{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 5px 19px}.district,.square{flex:0 0 84vw;min-height:380px;scroll-snap-align:center}.district b{font-size:38px}.browse{padding:46px 13px 70px}.browsehead{display:block}.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important;transform:none!important}}
-</style><style>.hero{position:relative;overflow:hidden}</style></head><body class="explore"><div class="atmosphere" aria-hidden="true"></div><main class="shell">
+</style><style>.hero{position:relative;overflow:hidden}</style><style id="lighthouse-brand-type-pass">
+  @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  html, body, main, section, article, aside, div, p, li, label, input, select, textarea, button, a, span, small, strong, summary, option {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  h1, h2, .brand, .brand-title, .brand-the, .script-title, .lighthouse-script {
+    font-family: 'Niconne', 'Brush Script MT', cursive !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+  }
+  h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: 0 !important;
+  }
+  .eyebrow, .pill, .button, nav a, .nav a, .status, .tag, .badge, [class*="kicker"], [class*="label"], [class*="meta"] {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: .015em !important;
+  }
+</style>
+</head><body class="explore"><div class="atmosphere" aria-hidden="true"></div><main class="shell">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 :root{--lh-blue:#113d6a;--lh-sky:#d6e6fe;--lh-line:rgba(17,61,106,.48);--lh-paper:rgba(255,255,255,.48)}
