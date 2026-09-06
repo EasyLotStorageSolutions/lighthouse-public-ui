@@ -269,25 +269,47 @@
       .button, .button.secondary, .button.light { min-height: 46px; padding: 0 24px; border: 1px solid var(--easy-blue); border-radius: 4px; background: rgba(255,255,255,.48); color: var(--easy-blue); font: 400 11px/1 Arial, Helvetica, sans-serif; letter-spacing: .055em; }
       .button.secondary { background: transparent; color: var(--easy-blue); }
       .button:hover { background: var(--easy-blue); border-color: var(--easy-blue); color: #fff; text-decoration: none; }
-      .hero { position: relative; overflow: hidden; padding: 64px 0 90px; background: var(--easy-sky); text-align: center; }
+      .hero { position: relative; overflow: hidden; min-height: min(760px, calc(100vh - 40px)); display: grid; align-items: center; padding: clamp(56px,7vw,92px) 0 clamp(44px,6vw,70px); background: var(--easy-sky); text-align: center; }
       .hero::before, .hero::after { display: none; }
       .hero .container { position: relative; z-index: 1; }
       .hero p { max-width: 790px; margin: 0 auto 30px; color: var(--easy-blue); font: 400 clamp(19px, 2.2vw, 24px)/1.62 'Playfair Display', Georgia, serif; }
       .hero .actions { justify-content: center; }
       .hero-note { margin-top: 22px !important; color: var(--easy-blue) !important; font-size: 14px !important; font-weight: 700 !important; }
-      .home-map { padding: 30px 0 18px; background: transparent; }
-      .home-map-panel { padding: 22px; border: 1px solid rgba(17,61,106,.38); border-radius: 18px; background: rgba(255,255,255,.66); box-shadow: 0 18px 46px rgba(8,43,76,.12); }
+      .home-map { padding: 28px 0 44px; background: transparent; }
+      .home-map-panel { padding: clamp(22px,3vw,34px); border: 1px solid rgba(17,61,106,.38); border-radius: 28px; background: linear-gradient(145deg,rgba(255,255,255,.78),rgba(232,242,249,.62)); box-shadow: 0 24px 70px rgba(8,43,76,.16); backdrop-filter: blur(10px); }
       .home-map-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
       .home-map-head h2 { margin: 0; font: 700 clamp(25px,3vw,34px)/1.08 'Playfair Display',Georgia,serif; letter-spacing: 0; }
       .home-map-head p { max-width: 440px; margin: 0; color: var(--easy-muted); font: 15px/1.55 Arial,sans-serif; }
-      .home-map-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
-      .home-place { display: grid; gap: 8px; min-height: 132px; padding: 18px; border: 1px solid rgba(17,61,106,.24); border-radius: 14px; background: rgba(255,255,255,.72); color: var(--easy-blue); text-decoration: none; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+      .home-map-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+      .home-place { display: grid; gap: 8px; min-height: 138px; padding: 19px; border: 1px solid rgba(17,61,106,.24); border-radius: 20px; background: rgba(255,255,255,.76); color: var(--easy-blue); text-decoration: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.72); transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease; }
       .home-place strong { color: var(--easy-navy); font: 700 19px/1.2 'Playfair Display',Georgia,serif; }
       .home-place span { color: var(--easy-muted); font: 13px/1.45 Arial,sans-serif; }
       .home-place small { align-self: end; color: var(--easy-blue); font: 800 10px/1.2 Arial,sans-serif; letter-spacing: .09em; text-transform: uppercase; }
       .home-place.primary { border-color: rgba(17,61,106,.62); background: linear-gradient(145deg,rgba(255,255,255,.94),rgba(231,241,250,.88)); }
-      .home-place:hover,.home-place:focus-visible { transform: translateY(-3px); border-color: var(--easy-blue); background: #fff; text-decoration: none; }
+      .home-place:hover,.home-place:focus-visible { transform: translateY(-3px); border-color: var(--easy-blue); background: #fff; text-decoration: none; box-shadow: 0 18px 36px rgba(8,43,76,.13); }
       .home-area-band { border-top: 1px solid rgba(17,61,106,.2); }
+      .launch-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; overflow: hidden; margin: 20px auto 0; border: 1px solid rgba(17,61,106,.26); border-radius: 18px; background: rgba(17,61,106,.24); box-shadow: 0 20px 50px rgba(8,43,76,.11); }
+      .launch-strip span { display: grid; gap: 5px; min-height: 82px; padding: 17px 18px; background: rgba(255,255,255,.7); color: var(--easy-muted); font: 12px/1.35 Arial,sans-serif; }
+      .launch-strip strong { color: var(--easy-navy); font: 800 11px/1.2 Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+      .experience-shell { width: min(1240px, calc(100% - 32px)); margin: 22px auto; border: 1px solid rgba(17,61,106,.24); border-radius: 34px; background: linear-gradient(145deg,rgba(255,255,255,.58),rgba(214,231,238,.3)); box-shadow: 0 28px 84px rgba(8,43,76,.13); overflow: hidden; }
+      .experience-shell > .container { width: min(1080px, calc(100% - 44px)); }
+      .easy-storage.experience-shell,.lighthouse-work.experience-shell,.marketplace-showcase.experience-shell,.video-community.experience-shell { padding-block: clamp(54px,7vw,86px); }
+      #assistant.experience-shell { padding-block: clamp(46px,6vw,74px); }
+      .lighthouse-doorway.experience-shell { padding-block: clamp(34px,5vw,62px); }
+      .quiet-support { padding: 30px 0 54px; }
+      .quiet-support-panel { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 20px 22px; border: 1px solid rgba(17,61,106,.22); border-radius: 22px; background: rgba(255,255,255,.54); }
+      .quiet-support-panel p { margin: 0; color: var(--easy-muted); font: 15px/1.5 Arial,sans-serif; }
+      .easy-needs,.easy-process,.easy-business { width: min(1080px, calc(100% - 48px)); margin: 18px auto; padding: 40px 0; border-top: 1px solid rgba(17,61,106,.18); }
+      .easy-needs .section-head,.easy-process .section-head,.easy-business .section-head { margin-bottom: 24px; }
+      .easy-needs h2,.easy-process h2,.easy-business h2 { font-size: clamp(32px,4vw,46px); }
+      .easy-needs .needs-list { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+      .easy-needs .need { display: block; padding: 18px; border: 1px solid rgba(17,61,106,.18)!important; border-radius: 18px; background: rgba(255,255,255,.44); }
+      .easy-needs .need-number { margin-bottom: 12px; background: rgba(255,255,255,.68); }
+      .easy-process .process-line { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; border: 0; }
+      .easy-process .process-step { padding: 20px; border: 1px solid rgba(17,61,106,.18); border-radius: 18px; background: rgba(255,255,255,.38); }
+      .easy-process .process-step::before { display: none; }
+      .easy-business .business-layout { grid-template-columns: minmax(0,1fr) minmax(280px,.72fr); gap: 28px; }
+      .easy-business .business-panel { border-radius: 20px; background: rgba(255,255,255,.48); box-shadow: none; }
       .journey-grid { display: none; }
       #assistant { position: relative; z-index: 2; margin-top: 0; padding: 58px 0 76px; background: transparent; }
       .assistant-shell { max-width: 940px; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: rgba(255,255,255,.48); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
@@ -383,7 +405,7 @@
       }
       @media (max-width: 640px) {
         .container { width: min(100% - 30px, 1080px); }
-        .hero { padding: 58px 0 98px; }
+        .hero { min-height: auto; padding: 54px 0 70px; }
         h1 { max-width: 100%; margin-top: 10px; font-size: clamp(44px, 14vw, 62px); line-height: 1; overflow-wrap: normal; }
         h2 { font-size: clamp(34px, 10vw, 46px); }
         .hero p { font-size: 18px; }
@@ -393,6 +415,13 @@
         .home-map-head p { margin-top: 8px; }
         .home-map-grid { grid-template-columns: 1fr; }
         .home-place { min-height: 104px; }
+        .launch-strip { grid-template-columns: 1fr; }
+        .experience-shell { width: min(100% - 18px, 1240px); margin-block: 12px; border-radius: 24px; }
+        .experience-shell > .container { width: min(100% - 26px, 1080px); }
+        .quiet-support-panel { align-items: stretch; flex-direction: column; }
+        .quiet-support-panel .button { width: 100%; }
+        .easy-needs,.easy-process,.easy-business { width: min(100% - 26px, 1080px); padding: 32px 0; }
+        .easy-needs .needs-list,.easy-process .process-line,.easy-business .business-layout { grid-template-columns: 1fr; }
         #assistant { margin-top: 0; padding-top: 42px; padding-bottom: 68px; }
         .assistant-shell { padding: 24px 20px; border-radius: 16px; }
         .ai-console-bar { margin: -24px -20px 24px; padding: 15px 16px; border-radius: 16px 16px 0 0; }
@@ -769,6 +798,12 @@
           <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
           <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">SEE STUDIO HERE</a><a class="button secondary" href="#home-map-title">CHOOSE AN AREA</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
+          <div class="launch-strip" aria-label="Opening day status">
+            <span><strong>Work</strong>Profiles, hiring needs, matching, invitations, and scheduling are open.</span>
+            <span><strong>Marketplace</strong>Browse, sell, showcase, and view Auction Hall as coming-soon.</span>
+            <span><strong>Storage</strong>Find space, list a facility, and join the operator network.</span>
+            <span><strong>Studio</strong>Watch the daily Channel feature or create inside your account.</span>
+          </div>
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
             <div class="starting-line-actions">
@@ -808,8 +843,8 @@
           </div>
         </div>
       </section>
-      <section class="section easy-storage" id="storage" aria-labelledby="storage-home-title"><div class="container storage-living-layout"><div class="storage-living-copy"><div class="eyebrow">Storage &amp; Space</div><h2 id="storage-home-title">Drive in. Find where you fit.</h2><p class="copy">Tell Lighthouse what you need, then explore a living miniature facility built around real approved availability.</p><form class="storage-home-search" action="/find-storage" method="get"><label for="storage-home-need">What do you need space for?<textarea id="storage-home-need" name="need" maxlength="600" placeholder="40 ft school bus, 24/7 access, fenced"></textarea></label><div class="actions"><button class="button" type="submit">FIND MY FIT</button><a class="button secondary" href="/customer-portal?view=storage">MY EASY LOT</a><a class="button secondary" href="/operator-community">FOR STORAGE OPERATORS</a></div></form></div><div class="storage-phone-wrap"><div class="storage-phone-label">LIGHTHOUSE STORAGE</div><div class="storage-drivein" aria-label="Living Storage Lot phone experience"><div class="storage-phone-island" aria-hidden="true"></div><div class="storage-phone-status"><span>9:41</span><span>● ◒ ▰</span></div><div class="storage-phone-appbar"><span class="storage-phone-mark">L</span><span><strong>Storage &amp; Space</strong><small>LIVE FACILITY VIEW</small></span></div><div class="storage-reality-layer" aria-hidden="true"><i class="storage-cloud one"></i><i class="storage-cloud two"></i><i class="storage-fence"></i><i class="storage-gate"></i><i class="storage-light"></i><i class="storage-vehicle"></i><i class="storage-sign">LIGHTHOUSE<br>SECURE STORAGE</i></div><div class="storage-drivein-lane" id="storage-drivein-lane"><article class="storage-drivein-zone"><h3>Entrance</h3><div class="storage-drivein-building"></div><div class="storage-drivein-empty">The Living Storage Lot</div></article><article class="storage-drivein-zone"><h3>Outdoor</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="outdoor"></div></article><article class="storage-drivein-zone"><h3>Equipment Yard</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="yard"></div></article><article class="storage-drivein-zone"><h3>Indoor Hall</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="indoor"></div></article></div><div class="storage-drivein-actions"><button class="storage-drivein-arrow" id="storage-drivein-prev" type="button" aria-label="Previous storage destination">←</button><div class="actions"><a class="button" href="/find-storage">ENTER FACILITY</a></div><button class="storage-drivein-arrow" id="storage-drivein-next" type="button" aria-label="Next storage destination">→</button></div></div><p class="storage-phone-hint">Tap a building or use the arrows to explore the real availability view.</p></div></div></section>
-      <section class="lighthouse-work" id="lighthouse-work" aria-labelledby="lighthouse-work-title" data-live-work="true">
+      <section class="section easy-storage experience-shell" id="storage" aria-labelledby="storage-home-title"><div class="container storage-living-layout"><div class="storage-living-copy"><div class="eyebrow">Storage &amp; Space</div><h2 id="storage-home-title">Drive in. Find where you fit.</h2><p class="copy">Tell Lighthouse what you need, then explore a living miniature facility built around real approved availability.</p><form class="storage-home-search" action="/find-storage" method="get"><label for="storage-home-need">What do you need space for?<textarea id="storage-home-need" name="need" maxlength="600" placeholder="40 ft school bus, 24/7 access, fenced"></textarea></label><div class="actions"><button class="button" type="submit">FIND MY FIT</button><a class="button secondary" href="/customer-portal?view=storage">MY EASY LOT</a><a class="button secondary" href="/operator-community">FOR STORAGE OPERATORS</a></div></form></div><div class="storage-phone-wrap"><div class="storage-phone-label">LIGHTHOUSE STORAGE</div><div class="storage-drivein" aria-label="Living Storage Lot phone experience"><div class="storage-phone-island" aria-hidden="true"></div><div class="storage-phone-status"><span>9:41</span><span>● ◒ ▰</span></div><div class="storage-phone-appbar"><span class="storage-phone-mark">L</span><span><strong>Storage &amp; Space</strong><small>LIVE FACILITY VIEW</small></span></div><div class="storage-reality-layer" aria-hidden="true"><i class="storage-cloud one"></i><i class="storage-cloud two"></i><i class="storage-fence"></i><i class="storage-gate"></i><i class="storage-light"></i><i class="storage-vehicle"></i><i class="storage-sign">LIGHTHOUSE<br>SECURE STORAGE</i></div><div class="storage-drivein-lane" id="storage-drivein-lane"><article class="storage-drivein-zone"><h3>Entrance</h3><div class="storage-drivein-building"></div><div class="storage-drivein-empty">The Living Storage Lot</div></article><article class="storage-drivein-zone"><h3>Outdoor</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="outdoor"></div></article><article class="storage-drivein-zone"><h3>Equipment Yard</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="yard"></div></article><article class="storage-drivein-zone"><h3>Indoor Hall</h3><div class="storage-drivein-building"></div><div class="storage-drivein-spaces" data-home-zone="indoor"></div></article></div><div class="storage-drivein-actions"><button class="storage-drivein-arrow" id="storage-drivein-prev" type="button" aria-label="Previous storage destination">←</button><div class="actions"><a class="button" href="/find-storage">ENTER FACILITY</a></div><button class="storage-drivein-arrow" id="storage-drivein-next" type="button" aria-label="Next storage destination">→</button></div></div><p class="storage-phone-hint">Tap a building or use the arrows to explore the real availability view.</p></div></div></section>
+      <section class="lighthouse-work experience-shell" id="lighthouse-work" aria-labelledby="lighthouse-work-title" data-live-work="true">
         <div class="container work-shell">
           <div class="work-copy"><div class="eyebrow">LIGHTHOUSE WORK · PUBLIC EARLY ACCESS</div><h2 id="lighthouse-work-title">From a real work need to a confirmed next step.</h2><p>Workers can create private profiles. Employers can state hiring needs. Lighthouse can introduce possible fits without becoming the employer, payroll company, or decision maker.</p><p class="work-truth">The launch scope is matching, coordination, invitations, applications, interview scheduling, hiring-status tracking, talent pools, Work Now readiness, and employer subscriptions. Interest is never a contract, hiring decision, or payment. Payroll, tax withholding, background checks, identity verification, contracts, wage payments, benefits, E-Verify, and automatic hiring stay outside this release.</p><div class="work-pill-row" aria-label="Lighthouse Work principles"><span class="work-pill">Workers free</span><span class="work-pill">Employer subscription</span><span class="work-pill">0% pay cut</span><span class="work-pill">No pay-to-rank</span></div></div>
           <div class="work-demo">
@@ -830,7 +865,7 @@
           </div>
         </div>
       </section>
-      <section class="marketplace-showcase" id="marketplace-showcase" aria-labelledby="marketplace-showcase-title">
+      <section class="marketplace-showcase experience-shell" id="marketplace-showcase" aria-labelledby="marketplace-showcase-title">
         <div class="lh-market-intro" id="marketplaceExperience">
 <div class="lh-market-copy"><span class="lh-eyebrow">THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketplace-showcase-title">Buy it. Sell it. Auction it.<span>All in one Marketplace.</span></h2><p>List goods, vehicles, equipment, business items, free items, trades, or wanted posts. Storage stays in its own Storage &amp; Space section.</p><div class="lh-market-actions"><a class="button" href="/sell-something">Sell Something</a><a class="button secondary" href="/marketplace">Explore Marketplace</a></div><button class="lh-demo-link" id="phone-demo-replay" type="button">See how it works</button></div>
           <div class="lh-phone-stage"><div class="lh-phone-glow" aria-hidden="true"></div><div class="marketplace-phone-wrap">
@@ -856,7 +891,7 @@
           <button class="experience-mode" type="button" data-home-mode="immersive" aria-pressed="false"><small>IMMERSIVE</small><strong>Turn up the atmosphere.</strong><span>Explore with deeper transitions and optional sound after you opt in.</span></button>
         </div><div class="portal-enter"><span id="portal-mode-copy">Explore mode opens the visual Marketplace campus. You can switch modes at any time.</span><div class="lh-market-actions"><a class="button" id="portal-enter-link" href="/marketplace">ENTER EXPLORE MODE</a><a class="button secondary" href="/auction-hall">ENTER AUCTION HALL · VIEW ONLY</a></div></div></div>
       </section>
-      <section class="section" id="assistant">
+      <section class="section experience-shell" id="assistant">
         <div class="container">
           <div class="assistant-shell">
             <div class="ai-console-bar"><div class="ai-identity"><span class="ai-mark" aria-hidden="true"></span><div><strong class="ai-name">Lighthouse AI</strong><span class="ai-subtitle">Guidance for work, business, projects, and everyday needs</span></div></div><span class="ai-live">Online</span></div>
@@ -909,7 +944,7 @@
           </div>
         </div>
       </section>
-      <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
+      <section class="lighthouse-doorway experience-shell" aria-labelledby="lighthouse-title">
         <div class="container"><div class="lighthouse-panel">
           <div class="lighthouse-intro"><div><div class="eyebrow">Your private AI workspace</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Bring Lighthouse an idea, a problem, pictures, or a short video. It helps turn what you share into organized work and keeps the decisions, evidence, and next steps together.</p></div><div class="lighthouse-member"><p>Already a member? Your private workspace, saved work, and account tools are waiting.</p><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a><p class="lighthouse-state" id="lighthouse-state" role="status" aria-live="polite">Checking your membership…</p></div></div>
           <div class="lighthouse-plans" aria-label="Lighthouse membership choices">
@@ -932,7 +967,7 @@
           <button class="button" id="delivery-form-submit" type="submit">Join Early Access</button>
         </form>
       </dialog>
-      <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
+      <section class="video-community experience-shell" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
           <div class="video-heading"><div><div class="eyebrow">Lighthouse Studio & Channel · Lighthouse Studio + Community</div><h2 id="video-community-title">Create, watch, and listen in one place.</h2><p>Open Lighthouse Studio for one private creative workspace with video, recording, beats, piano/MIDI, captions, versions and rights-aware release tools. The Channel is the calm public lounge for approved music videos, creator clips, business features, and community spotlights.</p><p><a class="button" href="/customer-portal?view=studio">OPEN LIGHTHOUSE STUDIO</a></p></div><div class="video-safety">Studio projects stay private unless you deliberately submit a video to Community Watch. Every upload is screened and held for human review. Channel media is screened and held for human review before publication.</div></div>
           <section class="channel-strip" aria-label="Lighthouse Channel">
