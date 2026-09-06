@@ -1,0 +1,7 @@
+#studio{color:var(--ink);font:400 17px/1.55 'Playfair Display',Georgia,serif}
+#studio .studio-hero{background:var(--sky);color:var(--ink);border-color:var(--line);border-radius:4px;box-shadow:var(--shadow)}
+#studio .studio-hero h2{color:var(--ink);font:italic 400 clamp(42px,5vw,60px)/1.08 'Niconne','Brush Script MT',cursive;letter-spacing:-.02em}
+#studio .studio-hero p,#studio .studio-hero .eyebrow,#studio .studio-text-link{color:var(--ink)}
+#studio .studio-hero .eyebrow,#studio button,#studio label,#studio .pill{font-family:Arial,Helvetica,sans-serif}
+#studio .studio-launch,#studio .studio-trust-row span{background:rgba(255,255,255,.48);border-color:var(--line);color:var(--ink)}
+#studio .studio-hero-actions button{background:rgba(255,255,255,.48);border:1px solid var(--ink);color:var(--ink)}
