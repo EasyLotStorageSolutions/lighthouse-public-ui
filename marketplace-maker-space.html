@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <base href="https://www.easylotstoragesolutions.com/" target="_top">
+    <title>Maker Space - Lighthouse Marketplace</title>
+    <style>
+      :root{--ink:#06131e;--deep:#082233;--sky:#8bdcff;--gold:#e6b75c;--muted:#bfd5df;--line:#8bdcff42}
+      *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#06131e,#113d6a 58%,#d6e6fe);color:#f8fbff;font-family:Arial,sans-serif}a{color:inherit}.shell{width:min(1120px,calc(100% - 34px));margin:auto;padding:28px 0 80px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px}.brand{font:600 28px Georgia,serif;text-decoration:none}.nav{display:flex;gap:8px;flex-wrap:wrap}.pill,.button{min-height:42px;padding:12px 15px;border:1px solid var(--line);border-radius:999px;background:#ffffff10;color:#fff;text-decoration:none;font-weight:800;font-size:11px;letter-spacing:.08em}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;padding:72px 0 46px}.eyebrow{color:var(--sky);font-weight:800;font-size:11px;letter-spacing:.18em;text-transform:uppercase}h1{margin:14px 0 18px;font:600 clamp(52px,8vw,94px)/.9 Georgia,serif;letter-spacing:-.04em}h2{margin:0 0 12px;font:600 clamp(31px,4vw,48px)/1 Georgia,serif}.hero p,.copy{color:#e4f3f8;font-size:17px;line-height:1.62}.panel{border:1px solid var(--line);border-radius:22px;background:#071c2bcc;padding:26px}.promise{display:grid;gap:12px}.promise strong{color:#fff;font-size:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 34px}.card{min-height:180px;padding:22px;border:1px solid var(--line);border-radius:18px;background:#ffffff10}.card h3{margin:0 0 9px;font:600 24px Georgia,serif}.card p{margin:0;color:var(--muted);line-height:1.55}.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}form{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:7px;color:#eaf7ff;font-size:13px;font-weight:700}.full{grid-column:1/-1}input,textarea,select{width:100%;padding:13px;border:1px solid #ffffff40;border-radius:9px;background:#06131e;color:#fff;font:inherit}textarea{min-height:120px;resize:vertical}.checks{display:grid;gap:10px}.checks label{display:flex;gap:9px;align-items:flex-start;font-weight:600;line-height:1.45}.checks input{width:auto;margin-top:2px}.submit{min-height:50px;border:0;border-radius:999px;background:var(--gold);color:#1b1408;font-weight:900;letter-spacing:.08em}.status{min-height:24px;color:var(--sky);font-weight:700}.quiet{margin-top:18px;color:#d7ecf4;font-size:13px;line-height:1.6}.bot{position:absolute;left:-10000px}@media(max-width:850px){.hero,.split,.grid{grid-template-columns:1fr}.hero{padding-top:52px}form{grid-template-columns:1fr}.full{grid-column:auto}.nav .pill{font-size:9px;padding-inline:10px}h1{font-size:54px}}:focus-visible{outline:3px solid #ffd166;outline-offset:3px}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="top" aria-label="Maker Space navigation">
+        <a class="brand" href="marketplace-explore.html">Lighthouse Maker Space</a>
+        <div class="nav"><a class="pill" href="marketplace-explore.html">BROWSE ALL</a><a class="pill" href="marketplace-sell.html">SELL</a><a class="pill" href="marketplace-property-classifieds.html#auctionArea">AUCTIONS</a><a class="pill" href="/find-local-help">SERVICES</a></div>
+      </nav>
+      <header class="hero">
+        <div>
+          <div class="eyebrow">Custom - Handmade - Repair - Prototype</div>
+          <h1>Make it real.</h1>
+          <p>Maker Space is a native lane inside Lighthouse Marketplace for custom making, handmade goods, repair/rebuild, prototypes, and design-to-build work. Buyers browse and request for free. Makers publish only after review.</p>
+          <a class="button" href="#makerForm">START MAKER APPLICATION</a>
+        </div>
+        <aside class="panel promise" aria-label="Direct payment promise">
+          <div class="eyebrow">Founding Maker Plan</div>
+          <h2>$19.99/month</h2>
+          <strong>Lighthouse charges this membership. Your customers pay you directly. Lighthouse takes 0% of your sale.</strong>
+          <p class="copy">Month-to-month. Cancel anytime through your Wix account/subscriptions area. No commission, escrow, payout handling, lead fee, paid ranking, or payment custody.</p>
+        </aside>
+      </header>
+      <section class="grid" aria-label="Maker Space categories">
+        <article class="card"><h3>Custom products</h3><p>Handmade goods, made-to-order pieces, and small-batch work with clear scope and proof.</p></article>
+        <article class="card"><h3>Repair and rebuild</h3><p>Repair, remake, restoration, modification, and rebuild requests with boundaries before work begins.</p></article>
+        <article class="card"><h3>Prototypes</h3><p>Design-to-build, mockups, early prototypes, digital design, and maker capacity.</p></article>
+      </section>
+      <section class="split">
+        <form class="panel" id="makerForm">
+          <input type="hidden" name="action" value="maker">
+          <label>Maker or business name<input name="makerName" required maxlength="180"></label>
+          <label>Private contact email<input name="email" type="email" required></label>
+          <label>Maker Space type<select name="listingType" required><option value="">Choose one</option><option value="maker-service">Maker service</option><option value="custom-product">Custom product</option><option value="repair-rebuild">Repair/rebuild</option><option value="prototype">Prototype</option><option value="digital-design">Digital design</option><option value="maker-capacity">Maker capacity</option></select></label>
+          <label>Price mode<select name="priceMode"><option value="request-custom">Request custom quote</option><option value="fixed-price">Fixed price</option><option value="make-offer">Make offer</option></select></label>
+          <label class="full">Listing title<input name="title" required maxlength="180" placeholder="For example: custom shelves, repair work, prototype bracket"></label>
+          <label class="full">Description<textarea name="description" required maxlength="5000" placeholder="Describe what you make or repair. Do not include private addresses or payment details."></textarea></label>
+          <label>Dimensions or size range<input name="dimensions" required placeholder="For example: up to 48 x 24 in, varies by project"></label>
+          <label>Lead time<input name="leadTime" required placeholder="For example: 2-4 weeks after scope approval"></label>
+          <label>Fulfillment<input name="fulfillment" required placeholder="Pickup, maker delivery, shipping, digital handoff"></label>
+          <label>Starting price, if public<input name="startingPrice" type="number" min="0" step="0.01"></label>
+          <label class="full">Maker policy<textarea name="makerPolicy" required placeholder="Cancellation, revisions, materials, returns, warranty, and direct-payment terms in your words."></textarea></label>
+          <label>Direct checkout/invoice URL<input name="directCheckoutUrl" type="url" placeholder="https://your checkout or invoice link"></label>
+          <label>Portfolio URL<input name="portfolioUrl" type="url" placeholder="https://your portfolio"></label>
+          <label class="full">Photo links<textarea name="photos" placeholder="Paste HTTPS photo links, one per line. File uploads stay off until a later reviewed pass."></textarea></label>
+          <label class="bot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+          <div class="checks full">
+            <label><input type="checkbox" name="authorityCertified" required> I am the maker, owner, or authorized seller for this work.</label>
+            <label><input type="checkbox" name="termsAccepted" required> I accept the Maker Space and Marketplace terms for this submission.</label>
+            <label><input type="checkbox" name="directPaymentAcknowledged" required> I understand Lighthouse takes 0% of my sale and customers pay me directly outside Lighthouse.</label>
+            <label><input type="checkbox" name="privacyAcknowledged" required> I understand this stays pending and private until Lighthouse review.</label>
+          </div>
+          <button class="submit full" type="submit">SUBMIT MAKER APPLICATION</button>
+          <p class="status full" id="makerStatus" aria-live="polite"></p>
+        </form>
+        <form class="panel" id="requestForm">
+          <input type="hidden" name="action" value="request">
+          <div class="eyebrow full">Buyer request - free</div>
+          <h2 class="full">Request custom work.</h2>
+          <label class="full">Private contact email<input name="email" type="email" required></label>
+          <label class="full">What do you want made, repaired, rebuilt, or designed?<textarea name="need" required maxlength="5000"></textarea></label>
+          <label>Measurements<input name="measurements"></label>
+          <label>Budget range<input name="budget"></label>
+          <label>Deadline<input name="deadline"></label>
+          <label>Fulfillment preference<input name="fulfillment"></label>
+          <label class="full">Reference photo links<textarea name="referencePhotos" placeholder="Paste HTTPS links only. Nothing uploads here."></textarea></label>
+          <div class="checks full">
+            <label><input type="checkbox" name="directPaymentAcknowledged" required> I understand any payment happens directly with the maker, not through Lighthouse.</label>
+            <label><input type="checkbox" name="privacyAcknowledged" required> I understand my request stays private and review-gated before routing.</label>
+          </div>
+          <button class="submit full" type="submit">SUBMIT CUSTOM REQUEST</button>
+          <p class="status full" id="requestStatus" aria-live="polite"></p>
+          <p class="quiet full">Approved auction modes remain separate and view-only here unless later reviewed. Winning auction outcomes would only create a Maker Project Passport, not a payment or automatic contract.</p>
+        </form>
+      </section>
+    </main>
+    <script>
+      const endpoint = 'https://www.easylotstoragesolutions.com/_functions/marketplaceMaker';
+      async function submitForm(form, status) {
+        const data = Object.fromEntries(new FormData(form));
+        if (data.website) return;
+        for (const field of ['authorityCertified','termsAccepted','directPaymentAcknowledged','privacyAcknowledged']) if (field in form) data[field] = form[field].checked;
+        status.textContent = 'Submitting for review...';
+        try {
+          const response = await fetch(endpoint, { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(data) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'Submission unavailable');
+          form.reset();
+          status.textContent = data.action === 'request' ? 'Request received. It is private and pending Lighthouse review before any maker routing.' : 'Maker application received. It is private and pending Lighthouse review before publication.';
+        } catch (error) {
+          status.textContent = error.message || 'Submission is temporarily unavailable. Please try again.';
+        }
+      }
+      document.getElementById('makerForm').addEventListener('submit', event => { event.preventDefault(); submitForm(event.currentTarget, document.getElementById('makerStatus')); });
+      document.getElementById('requestForm').addEventListener('submit', event => { event.preventDefault(); submitForm(event.currentTarget, document.getElementById('requestStatus')); });
+    </script>
+  </body>
+</html>
