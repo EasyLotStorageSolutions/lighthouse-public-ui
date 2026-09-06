@@ -1,5 +1,5 @@
 const EMBED_BASE = 'https://easylotstoragesolutions.github.io/lighthouse-public-ui';
-const EMBED_RELEASE = '20260906-lighthouse-brand-pass-v1';
+const EMBED_RELEASE = '20260906-blue-homepage-cleanup-v1';
 
 export function useEmbeddedUi(element, fileName) {
     if (!element || !fileName) return element;
@@ -7,3 +7,4 @@ export function useEmbeddedUi(element, fileName) {
     if ('scrolling' in element) element.scrolling = 'no';
     return element;
 }
+
