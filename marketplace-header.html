@@ -8,8 +8,16 @@
       * { box-sizing: border-box; }
       html, body { margin: 0; min-height: 100%; overflow: hidden; font-family: Arial, Helvetica, sans-serif; color: #113d6a; background: #d6e6fe; }
       .shell { width: min(980px, 100%); min-height: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-      .brand { display: flex; width: 100%; height: 620px; align-items: center; justify-content: center; overflow: hidden; text-decoration: none; }
-      .brand img { display: block; width: auto; max-width: 100%; height: 620px; object-fit: contain; object-position: center; }
+      .brand { position: relative; display: flex; width: 100%; height: 620px; align-items: center; justify-content: center; overflow: hidden; isolation: isolate; text-decoration: none; background: #173f59; }
+      .brand-video { position: absolute; z-index: -3; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+      .brand::before { content: ""; position: absolute; z-index: -2; inset: 0; background: linear-gradient(180deg, rgba(4,24,39,.08) 0%, rgba(4,24,39,.04) 43%, rgba(4,24,39,.58) 100%); }
+      .brand::after { content: ""; position: absolute; z-index: -1; inset: 0; box-shadow: inset 0 -120px 130px rgba(2,18,31,.22); pointer-events: none; }
+      .brand-lockup { width: min(720px, calc(100% - 48px)); margin-top: 245px; display: grid; justify-items: center; color: #fff; text-align: center; text-shadow: 0 3px 16px rgba(0,0,0,.8); }
+      .brand-mark { width: 76px; height: 76px; margin-bottom: -3px; filter: drop-shadow(0 3px 8px rgba(0,0,0,.6)); }
+      .brand-the { width: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px; font: 600 36px/1 Georgia, 'Times New Roman', serif; letter-spacing: .04em; }
+      .brand-the::before, .brand-the::after { content: ""; height: 2px; background: rgba(255,255,255,.9); box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+      .brand-title { margin-top: -2px; font: 500 clamp(60px, 8.5vw, 92px)/.95 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; }
+      .brand-by { width: min(500px, 88%); margin-top: 8px; padding-top: 11px; border-top: 2px solid rgba(255,255,255,.9); font: 400 clamp(17px, 2.5vw, 27px)/1.38 Arial, Helvetica, sans-serif; letter-spacing: .22em; }
       nav { width: min(960px, calc(100% - 24px)); margin: 7px auto 0; padding: 6px 8px; display: flex; justify-content: center; align-items: center; gap: 3px; flex-wrap: wrap; border: 1px solid rgba(17,61,106,.3); border-radius: 7px; background: rgba(255,255,255,.88); }
       nav a { min-height: 30px; padding: 7px 8px; display: inline-flex; align-items: center; color: #113d6a; font-size: 11px; font-weight: 700; line-height: 1.2; text-decoration: none; white-space: nowrap; }
       nav a.primary { border-radius: 4px; background: #113d6a; color: #fff; }
@@ -20,15 +28,30 @@
            logo block so the desktop navigation cannot wrap underneath it. */
         .shell { min-height: 204px; height: 204px; }
         .brand { height: 204px; }
-        .brand img { width: auto; max-width: 100%; height: 190px; object-fit: contain; object-position: center; }
+        .brand-lockup { width: min(430px, calc(100% - 28px)); margin-top: 62px; }
+        .brand-mark { width: 37px; height: 37px; }
+        .brand-the { gap: 10px; font-size: 17px; }
+        .brand-title { font-size: clamp(34px, 12vw, 52px); }
+        .brand-by { width: min(330px, 90%); margin-top: 4px; padding-top: 5px; border-top-width: 1px; font-size: 10px; letter-spacing: .18em; }
         nav { display: none; }
       }
+      @media (prefers-reduced-motion: reduce) { .brand-video { display: none; } }
     </style>
   </head>
   <body>
     <header class="shell">
       <a class="brand" href="/" aria-label="The Lighthouse by Easy Lot Storage Solutions home">
-        <img src="https://static.wixstatic.com/media/d4a0d6_71f7b575a8174672a5cb6915e91aa6b3~mv2.png" alt="The Lighthouse by Easy Lot Storage Solutions" />
+        <video class="brand-video" autoplay muted loop playsinline preload="metadata" poster="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-memorial-hero-poster.jpg?v=20260906" aria-hidden="true">
+          <source src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-memorial-hero.mp4?v=20260906" type="video/mp4" />
+        </video>
+        <span class="brand-lockup" aria-hidden="true">
+          <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Lighthouse">
+            <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M43 31h14l9 55H34l9-55Z"/><path d="M39 31h22M42 18h16l4 13H38l4-13Z"/><path d="M47 10h6v8M29 86h42M17 44l13-6M83 44l-13-6M15 60h14M85 60H71"/></g>
+          </svg>
+          <span class="brand-the">THE</span>
+          <span class="brand-title">LIGHTHOUSE</span>
+          <span class="brand-by">BY EASY LOT<br />STORAGE SOLUTIONS</span>
+        </span>
       </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
