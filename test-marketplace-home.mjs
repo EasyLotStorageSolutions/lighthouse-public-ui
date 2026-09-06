@@ -7,24 +7,24 @@ const source = await readFile(new URL('./marketplace-home.html', import.meta.url
 test('Meet The Lighthouse shows the current three memberships', () => {
   const plans = [
     ['Free', '$0'],
-    ['The Lighthouse Membership', '$0'],
-    ['Lighthouse Business', '$0']
+    ['Lighthouse Employer', '$199'],
+    ['Lighthouse Business', '$199']
   ];
 
   for (const [name, price] of plans) {
     assert.match(source, new RegExp(`<h3>${name}</h3>`));
     assert.ok(source.includes(price));
   }
-  assert.match(source, /OPEN NOW[\s\S]*?<h3>The Lighthouse Membership<\/h3>/);
-  assert.match(source, /Free early access is open now\. No checkout is active and nobody is charged\./);
+  assert.match(source, /14-DAY TRIAL[\s\S]*?<h3>Lighthouse Employer<\/h3>/);
+  assert.match(source, /Employer access starts with a 14-day free trial, then \$199\/month\./);
   assert.doesNotMatch(source, /MEMBERSHIP OPENING SOON/);
 });
 
-test('paid checkout stays inactive while free early access is open', () => {
+test('paid employer access links to the pricing page', () => {
   assert.match(source, /querySelectorAll\('\.lighthouse-plan-action'\)/);
   assert.match(source, /type: 'lighthouse:select-plan'/);
-  assert.match(source, /payload\.type === 'lighthouse:checkout-error'/);
-  assert.match(source, /START FREE ACCESS/);
+  assert.match(source, /START EMPLOYER PLAN/);
+  assert.match(source, /href="\/plans-pricing"/);
   assert.match(source, /action\.disabled = false/);
 });
 
