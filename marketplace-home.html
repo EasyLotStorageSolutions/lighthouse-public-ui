@@ -1811,7 +1811,7 @@
       }
       const storageDriveInLane = document.getElementById('storage-drivein-lane');
       const storageDriveIn = storageDriveInLane.closest('.storage-drivein');
-      function buildLocalPhoneVideo({ inputId, videoId, labelId, container, triggerParent, triggerText, videoLabel }) {
+      function buildLocalPhoneVideo({ inputId, videoId, labelId, container, triggerParent, triggerText, videoLabel, defaultSrc = '', defaultPoster = '', defaultLabel = '' }) {
         const video = document.createElement('video');
         video.id = videoId;
         video.className = videoId === 'storage-phone-video' ? 'storage-video' : 'phone-video';
@@ -1828,6 +1828,15 @@
         trigger.className = videoId === 'storage-phone-video' ? 'storage-portal-tool' : 'phone-video-trigger';
         trigger.htmlFor = inputId; trigger.textContent = triggerText;
         container.prepend(label); container.prepend(video); triggerParent.append(trigger, input);
+        if (defaultSrc) {
+          video.src = defaultSrc;
+          if (defaultPoster) video.poster = defaultPoster;
+          video.hidden = false;
+          label.hidden = false;
+          label.textContent = defaultLabel || 'REAL FACILITY PHOTO WALKTHROUGH';
+          container.classList.add('has-video');
+          video.play().catch(() => {});
+        }
         let objectUrl = '';
         input.addEventListener('change', () => {
           const file = input.files?.[0];
@@ -1843,7 +1852,7 @@
       storagePortalTools.className = 'storage-portal-tools';
       storagePortalTools.innerHTML = '<button class="storage-portal-tool" id="storage-portal-day" type="button" aria-pressed="false">☀ DAY</button>';
       storageDriveIn.appendChild(storagePortalTools);
-      buildLocalPhoneVideo({ inputId:'storage-video-input', videoId:'storage-phone-video', labelId:'storage-video-label', container:storageDriveIn, triggerParent:storagePortalTools, triggerText:'▶ REAL VIDEO', videoLabel:'Storage facility experience video' });
+      buildLocalPhoneVideo({ inputId:'storage-video-input', videoId:'storage-phone-video', labelId:'storage-video-label', container:storageDriveIn, triggerParent:storagePortalTools, triggerText:'▶ USE YOUR VIDEO', videoLabel:'Real storage facility photo walkthrough', defaultSrc:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-storage-facility-walkthrough.mp4?v=20260906', defaultPoster:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-storage-facility-poster.jpg?v=20260906', defaultLabel:'REAL FACILITY PHOTOS · CINEMATIC WALKTHROUGH' });
       let storageLivingStep = 0;
       let storageScanTimer = null;
       function scanHomeStorage() {
