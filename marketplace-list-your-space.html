@@ -140,8 +140,70 @@
         padding: 15px 20px;
         text-transform: uppercase;
       }
+      .host-form {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+        text-align: left;
+      }
+      .host-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .host-form label {
+        display: grid;
+        gap: 6px;
+        color: #113d6a;
+        font: 700 12px/1.4 Arial, sans-serif;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+      .host-form input,
+      .host-form select,
+      .host-form textarea {
+        width: 100%;
+        min-height: 46px;
+        padding: 12px;
+        border: 1px solid rgba(17, 61, 106, 0.48);
+        background: rgba(255,255,255,.72);
+        color: #113d6a;
+        font: 16px/1.4 Arial, sans-serif;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+      .host-form textarea {
+        min-height: 92px;
+        resize: vertical;
+      }
+      .host-form .full {
+        grid-column: 1 / -1;
+      }
+      .choice {
+        display: flex !important;
+        grid-template-columns: none !important;
+        align-items: flex-start;
+        gap: 10px !important;
+        font-size: 13px !important;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+      }
+      .choice input {
+        width: auto;
+        min-height: 0;
+        margin-top: 2px;
+      }
+      .status {
+        min-height: 24px;
+        color: #113d6a;
+        font: 700 14px/1.45 Arial, sans-serif;
+      }
+      .status.error {
+        color: #8a1f11;
+      }
       @media (max-width: 760px) {
         .space-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .host-form-grid { grid-template-columns: 1fr; }
         .grid {
           grid-template-columns: 1fr;
         }
@@ -245,7 +307,7 @@
   </head>
   <body>
     <main>
-      <div class="eyebrow">BECOME AN LIGHTHOUSE MARKETPLACE HOST</div>
+      <div class="eyebrow">BECOME A LIGHTHOUSE STORAGE MARKETPLACE HOST</div>
       <h1>List your space.</h1>
       <p class="lead">
         Start with the closest kind of space. Lighthouse will only ask the
@@ -262,8 +324,9 @@
         <div class="space-choice">OTHER</div>
       </div>
       <div class="promise">
-        You control your advertised price. Lighthouse does not require hosts to
-        reduce their price.
+        Storage facilities can advertise available space, photos, access details,
+        and a public starting price. Lighthouse does not take rent, deposits, or
+        a percentage of the deal.
       </div>
       <div class="types">
         <span>GARAGES</span><span>DRIVEWAYS</span><span>VEHICLE STORAGE</span
@@ -297,11 +360,34 @@
         </article>
       </section>
       <div class="form-note">
-        <strong>List Your Space form</strong
+        <strong>Storage facility advertising plan</strong
         ><span
-          >Continue to the secure Lighthouse form to submit your property for review.</span
+          >Launch offer: $199/month after a 14-day trial for reviewed facility advertising, photo-backed listings, renter inquiries, and operator network access. No rent collection, no commission, and no automatic bookings.</span
         >
-        <button type="button" id="openHostForm">CONTINUE TO LIST YOUR SPACE</button>
+        <form class="host-form" id="hostForm">
+          <div class="host-form-grid">
+            <label>Facility name<input name="facility_name" required maxlength="120" placeholder="Example Storage Yard" /></label>
+            <label>Business website<input name="public_website" maxlength="500" placeholder="https://example.com" /></label>
+            <label>First name<input name="host_first_name" required maxlength="80" /></label>
+            <label>Last name<input name="host_last_name" required maxlength="80" /></label>
+            <label>Email<input name="host_email" type="email" required maxlength="180" /></label>
+            <label>Contact number<input name="host_phone" required maxlength="40" /></label>
+            <label class="full">Property address<input name="property_address" required maxlength="220" placeholder="Street, city, state, ZIP" /></label>
+            <label>Space type<select name="space_type" required><option>Outdoor lot / yard</option><option>Vehicle storage</option><option>Fleet parking</option><option>Warehouse</option><option>Garage / covered</option><option>Container area</option><option>Industrial / flex</option><option>Other</option></select></label>
+            <label>Advertised monthly price<input name="monthly_price" type="number" min="0" step="1" placeholder="199" /></label>
+            <label class="full">Available space and site details<textarea name="space_description" required maxlength="1200" placeholder="Describe space sizes, surface, fencing, gate, cameras, access, and what renters should know."></textarea></label>
+            <label class="full">Photo links<textarea name="photo_urls" maxlength="2000" placeholder="Paste public photo links, one per line or separated by commas. These stay pending until Lighthouse reviews the listing."></textarea></label>
+            <label class="full">Allowed storage<textarea name="allowed_storage" maxlength="800" placeholder="Vehicles, equipment, containers, trailers, contractor materials, etc."></textarea></label>
+            <label class="full">Access features<textarea name="access_features" maxlength="800" placeholder="Hours, gate, appointment requirements, large vehicle access, loading dock, etc."></textarea></label>
+          </div>
+          <label class="choice"><input type="checkbox" name="authority_confirmed" required /> I confirm I am authorized to advertise this storage facility or space.</label>
+          <label class="choice"><input type="checkbox" name="host_responsibility_acknowledged" required /> I understand the host/operator remains responsible for legal use, agreements, taxes, permits, access, payment collection, renter screening, and site operations.</label>
+          <label class="choice"><input type="checkbox" name="review_acknowledged" required /> I understand Lighthouse reviews listings before public display and does not guarantee renters, bookings, revenue, ranking, or placement.</label>
+          <input type="hidden" name="operator_plan_requested" value="Storage Facility Advertising - 14-day trial then $199/month" />
+          <button type="submit" id="submitHostListing">SUBMIT FOR LIGHTHOUSE REVIEW</button>
+          <button type="button" id="openHostForm">USE ORIGINAL WIX FORM</button>
+          <div class="status" id="hostStatus" aria-live="polite"></div>
+        </form>
       </div>
       <section class="disclosure">
         <h2>Independent-host marketplace</h2>
@@ -315,6 +401,38 @@
     </main>
     <script>
       const parentOrigin = (()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
+      const status = document.getElementById("hostStatus");
+      const form = document.getElementById("hostForm");
+      const requestId = () =>
+        `host-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      const photoValues = value =>
+        String(value || "")
+          .split(/[\n,]+/)
+          .map(item => item.trim())
+          .filter(Boolean)
+          .slice(0, 8);
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        status.className = "status";
+        status.textContent = "Sending listing for Lighthouse review...";
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.requestId = requestId();
+        data.photos = photoValues(data.photo_urls);
+        window.parent.postMessage({ type: "marketplace:submit-operator-listing", input: data }, parentOrigin);
+      });
+      window.addEventListener("message", event => {
+        if (event.source !== window.parent || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type === "marketplace:operator-listing-submitted") {
+          status.className = "status";
+          status.textContent = "Listing received. Lighthouse will review it before anything appears publicly.";
+          form.reset();
+        }
+        if (data.type === "marketplace:operator-listing-error") {
+          status.className = "status error";
+          status.textContent = data.message || "The listing could not be submitted. Please try again.";
+        }
+      });
       document.getElementById("openHostForm").addEventListener("click", () => {
         window.parent.postMessage({ type: "marketplace:open-host-form" }, parentOrigin);
       });
