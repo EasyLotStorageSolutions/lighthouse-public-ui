@@ -7,22 +7,24 @@ const source = await readFile(new URL('./marketplace-home.html', import.meta.url
 test('Meet The Lighthouse shows the current three memberships', () => {
   const plans = [
     ['Free', '$0'],
-    ['The Lighthouse Membership', '$19.99'],
-    ['Lighthouse Business', '$39.99']
+    ['The Lighthouse Membership', '$0'],
+    ['Lighthouse Business', '$0']
   ];
 
   for (const [name, price] of plans) {
     assert.match(source, new RegExp(`<h3>${name}</h3>`));
     assert.ok(source.includes(price));
   }
-  assert.match(source, /RECOMMENDED[\s\S]*?<h3>The Lighthouse Membership<\/h3>/);
-  assert.match(source, /MEMBERSHIP OPENING SOON/);
+  assert.match(source, /OPEN NOW[\s\S]*?<h3>The Lighthouse Membership<\/h3>/);
+  assert.match(source, /Free early access is open now\. No checkout is active and nobody is charged\./);
+  assert.doesNotMatch(source, /MEMBERSHIP OPENING SOON/);
 });
 
-test('plan buttons use the parent checkout bridge and recover from errors', () => {
+test('paid checkout stays inactive while free early access is open', () => {
   assert.match(source, /querySelectorAll\('\.lighthouse-plan-action'\)/);
   assert.match(source, /type: 'lighthouse:select-plan'/);
   assert.match(source, /payload\.type === 'lighthouse:checkout-error'/);
+  assert.match(source, /START FREE ACCESS/);
   assert.match(source, /action\.disabled = false/);
 });
 

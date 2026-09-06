@@ -838,7 +838,7 @@
                 <div class="assistant-tools"><div class="voice-stage"><button class="voice-button" id="assistant-voice-toggle" type="button" data-state="checking" aria-pressed="false" aria-label="Ask Lighthouse by voice" disabled><span class="voice-icon" aria-hidden="true"></span><span class="voice-button-label">ASK BY VOICE</span></button><span class="assistant-status" id="assistant-status" role="status" aria-live="polite">Checking Lighthouse…</span></div><div class="voice-controls"><button class="button secondary" id="assistant-stop-speech" type="button" hidden>STOP SPEAKING</button></div></div>
                 <p class="voice-disclosure">Voice is optional and starts only when you tap the microphone. Transcripts may be retained for review; raw microphone audio is not stored by Lighthouse.</p>
                 <div class="voice-transcript" id="assistant-transcript" aria-live="polite" hidden><strong>You said</strong><p id="assistant-transcript-text"></p><p class="voice-warning" id="assistant-transcript-warning" hidden>Please review names, addresses, measurements, dates, phone numbers, plates, and VINs on screen before confirming.</p></div>
-                <div class="ai-upgrade" id="assistant-upgrade" hidden><div class="eyebrow">Continue with Lighthouse</div><h3>Keep the plan, context, and files together.</h3><p>Your private Lighthouse workspace saves the conversation and gives you more room for ongoing work, pictures, video, approvals, and connected tools.</p><ul><li>7-day free trial on every plan</li><li>Private saved work and project memory</li><li>Personal, Plus, and Power options</li></ul><div class="ai-upgrade-actions"><a class="button" href="/plans-pricing">SEE MEMBERSHIP OPTIONS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
+                <div class="ai-upgrade" id="assistant-upgrade" hidden><div class="eyebrow">Continue with Lighthouse</div><h3>Keep the plan, context, and files together.</h3><p>Your private Lighthouse workspace saves the conversation and gives you more room for ongoing work, pictures, video, approvals, and connected tools.</p><ul><li>Free early access while it is open</li><li>Private saved work and project memory</li><li>Work, Marketplace, and Studio tools</li></ul><div class="ai-upgrade-actions"><a class="button" href="/customer-portal">START FREE ACCESS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
                 <div class="assistant-confirm" id="assistant-confirm" hidden>
                   <strong>Review and confirm before submitting</strong>
                   <label><input type="checkbox" id="assistant-terms" /> I agree to the <a href="/policies-terms">Lighthouse terms</a> for this request.</label>
@@ -859,11 +859,11 @@
           <div class="lighthouse-intro"><div><div class="eyebrow">Your private AI workspace</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Bring Lighthouse an idea, a problem, pictures, or a short video. It helps turn what you share into organized work and keeps the decisions, evidence, and next steps together.</p></div><div class="lighthouse-member"><p>Already a member? Your private workspace, saved work, and account tools are waiting.</p><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a><p class="lighthouse-state" id="lighthouse-state" role="status" aria-live="polite">Checking your membership…</p></div></div>
           <div class="lighthouse-plans" aria-label="Lighthouse membership choices">
             <article class="lighthouse-plan"><h3>Free</h3><span class="lighthouse-price">$0</span><p class="lighthouse-trial">Explore anytime</p><p class="lighthouse-plan-copy">See what Lighthouse can do before choosing a membership.</p><ul><li>Explore Lighthouse</li><li>Browse Marketplace</li><li>View the Auction Hall</li><li>Discover services</li></ul><a class="button secondary" href="/find-storage?mode=quick">EXPLORE FREE</a></article>
-            <article class="lighthouse-plan recommended"><span class="lighthouse-plan-badge">RECOMMENDED</span><h3>The Lighthouse Membership</h3><span class="lighthouse-price">$19.99 <small>/ month</small></span><p class="lighthouse-trial">7-day free trial when enrollment opens</p><p class="lighthouse-plan-copy">The main membership for your personal Lighthouse workspace and Marketplace tools.</p><ul><li>Main Lighthouse membership</li><li>Marketplace member features</li><li>Auction member features when safely activated</li><li>Personal Lighthouse tools</li></ul><button class="button lighthouse-plan-action" type="button" disabled>MEMBERSHIP OPENING SOON</button></article>
-            <article class="lighthouse-plan"><h3>Lighthouse Business</h3><span class="lighthouse-price">$39.99 <small>/ month</small></span><p class="lighthouse-trial">7-day free trial when enrollment opens</p><p class="lighthouse-plan-copy">For sellers, operators, teams, and higher-capacity business workflows.</p><ul><li>Everything in Membership</li><li>Advanced business tools</li><li>Seller and showroom features</li><li>Higher-capacity workflows</li></ul><button class="button secondary lighthouse-plan-action" type="button" disabled>MEMBERSHIP OPENING SOON</button></article>
+            <article class="lighthouse-plan recommended"><span class="lighthouse-plan-badge">OPEN NOW</span><h3>The Lighthouse Membership</h3><span class="lighthouse-price">$0 <small>/ early access</small></span><p class="lighthouse-trial">Free while early access is open</p><p class="lighthouse-plan-copy">The main membership for your personal Lighthouse workspace and Marketplace tools.</p><ul><li>Main Lighthouse membership</li><li>Marketplace member features</li><li>Auction member features when safely activated</li><li>Personal Lighthouse tools</li></ul><a class="button" href="/customer-portal">START FREE ACCESS</a></article>
+            <article class="lighthouse-plan"><h3>Lighthouse Business</h3><span class="lighthouse-price">$0 <small>/ early access</small></span><p class="lighthouse-trial">Free while early access is open</p><p class="lighthouse-plan-copy">For sellers, operators, teams, and higher-capacity business workflows.</p><ul><li>Everything in Membership</li><li>Advanced business tools</li><li>Seller and showroom features</li><li>Higher-capacity workflows</li></ul><a class="button secondary" href="/customer-portal">OPEN BUSINESS ACCESS</a></article>
           </div>
           <p class="membership-separation">Lighthouse membership is separate from storage rentals and other service charges. A membership does not include storage pricing.</p>
-          <p class="lighthouse-fine-print">Both paid memberships are public for preview but are not buyable yet. No checkout is active.</p>
+          <p class="lighthouse-fine-print">Free early access is open now. No checkout is active and nobody is charged.</p>
         </div></div>
       </section>
       <dialog class="delivery-dialog" id="delivery-interest-dialog" aria-labelledby="delivery-form-title">
@@ -1156,7 +1156,7 @@
       }
       lighthousePlanActions.forEach(button => button.addEventListener('click', () => {
         lighthousePlanActions.forEach(action => { action.disabled = true; });
-        lighthouseState.textContent = `Opening the secure ${button.dataset.planName} checkout…`;
+        lighthouseState.textContent = `Opening free ${button.dataset.planName || 'Lighthouse'} access…`;
         postParent({ type: 'lighthouse:select-plan', planId: button.dataset.planId, planName: button.dataset.planName });
       }));
       try {
@@ -1951,11 +1951,11 @@
           communityVideoSignIn.hidden = videoCreationAllowed;
           const presentation = {
             SIGNED_OUT: ['Sign in to see your Lighthouse access.', 'SIGN IN', '/customer-portal'],
-            NO_PLAN: ['Membership enrollment is being readied now.', 'MEMBERSHIP OPENING SOON', '/plans-pricing'],
+            NO_PLAN: ['Free early access is open now.', 'START FREE ACCESS', '/customer-portal'],
             ACTIVE: ['Your membership is active.', 'OPEN LIGHTHOUSE', '/customer-portal'],
             CANCELED_ACTIVE: ['Your access remains active through the end of your paid period.', 'OPEN LIGHTHOUSE', '/customer-portal'],
             PAYMENT_ISSUE: ['Your membership needs billing attention.', 'REVIEW MEMBERSHIP', '/my-subscriptions'],
-            EXPIRED: ['Your previous membership has ended.', 'MEMBERSHIP OPENING SOON', '/plans-pricing'],
+            EXPIRED: ['Free early access is open now.', 'START FREE ACCESS', '/customer-portal'],
             SUSPENDED: ['Your membership is currently paused.', 'REVIEW MEMBERSHIP', '/my-subscriptions'],
             OWNER: ['Owner access is ready.', 'OPEN LIGHTHOUSE', '/customer-portal']
           }[access.state] || ['Membership status is temporarily unavailable.', 'SIGN IN', '/customer-portal'];
