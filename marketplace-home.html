@@ -235,6 +235,7 @@
         .hero p, .section-head p, .copy { font-size: 17px; }
         .section { padding: 58px 0; }
       }
+      .storage-portal-tools{position:absolute;z-index:10;right:18px;top:15px;display:flex;gap:7px}.storage-portal-tool{min-height:38px;padding:8px 11px;border:1px solid rgba(153,229,255,.55);border-radius:999px;background:rgba(4,22,38,.7);color:#fff;cursor:pointer;font:800 9px Arial,sans-serif;letter-spacing:.07em;backdrop-filter:blur(12px)}.storage-portal-tool:hover,.storage-portal-tool:focus-visible{background:#ddf6ff;color:#073457}.storage-drivein[data-night="true"]{background:radial-gradient(circle at 72% 14%,#edf5ff 0 3%,rgba(182,214,255,.18) 4%,transparent 15%),linear-gradient(180deg,#07182e 0 39%,#173a35 40%,#071c1d 100%)}.storage-drivein[data-night="true"] .storage-drivein-building{filter:brightness(.72)}.storage-drivein[data-night="true"] .storage-drivein-building::after{box-shadow:0 0 24px rgba(255,222,116,.7)}.storage-drivein.is-scanning::after{animation:storageScan .85s ease-out}.storage-drivein.is-scanning{box-shadow:0 48px 95px rgba(8,43,76,.38),0 0 36px rgba(83,211,255,.54),inset 0 0 45px rgba(105,191,248,.3)}@keyframes storageScan{0%{transform:translateX(-30%);filter:brightness(1)}50%{filter:brightness(1.45)}100%{transform:translateX(30%);filter:brightness(1)}}@media(max-width:520px){.storage-portal-tools{right:13px;top:13px}.storage-drivein-lane::before{max-width:145px}}
     </style>
     <style>
       /* Lighthouse platform homepage correction: the established blue visual system,
@@ -667,6 +668,30 @@
       .video-card{border-color:rgba(17,61,106,.3);background:rgba(255,255,255,.48)}
       .video-card h4,.video-card p,.video-meta,.video-report,.video-empty{color:var(--easy-blue)!important}
       .studio-public-demo{border-color:rgba(17,61,106,.38);box-shadow:0 13px 10px -12px rgba(17,61,106,.6)}
+      /* Premium interactive Storage portal: a cinematic device, not a generic diagram. */
+      .storage-drivein{isolation:isolate;min-height:560px;border:10px solid #071829;border-radius:42px;background:radial-gradient(circle at 72% 14%,#fff5b8 0 4%,rgba(255,232,130,.32) 5%,transparent 17%),linear-gradient(180deg,#62bce9 0 39%,#285b4e 40%,#102b2a 100%);box-shadow:0 48px 95px rgba(8,43,76,.38),0 0 0 1px rgba(255,255,255,.7),inset 0 0 45px rgba(105,191,248,.2);transform:perspective(1200px) rotateY(-1.5deg)}
+      .storage-drivein::after{z-index:0;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.17) 46%,transparent 57%),radial-gradient(circle at 18% 72%,rgba(58,230,190,.18),transparent 30%);animation:storageAtmosphere 9s ease-in-out infinite alternate}
+      .storage-drivein::before{z-index:0;left:20%;right:20%;top:28%;height:90%;background:linear-gradient(90deg,#172c35,#708086 43%,#c9d5d8 49%,#87989e 56%,#142b35);filter:drop-shadow(0 18px 18px rgba(0,0,0,.4))}
+      .storage-drivein-lane::before{content:"LIVE SPACE EXPLORER";position:absolute;z-index:7;left:22px;top:18px;padding:9px 13px;border:1px solid rgba(132,226,255,.5);border-radius:999px;background:rgba(4,18,33,.68);color:#eaf8ff;font:800 9px/1 Arial,sans-serif;letter-spacing:.16em;backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.22)}
+      .storage-drivein-lane::after{content:"TAP A DESTINATION";position:absolute;z-index:7;right:22px;top:18px;color:rgba(235,248,255,.82);font:800 9px/1 Arial,sans-serif;letter-spacing:.14em}
+      .storage-drivein-zone{cursor:pointer;filter:drop-shadow(0 18px 22px rgba(0,0,0,.3));transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .4s,opacity .4s}
+      .storage-drivein-zone:hover,.storage-drivein-zone:focus-within{filter:drop-shadow(0 25px 28px rgba(0,0,0,.5)) brightness(1.12)}
+      .storage-drivein-zone h3{border-color:rgba(130,222,255,.5);border-left-color:#f0b94f;background:linear-gradient(115deg,rgba(5,24,41,.94),rgba(16,64,87,.84));box-shadow:0 12px 28px rgba(0,0,0,.38),inset 0 0 16px rgba(105,191,248,.1);backdrop-filter:blur(12px)}
+      .storage-drivein-building{position:relative;overflow:hidden;background:linear-gradient(145deg,#f7fbff 0 46%,#d9e8f1 47% 52%,#7f9aaa 53%);box-shadow:14px 20px 22px rgba(0,0,0,.38),inset 0 -10px 22px rgba(8,43,76,.12)}
+      .storage-drivein-building::after{content:"";position:absolute;left:18%;right:18%;bottom:0;height:48%;background:repeating-linear-gradient(90deg,#27475b 0 18%,#9cc7d9 19% 22%);border-top:3px solid #d9b252;box-shadow:0 0 18px rgba(133,218,255,.36)}
+      .storage-drivein-space{border-color:rgba(143,226,255,.7);background:linear-gradient(145deg,rgba(8,38,61,.96),rgba(11,73,83,.9));box-shadow:0 12px 28px rgba(0,0,0,.46),inset 0 0 20px rgba(80,196,235,.11);transition:transform .25s,box-shadow .25s}
+      .storage-drivein-space:hover,.storage-drivein-space:focus-visible{transform:translateY(-6px) scale(1.06);box-shadow:0 18px 35px rgba(0,0,0,.55),0 0 22px rgba(89,211,245,.28)}
+      .storage-drivein-empty{border:1px solid rgba(143,226,255,.4);background:rgba(4,24,40,.76);backdrop-filter:blur(10px)}
+      .storage-drivein-actions{z-index:9;align-items:center;padding:8px;border:1px solid rgba(151,224,255,.28);border-radius:999px;background:rgba(4,18,33,.62);backdrop-filter:blur(14px);box-shadow:0 12px 35px rgba(0,0,0,.28)}
+      .storage-drivein-actions .button{border-color:rgba(159,225,255,.55);background:rgba(9,42,65,.82);color:#fff}.storage-drivein-actions .button.secondary{background:rgba(255,255,255,.12);color:#fff}
+      .storage-drivein-arrow{border-color:rgba(153,226,255,.8);background:linear-gradient(145deg,#fff,#c9eeff);box-shadow:0 8px 22px rgba(0,0,0,.34);transition:transform .2s,box-shadow .2s}.storage-drivein-arrow:hover{transform:scale(1.1);box-shadow:0 0 24px rgba(113,218,255,.58)}
+      @keyframes storageAtmosphere{to{transform:translateX(3%);filter:hue-rotate(5deg)}}
+      @media(max-width:900px){.storage-drivein{transform:none}}
+      @media(max-width:520px){.storage-drivein{min-height:470px;border-radius:34px}.storage-drivein-lane::after{display:none}.storage-drivein-zone:not(.is-focus){opacity:.12;pointer-events:none}.storage-drivein-zone.is-focus{left:18%!important;right:auto!important;top:25%!important;bottom:auto!important;width:64%!important;transform:scale(1.08)!important;z-index:5!important}.storage-drivein-actions{left:8px;right:8px}.storage-drivein-actions .actions{flex:1}.storage-drivein-actions .button{width:100%}}
+      @media(prefers-reduced-motion:reduce){.storage-drivein::after{animation:none}}
+      .lh-phone-screen{background:radial-gradient(circle at 75% 12%,rgba(157,236,255,.42),transparent 27%),linear-gradient(165deg,#156f9f 0,#0c466f 38%,#071d36 100%);box-shadow:inset 0 0 50px rgba(128,226,255,.22)}
+      .demo-scene{padding-bottom:88px}.demo-scene.is-active{pointer-events:auto}.demo-photo-placeholder{width:100%;color:#eaf8ff;cursor:pointer}.demo-input{display:block;width:100%;color:#fff;outline:none}.demo-input:focus{border-color:#8ee7ff;box-shadow:0 0 0 3px rgba(100,221,255,.2)}.demo-choice,.demo-action-stack span{cursor:pointer}.demo-choice:hover,.demo-choice:focus-visible,.demo-action-stack span:hover{border-color:#8ee7ff;background:rgba(105,191,248,.24)}
+      .demo-controls{position:absolute;z-index:8;left:18px;right:18px;bottom:18px;display:grid;grid-template-columns:46px 1fr 46px;gap:9px;align-items:center;padding:7px;border:1px solid rgba(154,230,255,.35);border-radius:999px;background:rgba(3,17,31,.72);backdrop-filter:blur(14px)}.demo-control{min-height:42px;border:1px solid rgba(159,230,255,.55);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font:800 15px Arial,sans-serif}.demo-control.primary{font-size:9px;letter-spacing:.1em}.demo-control:hover,.demo-control:focus-visible{background:#dff7ff;color:#08345a}.demo-step{position:absolute;right:24px;top:55px;z-index:7;color:#d9f5ff;font:800 9px Arial,sans-serif;letter-spacing:.12em}
     </style>
   </head>
   <body>
@@ -702,13 +727,14 @@
         <div class="lh-market-intro" id="marketplaceExperience">
 <div class="lh-market-copy"><span class="lh-eyebrow">THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketplace-showcase-title">Buy it. Sell it. Auction it.<span>All in one Marketplace.</span></h2><p>List goods, vehicles, equipment, business items, free items, trades, or wanted posts. Storage stays in its own Storage &amp; Space section.</p><div class="lh-market-actions"><a class="button" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-sell.html">Sell Something</a><a class="button secondary" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-explore.html?mode=explore">Explore Marketplace</a></div><button class="lh-demo-link" id="phone-demo-replay" type="button">See how it works</button></div>
           <div class="lh-phone-stage" aria-label="Animated preview of creating a Marketplace listing"><div class="lh-phone-glow" aria-hidden="true"></div><div class="lh-phone"><div class="lh-phone-top" aria-hidden="true"></div><div class="lh-phone-screen" aria-live="off">
-            <div class="demo-scene is-active" data-scene="0"><div class="demo-label">SELL SOMETHING</div><div class="demo-photo-placeholder"><div><span>+</span>Add a photo</div></div></div>
-            <div class="demo-scene" data-scene="1"><div class="demo-label">CREATE LISTING</div><h3>What are you selling?</h3><div class="demo-input">2017 Utility Trailer</div></div>
-            <div class="demo-scene" data-scene="2"><div class="demo-label">SELL YOUR WAY</div><h3>How should people buy it?</h3><div class="demo-choice active">Set a Price</div><div class="demo-choice">Auction It</div></div>
+            <div class="demo-scene is-active" data-scene="0"><div class="demo-label">SELL SOMETHING</div><button class="demo-photo-placeholder" id="demo-add-photo" type="button"><span>+</span>Add a photo</button></div>
+            <div class="demo-scene" data-scene="1"><div class="demo-label">CREATE LISTING</div><h3>What are you selling?</h3><input class="demo-input" id="demo-listing-title" value="2017 Utility Trailer" maxlength="80" aria-label="Example listing title"></div>
+            <div class="demo-scene" data-scene="2"><div class="demo-label">SELL YOUR WAY</div><h3>How should people buy it?</h3><button class="demo-choice active" type="button">Set a Price</button><button class="demo-choice" type="button">Auction It</button></div>
             <div class="demo-scene" data-scene="3"><div class="demo-card"><div class="demo-card-photo">LISTING PHOTO</div><div class="demo-card-body"><strong>2017 Utility Trailer</strong><span>Marketplace listing</span></div></div></div>
             <div class="demo-scene" data-scene="4"><div class="demo-label">MARKETPLACE</div><div class="demo-action-stack"><span>♡ Saved</span><span>Message seller</span><span>Viewed</span></div></div>
             <div class="demo-scene" data-scene="5"><div class="demo-label">AUCTION HALL</div><div class="demo-auction"><strong>Auction</strong><span>Ends Saturday</span><span class="view-only">VIEW ONLY</span></div></div>
-            <div class="demo-scene" data-scene="6"><div class="demo-success">✓</div><h3>Listed.</h3><p>Your Marketplace. Your way.</p></div>
+            <div class="demo-scene" data-scene="6"><div class="demo-success">✓</div><h3>Preview ready.</h3><p>Open Sell Something to submit for review.</p></div>
+            <span class="demo-step" id="demo-step">STEP 1 OF 7</span><div class="demo-controls" aria-label="Marketplace phone demo controls"><button class="demo-control" id="demo-phone-prev" type="button" aria-label="Previous demo step">←</button><button class="demo-control primary" id="demo-phone-action" type="button">ADD A PHOTO</button><button class="demo-control" id="demo-phone-next" type="button" aria-label="Next demo step">→</button></div>
           </div></div></div>
         </div>
         <div class="market-portal" aria-labelledby="market-portal-title"><div class="portal-heading"><span class="lh-eyebrow">CHOOSE YOUR WAY IN</span><h2 id="market-portal-title">Enter the Marketplace</h2><p>Browse fast. Explore visually. Step inside when you want the full experience.</p></div><div class="experience-switcher" role="group" aria-label="Marketplace experience mode">
@@ -1770,18 +1796,36 @@
         });
       }
       const storageDriveInLane = document.getElementById('storage-drivein-lane');
+      const storageDriveIn = storageDriveInLane.closest('.storage-drivein');
+      const storagePortalTools = document.createElement('div');
+      storagePortalTools.className = 'storage-portal-tools';
+      storagePortalTools.innerHTML = '<button class="storage-portal-tool" id="storage-portal-day" type="button" aria-pressed="false">☀ DAY</button>';
+      storageDriveIn.appendChild(storagePortalTools);
       let storageLivingStep = 0;
+      let storageScanTimer = null;
+      function scanHomeStorage() {
+        storageDriveIn.classList.remove('is-scanning');
+        requestAnimationFrame(() => storageDriveIn.classList.add('is-scanning'));
+        clearTimeout(storageScanTimer);
+        storageScanTimer = setTimeout(() => storageDriveIn.classList.remove('is-scanning'), 900);
+      }
       function focusHomeStorage(direction) {
         const zones = [...storageDriveInLane.querySelectorAll('.storage-drivein-zone')];
         storageLivingStep = Math.max(0, Math.min(zones.length - 1, storageLivingStep + direction));
         zones.forEach((zone, index) => {
-          zone.style.filter = index === storageLivingStep ? 'drop-shadow(0 18px 20px rgba(0,0,0,.38))' : storageLivingStep ? 'saturate(.65) opacity(.5)' : '';
+          zone.classList.toggle('is-focus', index === storageLivingStep);
+          zone.classList.toggle('is-muted', index !== storageLivingStep);
+          zone.style.filter = index === storageLivingStep ? 'drop-shadow(0 18px 20px rgba(0,0,0,.38))' : 'saturate(.65) opacity(.5)';
           zone.style.zIndex = index === storageLivingStep ? '4' : '1';
         });
       }
       document.getElementById('storage-drivein-prev').onclick = () => focusHomeStorage(-1);
       document.getElementById('storage-drivein-next').onclick = () => focusHomeStorage(1);
+      document.getElementById('storage-portal-day').onclick = event => { const night = storageDriveIn.dataset.night !== 'true'; storageDriveIn.dataset.night = String(night); event.currentTarget.textContent = night ? '☾ NIGHT' : '☀ DAY'; event.currentTarget.setAttribute('aria-pressed', String(night)); scanHomeStorage(); };
+      storageDriveIn.addEventListener('keydown', event => { if (event.key === 'ArrowLeft') focusHomeStorage(-1); if (event.key === 'ArrowRight') focusHomeStorage(1); });
+      document.getElementById('storage-home-need')?.addEventListener('input', scanHomeStorage);
       storageDriveInLane.querySelectorAll('.storage-drivein-zone').forEach((zone, index) => zone.addEventListener('click', () => { storageLivingStep = index; focusHomeStorage(0); }));
+      focusHomeStorage(0);
       window.addEventListener('message', event => {
         if (event.source !== parentWindow || event.origin !== parentOrigin) return;
         const payload = event.data || {};
@@ -2127,8 +2171,11 @@
       let phoneDemoTimer = null;
       const reduceMarketplaceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function showPhoneScene(index) {
-        phoneSceneIndex = index % phoneScenes.length;
+        phoneSceneIndex = (index + phoneScenes.length) % phoneScenes.length;
         phoneScenes.forEach((scene, sceneIndex) => scene.classList.toggle('is-active', sceneIndex === phoneSceneIndex));
+        const actions = ['ADD A PHOTO','TYPE YOUR ITEM','CHOOSE A METHOD','PREVIEW LISTING','SEE ACTIVITY','VIEW AUCTION','SELL SOMETHING'];
+        document.getElementById('demo-step').textContent = `STEP ${phoneSceneIndex + 1} OF ${phoneScenes.length}`;
+        document.getElementById('demo-phone-action').textContent = actions[phoneSceneIndex];
       }
       function startPhoneDemo() {
         if (!phoneScenes.length) return;
@@ -2139,6 +2186,12 @@
       }
       document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(phoneDemoTimer) : startPhoneDemo());
       document.getElementById('phone-demo-replay')?.addEventListener('click', () => { startPhoneDemo(); document.querySelector('.lh-phone')?.scrollIntoView({ behavior: reduceMarketplaceMotion ? 'auto' : 'smooth', block: 'center' }); });
+      const controlPhoneDemo = direction => { clearInterval(phoneDemoTimer); showPhoneScene(phoneSceneIndex + direction); };
+      document.getElementById('demo-phone-prev')?.addEventListener('click', () => controlPhoneDemo(-1));
+      document.getElementById('demo-phone-next')?.addEventListener('click', () => controlPhoneDemo(1));
+      document.getElementById('demo-add-photo')?.addEventListener('click', () => controlPhoneDemo(1));
+      document.querySelectorAll('.demo-choice').forEach(choice => choice.addEventListener('click', () => { document.querySelectorAll('.demo-choice').forEach(item => item.classList.toggle('active', item === choice)); controlPhoneDemo(1); }));
+      document.getElementById('demo-phone-action')?.addEventListener('click', () => { if (phoneSceneIndex === phoneScenes.length - 1) window.location.href = 'https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-sell.html'; else controlPhoneDemo(1); });
       startPhoneDemo();
       const portalCopy = {
         quick: ['Quick mode keeps everything fast, familiar, and screen-reader friendly.', 'BROWSE QUICKLY'],
