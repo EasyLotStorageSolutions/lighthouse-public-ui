@@ -291,6 +291,21 @@
       .launch-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; overflow: hidden; margin: 20px auto 0; border: 1px solid rgba(17,61,106,.26); border-radius: 18px; background: rgba(17,61,106,.24); box-shadow: 0 20px 50px rgba(8,43,76,.11); }
       .launch-strip span { display: grid; gap: 5px; min-height: 82px; padding: 17px 18px; background: rgba(255,255,255,.7); color: var(--easy-muted); font: 12px/1.35 Arial,sans-serif; }
       .launch-strip strong { color: var(--easy-navy); font: 800 11px/1.2 Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+      .overview-cinema { width:min(1180px,calc(100% - 34px)); margin: 10px auto 24px; padding: clamp(22px,3vw,34px); border: 1px solid rgba(17,61,106,.32); border-radius: 32px; background: linear-gradient(145deg,rgba(255,255,255,.82),rgba(220,234,242,.62)); box-shadow: 0 30px 84px rgba(8,43,76,.16); }
+      .overview-cinema-grid { display:grid; grid-template-columns:minmax(0,.78fr) minmax(360px,1.22fr); gap: clamp(20px,3vw,34px); align-items:center; }
+      .overview-copy h2 { margin: 6px 0 12px; font: 700 clamp(31px,3.8vw,48px)/1.02 'Playfair Display',Georgia,serif; letter-spacing: 0; }
+      .overview-copy p { margin: 0 0 18px; color: var(--easy-blue); font: 17px/1.6 'Playfair Display',Georgia,serif; }
+      .overview-copy .actions { justify-content:flex-start; }
+      .lighthouse-screen { position:relative; overflow:hidden; aspect-ratio:16/9; border: 11px solid #172d42; border-radius: 28px 28px 14px 14px; background: radial-gradient(circle at 70% 18%,rgba(242,184,75,.42),transparent 20%),linear-gradient(155deg,#0b2137 0%,#123f68 42%,#d6e6fe 100%); box-shadow: 0 28px 58px rgba(8,43,76,.34), inset 0 0 0 1px rgba(255,255,255,.16); }
+      .lighthouse-screen::after { content:""; position:absolute; left: 20%; right: 20%; bottom:-15px; height: 12px; border-radius:999px; background: rgba(8,43,76,.32); filter: blur(6px); }
+      .screen-beam { position:absolute; inset:0; background: conic-gradient(from -18deg at 19% 42%, transparent 0 14deg, rgba(255,240,190,.78) 17deg, transparent 34deg 360deg); opacity:.86; }
+      .screen-water { position:absolute; inset:auto 0 0; height:34%; background: repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 2px,transparent 2px 13px),linear-gradient(180deg,rgba(214,230,254,.4),rgba(7,30,50,.58)); }
+      .screen-stack { position:absolute; inset: 9% 6%; display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; align-content:end; }
+      .screen-tile { min-height: 82px; padding: 13px; border:1px solid rgba(255,255,255,.35); border-radius: 16px; background: rgba(255,255,255,.78); color: var(--easy-blue); box-shadow: 0 12px 32px rgba(5,16,29,.18); }
+      .screen-tile strong { display:block; color: var(--easy-navy); font: 800 12px/1 Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+      .screen-tile span { display:block; margin-top:8px; font: 13px/1.35 'Playfair Display',Georgia,serif; }
+      .screen-status { position:absolute; left: 20px; top: 18px; display:inline-flex; align-items:center; gap:8px; padding: 8px 11px; border:1px solid rgba(255,255,255,.42); border-radius:999px; background:rgba(255,255,255,.78); color:var(--easy-blue); font:800 10px/1 Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+      .screen-dot { width:8px; height:8px; border-radius:50%; background:var(--easy-gold); box-shadow:0 0 0 5px rgba(242,184,75,.2); }
       .experience-shell { width: min(1240px, calc(100% - 32px)); margin: 22px auto; border: 1px solid rgba(17,61,106,.24); border-radius: 34px; background: linear-gradient(145deg,rgba(255,255,255,.58),rgba(214,231,238,.3)); box-shadow: 0 28px 84px rgba(8,43,76,.13); overflow: hidden; }
       .experience-shell > .container { width: min(1080px, calc(100% - 44px)); }
       .easy-storage.experience-shell,.lighthouse-work.experience-shell,.marketplace-showcase.experience-shell,.video-community.experience-shell { padding-block: clamp(54px,7vw,86px); }
@@ -310,6 +325,21 @@
       .easy-process .process-step::before { display: none; }
       .easy-business .business-layout { grid-template-columns: minmax(0,1fr) minmax(280px,.72fr); gap: 28px; }
       .easy-business .business-panel { border-radius: 20px; background: rgba(255,255,255,.48); box-shadow: none; }
+      .front-door-clean .easy-storage,
+      .front-door-clean .lighthouse-work,
+      .front-door-clean .marketplace-showcase,
+      .front-door-clean .lighthouse-doorway,
+      .front-door-clean .easy-needs,
+      .front-door-clean .easy-process,
+      .front-door-clean .easy-business { display:none; }
+      .front-door-clean .video-community { width:min(1180px,calc(100% - 34px)); margin: 24px auto; border-radius: 32px; background: linear-gradient(145deg,rgba(238,245,255,.86),rgba(214,230,254,.7)); }
+      .front-door-clean .video-community .studio-public-demo,
+      .front-door-clean .video-community > .container > h3,
+      .front-door-clean .video-community > .container > p:not(.channel-rule),
+      .front-door-clean .video-community .video-signin,
+      .front-door-clean .video-community .video-feed-grid { display:none; }
+      .front-door-clean .video-heading { margin-bottom: 22px; }
+      .front-door-clean .channel-strip { grid-template-columns: minmax(280px,.8fr) minmax(420px,1.2fr); }
       .journey-grid { display: none; }
       #assistant { position: relative; z-index: 2; margin-top: 0; padding: 58px 0 76px; background: transparent; }
       .assistant-shell { max-width: 940px; padding: 42px; border: 1px solid rgba(17,61,106,.72); border-radius: 4px; background: rgba(255,255,255,.48); box-shadow: 0 13px 10px -12px rgba(17,61,106,.6); }
@@ -416,6 +446,12 @@
         .home-map-grid { grid-template-columns: 1fr; }
         .home-place { min-height: 104px; }
         .launch-strip { grid-template-columns: 1fr; }
+        .overview-cinema { width:min(100% - 18px,1180px); padding: 18px; border-radius: 24px; }
+        .overview-cinema-grid { grid-template-columns:1fr; }
+        .screen-stack { grid-template-columns:1fr 1fr; inset: 16% 5% 7%; }
+        .screen-tile { min-height: 70px; padding: 10px; }
+        .screen-tile span { font-size: 12px; }
+        .front-door-clean .channel-strip { grid-template-columns:1fr; }
         .experience-shell { width: min(100% - 18px, 1240px); margin-block: 12px; border-radius: 24px; }
         .experience-shell > .container { width: min(100% - 26px, 1080px); }
         .quiet-support-panel { align-items: stretch; flex-direction: column; }
@@ -791,7 +827,7 @@
       @media(prefers-reduced-motion:reduce){body::before{animation:none}}
     </style>
   </head>
-  <body>
+  <body class="front-door-clean">
     <main>
       <section class="hero">
         <div class="container">
@@ -839,6 +875,29 @@
               <a class="home-place" href="#marketplace-showcase"><strong>Marketplace</strong><span>Buy, sell, showcase services, and browse the auction experience when it is ready.</span><small>Marketplace</small></a>
               <a class="home-place" href="#lighthouse-video-studio"><strong>Studio &amp; Channel</strong><span>Create media privately and feature one owner-selected YouTube video on the homepage.</span><small>Watch and create</small></a>
               <a class="home-place" href="#what-easy-does"><strong>Business Help</strong><span>Bring projects, customers, files, follow-ups, websites, events, or other work.</span><small>Services</small></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="overview-cinema" aria-labelledby="overview-cinema-title">
+        <div class="overview-cinema-grid">
+          <div class="overview-copy">
+            <div class="eyebrow">The whole Lighthouse at a glance</div>
+            <h2 id="overview-cinema-title">One clean screen for everything you offer.</h2>
+            <p>Work, storage, marketplace, studio, business help, and everyday support stay connected without making the front page feel crowded.</p>
+            <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">WATCH THE CHANNEL</a></div>
+          </div>
+          <div class="lighthouse-screen" role="img" aria-label="A Lighthouse overview screen showing Work, Storage, Marketplace, Studio, Business Help, and Ask Lighthouse">
+            <div class="screen-beam" aria-hidden="true"></div>
+            <div class="screen-water" aria-hidden="true"></div>
+            <div class="screen-status"><i class="screen-dot" aria-hidden="true"></i> Live front door</div>
+            <div class="screen-stack" aria-hidden="true">
+              <div class="screen-tile"><strong>Work</strong><span>Profiles, hiring, matches</span></div>
+              <div class="screen-tile"><strong>Storage</strong><span>Facilities and operators</span></div>
+              <div class="screen-tile"><strong>Market</strong><span>Sell, browse, showcase</span></div>
+              <div class="screen-tile"><strong>Studio</strong><span>Create and watch</span></div>
+              <div class="screen-tile"><strong>Business</strong><span>Projects and follow-through</span></div>
+              <div class="screen-tile"><strong>Ask</strong><span>Start in plain words</span></div>
             </div>
           </div>
         </div>
