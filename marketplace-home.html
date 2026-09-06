@@ -269,11 +269,13 @@
       .button, .button.secondary, .button.light { min-height: 46px; padding: 0 24px; border: 1px solid var(--easy-blue); border-radius: 4px; background: rgba(255,255,255,.48); color: var(--easy-blue); font: 400 11px/1 Arial, Helvetica, sans-serif; letter-spacing: .055em; }
       .button.secondary { background: transparent; color: var(--easy-blue); }
       .button:hover { background: var(--easy-blue); border-color: var(--easy-blue); color: #fff; text-decoration: none; }
-      .hero { position: relative; overflow: hidden; min-height: min(760px, calc(100vh - 40px)); display: grid; align-items: center; padding: clamp(56px,7vw,92px) 0 clamp(44px,6vw,70px); background: transparent; text-align: center; }
-      .hero::before, .hero::after { display: none; }
-      .hero .container { position: relative; z-index: 1; }
-      .hero p { max-width: 790px; margin: 0 auto 30px; color: var(--easy-blue); font: 400 clamp(19px, 2.2vw, 24px)/1.62 'Playfair Display', Georgia, serif; }
-      .hero .actions { justify-content: center; }
+      .hero { position: relative; overflow: hidden; min-height: min(780px, calc(100vh - 20px)); display: grid; align-items: center; padding: clamp(62px,7vw,96px) 0 clamp(46px,6vw,72px); background: linear-gradient(115deg,rgba(255,250,240,.86),rgba(219,233,236,.56) 58%,rgba(22,74,102,.3)); text-align: left; }
+      .hero::before { content:""; position:absolute; right: clamp(26px,8vw,145px); top: 12%; width: min(34vw,360px); aspect-ratio: .58; display:block; border-radius: 46% 46% 8px 8px; background: linear-gradient(90deg,transparent 0 34%,#0a2539 35% 65%,transparent 66%),linear-gradient(180deg,#fff7df 0 8%,#d9b56f 9% 13%,#113d6a 14% 100%); clip-path: polygon(37% 0,63% 0,75% 100%,25% 100%); opacity:.92; filter: drop-shadow(0 34px 44px rgba(8,43,76,.28)); }
+      .hero::after { content:""; position:absolute; right: min(24vw,300px); top: 16%; width: min(52vw,620px); height: min(19vw,220px); display:block; background: linear-gradient(96deg,rgba(255,221,142,.66),rgba(255,250,240,.2) 48%,transparent 72%); clip-path: polygon(0 43%,100% 0,100% 100%,0 57%); opacity:.78; transform: rotate(-8deg); transform-origin: right center; }
+      .hero .container { position: relative; z-index: 1; max-width: 1180px; }
+      .hero .eyebrow,.hero h1,.hero p,.hero .actions,.hero-note,.starting-line,.launch-strip { max-width: 650px; }
+      .hero p { margin: 0 0 30px; color: var(--easy-blue); font: 400 clamp(19px, 2.2vw, 24px)/1.62 'Playfair Display', Georgia, serif; }
+      .hero .actions { justify-content: flex-start; }
       .hero-note { margin-top: 22px !important; color: var(--easy-blue) !important; font-size: 14px !important; font-weight: 700 !important; }
       .home-map { padding: 28px 0 44px; background: transparent; }
       .home-map-panel { padding: clamp(22px,3vw,34px); border: 1px solid rgba(229,184,95,.38); border-radius: 28px; background: linear-gradient(145deg,rgba(255,250,240,.9),rgba(219,233,236,.72)); box-shadow: 0 24px 70px rgba(8,43,76,.16); backdrop-filter: blur(10px); }
@@ -447,6 +449,11 @@
         .home-map-grid { grid-template-columns: 1fr; }
         .home-place { min-height: 104px; }
         .launch-strip { grid-template-columns: 1fr; }
+        .hero { text-align:center; }
+        .hero::before { right: 50%; top: auto; bottom: -52px; width: 142px; opacity: .24; transform: translateX(50%); }
+        .hero::after { right: 0; top: 64px; width: 100%; height: 130px; opacity: .28; }
+        .hero .eyebrow,.hero h1,.hero p,.hero .actions,.hero-note,.starting-line,.launch-strip { max-width: none; }
+        .hero .actions { justify-content:center; }
         .overview-cinema { width:min(100% - 18px,1180px); padding: 18px; border-radius: 24px; }
         .overview-cinema-grid { grid-template-columns:1fr; }
         .screen-stack { grid-template-columns:1fr 1fr; inset: 16% 5% 7%; }
@@ -835,6 +842,8 @@
       .front-door-clean .video-community .channel-strip~h3,
       .front-door-clean .video-community .channel-strip~p,
       .front-door-clean .video-community .video-signin,
+      .front-door-clean .video-community .video-form,
+      .front-door-clean .video-community .video-feed,
       .front-door-clean .video-community .video-feed-grid{display:none!important}
       @keyframes coastalWaterLight{from{transform:translate3d(-.35%,-.2%,0) scale(1.01)}to{transform:translate3d(.35%,.2%,0) scale(1.018)}}
       @media(max-width:760px){body::after{background-position:center top}.easy-callout,.delivery-coming-soon,.auction-home{background:rgba(255,255,255,.3)}}
