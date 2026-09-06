@@ -469,8 +469,8 @@
       .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
       .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
       .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
-      .channel-strip { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:0 0 28px; }
-      .channel-panel { padding:22px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); }
+      .channel-strip { display:grid; grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr); gap:24px; margin:0 0 28px; align-items:center; }
+      .channel-panel { padding:24px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); }
       .channel-panel h3 { margin-bottom:9px; }
       .channel-panel p { margin:0 0 16px; color:#dceeff; font-size:14px; line-height:1.55; }
       .channel-dial { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
@@ -478,6 +478,15 @@
       .channel-card strong { display:block; color:#fff; font:700 15px/1.25 Arial,sans-serif; }
       .channel-card span { display:block; margin-top:6px; color:#dceeff; font:12px/1.4 Arial,sans-serif; }
       .channel-rule { margin:14px 0 0!important; color:#9fd0ff!important; font:700 11px/1.45 Arial,sans-serif!important; letter-spacing:.04em; text-transform:uppercase; }
+      .channel-tv-wrap { display:grid; justify-items:center; gap:11px; min-width:0; }
+      .channel-tv { width:min(100%,520px); padding:12px 12px 18px; border:1px solid rgba(17,61,106,.44); border-radius:24px 24px 12px 12px; background:linear-gradient(145deg,#203141,#05080b 48%,#394a58); box-shadow:0 34px 58px -26px rgba(8,43,76,.68), inset 0 0 0 2px rgba(255,255,255,.12); }
+      .channel-tv-screen { position:relative; overflow:hidden; aspect-ratio:16/9; border:1px solid rgba(255,255,255,.22); border-radius:14px; background:radial-gradient(circle at 30% 24%,rgba(159,208,255,.28),transparent 28%),linear-gradient(145deg,#06131e,#113d6a 62%,#082b4c); }
+      .channel-tv-screen iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+      .channel-tv-placeholder { position:absolute; inset:0; display:grid; place-items:center; padding:24px; color:#fff; text-align:center; }
+      .channel-tv-placeholder strong { display:block; font:700 clamp(24px,4vw,38px)/1.05 'Playfair Display',Georgia,serif; }
+      .channel-tv-placeholder span { display:block; max-width:330px; margin:10px auto 0; color:#dceeff; font:700 12px/1.5 Arial,sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+      .channel-tv-base { width:42%; height:10px; border-radius:0 0 999px 999px; background:#111923; box-shadow:0 8px 16px rgba(0,0,0,.24); }
+      .channel-tv-note { max-width:520px; margin:0!important; color:var(--easy-blue)!important; text-align:center; font:700 11px/1.45 Arial,sans-serif!important; }
       .studio-public-demo { margin: 0 0 30px; padding: 28px; border: 1px solid rgba(255,255,255,.34); border-radius: 8px; background: #f4f8fe; color: var(--easy-navy); box-shadow: 0 22px 48px rgba(0,0,0,.2); }
       .studio-public-demo h3,.studio-public-demo h4,.studio-public-demo p { color: var(--easy-navy); }
       .studio-demo-head { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:start; margin-bottom:22px; }
@@ -892,19 +901,24 @@
           <section class="channel-strip" aria-label="Lighthouse Channel">
             <article class="channel-panel">
               <div class="eyebrow">Lighthouse Channel</div>
-              <h3>Radio station, TV lounge, and community stage.</h3>
-              <p>Watch approved videos, listen to approved music or playlist links, and discover creator, maker, work, business, and storage stories without turning the homepage into a noisy feed.</p>
+              <h3>Your daily video stage inside Lighthouse.</h3>
+              <p>Feature one YouTube music video, creator clip, business story, or community spotlight at a time. The homepage stays calm, and the video can change whenever you choose.</p>
               <div class="channel-dial" aria-label="Channel modes">
-                <div class="channel-card"><strong>Watch</strong><span>Approved music videos, short films, maker demos, facility tours, and project features.</span></div>
-                <div class="channel-card"><strong>Listen</strong><span>Approved artist links, playlists, podcasts, and calm listening sessions.</span></div>
+                <div class="channel-card"><strong>Daily Pick</strong><span>One featured YouTube video can be changed as often as you want.</span></div>
+                <div class="channel-card"><strong>Listen</strong><span>Music videos, playlists, podcasts, and calm listening sessions.</span></div>
                 <div class="channel-card"><strong>Stage</strong><span>Community submissions held for owner/human review before anything goes public.</span></div>
               </div>
             </article>
-            <article class="channel-panel">
-              <div class="eyebrow">Channel rules</div>
-              <h3>Entertaining, but still trustworthy.</h3>
-              <p>No autoplay, no public comments, no tips or donations, no paid ranking, no copyright claims made by Lighthouse, and no public media unless rights and safety review are complete.</p>
-              <p class="channel-rule">Members submit. Lighthouse reviews. Viewers choose play.</p>
+            <article class="channel-tv-wrap" aria-label="Featured YouTube video">
+              <div class="channel-tv">
+                <div class="channel-tv-screen">
+                  <!-- DAILY YOUTUBE VIDEO: replace the src below with the YouTube embed URL you want featured today. Keep the youtube-nocookie.com embed format and do not add autoplay. -->
+                  <iframe id="channel-feature-frame" title="Featured Lighthouse Channel YouTube video" src="https://www.youtube-nocookie.com/embed/x0DinqPXxTo" data-youtube-embed="https://www.youtube-nocookie.com/embed/x0DinqPXxTo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <div id="channel-feature-placeholder" class="channel-tv-placeholder" aria-hidden="true" hidden><div><strong id="channel-feature-title">Today’s Lighthouse Channel feature</strong><span id="channel-feature-note">Featured from the owner-selected Lighthouse Channel playlist.</span></div></div>
+                </div>
+              </div>
+              <div class="channel-tv-base" aria-hidden="true"></div>
+              <p class="channel-tv-note">YouTube videos are viewer-controlled. No autoplay, no public comments on Lighthouse, no tips or donations, no paid ranking, and no copyright claims made by Lighthouse.</p>
             </article>
           </section>
           <section class="studio-public-demo" aria-labelledby="studio-demo-title">
@@ -1432,6 +1446,26 @@
           communityVideoFeed.appendChild(card);
         });
       }
+      function renderChannelFeature(feature = {}) {
+        const frame = document.getElementById('channel-feature-frame');
+        const placeholder = document.getElementById('channel-feature-placeholder');
+        const title = document.getElementById('channel-feature-title');
+        const note = document.getElementById('channel-feature-note');
+        const embedUrl = String(feature.embedUrl || '').trim();
+        const safeEmbed = /^https:\/\/www\.youtube-nocookie\.com\/embed\/[a-zA-Z0-9_-]{11}$/.test(embedUrl);
+        if (title) title.textContent = feature.title || "Today's video goes here.";
+        if (note) note.textContent = feature.note || 'Change it from Owner Mode in your Lighthouse account.';
+        if (!frame || !placeholder) return;
+        if (safeEmbed) {
+          frame.src = embedUrl;
+          frame.hidden = false;
+          placeholder.hidden = true;
+        } else {
+          frame.removeAttribute('src');
+          frame.hidden = true;
+          placeholder.hidden = false;
+        }
+      }
       async function uploadCommunityVideo(upload) {
         if (!communityVideo.file || !upload?.uploadUrl || !upload?.videoId) throw new Error('COMMUNITY_VIDEO_UPLOAD_NOT_READY');
         communityVideo.videoId = upload.videoId;
@@ -1850,6 +1884,7 @@
         const legal = Array.isArray(data.legalDocuments) ? data.legalDocuments : [];
         void legal;
         renderCommunityVideos(Array.isArray(data.communityVideos) ? data.communityVideos : []);
+        renderChannelFeature(data.channelFeature || {});
         renderHomeStorageExplorer(Array.isArray(data.storageListings) ? data.storageListings : []);
       }
       function renderHomeStorageExplorer(items) {
