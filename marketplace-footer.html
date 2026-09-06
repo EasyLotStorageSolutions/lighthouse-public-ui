@@ -8,7 +8,7 @@
       @import url('https://fonts.googleapis.com/css2?family=Niconne&family=Playfair+Display:wght@400;700&display=swap');
       * { box-sizing: border-box; }
       html, body { margin: 0; min-height: 100%; overflow: hidden; font-family: 'Playfair Display', Georgia, serif; color: #113d6a; background: #d6e6fe; }
-      .shell { width: min(980px, calc(100% - 44px)); min-height: 500px; margin: 0 auto; padding: 58px 0 30px; border-top: 1px solid rgba(17,61,106,.3); }
+      .shell { width: min(980px, calc(100% - 44px)); min-height: 0; margin: 0 auto; padding: 42px 0 24px; border-top: 1px solid rgba(17,61,106,.3); }
       .grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 38px; }
       h2, h3 { margin: 0 0 14px; color: #113d6a; }
       h2 { font: italic 400 40px/1.05 'Niconne', 'Brush Script MT', cursive; }
@@ -16,12 +16,22 @@
       p { margin: 0 0 14px; font-size: 14px; line-height: 1.7; }
       a { display: block; margin: 10px 0; color: #0000ee; font: 400 12px/1.3 Arial, Helvetica, sans-serif; text-decoration: none; }
       a:hover { text-decoration: underline; text-underline-offset: 4px; }
-      .copyright { margin-top: 34px; padding-top: 20px; border-top: 1px solid rgba(17,61,106,.25); font-size: 13px; }
+      .copyright { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(17,61,106,.25); font-size: 13px; }
       :focus-visible { outline: 3px solid #f7b731; outline-offset: 3px; }
       @media (max-width: 700px) {
         html, body { overflow: hidden; }
-        .shell { min-height: 980px; padding-top: 38px; }
-        .grid { grid-template-columns: 1fr; gap: 24px; }
+        .shell { width: min(100% - 32px, 980px); min-height: 0; padding: 28px 0 20px; }
+        .grid { grid-template-columns: 1fr 1fr; gap: 20px 18px; }
+        .grid > div:first-child { grid-column: 1 / -1; }
+        h2 { font-size: 34px; }
+        h3 { margin-bottom: 9px; font-size: 14px; }
+        p { margin-bottom: 9px; line-height: 1.55; }
+        a { margin: 7px 0; font-size: 11px; }
+        .copyright { margin-top: 18px; padding-top: 13px; }
+      }
+      @media (max-width: 420px) {
+        .grid { grid-template-columns: 1fr; gap: 16px; }
+        .grid > div:first-child { grid-column: auto; }
       }
     </style>
   </head>
