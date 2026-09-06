@@ -24,7 +24,7 @@ test('paid employer access links to the pricing page', () => {
   assert.match(source, /querySelectorAll\('\.lighthouse-plan-action'\)/);
   assert.match(source, /type: 'lighthouse:select-plan'/);
   assert.match(source, /START EMPLOYER PLAN/);
-  assert.match(source, /href="\/plans-pricing"/);
+  assert.match(source, /href="\/pricing-plans"/);
   assert.match(source, /action\.disabled = false/);
 });
 
