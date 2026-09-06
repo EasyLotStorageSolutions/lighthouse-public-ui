@@ -40,7 +40,8 @@ test('Marketplace phone is a coded, interactive six-step listing demo', () => {
   assert.match(source, /data-sale-type="Buy Now"/);
   assert.match(source, /data-sale-type="Auction"/);
   assert.match(source, /id="phone-price"[^>]*type="number"/);
-  assert.match(source, /marketplacePhone\.addEventListener\('click', stopPhoneDemo/);
+  assert.match(source, /marketplacePhone\.addEventListener\('pointerdown',stopPhoneDemo,\{once:true\}\)/);
+  assert.match(source, /marketplacePhone\.addEventListener\('keydown',stopPhoneDemo,\{once:true\}\)/);
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.doesNotMatch(source, /<video[^>]+marketplace-phone/i);
 });
@@ -49,6 +50,17 @@ test('Marketplace review and payment boundaries remain visible in the phone', ()
   assert.match(source, /Listings are reviewed before they go live|reviews it before it goes live/);
   assert.match(source, /Buyer pays seller directly/);
   assert.match(source, /ENTER AUCTION HALL · VIEW ONLY/);
+});
+
+test('Lighthouse Work is public between Storage and Marketplace with nine interactive steps', () => {
+  const storage = source.indexOf('id="storage"');
+  const work = source.indexOf('id="lighthouse-work"');
+  const marketplace = source.indexOf('id="marketplace-showcase"');
+  assert.ok(storage < work && work < marketplace);
+  assert.match(source, /id="lighthouse-work"[^>]*data-live-work="true"/);
+  assert.equal((source.match(/data-work-screen="\d"/g) || []).length, 9);
+  assert.match(source, /PUBLIC EARLY ACCESS/);
+  assert.match(source, /Interest is never a contract, hiring decision, or payment/);
 });
 
 test('embedded homepage script parses', () => {
