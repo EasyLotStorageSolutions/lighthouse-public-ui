@@ -469,6 +469,15 @@
       .video-empty { grid-column:1/-1; padding:34px 20px; border:1px dashed rgba(255,255,255,.34); text-align:center; color:#dceeff!important; }
       .video-signin { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:14px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); }
       .video-signin p { flex:1; min-width:220px; margin:0; color:#dceeff; font-size:13px; line-height:1.5; }
+      .channel-strip { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:0 0 28px; }
+      .channel-panel { padding:22px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); }
+      .channel-panel h3 { margin-bottom:9px; }
+      .channel-panel p { margin:0 0 16px; color:#dceeff; font-size:14px; line-height:1.55; }
+      .channel-dial { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+      .channel-card { min-height:96px; padding:14px; border:1px solid rgba(255,255,255,.26); background:rgba(3,18,34,.28); }
+      .channel-card strong { display:block; color:#fff; font:700 15px/1.25 Arial,sans-serif; }
+      .channel-card span { display:block; margin-top:6px; color:#dceeff; font:12px/1.4 Arial,sans-serif; }
+      .channel-rule { margin:14px 0 0!important; color:#9fd0ff!important; font:700 11px/1.45 Arial,sans-serif!important; letter-spacing:.04em; text-transform:uppercase; }
       .studio-public-demo { margin: 0 0 30px; padding: 28px; border: 1px solid rgba(255,255,255,.34); border-radius: 8px; background: #f4f8fe; color: var(--easy-navy); box-shadow: 0 22px 48px rgba(0,0,0,.2); }
       .studio-public-demo h3,.studio-public-demo h4,.studio-public-demo p { color: var(--easy-navy); }
       .studio-demo-head { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:start; margin-bottom:22px; }
@@ -576,7 +585,7 @@
       @media(max-width:900px){.lighthouse-intro,.lighthouse-plans{grid-template-columns:1fr}.lighthouse-member{padding:24px 0 0;border-left:0;border-top:1px solid var(--easy-line)}.lighthouse-plan-copy{min-height:0}.lighthouse-plan.recommended{transform:none;margin-top:8px}}
       @media(max-width:900px){.delivery-heading{grid-template-columns:1fr;gap:24px}}
       @media(max-width:900px){.auction-home-grid{grid-template-columns:1fr;gap:28px}.marketplace-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout,.studio-demo-head{grid-template-columns:1fr}.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.studio-public-demo{padding:20px 15px}.studio-demo-workspace{grid-template-columns:1fr}.studio-demo-library{display:none}.studio-demo-main{padding:12px}.studio-demo-offers{grid-template-columns:1fr 1fr}.studio-demo-cta{align-items:stretch;flex-direction:column}.studio-demo-cta .button{width:100%}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home-panel{padding:22px 18px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
+      @media(max-width:760px){.lighthouse-doorway{padding:0 0 42px}.lighthouse-panel{padding:28px 22px}.lighthouse-plans{gap:16px}.lighthouse-plan{padding:26px 20px 22px}.video-community{padding:52px 0 72px}.video-heading,.video-layout,.studio-demo-head,.channel-strip{grid-template-columns:1fr}.channel-dial,.video-feed-grid{grid-template-columns:1fr}.video-safety{max-width:none}.video-studio,.video-feed{padding:21px 18px}.studio-public-demo{padding:20px 15px}.studio-demo-workspace{grid-template-columns:1fr}.studio-demo-library{display:none}.studio-demo-main{padding:12px}.studio-demo-offers{grid-template-columns:1fr 1fr}.studio-demo-cta{align-items:stretch;flex-direction:column}.studio-demo-cta .button{width:100%}.auction-home{padding:54px 0}.auction-home-grid{gap:24px}.auction-home-panel{padding:22px 18px}.auction-home .button{width:100%}.delivery-coming-soon{padding:58px 0}.delivery-cards,.promise-points,.delivery-form-grid{grid-template-columns:1fr}.delivery-card h3{min-height:0}.delivery-dialog-head{padding:22px 20px 18px}.delivery-dialog-head h2{font-size:27px}.delivery-form{padding:22px 20px 26px}.delivery-form label.full{grid-column:auto}.delivery-choice-row{grid-column:auto}.delivery-choice{width:100%}}
       @media(max-width:430px){.studio-demo-offers{grid-template-columns:1fr}.studio-demo-type{flex:1}.studio-demo-preview strong{font-size:24px}.studio-demo-tools{display:grid;grid-template-columns:1fr 1fr}.studio-demo-tool{width:100%}}
       @media(max-width:760px){.marketplace-entry-grid{grid-template-columns:1fr}.marketplace-entry{min-height:0}}
       .ai-conversation { display: grid; gap: 14px; margin-bottom: 16px; max-height: 620px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(17,61,106,.36) transparent; }
@@ -879,7 +888,25 @@
       </dialog>
       <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
-          <div class="video-heading"><div><div class="eyebrow">Lighthouse Studio + Community</div><h2 id="video-community-title">Create video, music, audio and stories in one place.</h2><p>Open Lighthouse Studio for one private creative workspace with video, recording, beats, piano/MIDI, captions, versions and rights-aware release tools. Share a finished community video only when you choose.</p><p><a class="button" href="/customer-portal?view=studio">OPEN LIGHTHOUSE STUDIO</a></p></div><div class="video-safety">Studio projects stay private unless you deliberately submit a video to Community Watch. Every upload is screened and held for human review.</div></div>
+          <div class="video-heading"><div><div class="eyebrow">Lighthouse Studio & Channel · Lighthouse Studio + Community</div><h2 id="video-community-title">Create, watch, and listen in one place.</h2><p>Open Lighthouse Studio for one private creative workspace with video, recording, beats, piano/MIDI, captions, versions and rights-aware release tools. The Channel is the calm public lounge for approved music videos, creator clips, business features, and community spotlights.</p><p><a class="button" href="/customer-portal?view=studio">OPEN LIGHTHOUSE STUDIO</a></p></div><div class="video-safety">Studio projects stay private unless you deliberately submit a video to Community Watch. Every upload is screened and held for human review. Channel media is screened and held for human review before publication.</div></div>
+          <section class="channel-strip" aria-label="Lighthouse Channel">
+            <article class="channel-panel">
+              <div class="eyebrow">Lighthouse Channel</div>
+              <h3>Radio station, TV lounge, and community stage.</h3>
+              <p>Watch approved videos, listen to approved music or playlist links, and discover creator, maker, work, business, and storage stories without turning the homepage into a noisy feed.</p>
+              <div class="channel-dial" aria-label="Channel modes">
+                <div class="channel-card"><strong>Watch</strong><span>Approved music videos, short films, maker demos, facility tours, and project features.</span></div>
+                <div class="channel-card"><strong>Listen</strong><span>Approved artist links, playlists, podcasts, and calm listening sessions.</span></div>
+                <div class="channel-card"><strong>Stage</strong><span>Community submissions held for owner/human review before anything goes public.</span></div>
+              </div>
+            </article>
+            <article class="channel-panel">
+              <div class="eyebrow">Channel rules</div>
+              <h3>Entertaining, but still trustworthy.</h3>
+              <p>No autoplay, no public comments, no tips or donations, no paid ranking, no copyright claims made by Lighthouse, and no public media unless rights and safety review are complete.</p>
+              <p class="channel-rule">Members submit. Lighthouse reviews. Viewers choose play.</p>
+            </article>
+          </section>
           <section class="studio-public-demo" aria-labelledby="studio-demo-title">
              <div class="studio-demo-head"><div><div class="eyebrow">Try it here · no account needed</div><h3 id="studio-demo-title">See how Lighthouse Studio works.</h3><p>This demonstration lets you try the creative flow without uploading anything. Choose what you want to make, arrange the sample timeline, add music or captions, trim a clip, and undo a change. The full member Studio saves real private projects and works with your own media.</p></div><span class="studio-demo-badge">LIVE SAMPLE</span></div>
             <div class="studio-demo-types" role="group" aria-label="Choose a sample Studio project"><button class="studio-demo-type active" type="button" data-studio-demo-type="VIDEO">Make a Video</button><button class="studio-demo-type" type="button" data-studio-demo-type="MUSIC">Make Music</button><button class="studio-demo-type" type="button" data-studio-demo-type="BEAT">Make a Beat</button><button class="studio-demo-type" type="button" data-studio-demo-type="PODCAST">Podcast</button><button class="studio-demo-type" type="button" data-studio-demo-type="SHORTS">Create Shorts</button></div>
@@ -899,7 +926,7 @@
           <div class="video-layout">
             <div class="video-studio">
               <h3>Submit to Community Watch</h3>
-              <p>Already finished your clip? Record from your phone or choose a vertical video up to 3 minutes and 100 MB, then send it for review.</p>
+              <p>Already finished your clip or music video? Record from your phone or choose a vertical video up to 3 minutes and 100 MB, then send it for Channel review.</p>
               <div class="video-signin" id="video-signin"><p>Sign in with an active Lighthouse membership to create in Studio or submit a finished community video.</p><a class="button light" href="/customer-portal?view=studio">OPEN STUDIO</a></div>
               <form class="video-form" id="community-video-form" hidden>
                 <label>Video title<input id="community-video-title" type="text" maxlength="120" required placeholder="Give your video a clear title" /></label>
@@ -913,7 +940,7 @@
               </form>
             </div>
             <div class="video-feed">
-              <h3>Community Watch</h3><p>Short videos shared by Lighthouse members and approved before publication.</p>
+              <h3>Community Stage</h3><p>Approved videos shared by Lighthouse members. Viewers press play; nothing autoplays.</p>
               <div class="video-feed-grid" id="community-video-feed"><p class="video-empty">Approved community videos will appear here.</p></div>
             </div>
           </div>
