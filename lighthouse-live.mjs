@@ -20,7 +20,8 @@ if(app){
   const modes=el('div','harbor-live-modes');modes.setAttribute('role','group');modes.setAttribute('aria-label','Choose Lighthouse Live mode');
   const visualButton=button('Watch',null,()=>showVisual());
   const radioButton=button('Radio',null,()=>showRadio());
-  modes.append(visualButton,radioButton);
+  const iheartButton=button('iHeart',null,()=>showIHeart());
+  modes.append(visualButton,radioButton,iheartButton);
 
   const media=el('div','lighthouse-media harbor-live-lighthouse');
   const image=el('img');image.src=art;image.alt='Lighthouse lantern surrounding the live media screen';
@@ -39,29 +40,47 @@ if(app){
   searchLabel.append(searchInput);searchForm.append(searchLabel,searchButton);
   const status=el('p','harbor-live-status','Radio search is powered by the public Radio Browser directory. Station availability can change.');status.setAttribute('role','status');
   const suggestions=el('div','harbor-radio-suggestions');suggestions.setAttribute('aria-label','Suggested radio searches');
+  const iheartControls=el('div','harbor-iheart-controls');
+  const iheartLabel=el('label',null,'Choose an iHeartRadio station');
+  const iheartSelect=el('select');
+  [
+    ['Z104.3 · Baltimore','https://www.iheart.com/live/1077/?embed=true&theme=dark'],
+    ['Magic 95.9 · Baltimore','https://www.iheart.com/live/magic-959-8938/?embed=true&theme=dark'],
+    ['Mix 106.5 · Baltimore','https://www.iheart.com/live/mix-1065-10792/?embed=true&theme=dark'],
+    ['Spirit 1400 · Baltimore','https://www.iheart.com/live/spirit-1400-8940/?embed=true&theme=dark'],
+    ["Today's 101.9 · Baltimore",'https://www.iheart.com/live/todays-1019-10803/?embed=true&theme=dark']
+  ].forEach(([label,value])=>{const option=el('option',null,label);option.value=value;iheartSelect.append(option)});
+  const iheartBrowse=el('a',null,'Browse more stations on iHeart');iheartBrowse.href='https://www.iheart.com/live/';iheartBrowse.target='_blank';iheartBrowse.rel='noopener noreferrer';
+  iheartLabel.append(iheartSelect);iheartControls.append(iheartLabel,iheartBrowse);
   const results=el('div','harbor-radio-results');
-  dialog.append(close,eyebrow,title,intro,modes,media,searchForm,suggestions,status,results);
+  dialog.append(close,eyebrow,title,intro,modes,media,searchForm,suggestions,iheartControls,status,results);
   app.append(dialog);
 
   function setMode(mode){
-    const radio=mode==='radio';visualButton.setAttribute('aria-pressed',String(!radio));radioButton.setAttribute('aria-pressed',String(radio));
-    frame.hidden=radio;radioPanel.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;
+    const radio=mode==='radio',iheart=mode==='iheart',visual=mode==='visual';visualButton.setAttribute('aria-pressed',String(visual));radioButton.setAttribute('aria-pressed',String(radio));iheartButton.setAttribute('aria-pressed',String(iheart));
+    frame.hidden=radio;radioPanel.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;
   }
   function showVisual(){
-    audio.pause();setMode('visual');
+    audio.pause();dialog.scrollTop=0;setMode('visual');
     const experience=experiences[activeCategory];frame.src=`https://www.youtube-nocookie.com/embed/${experience.video}?rel=0`;
     title.textContent=`${experience.name} Lighthouse · Watch`;
     intro.textContent='Choose play inside the lantern when you are ready. The channel does not autoplay.';
   }
   function showRadio(){
-    const experience=experiences[activeCategory];frame.src='about:blank';setMode('radio');title.textContent=`${experience.name} Lighthouse · Radio`;
+    const experience=experiences[activeCategory];dialog.scrollTop=0;frame.src='about:blank';setMode('radio');title.textContent=`${experience.name} Lighthouse · Radio`;
     intro.textContent='Search thousands of internet stations, then listen without leaving your Lighthouse.';
     searchInput.placeholder=`Try ${experience.prompt} or a station name`;
     suggestions.replaceChildren(...experience.suggestions.map(term=>button(term,'',()=>{searchInput.value=term;searchStations(term)})));
     try{const saved=JSON.parse(localStorage.getItem(`lighthouse-radio-${activeCategory}`)||'null');if(saved?.url&&/^https:\/\//i.test(saved.url)){radioNow.textContent=saved.name;radioMeta.textContent=saved.meta;audio.src=saved.url;status.textContent='Your last station for this Lighthouse is ready. Press play when you want it.'}}catch{}
     setTimeout(()=>searchInput.focus(),0);
   }
+  function showIHeart(){
+    audio.pause();dialog.scrollTop=0;setMode('iheart');frame.title='Official iHeartRadio station widget';frame.src=iheartSelect.value;
+    title.textContent=`${experiences[activeCategory].name} Lighthouse · iHeartRadio`;
+    intro.textContent='Choose a station below, then use the official iHeartRadio player inside this Lighthouse. It does not autoplay.';
+  }
   function openLive(category,mode){activeCategory=category;dialog.showModal();mode==='radio'?showRadio():showVisual();}
+  iheartSelect.addEventListener('change',()=>{if(iheartButton.getAttribute('aria-pressed')==='true'){frame.src=iheartSelect.value}});
 
   async function searchStations(query){
     status.textContent='Searching the radio dial…';results.replaceChildren();

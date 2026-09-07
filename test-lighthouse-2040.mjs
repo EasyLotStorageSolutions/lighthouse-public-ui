@@ -47,6 +47,9 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.match(live, /station\.url_resolved/);
   assert.match(live, /lighthouse-radio-\$\{activeCategory\}/);
   assert.doesNotMatch(live, /autoplay=1/);
+  assert.match(live, /\?embed=true&theme=dark/);
+  assert.match(live, /Official iHeartRadio station widget/);
+  assert.match(live, /Browse more stations on iHeart/);
 });
 
 test('the visible site header uses the dark Lighthouse navigation and a dependable Home link', () => {

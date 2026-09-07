@@ -108,7 +108,7 @@ document.documentElement.classList.add('harbor-ready');updateTheme();updateFavor
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 if(new URLSearchParams(location.search).has('easyStart'))openMore();
 await import('./lighthouse-embed-height.mjs?v=1');
-await import('./lighthouse-live.mjs?v=20260907-1');
+await import('./lighthouse-live.mjs?v=20260907-2');
 
 // Receive only published editorial fields from the owning Wix page. Keep original
 // media intact when the bridge or CMS is unavailable (including standalone previews).

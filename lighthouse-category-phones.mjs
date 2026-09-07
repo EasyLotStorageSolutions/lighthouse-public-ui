@@ -110,4 +110,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260907-8');
+await import('./lighthouse-harbor.mjs?v=20260907-9');
