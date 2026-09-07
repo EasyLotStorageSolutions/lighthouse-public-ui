@@ -70,3 +70,11 @@ html.harbor-ready,html.harbor-ready body{overflow:auto;background:#071827;color:
 .harbor-app .yvette-screen:before{content:'';position:absolute;inset:0;background:#03142288;backdrop-filter:blur(16px)}
 .harbor-app .yvette-video{position:relative;background:transparent}
 .harbor-nav{scrollbar-color:#567187 #0b2439;scrollbar-width:thin}
+.harbor-feature-preview{position:relative;aspect-ratio:16/10;background:#061522;overflow:hidden}
+.harbor-feature-preview video,.harbor-feature-preview iframe,.harbor-feature-preview img{display:block;width:100%;height:100%;object-fit:contain;border:0;opacity:1}
+.harbor-feature-preview video{position:absolute;inset:0}
+.harbor-feature-enter{display:block;position:relative;width:100%;border:0;background:transparent;color:inherit;text-align:left;min-height:52px}
+.harbor-feature-play{position:absolute;inset:0;border:0;background:#07182766;color:#fff;font:700 13px Arial,sans-serif}
+.harbor-destination:hover{transform:none}.harbor-destination:hover img{transform:none}
+.harbor-app:not([data-view=home]) .harbor-feature-preview{display:none}
+@media(max-width:700px){.harbor-destination:last-child{display:block;grid-column:auto}.harbor-destination:last-child img{width:100%;height:100%}.harbor-feature-preview{aspect-ratio:4/3}.harbor-feature-enter .harbor-destination-text{padding:12px 8px}}

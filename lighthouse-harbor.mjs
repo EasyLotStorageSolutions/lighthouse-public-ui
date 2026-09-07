@@ -1,4 +1,6 @@
 import {sections} from './lighthouse-guide-data.mjs';
+import {youtubeId} from './lighthouse-guide-data.mjs';
+import {featuredVideos} from './lighthouse-featured-videos.mjs?v=1';
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
 const descriptors={storage:'Space for your next chapter',employment:'Opportunity starts with people',social:'A place to belong',marketplace:'Discover something unexpected',music:'Make room for your imagination'};
@@ -32,9 +34,23 @@ const pin=button('☆ Add to favorites','harbor-subtle',()=>{if(!sourceIds[curre
 panelHeading.append(back,pin);stage.append(panelHeading);
 let current='home';
 for(const s of sections){
-  const card=button('','harbor-destination',()=>go(s.id,true));card.dataset.destination=s.id;
-  const photo=el('img');photo.src=new URL(s.id+'-poster.jpg',base).href;photo.alt='';photo.width=200;photo.height=100;
-  const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,s.name),el('small',null,descriptors[s.id]));card.append(photo,cardText,el('span','harbor-destination-arrow','↗'));
+  const card=el('article','harbor-destination');card.dataset.destination=s.id;
+  const preview=el('div','harbor-feature-preview');const feature=featuredVideos[s.id];
+  const photo=el('img');photo.src=feature.poster;photo.alt=s.name+' preview';photo.width=200;photo.height=112;
+  preview.append(photo);
+  if(feature.mode==='video'){
+    const video=el('video');video.controls=true;video.playsInline=true;video.preload='none';video.poster=feature.poster;video.src=feature.source;video.setAttribute('aria-label',s.name+' featured video');
+    if(feature.captions){const track=el('track');track.kind='captions';track.srclang='en';track.label='English';track.src=feature.captions;video.append(track);}
+    video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();});});
+    video.addEventListener('error',()=>{video.hidden=true;photo.hidden=false;});
+    photo.hidden=true;preview.append(video);
+  }else if(feature.mode==='youtube'){
+    const play=button('▷ Watch '+s.name,'harbor-feature-play',()=>{
+      pauseAll();const frame=el('iframe');frame.src='https://www.youtube-nocookie.com/embed/'+youtubeId(feature.source)+'?autoplay=1&playsinline=1';frame.title=s.name+' featured video';frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;preview.replaceChildren(frame);
+    });preview.append(play);
+  }
+  const enter=button('','harbor-feature-enter',()=>go(s.id,true));enter.setAttribute('aria-label','Enter '+s.name);
+  const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,s.name),el('small',null,descriptors[s.id]));enter.append(cardText,el('span','harbor-destination-arrow','↗'));card.append(preview,enter);
   card.addEventListener('pointerenter',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
   card.addEventListener('focus',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
   nav.append(card);cards.set(s.id,card);
@@ -62,7 +78,7 @@ const selectedSources=new Set(Object.values(sourceIds));
 original.forEach(node=>{if(selectedSources.has(node.id))return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
 function openMore(target){moreDialog.showModal();if(target){const node=info.querySelector('#'+target);node?.scrollIntoView({block:'start'});}}
 moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.close();});
-function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src);});}
+function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
 function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
 function go(id,user=false){
   if(id!=='home'&&!panels.has(id))return;
