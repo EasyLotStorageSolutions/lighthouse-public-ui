@@ -78,6 +78,8 @@
       // if Wix replaces the app shell while it finishes hydrating.
       const mount = list.closest('[id^="TPASection_"]') || list;
       mount.insertAdjacentElement('beforebegin', guide);
+      guide.style.gridRow = '1';
+      mount.style.gridRow = '2';
       guide.addEventListener('click', event => {
         const button = event.target.closest('[data-view]');
         if (!button) return;
