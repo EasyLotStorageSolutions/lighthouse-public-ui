@@ -1,0 +1,30 @@
+
+/* Separate category sections; preserve the existing Lighthouse experience. */
+#storage,#lighthouse-work,#marketplace-showcase,#lighthouse-video-studio {
+  padding-block:clamp(72px,8vw,112px);
+  scroll-margin-top:24px;
+  border-top:1px solid rgba(17,61,106,.18);
+}
+#storage .storage-living-layout {grid-template-columns:minmax(0,1fr) minmax(280px,350px);gap:clamp(36px,6vw,88px)}
+.storage-phone-wrap,.marketplace-phone-wrap {min-width:0}
+.storage-drivein,.marketplace-phone,.work-phone {width:min(100%,330px);justify-self:center}
+.work-shell {column-gap:clamp(36px,5vw,72px);row-gap:48px}
+.work-demo {grid-template-columns:1fr;justify-items:center;gap:30px}
+.work-media {max-width:430px}
+#marketplace-showcase .market-portal {margin-top:64px}
+#lighthouse-video-studio .channel-strip {grid-template-columns:minmax(0,1fr) minmax(280px,350px);gap:clamp(36px,6vw,88px);align-items:center;margin-top:48px;margin-bottom:64px}
+.channel-tv {position:relative;width:min(100%,330px);padding:38px 10px 14px;border:2px solid #63717d;border-radius:46px;background:linear-gradient(145deg,#52616d,#101820 18%,#05080b 65%,#394a58)}
+.channel-tv:before {content:"";position:absolute;top:13px;left:calc(50% - 45px);width:90px;height:16px;border-radius:12px;background:#020609}
+.channel-tv-screen {aspect-ratio:9/16;border-radius:23px}
+.channel-tv-base {display:none}
+.channel-phone-footer {display:grid;gap:10px;padding:14px 8px 2px;color:#f5faff;text-align:center;font:700 12px/1.4 Arial,sans-serif}
+.channel-phone-footer .button {min-height:44px;background:#d6e6fe;color:#113d6a;border-radius:12px;font-size:12px}
+.channel-phone-footer:after {content:"";display:block;width:90px;height:4px;margin:3px auto 0;border-radius:5px;background:#cbd8e4}
+.channel-tv-note {max-width:350px}
+@media(max-width:900px){
+ #storage .storage-living-layout,#lighthouse-video-studio .channel-strip {grid-template-columns:1fr;gap:32px}
+ #storage,#lighthouse-work,#marketplace-showcase,#lighthouse-video-studio {padding-block:64px}
+ .storage-living-copy {text-align:center}
+ .storage-phone-wrap,.channel-tv-wrap {justify-self:center;width:100%}
+ .work-shell {row-gap:32px}
+}
