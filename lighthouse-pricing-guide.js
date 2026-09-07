@@ -31,7 +31,7 @@
   const style = document.createElement('style');
   style.id = 'lighthouse-pricing-guide-style';
   style.textContent = `
-    #lighthouse-pricing-guide{max-width:1160px;margin:28px auto 36px;padding:clamp(24px,4vw,46px);border:1px solid rgba(17,61,106,.22);border-radius:24px;background:linear-gradient(140deg,#08243d,#104c77);color:#fff;box-shadow:0 28px 70px -42px rgba(3,22,39,.8);font-family:Arial,sans-serif}
+    #lighthouse-pricing-guide{box-sizing:border-box;width:calc(100% - 32px);max-width:1160px;margin:28px auto 36px;padding:clamp(24px,4vw,46px);border:1px solid rgba(17,61,106,.22);border-radius:24px;background:linear-gradient(140deg,#08243d,#104c77);color:#fff;box-shadow:0 28px 70px -42px rgba(3,22,39,.8);font-family:Arial,sans-serif}
     #lighthouse-pricing-guide .lpg-eyebrow{margin:0 0 8px;color:#f4cf83;font-size:12px;font-weight:800;letter-spacing:.18em}
     #lighthouse-pricing-guide h1{margin:0;font:400 clamp(38px,5vw,62px)/1.05 Georgia,serif;color:#fff}
     #lighthouse-pricing-guide .lpg-copy{max-width:850px;margin:14px 0 22px;font-size:17px;line-height:1.65}
@@ -73,9 +73,11 @@
       guide.id = 'lighthouse-pricing-guide';
       guide.setAttribute('aria-labelledby', 'lpg-title');
       guide.innerHTML = `<p class="lpg-eyebrow"></p><h1 id="lpg-title"></h1><p class="lpg-copy"></p><div class="lpg-tabs" role="group" aria-label="Choose which plans to see"><button type="button" data-view="lighthouse">Lighthouse memberships</button><button type="button" data-view="storage">Storage & facility plans</button><button type="button" data-view="all">Compare all</button></div><p class="lpg-note"></p><div class="lpg-quick"><a href="/">Return to Lighthouse</a><a href="/find-storage">Explore storage first</a></div>`;
-      // Wix owns and re-renders everything inside its site/app container. Mount
-      // this one explanatory control beside that container so Wix cannot erase it.
-      document.body.insertAdjacentElement('afterbegin', guide);
+      // Keep the site's own header first, then introduce the choices immediately
+      // before Wix's plan app. The bounded startup retry restores this placement
+      // if Wix replaces the app shell while it finishes hydrating.
+      const mount = list.closest('[id^="TPASection_"]') || list;
+      mount.insertAdjacentElement('beforebegin', guide);
       guide.addEventListener('click', event => {
         const button = event.target.closest('[data-view]');
         if (!button) return;
