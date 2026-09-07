@@ -776,13 +776,14 @@
       @media(max-width:600px){.assistant-coming-soon{padding:48px 0 28px}.ai-coming-soon-card{padding-top:4px}.ai-coming-soon-card p{font-size:16px}}
     </style>
   
+    <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-2040-v1" />
 </head>
   <body>
     <main>
       <section class="hero">
         <div class="container">
           <div class="eyebrow">Welcome to The Lighthouse</div><h1>Your world. One Lighthouse.</h1><p>Find opportunity. Connect with people. Create something new.<br>Choose a place to begin—and make it yours.</p>
-          <div class="actions"><a class="button" href="#assistant">LIGHTHOUSE AI · COMING SOON</a><a class="button secondary" href="#lighthouse-video-studio">SEE STUDIO HERE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
+          <div class="actions"><button class="button beacon-entry" type="button" data-open-beacon>ENTER THE BEACON</button><a class="button" href="#assistant">LIGHTHOUSE AI · COMING SOON</a><a class="button secondary" href="#lighthouse-video-studio">WATCH THE LIGHT</a><a class="button secondary" href="#what-easy-does">EXPLORE LIGHTHOUSE</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
@@ -854,15 +855,9 @@
         </div><div class="portal-enter"><span id="portal-mode-copy">Explore mode opens the visual Marketplace campus. You can switch modes at any time.</span><div class="lh-market-actions"><a class="button" id="portal-enter-link" href="/marketplace">ENTER EXPLORE MODE</a><a class="button secondary" href="/auction-hall">ENTER AUCTION HALL · VIEW ONLY</a></div></div></div>
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
-        <div class="container"><div class="lighthouse-panel">
-          <div class="lighthouse-intro"><div><div class="eyebrow">Your private AI workspace</div><h2 id="lighthouse-title">Meet The Lighthouse.</h2><p>Bring Lighthouse an idea, a problem, pictures, or a short video. It helps turn what you share into organized work and keeps the decisions, evidence, and next steps together.</p></div><div class="lighthouse-member"><p>Already a member? Your private workspace, saved work, and account tools are waiting.</p><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN LIGHTHOUSE</a><p class="lighthouse-state" id="lighthouse-state" role="status" aria-live="polite">Checking your membership…</p></div></div>
-          <div class="lighthouse-plans" aria-label="Lighthouse membership choices">
-            <article class="lighthouse-plan"><h3>Free</h3><span class="lighthouse-price">$0</span><p class="lighthouse-trial">Explore anytime</p><p class="lighthouse-plan-copy">See what Lighthouse can do before choosing a membership.</p><ul><li>Explore Lighthouse</li><li>Browse Marketplace</li><li>View the Auction Hall</li><li>Discover services</li></ul><a class="button secondary" href="/find-storage?mode=quick">EXPLORE FREE</a></article>
-            <article class="lighthouse-plan recommended"><span class="lighthouse-plan-badge">14-DAY TRIAL</span><h3>Lighthouse Employer</h3><span class="lighthouse-price">$199 <small>/ month</small></span><p class="lighthouse-trial">Start with a 14-day free trial</p><p class="lighthouse-plan-copy">For businesses that want matching, introductions, applications, and hiring coordination.</p><ul><li>Post hiring needs</li><li>Review possible worker matches</li><li>Coordinate invitations and applications</li><li>No placement fee or pay percentage</li></ul><a class="button" href="/pricing-plans?for=employer">START EMPLOYER PLAN</a></article>
-            <article class="lighthouse-plan"><h3>Lighthouse Business</h3><span class="lighthouse-price">$199 <small>/ month</small></span><p class="lighthouse-trial">For teams that need business access</p><p class="lighthouse-plan-copy">For sellers, operators, teams, and higher-capacity business workflows.</p><ul><li>Business workspace access</li><li>Advanced business tools</li><li>Seller and showroom features</li><li>Higher-capacity workflows</li></ul><a class="button secondary" href="/pricing-plans?for=lighthouse">VIEW BUSINESS PLAN</a></article>
-          </div>
-          <p class="membership-separation">Lighthouse membership is separate from storage rentals and other service charges. A membership does not include storage pricing.</p>
-          <p class="lighthouse-fine-print">Workers stay free. Employer access starts with a 14-day free trial, then $199/month. No placement fees and no percentage of worker pay.</p>
+        <div class="container"><div class="signal-deck">
+          <div class="signal-grid"><div class="signal-copy"><div class="eyebrow">Lighthouse AI · development preview</div><h2 id="lighthouse-title">A clearer way through what comes next.</h2><p>Yvette will be the familiar guide at the center of Lighthouse. The complete AI workspace is still being built journey by journey; the working destinations remain open while it grows.</p><p id="yvette-transcript" class="yvette-transcript" hidden>“Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.”</p><div class="signal-access"><a class="button" href="/#what-easy-does">EXPLORE WHAT WORKS TODAY</a><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN MY LIGHTHOUSE</a><a class="button secondary" href="/plans-pricing">MEMBERSHIP OPTIONS</a></div><p class="signal-small"><span id="lighthouse-state" role="status" aria-live="polite">Checking your access…</span> · Voice playback uses a narrator available on your device.</p></div>
+          <div class="lighthouse-media" aria-label="Yvette development message inside a Lighthouse lantern"><img src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-media-console-2040.webp" alt="Futuristic Lighthouse lantern built around a media window"><div class="lighthouse-screen yvette-screen"><div class="yvette-message"><span class="yvette-orbit" aria-hidden="true">Y</span><strong>Yvette</strong><span>Lighthouse guide · in development</span></div></div><button class="yvette-control" id="yvette-play" type="button">HEAR YVETTE’S WELCOME</button></div></div>
         </div></div>
       </section>
       <dialog class="delivery-dialog" id="delivery-interest-dialog" aria-labelledby="delivery-form-title">
@@ -879,29 +874,18 @@
       <section class="video-community" id="lighthouse-video-studio" aria-labelledby="video-community-title">
         <div class="container">
           <div class="video-heading"><div><div class="eyebrow">Lighthouse Studio & Channel · Lighthouse Studio + Community</div><h2 id="video-community-title">Create, watch, and listen in one place.</h2><p>Open Lighthouse Studio for one private creative workspace with video, recording, beats, piano/MIDI, captions, versions and rights-aware release tools. The Channel is the calm public lounge for approved music videos, creator clips, business features, and community spotlights.</p><p><a class="button" href="/customer-portal?view=studio">OPEN LIGHTHOUSE STUDIO</a></p></div><div class="video-safety">Studio projects stay private unless you deliberately submit a video to Community Watch. Every upload is screened and held for human review. Channel media is screened and held for human review before publication.</div></div>
-          <section class="channel-strip" aria-label="Lighthouse Channel">
-            <article class="channel-panel">
-              <div class="eyebrow">Lighthouse Channel</div>
-              <h3>Your daily video stage inside Lighthouse.</h3>
-              <p>Feature one YouTube music video, creator clip, business story, or community spotlight at a time. The homepage stays calm, and the video can change whenever you choose.</p>
-              <div class="channel-dial" aria-label="Channel modes">
-                <div class="channel-card"><strong>Daily Pick</strong><span>One featured YouTube video can be changed as often as you want.</span></div>
-                <div class="channel-card"><strong>Listen</strong><span>Music videos, playlists, podcasts, and calm listening sessions.</span></div>
-                <div class="channel-card"><strong>Stage</strong><span>Community submissions held for owner/human review before anything goes public.</span></div>
-              </div>
-            </article>
-            <article class="channel-tv-wrap" aria-label="Featured YouTube video">
-              <div class="channel-tv">
-                <div class="channel-tv-screen">
-                  <!-- DAILY YOUTUBE VIDEO: replace the src below with the YouTube embed URL you want featured today. Keep the youtube-nocookie.com embed format and do not add autoplay. -->
-                  <iframe id="channel-feature-frame" title="Featured Lighthouse Channel YouTube video" src="https://www.youtube-nocookie.com/embed/x0DinqPXxTo?loop=1&playlist=x0DinqPXxTo" data-youtube-embed="https://www.youtube-nocookie.com/embed/x0DinqPXxTo?loop=1&playlist=x0DinqPXxTo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                  <div id="channel-feature-placeholder" class="channel-tv-placeholder" aria-hidden="true" hidden><div><strong id="channel-feature-title">Today’s Lighthouse Channel feature</strong><span id="channel-feature-note">Featured from the owner-selected Lighthouse Channel playlist.</span></div></div>
-                </div>
-                <div class="channel-phone-footer"><span>Lighthouse Studio &amp; Music</span><a class="button" href="/customer-portal?view=studio">OPEN STUDIO</a></div>
-              </div>
-              <div class="channel-tv-base" aria-hidden="true"></div>
-              <p class="channel-tv-note">YouTube videos are viewer-controlled. No autoplay, no public comments on Lighthouse, no tips or donations, no paid ranking, and no copyright claims made by Lighthouse.</p>
-            </article>
+          <section class="channel-2040" aria-label="Watch the Lighthouse film collection">
+            <div class="lighthouse-media" aria-label="Selected film playing inside a Lighthouse lantern"><img src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-media-console-2040.webp" alt="Futuristic Lighthouse lantern built around a video screen"><div class="lighthouse-screen"><iframe id="lighthouse-film-frame" title="Daylight by Cole Pilley" src="https://www.youtube-nocookie.com/embed/x0DinqPXxTo?rel=0" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+            <div class="channel-copy"><div class="eyebrow">Watch the Lighthouse</div><h3>Choose a light. Change the horizon.</h3><p>A moving collection of coastlines, beacons, calm water, storms, and Lighthouse stories. Pick a film and it appears inside the lantern.</p><div class="film-title" id="lighthouse-film-title">Daylight — official music video</div><div class="film-credit" id="lighthouse-film-credit">Cole Pilley · YouTube</div>
+              <div class="film-rail" role="group" aria-label="Choose a lighthouse film">
+                <button class="film-pick" type="button" aria-pressed="true" data-lighthouse-film="x0DinqPXxTo" data-title="Daylight — official music video" data-credit="Cole Pilley · YouTube"><img src="https://i.ytimg.com/vi/x0DinqPXxTo/hqdefault.jpg" alt="Daylight music video preview" loading="lazy"><span>Daylight</span></button>
+                <button class="film-pick" type="button" aria-pressed="false" data-lighthouse-film="0TPmbw4sPUo" data-title="Relaxing Waves at Nubble Light · 4K" data-credit="Naturally Peaceful Video · YouTube"><img src="https://i.ytimg.com/vi/0TPmbw4sPUo/hqdefault.jpg" alt="Waves at Nubble Light preview" loading="lazy"><span>Quiet Nubble Light</span></button>
+                <button class="film-pick" type="button" aria-pressed="false" data-lighthouse-film="r0fwqV0glGs" data-title="Lighthouse in stormy seas" data-credit="Reimagine Reality · YouTube"><img src="https://i.ytimg.com/vi/r0fwqV0glGs/hqdefault.jpg" alt="Storm waves around a lighthouse preview" loading="lazy"><span>Storm Light</span></button>
+                <button class="film-pick" type="button" aria-pressed="false" data-lighthouse-film="lLqdB_7FfUA" data-title="Cape Hatteras drone aerials" data-credit="The Outer Banks · YouTube"><img src="https://i.ytimg.com/vi/lLqdB_7FfUA/hqdefault.jpg" alt="Cape Hatteras lighthouse aerial preview" loading="lazy"><span>Cape Hatteras</span></button>
+                <button class="film-pick" type="button" aria-pressed="false" data-lighthouse-film="Sj_7xYkL680" data-title="4K Lighthouse Ocean Scenery" data-credit="Chillax 4K · YouTube"><img src="https://i.ytimg.com/vi/Sj_7xYkL680/hqdefault.jpg" alt="Calm lighthouse ocean scenery preview" loading="lazy"><span>Ocean Calm</span></button>
+                <button class="film-pick" type="button" aria-pressed="false" data-lighthouse-film="dxQLpSt-ilo" data-title="Lighthouse and the sunset · 4K" data-credit="Free HD Videos · YouTube"><img src="https://i.ytimg.com/vi/dxQLpSt-ilo/hqdefault.jpg" alt="Lighthouse at sunset preview" loading="lazy"><span>Sunset Light</span></button>
+              </div><p class="film-note">Every film starts only when you choose it. Titles and creators remain visible. <a href="https://pixabay.com/videos/search/lighthouse/" target="_blank" rel="noopener noreferrer">Explore hundreds of royalty-free lighthouse clips</a>.</p>
+            </div>
           </section>
 
           <section class="studio-public-demo" aria-labelledby="studio-demo-title">
@@ -2549,13 +2533,17 @@
       updateGuestExperience();
       postParent({ type: 'home:ready' });
     </script>
+  <dialog class="beacon-quest" id="beacon-quest" aria-labelledby="beacon-title">
+    <div class="beacon-shell"><button class="beacon-close" id="beacon-close" type="button" aria-label="Close the Beacon">×</button><div class="eyebrow">A small reason to return</div><h2 id="beacon-title">What kind of light do you need today?</h2><p>Choose the feeling closest to where you are. The Beacon will give you one simple experience inside Lighthouse.</p><div class="beacon-choices" role="group" aria-label="Choose your Beacon path"><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="calm"><strong>I need calm.</strong><span>Two minutes of coast, light, and room to breathe.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="curious"><strong>Surprise me.</strong><span>Open a part of Lighthouse you may have missed.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="ready"><strong>I’m ready to move.</strong><span>Turn one real thought into a useful next step.</span></button></div><div class="beacon-result" aria-live="polite"><span class="beacon-number" aria-hidden="true">✦</span><div><h3 id="beacon-result-title">Choose a light above.</h3><p id="beacon-result-copy">Your path will appear here.</p></div><a class="button" id="beacon-result-link" href="#" hidden>BEGIN</a></div><p class="beacon-score" id="beacon-score">0 beacons found on this device.</p></div>
+  </dialog>
+  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.js?v=20260907-2040-v1"></script>
   <script type="module">
     let loadTimer;
     try {
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-9',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-12',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})

@@ -4,34 +4,27 @@ import test from 'node:test';
 
 const source = await readFile(new URL('./marketplace-home.html', import.meta.url), 'utf8');
 
-test('Meet The Lighthouse shows the current three memberships', () => {
-  const plans = [
-    ['Free', '$0'],
-    ['Lighthouse Employer', '$199'],
-    ['Lighthouse Business', '$199']
-  ];
-
-  for (const [name, price] of plans) {
-    assert.match(source, new RegExp(`<h3>${name}</h3>`));
-    assert.ok(source.includes(price));
-  }
-  assert.match(source, /14-DAY TRIAL[\s\S]*?<h3>Lighthouse Employer<\/h3>/);
-  assert.match(source, /Employer access starts with a 14-day free trial, then \$199\/month\./);
-  assert.doesNotMatch(source, /MEMBERSHIP OPENING SOON/);
+test('the AI signal deck is an honest development preview led by Yvette', () => {
+  assert.match(source, /Lighthouse AI · development preview/);
+  assert.match(source, /Yvette will be the familiar guide at the center of Lighthouse/);
+  assert.match(source, /The full AI workspace is still in development/);
+  assert.match(source, /HEAR YVETTE’S WELCOME/);
+  assert.match(source, /Voice playback uses a narrator available on your device/);
+  assert.doesNotMatch(source, /<div class="lighthouse-plans"/);
 });
 
-test('paid employer access links to the pricing page', () => {
-  assert.match(source, /querySelectorAll\('\.lighthouse-plan-action'\)/);
-  assert.match(source, /type: 'lighthouse:select-plan'/);
-  assert.match(source, /START EMPLOYER PLAN/);
-  assert.match(source, /href="\/pricing-plans\?for=employer"/);
-  assert.match(source, /action\.disabled = false/);
+test('membership details stay available without crowding the homepage', () => {
+  assert.match(source, /href="\/plans-pricing">MEMBERSHIP OPTIONS/);
+  assert.match(source, /href="\/customer-portal">OPEN MY LIGHTHOUSE/);
 });
 
-test('pricing layout has explicit tablet and phone safeguards', () => {
-  assert.match(source, /@media\(max-width:900px\)[\s\S]*?\.lighthouse-plans\{grid-template-columns:1fr\}/);
-  assert.match(source, /@media\(max-width:760px\)[\s\S]*?\.lighthouse-panel\{padding:28px 22px\}/);
-  assert.match(source, /\.lighthouse-plan\s*\{[^}]*min-width:0/);
+test('the Beacon and Watch experiences are present on the homepage', () => {
+  assert.match(source, /id="beacon-quest"/);
+  for (const mood of ['calm', 'curious', 'ready']) assert.match(source, new RegExp(`data-beacon-mood="${mood}"`));
+  assert.equal((source.match(/data-lighthouse-film="[A-Za-z0-9_-]+"/g) || []).length, 6);
+  assert.match(source, /youtube-nocookie\.com\/embed/);
+  assert.doesNotMatch(source, /youtube-nocookie\.com\/embed\/[^"]*autoplay=1/);
+  assert.match(source, /lighthouse-media-console-2040\.webp/);
 });
 
 test('Marketplace phone is a coded, interactive six-step listing demo', () => {

@@ -17,7 +17,7 @@ function make(tag, className, text) {
 function mountPhone(section, old, options) {
   const group=make('div','yvette-phone-group');
   const phone=make('section','yvette-phone');
-  phone.setAttribute('aria-label',section.name+' phone with Yvette');
+  phone.setAttribute('aria-label',section.name+' Lighthouse lantern with Yvette');
   phone.dataset.category=section.id;
   const top=make('div','yvette-phone-top',section.name);
   top.append(make('span','yvette-island'));
@@ -110,4 +110,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260907-4');
+await import('./lighthouse-harbor.mjs?v=20260907-7');

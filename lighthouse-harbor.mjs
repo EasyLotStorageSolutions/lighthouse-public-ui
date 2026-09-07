@@ -25,6 +25,9 @@ const more=button('More at Lighthouse','harbor-subtle',()=>openMore());tools.app
 const welcome=el('section','harbor-welcome');welcome.setAttribute('aria-labelledby','harbor-title');
 const heading=el('h1',null,'Your world. One Lighthouse.');heading.id='harbor-title';
 welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),heading,el('p','harbor-invitation','Where would you like to go?'));
+const beacon=button('✦ Enter the Beacon','harbor-watch',()=>document.getElementById('beacon-quest')?.showModal());
+const meetYvette=button('Meet Yvette · AI in development','harbor-subtle',()=>openMore('lighthouse-title'));
+welcome.append(beacon,meetYvette);
 const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');
 const cards=new Map();const panels=new Map();
 const stage=el('div','harbor-stage');
@@ -68,7 +71,7 @@ for(const s of sections){
   intro.append(el('p','harbor-availability',expectations[s.id]));
   const guide=el('div','harbor-guide-note');const avatar=el('img');avatar.src=new URL('yvette-portrait.jpg',base).href;avatar.alt='';avatar.width=42;avatar.height=42;guide.append(avatar,el('p',null,'Yvette is here to show you around. Press Play guide in the Lighthouse viewer whenever you’re ready.'));intro.append(guide);
   if(s.id==='social')intro.append(el('p','harbor-availability','Social preview · Adults 18+ · Sample activity, not a live network.'));
-  overview.append(intro);if(phone){phone.classList.add('lighthouse-viewer');phone.querySelector('.yvette-phone')?.setAttribute('aria-label',s.name+' Lighthouse video viewer');const screen=phone.querySelector('.yvette-screen');if(screen)screen.style.backgroundImage=`url("${new URL(s.id+'-poster.jpg',base).href}")`;overview.append(phone);}panel.append(overview);
+  overview.append(intro);if(phone){phone.classList.add('lighthouse-viewer');phone.querySelector('.yvette-phone')?.setAttribute('aria-label',s.name+' video inside a Lighthouse lantern');const screen=phone.querySelector('.yvette-screen');if(screen)screen.style.backgroundImage=`url("${new URL(s.id+'-poster.jpg',base).href}")`;overview.append(phone);}panel.append(overview);
   if(source){const details=el('details','harbor-tools');details.append(el('summary',null,'Explore '+s.name+' tools & details'),source);panel.append(details);}
   panels.set(s.id,panel);stage.append(panel);
 }
@@ -84,7 +87,7 @@ const selectedSources=new Set(Object.values(sourceIds));
 original.forEach(node=>{if(selectedSources.has(node.id))return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
 function openMore(target){moreDialog.showModal();if(target){const node=info.querySelector('#'+target);node?.scrollIntoView({block:'start'});}}
 moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.close();});
-function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
+function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe,.harbor-cinema iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
 function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
 function go(id,user=false){
   if(id!=='home'&&!panels.has(id))return;
@@ -95,11 +98,12 @@ function go(id,user=false){
 document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(!a)return;const target=a.getAttribute('href').slice(1);const id=Object.keys(sourceIds).find(key=>sourceIds[key]===target);if(id){event.preventDefault();event.stopImmediatePropagation();go(id,true);}else if(info.querySelector('#'+CSS.escape(target))){event.preventDefault();event.stopImmediatePropagation();openMore(target);}},true);
 window.addEventListener('hashchange',()=>{const id=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));if(id)go(id);else if(!location.hash)go('home');});
 const cinema=el('dialog','harbor-cinema');cinema.setAttribute('aria-label','Watch Lighthouse');
-const cinemaTitle=el('h2',null,'The Lighthouse');const cinemaClose=button('Close ×','harbor-close',()=>cinema.close());
+const cinemaTitle=el('h2',null,'Watch the Lighthouse');const cinemaClose=button('Close ×','harbor-close',()=>cinema.close());
 const film=el('video');film.controls=true;film.playsInline=true;film.preload='none';film.poster=new URL('./assets/lighthouse-memorial-hero-poster.jpg',import.meta.url).href;film.src=new URL('./assets/lighthouse-memorial-hero.mp4',import.meta.url).href;film.setAttribute('aria-label','Original Lighthouse coastal film');
-cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>film.pause());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
+cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>pauseAll());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
 const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});welcome.append(watch);
 app.append(scene,header,welcome,nav,stage,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;
+const filmCollection=root.querySelector('#lighthouse-video-studio .channel-2040');if(filmCollection){filmCollection.classList.add('harbor-film-collection');cinema.append(filmCollection);}
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 if(new URLSearchParams(location.search).has('easyStart'))openMore();
