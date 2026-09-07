@@ -45,8 +45,8 @@ function mountPhone(section, old, options) {
   function showGuide(){legacy.hidden=true;screen.hidden=false;toggle?.setAttribute('aria-pressed','false');if(toggle)toggle.textContent=options.label;legacy.querySelectorAll('video').forEach(v=>v.pause());}
   async function start(){showGuide();try{await video.play();}catch{status.textContent='Tap the video’s play control to start the guide.';}}
   play.addEventListener('click',()=>video.paused?start():video.pause());
-  replay.addEventListener('click',()=>{video.currentTime=0;start();});
-  full.addEventListener('click',async()=>{showGuide();try{if(video.requestFullscreen)await video.requestFullscreen();else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen();else status.textContent='Use the full-screen control on the video.';}catch{status.textContent='Use the full-screen control on the video.';}});
+  replay.addEventListener('click',async()=>{const active=!legacy.hidden?legacy.querySelector('video'):video;if(active){active.currentTime=0;try{await active.play();}catch{status.textContent='Press play on the video to begin.';}}else{video.currentTime=0;start();}});
+  full.addEventListener('click',async()=>{const active=!legacy.hidden?(legacy.querySelector('video')||legacy):video;try{if(active.requestFullscreen)await active.requestFullscreen();else if(active.webkitEnterFullscreen)active.webkitEnterFullscreen();else status.textContent='Use the full-screen control on the video.';}catch{status.textContent='Use the full-screen control on the video.';}});
   video.addEventListener('play',()=>{allVideos.forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('video:not(.yvette-video)').forEach(other=>other.pause());play.textContent='Pause';status.textContent='';});
   video.addEventListener('pause',()=>play.textContent='Play guide');
   video.addEventListener('ended',()=>play.textContent='Play guide');
@@ -109,3 +109,5 @@ if(welcome){
   [...quick.children].forEach((link,index)=>{const name=link.textContent;link.textContent='';const photo=make('img','welcome-category-image');photo.src=new URL(ids[index]+'-poster.jpg',media).href;photo.alt='';photo.width=160;photo.height=84;const text=make('span','welcome-category-text');text.append(make('strong',null,name),make('small',null,descriptions[index]));link.append(photo,text);});
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
+
+await import('./lighthouse-harbor.mjs?v=20260907-1');

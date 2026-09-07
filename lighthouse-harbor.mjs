@@ -1,0 +1,83 @@
+import {sections} from './lighthouse-guide-data.mjs';
+const root=document.querySelector('main');
+const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
+const descriptors={storage:'Space for your next chapter',employment:'Opportunity starts with people',social:'A place to belong',marketplace:'Discover something unexpected',music:'Make room for your imagination'};
+const paths={storage:[['Find storage','/find-storage'],['My rental & payments','/customer-portal?view=storage'],['For operators','/find-storage?area=operators']],employment:[['Find work','/customer-portal?view=controls'],['Hire people','/pricing-plans']],social:[['Explore the social preview','https://lighthouse-world-entrance.sreichert21.chatgpt.site/social.html']],marketplace:[['Explore Marketplace','/marketplace'],['Sell something','/sell-something'],['Auction Hall · view only','/auction-hall']],music:[['Open the Studio','/customer-portal?view=studio']]};
+const base=new URL('./assets/lighthouse-guides/',import.meta.url);
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n;}
+function button(text,cls,fn){const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;}
+let prefs={theme:'sunset',favorites:[],remember:false,last:'home',still:false};
+try{const saved=JSON.parse(localStorage.getItem('lighthouse-harbor-v1')||'null');if(saved&&typeof saved==='object'){prefs={...prefs,theme:['day','sunset','night'].includes(saved.theme)?saved.theme:'sunset',favorites:Array.isArray(saved.favorites)?saved.favorites.filter(id=>sourceIds[id]):[],remember:saved.remember===true,last:sourceIds[saved.last]?saved.last:'home',still:saved.still===true};}}catch{}
+function save(){try{localStorage.setItem('lighthouse-harbor-v1',JSON.stringify(prefs));}catch{announcement.textContent='Your browser cannot save preferences. You can still explore everything.';}}
+const original=[...root.children];
+const app=el('div','harbor-app');app.dataset.theme=prefs.theme;app.dataset.view='home';app.classList.toggle('harbor-still',prefs.still);
+const scene=el('div','harbor-scene');scene.setAttribute('aria-hidden','true');scene.append(el('div','harbor-atmosphere'),el('div','harbor-beam'),el('div','harbor-lantern'),el('div','harbor-water'));
+const header=el('header','harbor-header');
+const home=button('The Lighthouse','harbor-brand',()=>go('home',true));home.setAttribute('aria-label','Back to Lighthouse');
+const tools=el('div','harbor-header-tools');
+const themes=el('div','harbor-themes');themes.setAttribute('role','group');themes.setAttribute('aria-label','Choose atmosphere');
+['day','sunset','night'].forEach(theme=>{const b=button(theme[0].toUpperCase()+theme.slice(1),'',()=>{prefs.theme=theme;app.dataset.theme=theme;save();updateTheme();});b.dataset.theme=theme;themes.append(b);});
+function updateTheme(){[...themes.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===prefs.theme)));}
+const motion=button('Pause scene','harbor-subtle',()=>{prefs.still=!prefs.still;app.classList.toggle('harbor-still',prefs.still);motion.textContent=prefs.still?'Animate scene':'Pause scene';motion.setAttribute('aria-pressed',String(prefs.still));save();});motion.textContent=prefs.still?'Animate scene':'Pause scene';motion.setAttribute('aria-pressed',String(prefs.still));
+const more=button('More at Lighthouse','harbor-subtle',()=>openMore());tools.append(themes,motion,more);header.append(home,tools);
+const welcome=el('section','harbor-welcome');welcome.setAttribute('aria-labelledby','harbor-title');
+const heading=el('h1',null,'Your world. One Lighthouse.');heading.id='harbor-title';
+welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),heading,el('p','harbor-invitation','Where would you like to go?'));
+const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');
+const cards=new Map();const panels=new Map();
+const stage=el('div','harbor-stage');
+const panelHeading=el('div','harbor-panel-heading');
+const back=button('← Back to the harbor','harbor-subtle',()=>go('home',true));
+const pin=button('☆ Add to favorites','harbor-subtle',()=>{if(!sourceIds[current])return;prefs.favorites=prefs.favorites.includes(current)?prefs.favorites.filter(id=>id!==current):[...prefs.favorites,current];save();updateFavorite();});
+panelHeading.append(back,pin);stage.append(panelHeading);
+let current='home';
+for(const s of sections){
+  const card=button('','harbor-destination',()=>go(s.id,true));card.dataset.destination=s.id;
+  const photo=el('img');photo.src=new URL(s.id+'-poster.jpg',base).href;photo.alt='';photo.width=200;photo.height=100;
+  const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,s.name),el('small',null,descriptors[s.id]));card.append(photo,cardText,el('span','harbor-destination-arrow','↗'));
+  card.addEventListener('pointerenter',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
+  card.addEventListener('focus',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
+  nav.append(card);cards.set(s.id,card);
+  const source=document.getElementById(sourceIds[s.id]);
+  const phone=source?.querySelector('.yvette-phone-group');
+  const panel=el('section','harbor-panel');panel.hidden=true;panel.id='harbor-'+s.id;panel.setAttribute('aria-labelledby','harbor-heading-'+s.id);card.setAttribute('aria-controls',panel.id);
+  const overview=el('div','harbor-overview');const intro=el('div','harbor-intro');
+  intro.append(el('p','harbor-eyebrow',s.eyebrow));const h=el('h2',null,s.title);h.id='harbor-heading-'+s.id;h.tabIndex=-1;intro.append(h,el('p','harbor-description',s.description));
+  const actions=el('div','harbor-actions');paths[s.id].forEach(([text,href])=>{const a=el('a',null,text);a.href=href.startsWith('/')?'https://www.easylotstoragesolutions.com'+href:href;a.target='_top';actions.append(a);});intro.append(actions);
+  const guide=el('div','harbor-guide-note');const avatar=el('img');avatar.src=new URL('yvette-portrait.jpg',base).href;avatar.alt='';avatar.width=42;avatar.height=42;guide.append(avatar,el('p',null,'Yvette is here to show you around. Press Play guide in the Lighthouse viewer whenever you’re ready.'));intro.append(guide);
+  if(s.id==='social')intro.append(el('p','harbor-availability','Social preview · Adults 18+ · Sample activity, not a live network.'));
+  overview.append(intro);if(phone){phone.classList.add('lighthouse-viewer');phone.querySelector('.yvette-phone')?.setAttribute('aria-label',s.name+' Lighthouse video viewer');const screen=phone.querySelector('.yvette-screen');if(screen)screen.style.backgroundImage=`url("${new URL(s.id+'-poster.jpg',base).href}")`;overview.append(phone);}panel.append(overview);
+  if(source){const details=el('details','harbor-tools');details.append(el('summary',null,'Explore '+s.name+' tools & details'),source);panel.append(details);}
+  panels.set(s.id,panel);stage.append(panel);
+}
+const footer=el('footer','harbor-footer');
+const favorites=el('div','harbor-favorites');favorites.setAttribute('aria-label','Your favorite destinations');
+const rememberLabel=el('label','harbor-remember');const remember=el('input');remember.type='checkbox';remember.checked=prefs.remember;remember.addEventListener('change',()=>{prefs.remember=remember.checked;prefs.last=current;save();});rememberLabel.append(remember,el('span',null,'Remember my place on this device'));
+footer.append(favorites,rememberLabel);
+const announcement=el('p','harbor-announcement');announcement.setAttribute('role','status');
+const moreDialog=el('dialog','harbor-more');moreDialog.setAttribute('aria-label','More at Lighthouse');
+const closeMore=button('Close ×','harbor-close',()=>moreDialog.close());moreDialog.append(closeMore,el('h2',null,'More at Lighthouse'));
+const info=el('div','harbor-more-content');moreDialog.append(info);
+const selectedSources=new Set(Object.values(sourceIds));
+original.forEach(node=>{if(selectedSources.has(node.id))return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
+function openMore(target){moreDialog.showModal();if(target){const node=info.querySelector('#'+target);node?.scrollIntoView({block:'start'});}}
+moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.close();});
+function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src);});}
+function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
+function go(id,user=false){
+  if(id!=='home'&&!panels.has(id))return;
+  pauseAll();current=id;app.dataset.view=id;welcome.hidden=id!=='home';stage.hidden=id==='home';panels.forEach((p,key)=>p.hidden=key!==id);cards.forEach((b,key)=>b.setAttribute('aria-current',key===id?'page':'false'));updateFavorite();
+  if(prefs.remember){prefs.last=id;save();}
+  if(user){const url=new URL(location.href);url.hash=id==='home'?'':sourceIds[id];history.replaceState(null,'',url.href);cards.get(id)?.scrollIntoView({block:'nearest',inline:'center'});(id==='home'?heading:document.getElementById('harbor-heading-'+id)).focus({preventScroll:true});app.scrollIntoView({block:'start'});}
+}
+document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(!a)return;const target=a.getAttribute('href').slice(1);const id=Object.keys(sourceIds).find(key=>sourceIds[key]===target);if(id){event.preventDefault();event.stopImmediatePropagation();go(id,true);}else if(info.querySelector('#'+CSS.escape(target))){event.preventDefault();event.stopImmediatePropagation();openMore(target);}},true);
+window.addEventListener('hashchange',()=>{const id=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));if(id)go(id);else if(!location.hash)go('home');});
+const cinema=el('dialog','harbor-cinema');cinema.setAttribute('aria-label','Watch Lighthouse');
+const cinemaTitle=el('h2',null,'The Lighthouse');const cinemaClose=button('Close ×','harbor-close',()=>cinema.close());
+const film=el('video');film.controls=true;film.playsInline=true;film.preload='none';film.poster=new URL('./assets/lighthouse-memorial-hero-poster.jpg',import.meta.url).href;film.src=new URL('./assets/lighthouse-memorial-hero.mp4',import.meta.url).href;film.setAttribute('aria-label','Original Lighthouse coastal film');
+cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>film.pause());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
+const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});welcome.append(watch);
+app.append(scene,header,welcome,nav,stage,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;
+document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
+const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
+if(new URLSearchParams(location.search).has('easyStart'))openMore();
