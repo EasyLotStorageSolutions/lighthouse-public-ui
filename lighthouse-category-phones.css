@@ -29,3 +29,8 @@
 .yvette-category-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:24px 16px;background:#edf4fa}.yvette-category-nav a{padding:12px 16px;border:1px solid #a4bacd;border-radius:24px;color:#113d6a;text-decoration:none;font:700 12px/1.4 Arial,sans-serif}
 .yvette-section-details{grid-column:1/-1;width:100%;margin:24px 0;color:#113d6a}.yvette-section-details>summary{padding:18px;border:1px solid #a4bacd;border-radius:12px;background:#ffffff70;cursor:pointer;font:700 14px/1.5 Arial,sans-serif}.yvette-embedded body>main{max-height:100vh;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#8aa6bc transparent}
 @media(max-width:800px){.yvette-phones-ready .work-shell,.yvette-phones-ready .lh-market-intro,.yvette-category-layout{grid-template-columns:minmax(0,1fr);gap:30px}.yvette-phone-group{width:min(100%,280px)}.yvette-phones-ready .work-copy,.yvette-category-copy{text-align:center}.yvette-phones-ready .work-pill-row{justify-content:center}.yvette-world{padding-block:56px}.yvette-legacy{height:455px}.yvette-legacy .work-phone{height:455px}.yvette-legacy .storage-drivein{min-height:455px}.yvette-category-nav{gap:7px}.yvette-category-nav a{padding:10px 12px}}
+/* Visual review: aligned sections, one phone frame, readable lower-page copy. */
+.yvette-phones-ready .lh-market-intro,.yvette-phones-ready .market-portal{width:min(1080px,calc(100% - 48px));margin-inline:auto}
+.yvette-legacy .storage-phone-island{display:none}
+.yvette-phones-ready #what-easy-does,.yvette-phones-ready #how-easy-works,.yvette-phones-ready #for-business{background:rgba(237,244,255,.88)}
+@media(max-width:520px){.yvette-phones-ready .lh-market-intro,.yvette-phones-ready .market-portal{width:calc(100% - 32px)}}
