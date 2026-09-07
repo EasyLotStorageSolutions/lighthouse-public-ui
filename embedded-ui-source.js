@@ -1,5 +1,5 @@
 const EMBED_BASE = 'https://easylotstoragesolutions.github.io/lighthouse-public-ui';
-const EMBED_RELEASE = '20260906-blue-homepage-cleanup-v1';
+const EMBED_RELEASE = '20260907-selected-phones-maker-recovery-v1';
 
 export function useEmbeddedUi(element, fileName) {
     if (!element || !fileName) return element;
