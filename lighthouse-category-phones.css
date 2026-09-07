@@ -34,3 +34,18 @@
 .yvette-legacy .storage-phone-island{display:none}
 .yvette-phones-ready #what-easy-does,.yvette-phones-ready #how-easy-works,.yvette-phones-ready #for-business{background:rgba(237,244,255,.88)}
 @media(max-width:520px){.yvette-phones-ready .lh-market-intro,.yvette-phones-ready .market-portal{width:calc(100% - 32px)}}
+/* A calm, direct entrance into the five Lighthouse destinations. */
+.lighthouse-welcome{padding:76px 0 52px!important;background:linear-gradient(180deg,rgba(237,244,255,.88),rgba(220,236,245,.78))!important}
+.lighthouse-welcome h1{max-width:950px;margin:18px auto 22px;font-size:clamp(52px,6.5vw,88px)!important;line-height:1.12!important}
+.lighthouse-welcome .eyebrow{letter-spacing:.22em}
+.lighthouse-welcome>.container>p:not(.hero-note){max-width:660px;margin:0 auto;color:#244e68;font-size:clamp(17px,1.7vw,21px);line-height:1.7}
+.lighthouse-welcome>.container>.actions,.lighthouse-welcome .starting-line-title,.lighthouse-welcome .starting-line-actions,.lighthouse-welcome .starting-line-note{display:none}
+.lighthouse-welcome .starting-line{margin:0;padding:0;border:0;background:none;box-shadow:none}
+.lighthouse-welcome .yvette-category-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:36px auto 22px;padding:0;background:none;max-width:1040px}
+.lighthouse-welcome .yvette-category-nav a{display:flex;flex-direction:column;overflow:hidden;padding:0;border:1px solid #a8c0d0;border-radius:18px;background:#f7fbff;box-shadow:0 8px 20px #163e5a0d;text-align:left;transition:transform .15s,box-shadow .15s}
+.lighthouse-welcome .yvette-category-nav a:hover{transform:translateY(-3px);box-shadow:0 12px 24px #163e5a22}
+.welcome-category-image{display:block;width:100%;height:84px;object-fit:cover;object-position:center 34%}
+.welcome-category-text{display:grid;gap:6px;padding:15px 13px}.welcome-category-text strong{font:700 14px/1.35 Arial,sans-serif}.welcome-category-text small{font:12px/1.4 Arial,sans-serif;color:#45657b}
+.lighthouse-welcome .hero-note{font:12px/1.5 Arial,sans-serif!important;color:#45657b!important;margin:0!important}
+@media(max-width:700px){.lighthouse-welcome{padding:46px 0 34px!important}.lighthouse-welcome .yvette-category-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:26px}.lighthouse-welcome .yvette-category-nav a:last-child{grid-column:1/-1;flex-direction:row;align-items:center}.lighthouse-welcome .yvette-category-nav a:last-child img{width:35%;height:90px}.welcome-category-image{height:66px}.welcome-category-text{padding:12px}.lighthouse-welcome h1{font-size:52px!important}}
+@media(prefers-reduced-motion:reduce){.lighthouse-welcome .yvette-category-nav a{transition:none;transform:none}}

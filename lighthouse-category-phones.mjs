@@ -101,3 +101,11 @@ for(const [selector,label] of [['.work-driver','Work options, plans & hiring det
 if(window.self!==window.top)document.documentElement.classList.add('yvette-embedded');
 
  document.querySelector('#phone-demo-replay')?.addEventListener('click',()=>{const phone=document.querySelector('.yvette-phone[data-category=marketplace]');if(phone?.querySelector('.yvette-legacy')?.hidden)phone.querySelector('.yvette-mode')?.click();});
+const welcome=document.querySelector('.hero>.container');
+if(welcome){
+  welcome.insertBefore(quick,welcome.querySelector('.hero-note'));
+  const descriptions=['Find your space','Find work or hire','Find your people','Discover & trade','Watch, listen & create'];
+  const ids=['storage','employment','social','marketplace','music'];
+  [...quick.children].forEach((link,index)=>{const name=link.textContent;link.textContent='';const photo=make('img','welcome-category-image');photo.src=new URL(ids[index]+'-poster.jpg',media).href;photo.alt='';photo.width=160;photo.height=84;const text=make('span','welcome-category-text');text.append(make('strong',null,name),make('small',null,descriptions[index]));link.append(photo,text);});
+  document.querySelector('.hero').classList.add('lighthouse-welcome');
+}
