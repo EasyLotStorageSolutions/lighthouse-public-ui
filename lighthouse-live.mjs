@@ -52,13 +52,19 @@ if(app){
   ].forEach(([label,value])=>{const option=el('option',null,label);option.value=value;iheartSelect.append(option)});
   const iheartBrowse=el('a',null,'Browse more stations on iHeart');iheartBrowse.href='https://www.iheart.com/live/';iheartBrowse.target='_blank';iheartBrowse.rel='noopener noreferrer';
   iheartLabel.append(iheartSelect);iheartControls.append(iheartLabel,iheartBrowse);
+  const iheartCustom=el('form','harbor-iheart-custom');
+  const iheartCustomLabel=el('label',null,'Use any iHeart station');
+  const iheartCustomInput=el('input');iheartCustomInput.type='url';iheartCustomInput.inputMode='url';iheartCustomInput.placeholder='Paste an iHeart station link';iheartCustomInput.autocomplete='off';iheartCustomInput.maxLength=240;
+  const iheartCustomButton=button('LOAD IN LIGHTHOUSE','',()=>{});iheartCustomButton.type='submit';
+  const iheartStatus=el('p','harbor-live-status','Choose a quick station above, or find any station on iHeart and paste its link here.');iheartStatus.setAttribute('role','status');
+  iheartCustomLabel.append(iheartCustomInput);iheartCustom.append(iheartCustomLabel,iheartCustomButton);
   const results=el('div','harbor-radio-results');
-  dialog.append(close,eyebrow,title,intro,modes,media,searchForm,suggestions,iheartControls,status,results);
+  dialog.append(close,eyebrow,title,intro,modes,media,searchForm,suggestions,iheartControls,iheartCustom,iheartStatus,status,results);
   app.append(dialog);
 
   function setMode(mode){
     const radio=mode==='radio',iheart=mode==='iheart',visual=mode==='visual';visualButton.setAttribute('aria-pressed',String(visual));radioButton.setAttribute('aria-pressed',String(radio));iheartButton.setAttribute('aria-pressed',String(iheart));
-    frame.hidden=radio;radioPanel.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;
+    frame.hidden=radio;radioPanel.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
   }
   function showVisual(){
     audio.pause();dialog.scrollTop=0;setMode('visual');
@@ -75,12 +81,24 @@ if(app){
     setTimeout(()=>searchInput.focus(),0);
   }
   function showIHeart(){
-    audio.pause();dialog.scrollTop=0;setMode('iheart');frame.title='Official iHeartRadio station widget';frame.src=iheartSelect.value;
+    audio.pause();dialog.scrollTop=0;setMode('iheart');frame.title='Official iHeartRadio station widget';
+    let station=iheartSelect.value;
+    try{const saved=localStorage.getItem(`lighthouse-iheart-${activeCategory}`);if(saved&&toIHeartEmbed(saved)){station=saved;iheartCustomInput.value=saved;iheartStatus.textContent='Your station for this Lighthouse is ready. Press play in the official iHeart player.'}}catch{}
+    frame.src=toIHeartEmbed(station)||station;
     title.textContent=`${experiences[activeCategory].name} Lighthouse · iHeartRadio`;
-    intro.textContent='Choose a station below, then use the official iHeartRadio player inside this Lighthouse. It does not autoplay.';
+    intro.textContent='Choose a quick station or bring in any official iHeart station. The player stays inside this Lighthouse and does not autoplay.';
   }
   function openLive(category,mode){activeCategory=category;dialog.showModal();mode==='radio'?showRadio():showVisual();}
   iheartSelect.addEventListener('change',()=>{if(iheartButton.getAttribute('aria-pressed')==='true'){frame.src=iheartSelect.value}});
+  function toIHeartEmbed(value){
+    try{const url=new URL(value);if(!['iheart.com','www.iheart.com'].includes(url.hostname.toLowerCase()))return null;const match=url.pathname.match(/^\/live\/([a-z0-9-]+)\/?$/i);if(!match)return null;return `https://www.iheart.com/live/${match[1]}/?embed=true&theme=dark`}catch{return null}
+  }
+  iheartCustom.addEventListener('submit',event=>{
+    event.preventDefault();const station=iheartCustomInput.value.trim();const embed=toIHeartEmbed(station);
+    if(!embed){iheartStatus.textContent='Paste a complete iHeart station link, such as https://www.iheart.com/live/station-name-1234/';return}
+    frame.src=embed;iheartStatus.textContent='Station loaded. Press play in the official iHeart player.';
+    try{localStorage.setItem(`lighthouse-iheart-${activeCategory}`,station)}catch{}
+  });
 
   async function searchStations(query){
     status.textContent='Searching the radio dial…';results.replaceChildren();

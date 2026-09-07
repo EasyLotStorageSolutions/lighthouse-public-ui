@@ -53,6 +53,10 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.doesNotMatch(live, /autoplay=1/);
   assert.match(live, /\?embed=true&theme=dark/);
   assert.match(live, /Official iHeartRadio station widget/);
+  assert.match(live, /function toIHeartEmbed\(value\)/);
+  assert.match(live, /\['iheart\.com','www\.iheart\.com'\]/);
+  assert.match(live, /lighthouse-iheart-\$\{activeCategory\}/);
+  assert.match(live, /Use any iHeart station/);
   assert.match(live, /Browse more stations on iHeart/);
 });
 
