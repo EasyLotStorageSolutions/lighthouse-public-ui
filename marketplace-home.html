@@ -263,7 +263,7 @@
       .channel-dial {
       .channel-panel .eyebrow::before {
 @media(max-width:760px){.channel-strip{grid-template-columns:1fr}.channel-dial{grid-template-columns:1fr}.channel-tv{box-sizing:border-box}}
-</style>
+.assistant-coming-soon{padding-bottom:34px}.assistant-coming-soon .assistant-shell{max-width:980px;background:linear-gradient(145deg,#fff,#e7f1ff);border-color:rgba(17,61,106,.34);box-shadow:0 22px 52px rgba(8,43,76,.16)}.assistant-coming-soon .ai-console-grid{display:none}.assistant-coming-soon .ai-live::before{background:#f7b731;box-shadow:0 0 0 4px rgba(247,183,49,.16)}.ai-coming-soon-card{position:relative;padding:18px 4px 4px}.ai-coming-soon-card h2{max-width:720px;margin:8px 0 12px;color:var(--easy-blue);font-size:clamp(38px,5vw,62px)}.ai-coming-soon-card p{max-width:760px;color:var(--easy-blue);font:400 18px/1.65 'Playfair Display',Georgia,serif}.ai-coming-note{padding-top:18px;border-top:1px solid rgba(17,61,106,.2);font-size:15px!important}@media(max-width:600px){.assistant-coming-soon{padding-bottom:20px}.ai-coming-soon-card{padding-top:4px}.ai-coming-soon-card p{font-size:16px}}</style>
     <style>
       /* Lighthouse platform homepage correction: the established blue visual system,
          with Ask Lighthouse as the front door and storage as one service vertical. */
@@ -744,6 +744,15 @@
       @keyframes coastalWaterLight{from{transform:translate3d(-.35%,-.2%,0) scale(1.01)}to{transform:translate3d(.35%,.2%,0) scale(1.018)}}
       @media(max-width:760px){body::after{background-position:center top}.easy-callout,.delivery-coming-soon,.auction-home{background:rgba(255,255,255,.3)}}
       @media(prefers-reduced-motion:reduce){body::before{animation:none}}
+      .assistant-coming-soon{padding:70px 0 42px}
+      .assistant-coming-soon .assistant-shell{max-width:980px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(225,239,252,.92));border-color:rgba(17,61,106,.34);box-shadow:0 22px 52px rgba(8,43,76,.16)}
+      .assistant-coming-soon .ai-console-grid{display:none}
+      .assistant-coming-soon .ai-live::before{background:#f7b731;box-shadow:0 0 0 4px rgba(247,183,49,.16)}
+      .ai-coming-soon-card{position:relative;padding:18px 4px 4px}
+      .ai-coming-soon-card h2{max-width:720px;margin:8px 0 12px;color:var(--easy-blue);font-size:clamp(38px,5vw,62px)}
+      .ai-coming-soon-card p{max-width:760px;color:var(--easy-blue);font:400 18px/1.65 'Playfair Display',Georgia,serif}
+      .ai-coming-note{padding-top:18px;border-top:1px solid rgba(17,61,106,.2);font-size:15px!important}
+      @media(max-width:600px){.assistant-coming-soon{padding:48px 0 28px}.ai-coming-soon-card{padding-top:4px}.ai-coming-soon-card p{font-size:16px}}
     </style>
   </head>
   <body>
@@ -751,7 +760,7 @@
       <section class="hero">
         <div class="container">
           <div class="eyebrow">One place to start</div><h1>Tell Lighthouse what you need.</h1><p>Work. Business. Projects. Events. Everyday life. Storage. Something else. Lighthouse helps you figure out what comes next—and helps you get it done.</p>
-          <div class="actions"><a class="button" href="#assistant">ASK LIGHTHOUSE</a><a class="button secondary" href="#lighthouse-video-studio">SEE STUDIO HERE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
+          <div class="actions"><a class="button" href="#assistant">LIGHTHOUSE AI · COMING SOON</a><a class="button secondary" href="#lighthouse-video-studio">SEE STUDIO HERE</a><a class="button secondary" href="#what-easy-does">EXPLORE WHAT LIGHTHOUSE CAN HELP WITH</a></div>
           <p class="hero-note">No account needed to start exploring.</p>
           <div class="starting-line" aria-label="Start with what you need">
             <div class="starting-line-title"><strong>Choose the closest starting point.</strong><span>You can explain the details in ordinary words</span></div>
@@ -821,59 +830,6 @@
           <button class="experience-mode" type="button" data-home-mode="explore" aria-pressed="true"><small>EXPLORE</small><strong>Move through the districts.</strong><span>A spatial 2.5D Marketplace campus built over the same real inventory.</span></button>
           <button class="experience-mode" type="button" data-home-mode="immersive" aria-pressed="false"><small>IMMERSIVE</small><strong>Turn up the atmosphere.</strong><span>Explore with deeper transitions and optional sound after you opt in.</span></button>
         </div><div class="portal-enter"><span id="portal-mode-copy">Explore mode opens the visual Marketplace campus. You can switch modes at any time.</span><div class="lh-market-actions"><a class="button" id="portal-enter-link" href="/marketplace">ENTER EXPLORE MODE</a><a class="button secondary" href="/auction-hall">ENTER AUCTION HALL · VIEW ONLY</a></div></div></div>
-      </section>
-      <section class="section" id="assistant">
-        <div class="container">
-          <div class="assistant-shell">
-            <div class="ai-console-bar"><div class="ai-identity"><span class="ai-mark" aria-hidden="true"></span><div><strong class="ai-name">Lighthouse AI</strong><span class="ai-subtitle">Guidance for work, business, projects, and everyday needs</span></div></div><span class="ai-live">Online</span></div>
-            <div class="ai-console-grid">
-              <aside class="ai-guide" aria-label="What Lighthouse AI can do">
-                <h3>What Lighthouse can do</h3>
-                <p>Start here for helpful AI guidance without needing to choose a department or service first.</p>
-                <div class="ai-capabilities">
-                  <div class="ai-capability"><span>01</span><div><strong>Understand the need</strong><small>Turn an unfinished idea or messy problem into something clear.</small></div></div>
-                  <div class="ai-capability"><span>02</span><div><strong>Look at context</strong><small>Use pictures or sampled video frames to understand what you are showing.</small></div></div>
-                  <div class="ai-capability"><span>03</span><div><strong>Suggest a next step</strong><small>Organize practical options while keeping important decisions with you.</small></div></div>
-                </div>
-                <div class="ai-access"><strong>Want the complete AI workspace?</strong><p>Sign in and activate The Lighthouse Membership for saved cases, ongoing work, memory, files, approvals, and connected computer tools.</p><a class="button" href="/customer-portal">SIGN IN FOR FULL ACCESS</a></div>
-              </aside>
-              <div class="ai-chat">
-                <div class="assistant-intro"><div class="section-head"><div class="guest-label">Guest AI — start here</div><h2>What do you need help with?</h2><p>Describe the situation in ordinary words. Lighthouse will help you understand the need and organize a useful next step.</p></div></div>
-                <div class="ai-conversation" id="assistant-conversation" aria-live="polite">
-                  <div class="ai-turn"><span class="ai-avatar" aria-hidden="true">L</span><div class="ai-bubble"><strong>Hi, I’m Lighthouse.</strong><p>Tell me what you are trying to get done—even if the idea is unfinished. I can ask a useful follow-up, look at pictures or a short video, and help you decide what comes next. You do not need to know which service comes first.</p></div></div>
-                </div>
-                <div class="ai-guest-meter" id="assistant-guest-meter"><div class="ai-guest-meter-row"><span>Live guest conversation</span><strong id="assistant-guest-count">3 messages available</strong></div><div class="ai-guest-meter-track" aria-hidden="true"><span class="ai-guest-meter-fill" id="assistant-guest-fill"></span></div></div>
-                <div class="assistant-composer">
-                  <form class="assistant-form" id="assistant-text-form">
-                    <label for="assistant-text-input">Message Lighthouse<textarea id="assistant-text-input" maxlength="2000" placeholder="For example: I have a damaged gate, I need help finding work, or I need to organize a business project…"></textarea></label>
-                    <div class="attachment-tray" id="assistant-attachment-tray" aria-live="polite" hidden></div>
-                    <label class="media-consent" id="assistant-media-consent-row" hidden><input type="checkbox" id="assistant-media-consent" /> I have permission to share this media and understand that Lighthouse will analyze the selected images or sampled video frames.</label>
-                    <div class="composer-footer"><div class="composer-actions"><button class="composer-tool" id="assistant-add-photo" type="button"><span class="composer-icon" aria-hidden="true">▧</span>Add pictures</button><button class="composer-tool" id="assistant-add-video" type="button"><span class="composer-icon" aria-hidden="true">▶</span>Add video</button></div><button class="button composer-send" id="assistant-send" type="submit" disabled>SEND TO LIGHTHOUSE →</button></div>
-                    <input id="assistant-photo-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden />
-                    <input id="assistant-video-input" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" hidden />
-                  </form>
-                </div>
-                <p class="media-help">Your original video is not sent to the AI. Lighthouse analyzes up to four compressed pictures or four sampled video frames.</p>
-                <p class="prompt-label">Try an example</p>
-                <div class="suggestions" aria-label="Ways to start"><button class="suggestion" type="button" data-prompt="I need work.">I need work</button><button class="suggestion" type="button" data-prompt="I need someone tomorrow.">I need someone tomorrow</button><button class="suggestion" type="button" data-prompt="Help me plan Christmas.">Plan Christmas</button><button class="suggestion" type="button" data-prompt="Help me run my business.">Help with my business</button><button class="suggestion" type="button" data-prompt="I need a plumber.">I need a plumber</button><button class="suggestion" type="button" data-prompt="I have no idea where to start.">I don't know where to start</button></div>
-                <div class="assistant-tools"><div class="voice-stage"><button class="voice-button" id="assistant-voice-toggle" type="button" data-state="checking" aria-pressed="false" aria-label="Ask Lighthouse by voice" disabled><span class="voice-icon" aria-hidden="true"></span><span class="voice-button-label">ASK BY VOICE</span></button><span class="assistant-status" id="assistant-status" role="status" aria-live="polite">Checking Lighthouse…</span></div><div class="voice-controls"><button class="button secondary" id="assistant-stop-speech" type="button" hidden>STOP SPEAKING</button></div></div>
-                <p class="voice-disclosure">Voice is optional and starts only when you tap the microphone. Transcripts may be retained for review; raw microphone audio is not stored by Lighthouse.</p>
-                <div class="voice-transcript" id="assistant-transcript" aria-live="polite" hidden><strong>You said</strong><p id="assistant-transcript-text"></p><p class="voice-warning" id="assistant-transcript-warning" hidden>Please review names, addresses, measurements, dates, phone numbers, plates, and VINs on screen before confirming.</p></div>
-                <div class="ai-upgrade" id="assistant-upgrade" hidden><div class="eyebrow">Continue with Lighthouse</div><h3>Keep the plan, context, and files together.</h3><p>Your private Lighthouse workspace saves the conversation and gives you more room for ongoing work, pictures, video, approvals, and connected tools.</p><ul><li>Free early access while it is open</li><li>Private saved work and project memory</li><li>Work, Marketplace, and Studio tools</li></ul><div class="ai-upgrade-actions"><a class="button" href="/customer-portal">START FREE ACCESS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
-                <div class="assistant-confirm" id="assistant-confirm" hidden>
-                  <strong>Review and confirm before submitting</strong>
-                  <label><input type="checkbox" id="assistant-terms" /> I agree to the <a href="/policies-terms">Lighthouse terms</a> for this request.</label>
-                  <label><input type="checkbox" id="assistant-privacy" /> I acknowledge the <a href="/policies-terms">privacy notice</a> and consent to this request being recorded.</label>
-                  <label id="assistant-alert-row" hidden><input type="checkbox" id="assistant-alert" /> Alert me if Lighthouse finds a compatible space later.</label>
-                  <label id="assistant-authorization-row" hidden><input type="checkbox" id="assistant-authorization" /> I confirm I am authorized to request access or key-related service for this vehicle or property.</label>
-                  <button class="button" id="assistant-confirm-button" type="button">CONFIRM AND SUBMIT</button>
-                </div>
-                <details class="assistant-fallbacks" id="assistant-fallbacks"><summary>Prefer a standard form?</summary><div class="assistant-fallback-actions"><a class="button secondary" href="/solutions#request">GET HELP</a><a class="button secondary" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a></div></details>
-                <p class="assistant-disclaimer">Guest AI guidance is not saved as a private workspace. Full Lighthouse features require sign-in and an active membership. Services, availability, pricing, qualifications, and important actions remain subject to review and confirmation.</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
         <div class="container"><div class="lighthouse-panel">
@@ -993,6 +949,59 @@
           <aside class="business-panel"><h3>Bring Lighthouse into the real work.</h3><p>Not another dashboard to babysit. Start with the outcome you need.</p><ul><li>Find workers</li><li>Manage jobs</li><li>Organize customers</li><li>Coordinate resources</li><li>Handle follow-ups</li><li>Find new opportunities</li></ul></aside>
         </div>
       </section>
+      <section class="section assistant-coming-soon" id="assistant">
+        <div class="container">
+          <div class="assistant-shell">
+            <div class="ai-console-bar"><div class="ai-identity"><span class="ai-mark" aria-hidden="true"></span><div><strong class="ai-name">Lighthouse AI</strong><span class="ai-subtitle">A clearer way to ask, organize, and move forward</span></div></div><span class="ai-live">Coming Soon</span></div>
+            <div class="ai-coming-soon-card"><div class="eyebrow">Coming Soon</div><h2>Lighthouse AI is getting ready.</h2><p>Bring one question, problem, picture, or unfinished idea. Lighthouse AI will help organize what you need, explain useful options, and guide you toward the right Lighthouse service or workspace.</p><p class="ai-coming-note">The preview is being prepared now. Storage search, Easy Lot customer access, the Marketplace, Work, Studio, and The Operator Exchange remain available today.</p></div><div class="ai-console-grid" aria-hidden="true">
+              <aside class="ai-guide" aria-label="What Lighthouse AI can do">
+                <h3>What Lighthouse can do</h3>
+                <p>Start here for helpful AI guidance without needing to choose a department or service first.</p>
+                <div class="ai-capabilities">
+                  <div class="ai-capability"><span>01</span><div><strong>Understand the need</strong><small>Turn an unfinished idea or messy problem into something clear.</small></div></div>
+                  <div class="ai-capability"><span>02</span><div><strong>Look at context</strong><small>Use pictures or sampled video frames to understand what you are showing.</small></div></div>
+                  <div class="ai-capability"><span>03</span><div><strong>Suggest a next step</strong><small>Organize practical options while keeping important decisions with you.</small></div></div>
+                </div>
+                <div class="ai-access"><strong>Want the complete AI workspace?</strong><p>Sign in and activate The Lighthouse Membership for saved cases, ongoing work, memory, files, approvals, and connected computer tools.</p><a class="button" href="/customer-portal">SIGN IN FOR FULL ACCESS</a></div>
+              </aside>
+              <div class="ai-chat">
+                <div class="assistant-intro"><div class="section-head"><div class="guest-label">Guest AI — start here</div><h2>What do you need help with?</h2><p>Describe the situation in ordinary words. Lighthouse will help you understand the need and organize a useful next step.</p></div></div>
+                <div class="ai-conversation" id="assistant-conversation" aria-live="polite">
+                  <div class="ai-turn"><span class="ai-avatar" aria-hidden="true">L</span><div class="ai-bubble"><strong>Hi, I’m Lighthouse.</strong><p>Tell me what you are trying to get done—even if the idea is unfinished. I can ask a useful follow-up, look at pictures or a short video, and help you decide what comes next. You do not need to know which service comes first.</p></div></div>
+                </div>
+                <div class="ai-guest-meter" id="assistant-guest-meter"><div class="ai-guest-meter-row"><span>Live guest conversation</span><strong id="assistant-guest-count">3 messages available</strong></div><div class="ai-guest-meter-track" aria-hidden="true"><span class="ai-guest-meter-fill" id="assistant-guest-fill"></span></div></div>
+                <div class="assistant-composer">
+                  <form class="assistant-form" id="assistant-text-form">
+                    <label for="assistant-text-input">Message Lighthouse<textarea id="assistant-text-input" maxlength="2000" placeholder="For example: I have a damaged gate, I need help finding work, or I need to organize a business project…"></textarea></label>
+                    <div class="attachment-tray" id="assistant-attachment-tray" aria-live="polite" hidden></div>
+                    <label class="media-consent" id="assistant-media-consent-row" hidden><input type="checkbox" id="assistant-media-consent" /> I have permission to share this media and understand that Lighthouse will analyze the selected images or sampled video frames.</label>
+                    <div class="composer-footer"><div class="composer-actions"><button class="composer-tool" id="assistant-add-photo" type="button"><span class="composer-icon" aria-hidden="true">▧</span>Add pictures</button><button class="composer-tool" id="assistant-add-video" type="button"><span class="composer-icon" aria-hidden="true">▶</span>Add video</button></div><button class="button composer-send" id="assistant-send" type="submit" disabled>SEND TO LIGHTHOUSE →</button></div>
+                    <input id="assistant-photo-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden />
+                    <input id="assistant-video-input" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v" hidden />
+                  </form>
+                </div>
+                <p class="media-help">Your original video is not sent to the AI. Lighthouse analyzes up to four compressed pictures or four sampled video frames.</p>
+                <p class="prompt-label">Try an example</p>
+                <div class="suggestions" aria-label="Ways to start"><button class="suggestion" type="button" data-prompt="I need work.">I need work</button><button class="suggestion" type="button" data-prompt="I need someone tomorrow.">I need someone tomorrow</button><button class="suggestion" type="button" data-prompt="Help me plan Christmas.">Plan Christmas</button><button class="suggestion" type="button" data-prompt="Help me run my business.">Help with my business</button><button class="suggestion" type="button" data-prompt="I need a plumber.">I need a plumber</button><button class="suggestion" type="button" data-prompt="I have no idea where to start.">I don't know where to start</button></div>
+                <div class="assistant-tools"><div class="voice-stage"><button class="voice-button" id="assistant-voice-toggle" type="button" data-state="checking" aria-pressed="false" aria-label="Ask Lighthouse by voice" disabled><span class="voice-icon" aria-hidden="true"></span><span class="voice-button-label">ASK BY VOICE</span></button><span class="assistant-status" id="assistant-status" role="status" aria-live="polite">Checking Lighthouse…</span></div><div class="voice-controls"><button class="button secondary" id="assistant-stop-speech" type="button" hidden>STOP SPEAKING</button></div></div>
+                <p class="voice-disclosure">Voice is optional and starts only when you tap the microphone. Transcripts may be retained for review; raw microphone audio is not stored by Lighthouse.</p>
+                <div class="voice-transcript" id="assistant-transcript" aria-live="polite" hidden><strong>You said</strong><p id="assistant-transcript-text"></p><p class="voice-warning" id="assistant-transcript-warning" hidden>Please review names, addresses, measurements, dates, phone numbers, plates, and VINs on screen before confirming.</p></div>
+                <div class="ai-upgrade" id="assistant-upgrade" hidden><div class="eyebrow">Continue with Lighthouse</div><h3>Keep the plan, context, and files together.</h3><p>Your private Lighthouse workspace saves the conversation and gives you more room for ongoing work, pictures, video, approvals, and connected tools.</p><ul><li>Free early access while it is open</li><li>Private saved work and project memory</li><li>Work, Marketplace, and Studio tools</li></ul><div class="ai-upgrade-actions"><a class="button" href="/customer-portal">START FREE ACCESS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
+                <div class="assistant-confirm" id="assistant-confirm" hidden>
+                  <strong>Review and confirm before submitting</strong>
+                  <label><input type="checkbox" id="assistant-terms" /> I agree to the <a href="/policies-terms">Lighthouse terms</a> for this request.</label>
+                  <label><input type="checkbox" id="assistant-privacy" /> I acknowledge the <a href="/policies-terms">privacy notice</a> and consent to this request being recorded.</label>
+                  <label id="assistant-alert-row" hidden><input type="checkbox" id="assistant-alert" /> Alert me if Lighthouse finds a compatible space later.</label>
+                  <label id="assistant-authorization-row" hidden><input type="checkbox" id="assistant-authorization" /> I confirm I am authorized to request access or key-related service for this vehicle or property.</label>
+                  <button class="button" id="assistant-confirm-button" type="button">CONFIRM AND SUBMIT</button>
+                </div>
+                <details class="assistant-fallbacks" id="assistant-fallbacks"><summary>Prefer a standard form?</summary><div class="assistant-fallback-actions"><a class="button secondary" href="/solutions#request">GET HELP</a><a class="button secondary" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a></div></details>
+                <p class="assistant-disclaimer">Guest AI guidance is not saved as a private workspace. Full Lighthouse features require sign-in and an active membership. Services, availability, pricing, qualifications, and important actions remain subject to review and confirmation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <div class="legacy-home" hidden aria-hidden="true">
       <section class="section soft" id="solutions">
         <div class="container"><div class="section-head"><div class="eyebrow">Storage solutions</div><h2>Storage Solutions When You Need Them</h2><p>Finding space is only part of the problem. Lighthouse helps customers and hosts handle the things that often come with storing, moving, or managing vehicles and property.</p></div><div class="grid" id="support"><article class="card solution-card"><h3>Towing &amp; Vehicle Transport</h3><p>Need to get a vehicle to or from storage? Request towing or vehicle transport directly through Lighthouse.</p><ul><li>Tow to or from storage</li><li>Non-running vehicle transport</li><li>Vehicle relocation</li><li>Pickup and drop-off assistance</li></ul><a class="button" href="/solutions?service=TOWING_VEHICLE_TRANSPORT#request">REQUEST A TOW</a></article><article class="card solution-card"><h3>Vehicle Access &amp; Key Help</h3><p>Locked out, missing a key, or need access to a vehicle before it can be moved? Request vehicle-access or key assistance through Lighthouse.</p><ul><li>Vehicle lockout or lost key</li><li>Replacement key or supported programming</li><li>Access needed before towing</li><li>Basic access or diagnostic help</li></ul><a class="button" href="/solutions?service=LOCKSMITH_VEHICLE_ACCESS#request">GET KEY OR ACCESS HELP</a></article><article class="card solution-card"><h3>Dumpster Rental &amp; Cleanout</h3><p>Need to clear a garage, yard, property, or storage area? Request dumpster or cleanout help through Lighthouse.</p><ul><li>Garage and storage-area cleanout</li><li>Yard or property cleanup</li><li>Dumpster rental requests</li><li>Host and operator preparation</li></ul><a class="button" href="/solutions?service=DUMPSTER_RENTAL_CLEANOUT#request">REQUEST CLEANOUT HELP</a></article><article class="card solution-card"><h3>More Storage Solutions</h3><p>Browse vehicle, hauling, property, lot, and storage-support services without leaving the Lighthouse ecosystem.</p><a class="button" href="/solutions">MORE STORAGE SOLUTIONS</a></article></div><p class="solution-note">These solutions are available to storage customers, property hosts, and operators. Independent providers may fulfill requests; availability, pricing, qualifications, and response times are not guaranteed by Lighthouse.</p></div>
@@ -1009,16 +1018,15 @@
       <section class="section">
         <div class="container"><div class="section-head"><div class="eyebrow">Why Lighthouse</div><h2>Practical help for real operations.</h2></div><div class="grid four"><article class="card"><h3>Real Space, Real Operators</h3><p>Lighthouse-operated locations plus independent provider listings.</p></article><article class="card"><h3>Built for Business Needs</h3><p>Fleets, contractors, equipment, inventory, trailers, containers, and unusual requirements.</p></article><article class="card"><h3>Simple Matching</h3><p>Location, dimensions, clearance, access, amenities, budget, and duration.</p></article><article class="card"><h3>Human Review Where It Matters</h3><p>Approval and access stay controlled for consequential actions.</p></article></div><div class="actions" style="margin-top:28px"><a class="button secondary" href="/copy-of-how-it-works">EXPLORE BUSINESS STORAGE</a></div></div>
       </section>
-      <section class="section sky">
-        <div class="container"><div class="section-head"><div class="eyebrow">Lighthouse AI</div><h2>Tell it what you need. It gets to work.</h2><p>One AI to talk to. A whole team behind it.</p></div><div class="grid four"><article class="card"><h3>Website work</h3><p>Plan, improve, and safely maintain business websites.</p></article><article class="card"><h3>Business admin</h3><p>Organize routine work and surface what needs attention.</p></article><article class="card"><h3>Research &amp; projects</h3><p>Turn questions and goals into reviewed, useful results.</p></article><article class="card"><h3>Files &amp; coding work</h3><p>Work inside approved folders with clear previews and approvals.</p></article></div><div class="actions" style="margin-top:28px"><a class="button" href="/customer-portal">SEE HOW LIGHTHOUSE WORKS</a><a class="button secondary" href="/customer-portal">SIGN IN</a></div></div>
-      </section>
       <section class="section soft">
         <div class="container"><div class="section-head"><div class="eyebrow">Lighthouse-operated options</div><h2>Lighthouse is one provider you can compare.</h2><p>Lighthouse-operated locations appear alongside independent-host listings and use the same practical compatibility factors.</p></div><div class="grid"><article class="card location-card"><span class="badge">PROVIDER: LIGHTHOUSE</span><h3>Hollins Ferry Road</h3><div class="address">2619 Hollins Ferry Road<br />Baltimore, MD 21230</div><p>Browse the shared listing system for current availability, space details, access information, and terms.</p><a class="button" href="/find-storage">BROWSE AVAILABLE SPACES</a></article><article class="card location-card"><span class="badge">PROVIDER: LIGHTHOUSE</span><h3>North Rose Street</h3><div class="address">1101 North Rose Street<br />Baltimore, MD 21213</div><p>Browse the shared listing system for current availability, space details, access information, and terms.</p><a class="button" href="/find-storage">BROWSE AVAILABLE SPACES</a></article><article class="card"><h3>Same marketplace process</h3><p>Customers can compare Lighthouse-operated and independent listings using the same location, size, access, amenity, availability, and compatibility factors.</p><p style="margin-top:16px">Provider ownership does not change organic marketplace fit or placement.</p></article></div></div>
       </section>
       <section class="section dark">
         <div class="container"><div class="section-head"><div class="eyebrow">How it works</div><h2>From need to reviewed result.</h2></div><div class="grid four steps"><article class="model step"><h3>Tell us what you need.</h3></article><article class="model step"><h3>Lighthouse or Lighthouse routes it correctly.</h3></article><article class="model step"><h3>Review the options or planned work.</h3></article><article class="model step"><h3>Approve important actions when required.</h3></article></div></div>
       </section>
-      <section class="section sky final"><div class="container"><h2>What do you want to get done?</h2><p class="copy">Find space, put space to work, or ask Lighthouse for help.</p><div class="actions"><a class="button" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a><a class="button secondary" href="#assistant">ASK LIGHTHOUSE</a></div></div></section>
+      <section class="section sky final"><div class="container"><h2>What do you want to get done?</h2><p class="copy">Find space or put your own space to work today. Lighthouse AI is coming soon.</p><div class="actions"><a class="button" href="/find-storage">FIND SPACE</a><a class="button secondary" href="/copy-of-find-storage">LIST SPACE</a><a class="button secondary" href="#assistant">LIGHTHOUSE AI · COMING SOON</a></div></div></section>
+
+
       </div>
     </main>
     <script>
