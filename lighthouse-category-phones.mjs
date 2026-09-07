@@ -91,3 +91,10 @@ const quick=make('nav','yvette-category-nav');quick.setAttribute('aria-label','C
 [['Storage','storage'],['Employment','lighthouse-work'],['Lighthouse World','lighthouse-world'],['Marketplace','marketplace-showcase'],['Music & Studio','lighthouse-video-studio']].forEach(([name,id])=>{const a=make('a',null,name);a.href='#'+id;a.addEventListener('click',event=>{event.preventDefault();document.getElementById(id)?.scrollIntoView({behavior:'auto',block:'start'});});quick.append(a);});
 document.querySelector('#storage')?.before(quick);
 document.documentElement.classList.add('yvette-phones-ready');
+// Keep detailed tools available on demand, with the category doorway first.
+for(const [selector,label] of [['.work-driver','Work options, plans & hiring details'],['#studio-demo','Try the Studio editing demonstration']]){
+  const content=document.querySelector(selector);
+  if(content){const details=make('details','yvette-section-details');content.before(details);details.append(make('summary',null,label),content);}
+}
+// Wix supplies a fixed-height frame; allow its content to remain reachable at every screen size.
+if(window.self!==window.top)document.documentElement.classList.add('yvette-embedded');
