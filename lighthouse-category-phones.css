@@ -1,4 +1,4 @@
-.yvette-phone-group{width:min(100%,340px);justify-self:center;min-width:0;text-align:left}
+.yvette-phone-group{width:min(100%,290px);justify-self:center;min-width:0;text-align:left}
 .yvette-phone{box-sizing:border-box;width:100%;padding:12px 10px 8px;border:2px solid #627582;border-radius:43px;background:linear-gradient(135deg,#435764,#101b25 24%,#080f17 78%,#344b59);box-shadow:0 30px 55px -25px #183d5d80;color:#f4f8fc;font-family:Arial,sans-serif;overflow:hidden}
 .yvette-phone-top{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:10px;font-weight:700;letter-spacing:.04em}
 .yvette-island{width:76px;height:20px;border-radius:20px;background:#020609;box-shadow:inset -10px 0 8px #182638}
@@ -14,18 +14,18 @@
 .yvette-home-indicator{width:88px;height:4px;background:#c1ced7;border-radius:8px;margin:1px auto 3px}
 .yvette-status{margin:8px 0;font:12px/1.5 Arial,sans-serif;color:#113d6a}.yvette-status:empty{display:none}
 .yvette-transcript{margin:12px 0 0;color:#113d6a;font:13px/1.6 Arial,sans-serif}.yvette-transcript summary{cursor:pointer;text-align:center;padding:8px}.yvette-transcript p{padding:12px;background:#ffffff80;border-radius:12px}
-.yvette-legacy{height:555px;overflow:auto;border-radius:23px;background:#eef5fa;color:#113d6a}
+.yvette-legacy{height:475px;overflow:auto;border-radius:23px;background:#eef5fa;color:#113d6a}
 .yvette-phone [hidden],.yvette-phones-ready .work-demo[hidden]{display:none!important}
 .yvette-legacy .yvette-unframed{width:100%!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;transform:none!important}
-.yvette-legacy .work-phone{height:555px;aspect-ratio:auto}.yvette-legacy .work-phone-screen,.yvette-legacy .marketplace-phone-screen{border-radius:0}
-.yvette-legacy .storage-drivein{min-height:555px;aspect-ratio:auto}.yvette-legacy .channel-tv-screen{border-radius:0;aspect-ratio:9/16}
+.yvette-legacy .work-phone{height:475px;aspect-ratio:auto}.yvette-legacy .work-phone-screen,.yvette-legacy .marketplace-phone-screen{border-radius:0}
+.yvette-legacy .storage-drivein{min-height:475px;aspect-ratio:auto}.yvette-legacy .channel-tv-screen{border-radius:0;aspect-ratio:9/16}
 .yvette-legacy .channel-phone-footer,.yvette-legacy .channel-tv:before{display:none}
 .yvette-phones-ready .storage-phone-label,.yvette-phones-ready .storage-phone-hint,.yvette-phones-ready #marketplace-phone-hint,.yvette-phones-ready .channel-tv-note,.yvette-phones-ready .lh-phone-glow{display:none}
-.yvette-phones-ready .work-shell{grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:40px 64px;align-items:center}
+.yvette-phones-ready .work-shell{grid-template-columns:minmax(0,1fr) minmax(260px,300px);gap:40px 64px;align-items:center}
 .yvette-phones-ready .work-copy{text-align:left}.yvette-phones-ready .work-driver,.yvette-extra-film{grid-column:1/-1;width:100%;min-width:0}.yvette-extra-film summary{cursor:pointer;color:#113d6a;font:13px/1.5 Arial,sans-serif}.yvette-extra-film .work-media{margin:20px auto}
-.yvette-phones-ready .lh-market-intro{grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:64px;padding-block:0}.yvette-phones-ready .lh-phone-stage{min-height:0;width:100%}
+.yvette-phones-ready .lh-market-intro{grid-template-columns:minmax(0,1fr) minmax(260px,300px);gap:64px;padding-block:0}.yvette-phones-ready .lh-phone-stage{min-height:0;width:100%}
 .yvette-phones-ready .marketplace-phone-wrap{width:100%}.yvette-phones-ready .channel-tv-wrap{width:100%;display:grid;justify-items:center}
-.yvette-category-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);align-items:center;gap:64px}.yvette-world{padding-block:80px;border-top:1px solid #113d6a30}.yvette-world h2{font:400 clamp(44px,5vw,66px)/1.1 'Niconne',cursive;color:#113d6a}
+.yvette-category-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,300px);align-items:center;gap:64px}.yvette-world{padding-block:80px;border-top:1px solid #113d6a30}.yvette-world h2{font:400 clamp(44px,5vw,66px)/1.1 'Niconne',cursive;color:#113d6a}
 .yvette-category-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:24px 16px;background:#edf4fa}.yvette-category-nav a{padding:12px 16px;border:1px solid #a4bacd;border-radius:24px;color:#113d6a;text-decoration:none;font:700 12px/1.4 Arial,sans-serif}
 .yvette-section-details{grid-column:1/-1;width:100%;margin:24px 0;color:#113d6a}.yvette-section-details>summary{padding:18px;border:1px solid #a4bacd;border-radius:12px;background:#ffffff70;cursor:pointer;font:700 14px/1.5 Arial,sans-serif}.yvette-embedded body>main{max-height:100vh;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#8aa6bc transparent}
-@media(max-width:800px){.yvette-phones-ready .work-shell,.yvette-phones-ready .lh-market-intro,.yvette-category-layout{grid-template-columns:minmax(0,1fr);gap:30px}.yvette-phone-group{width:min(100%,320px)}.yvette-phones-ready .work-copy,.yvette-category-copy{text-align:center}.yvette-phones-ready .work-pill-row{justify-content:center}.yvette-world{padding-block:56px}.yvette-legacy{height:520px}.yvette-legacy .work-phone{height:520px}.yvette-legacy .storage-drivein{min-height:520px}.yvette-category-nav{gap:7px}.yvette-category-nav a{padding:10px 12px}}
+@media(max-width:800px){.yvette-phones-ready .work-shell,.yvette-phones-ready .lh-market-intro,.yvette-category-layout{grid-template-columns:minmax(0,1fr);gap:30px}.yvette-phone-group{width:min(100%,280px)}.yvette-phones-ready .work-copy,.yvette-category-copy{text-align:center}.yvette-phones-ready .work-pill-row{justify-content:center}.yvette-world{padding-block:56px}.yvette-legacy{height:455px}.yvette-legacy .work-phone{height:455px}.yvette-legacy .storage-drivein{min-height:455px}.yvette-category-nav{gap:7px}.yvette-category-nav a{padding:10px 12px}}
