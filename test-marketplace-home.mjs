@@ -66,7 +66,7 @@ test('Lighthouse Work is public between Storage and Marketplace with nine intera
 });
 
 test('embedded homepage script parses', () => {
-  const script = source.match(/<script>([\s\S]*)<\/script>/)?.[1];
+  const script = source.match(/<script>([\s\S]*?)<\/script>/)?.[1];
   assert.ok(script, 'homepage script was not found');
   assert.doesNotThrow(() => new Function(script));
 });

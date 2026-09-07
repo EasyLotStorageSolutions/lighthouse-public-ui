@@ -1,0 +1,93 @@
+import {sections} from './lighthouse-guide-data.mjs';
+
+const media = new URL('./assets/lighthouse-guides/', import.meta.url);
+const settings = {
+  storage: {selector:'.storage-drivein', label:'Facility tour', href:'https://www.easylotstoragesolutions.com/find-storage'},
+  employment: {selector:'#work-phone', label:'Try work demo', href:'https://www.easylotstoragesolutions.com/customer-portal?view=controls'},
+  marketplace: {selector:'#marketplace-phone', label:'Try listing demo', href:'https://www.easylotstoragesolutions.com/marketplace'},
+  music: {selector:'.channel-tv', label:'Watch featured video', href:'https://www.easylotstoragesolutions.com/customer-portal?view=studio'}
+};
+const allVideos = new Set();
+function make(tag, className, text) {
+  const node = document.createElement(tag);
+  if(className) node.className=className;
+  if(text) node.textContent=text;
+  return node;
+}
+function mountPhone(section, old, options) {
+  const group=make('div','yvette-phone-group');
+  const phone=make('section','yvette-phone');
+  phone.setAttribute('aria-label',section.name+' phone with Yvette');
+  phone.dataset.category=section.id;
+  const top=make('div','yvette-phone-top',section.name);
+  top.append(make('span','yvette-island'));
+  const screen=make('div','yvette-screen');
+  const video=make('video','yvette-video');
+  video.controls=true; video.playsInline=true; video.preload='none';
+  video.poster=new URL(section.id+'-poster.jpg',media).href;
+  video.src=new URL(section.id+'.mp4',media).href;
+  video.setAttribute('aria-label','Yvette introduces '+section.name);
+  const captions=make('track'); captions.kind='captions';captions.srclang='en';captions.label='English';captions.src=new URL(section.id+'.vtt',media).href;
+  video.append(captions); screen.append(video);allVideos.add(video);
+  const fallback=make('p','yvette-error','The guide could not load. You can read it below or enter the section.');fallback.hidden=true;screen.append(fallback);
+  video.addEventListener('error',()=>{fallback.hidden=true;status.textContent=fallback.textContent;});
+  const dock=make('div','yvette-dock');
+  const identity=make('div','yvette-identity');
+  const portrait=make('img');portrait.src=new URL('yvette-portrait.jpg',media).href;portrait.alt='Yvette';portrait.width=44;portrait.height=44;portrait.loading='lazy';
+  const greeting=make('div');greeting.append(make('strong',null,"Hi, I’m Yvette."),make('span',null,'Your Lighthouse guide'));
+  identity.append(portrait,greeting);dock.append(identity);
+  const controls=make('div','yvette-controls');
+  const play=make('button',null,'Play guide');play.type='button';
+  const replay=make('button',null,'Replay');replay.type='button';
+  const full=make('button',null,'Full screen');full.type='button';
+  const status=make('p','yvette-status');status.setAttribute('role','status');
+  const legacy=make('div','yvette-legacy');legacy.hidden=true;
+  function showGuide(){legacy.hidden=true;screen.hidden=false;toggle?.setAttribute('aria-pressed','false');}
+  async function start(){showGuide();try{await video.play();}catch{status.textContent='Tap the video’s play control to start the guide.';}}
+  play.addEventListener('click',()=>video.paused?start():video.pause());
+  replay.addEventListener('click',()=>{video.currentTime=0;start();});
+  full.addEventListener('click',async()=>{showGuide();try{if(video.requestFullscreen)await video.requestFullscreen();else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen();else status.textContent='Use the full-screen control on the video.';}catch{status.textContent='Use the full-screen control on the video.';}});
+  video.addEventListener('play',()=>{allVideos.forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('video:not(.yvette-video)').forEach(other=>other.pause());play.textContent='Pause';status.textContent='';});
+  video.addEventListener('pause',()=>play.textContent='Play guide');
+  video.addEventListener('ended',()=>play.textContent='Play guide');
+  controls.append(play,replay,full);dock.append(controls);
+  let toggle;
+  if(old){
+    old.before(group);legacy.append(old);old.classList.add('yvette-unframed');
+    toggle=make('button','yvette-mode',options.label);toggle.type='button';toggle.setAttribute('aria-pressed','false');
+    toggle.addEventListener('click',()=>{const opening=legacy.hidden;video.pause();screen.hidden=opening;legacy.hidden=!opening;toggle.setAttribute('aria-pressed',String(opening));toggle.textContent=opening?'Back to Yvette':options.label;
+      if(!opening){legacy.querySelectorAll('video').forEach(v=>v.pause());legacy.querySelectorAll('iframe').forEach(frame=>{const src=frame.getAttribute('src');if(src)frame.setAttribute('src',src);});}
+    });dock.append(toggle);
+  }
+  const enter=make('a','yvette-enter',section.id==='employment'?'Open work profile':section.cta);enter.href=options.href;enter.target='_top';dock.append(enter,make('div','yvette-home-indicator'));
+  phone.append(top,screen,legacy,dock);
+  const transcript=make('details','yvette-transcript');transcript.append(make('summary',null,'Read Yvette’s guide'),make('p',null,section.transcript));
+  group.append(phone,status,transcript);
+  return group;
+}
+for(const section of sections){
+  if(section.id==='social')continue;
+  const options=settings[section.id];const old=document.querySelector(options.selector);
+  if(old)mountPhone(section,old,options);
+}
+// Keep the existing Work tools full width, beneath its description and phone.
+const workShell=document.querySelector('.work-shell');
+const workDemo=document.querySelector('.work-demo');
+if(workShell&&workDemo){
+  const phone=workDemo.querySelector('.yvette-phone-group');if(phone)workShell.append(phone);
+  const mediaFigure=workDemo.querySelector('.work-media');
+  if(mediaFigure){const details=make('details','yvette-extra-film');details.append(make('summary',null,'Watch the Lighthouse coastal film'),mediaFigure);workShell.append(details);}
+  const driver=workDemo.querySelector('.work-driver');if(driver)workShell.append(driver);
+  workDemo.hidden=true;
+}
+const social=sections.find(s=>s.id==='social');
+const world=make('section','section yvette-world');world.id='lighthouse-world';
+const layout=make('div','container yvette-category-layout');const copy=make('div','yvette-category-copy');
+copy.append(make('div','eyebrow','Lighthouse World · Social preview'),make('h2',null,social.title),make('p','copy',social.description),make('p','copy','Explore the adult-only social demonstration. Personal Spaces, communities, and chronological feeds are being built here.'));
+layout.append(copy,mountPhone(social,null,{href:'https://lighthouse-world-entrance.sreichert21.chatgpt.site/social.html'}));world.append(layout);
+document.querySelector('#marketplace-showcase')?.before(world);
+// Direct category choices spare visitors a long scroll through every doorway.
+const quick=make('nav','yvette-category-nav');quick.setAttribute('aria-label','Choose your Lighthouse category');
+[['Storage','storage'],['Employment','lighthouse-work'],['Lighthouse World','lighthouse-world'],['Marketplace','marketplace-showcase'],['Music & Studio','lighthouse-video-studio']].forEach(([name,id])=>{const a=make('a',null,name);a.href='#'+id;a.addEventListener('click',event=>{event.preventDefault();document.getElementById(id)?.scrollIntoView({behavior:'auto',block:'start'});});quick.append(a);});
+document.querySelector('#storage')?.before(quick);
+document.documentElement.classList.add('yvette-phones-ready');
