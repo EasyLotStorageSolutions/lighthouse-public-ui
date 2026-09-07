@@ -2,6 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <style>
+      html.lighthouse-loading,html.lighthouse-loading body{background:#071827!important}
+      html.lighthouse-loading body{visibility:hidden!important}
+      html.lighthouse-loading::before{content:'The Lighthouse';position:fixed;inset:0;display:grid;place-items:center;color:#edca8b;background:#071827;font:italic 36px Georgia,serif;z-index:2147483646}
+      html.lighthouse-load-error::before{display:none}
+      #lighthouse-load-status{position:fixed;inset:0;z-index:2147483647;display:grid;place-content:center;gap:20px;padding:32px;text-align:center;background:#071827;color:#f4f1e8;font:18px/1.5 Arial,sans-serif;visibility:visible}
+      #lighthouse-load-status button{padding:14px 24px;background:#edca8b;color:#071827;border:0;border-radius:8px;font:inherit;cursor:pointer}
+    </style>
+    <script>
+      document.documentElement.classList.add('lighthouse-loading');
+      window.lighthouseStylesReady=Promise.all([
+        'lighthouse-category-spacing.css?v=20260907-1',
+        'lighthouse-category-phones.css?v=20260907-6',
+        'lighthouse-harbor.css?v=20260907-1'
+      ].map(file=>new Promise((resolve,reject)=>{
+        const link=document.createElement('link');link.rel='stylesheet';
+        link.href=new URL(file,location.href).href;
+        link.onload=resolve;link.onerror=()=>reject(new Error('Styles unavailable'));
+        document.head.append(link);
+      })));
+      window.lighthouseStylesReady.catch(()=>{});
+    </script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <base href="https://www.easylotstoragesolutions.com/" target="_top" />
     <title>The Lighthouse — AI Help, Projects &amp; Community Video</title>
@@ -2527,5 +2549,24 @@
       updateGuestExperience();
       postParent({ type: 'home:ready' });
     </script>
-  <script>for (const file of ["lighthouse-category-spacing.css?v=20260907-1","lighthouse-category-phones.css?v=20260907-6","lighthouse-harbor.css?v=20260907-1"]) { const link=document.createElement("link"); link.rel="stylesheet"; link.href=new URL(file,window.location.href).href; document.head.append(link); } const phones=document.createElement("script"); phones.type="module"; phones.src=new URL("lighthouse-category-phones.mjs?v=20260907-7",window.location.href).href; document.body.append(phones);</script></body>
+  <script type="module">
+    let loadTimer;
+    try {
+      await Promise.race([
+        (async()=>{
+          await window.lighthouseStylesReady;
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-7',location.href).href);
+          if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
+        })(),
+        new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
+      ]);
+      document.documentElement.classList.remove('lighthouse-loading');
+    } catch(error) {
+      document.documentElement.classList.add('lighthouse-load-error');
+      const status=document.createElement('section');status.id='lighthouse-load-status';status.setAttribute('role','alert');
+      const message=document.createElement('p');message.textContent='Lighthouse is taking a little longer to arrive. Please try again.';
+      const retry=document.createElement('button');retry.textContent='Reload Lighthouse';retry.onclick=()=>location.reload();
+      status.append(message,retry);document.body.append(status);
+    } finally {clearTimeout(loadTimer)}
+  </script></body>
 </html>
