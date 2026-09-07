@@ -81,3 +81,4 @@ app.append(scene,header,welcome,nav,stage,footer,announcement,moreDialog,cinema)
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 if(new URLSearchParams(location.search).has('easyStart'))openMore();
+await import('./lighthouse-embed-height.mjs?v=1');
