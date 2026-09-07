@@ -15,7 +15,7 @@ const original=[...root.children];
 const app=el('div','harbor-app');app.dataset.theme=prefs.theme;app.dataset.view='home';app.classList.toggle('harbor-still',prefs.still);
 const scene=el('div','harbor-scene');scene.setAttribute('aria-hidden','true');scene.append(el('div','harbor-atmosphere'),el('div','harbor-beam'),el('div','harbor-lantern'),el('div','harbor-water'));
 const header=el('header','harbor-header');
-const home=button('The Lighthouse','harbor-brand',()=>go('home',true));home.setAttribute('aria-label','Back to Lighthouse');
+const home=button('Lighthouse Home','harbor-brand',()=>go('home',true));home.setAttribute('aria-label','Return to Lighthouse Home');
 const tools=el('div','harbor-header-tools');
 const themes=el('div','harbor-themes');themes.setAttribute('role','group');themes.setAttribute('aria-label','Choose atmosphere');
 ['day','sunset','night'].forEach(theme=>{const b=button(theme[0].toUpperCase()+theme.slice(1),'',()=>{prefs.theme=theme;app.dataset.theme=theme;save();updateTheme();});b.dataset.theme=theme;themes.append(b);});
@@ -32,7 +32,7 @@ const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse desti
 const cards=new Map();const panels=new Map();
 const stage=el('div','harbor-stage');
 const panelHeading=el('div','harbor-panel-heading');
-const back=button('← Back to the harbor','harbor-subtle',()=>go('home',true));
+const back=button('Return home','harbor-subtle harbor-panel-home',()=>go('home',true));
 const pin=button('☆ Add to favorites','harbor-subtle',()=>{if(!sourceIds[current])return;prefs.favorites=prefs.favorites.includes(current)?prefs.favorites.filter(id=>id!==current):[...prefs.favorites,current];save();updateFavorite();});
 panelHeading.append(back,pin);stage.append(panelHeading);
 let current='home';

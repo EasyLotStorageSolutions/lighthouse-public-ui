@@ -38,6 +38,10 @@ test('all five main-page Lighthouses have independent guide, television, and rad
   assert.match(live, /audio\.pause\(\)/);
   assert.match(live, /frame\.src='about:blank'/);
   assert.match(styles, /\.harbor-app\[data-view=home\] \.harbor-brand\{display:none\}/);
+  assert.match(styles, /\.harbor-app:not\(\[data-view=home\]\) \.harbor-nav\{display:none!important\}/);
+  assert.match(styles, /\.harbor-panel-home\{display:none!important\}/);
+  assert.match(harbor, /button\('Lighthouse Home','harbor-brand'/);
+  assert.match(harbor, /aria-label','Return to Lighthouse Home'/);
   assert.match(styles, /scroll-snap-type:x mandatory/);
 });
 
