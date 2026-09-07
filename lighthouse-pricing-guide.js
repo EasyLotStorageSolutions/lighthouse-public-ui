@@ -116,7 +116,10 @@
   const retry = setInterval(() => {
     attempts += 1;
     try {
-      if (render() || attempts >= 80) clearInterval(retry);
+      render();
+      // Keep applying through Wix's initial React reconciliation, which can
+      // replace otherwise-ready plan cards a moment after first paint.
+      if (attempts >= 80) clearInterval(retry);
     } catch (error) {
       document.documentElement.dataset.lighthousePricingError = String(error?.message || error).slice(0, 240);
       if (attempts >= 80) clearInterval(retry);
