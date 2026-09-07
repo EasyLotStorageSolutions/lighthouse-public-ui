@@ -66,14 +66,14 @@
   function render() {
     const list = document.querySelector('[data-hook="PackagePicker-wrapper"]');
     const plans = [...document.querySelectorAll('[data-hook="plan"]')];
-    if (!list || plans.length < 3) return false;
+    if (!list) return false;
     let guide = document.getElementById('lighthouse-pricing-guide');
     if (!guide) {
       guide = document.createElement('section');
       guide.id = 'lighthouse-pricing-guide';
       guide.setAttribute('aria-labelledby', 'lpg-title');
       guide.innerHTML = `<p class="lpg-eyebrow"></p><h1 id="lpg-title"></h1><p class="lpg-copy"></p><div class="lpg-tabs" role="group" aria-label="Choose which plans to see"><button type="button" data-view="lighthouse">Lighthouse memberships</button><button type="button" data-view="storage">Storage & facility plans</button><button type="button" data-view="all">Compare all</button></div><p class="lpg-note"></p><div class="lpg-quick"><a href="/">Return to Lighthouse</a><a href="/find-storage">Explore storage first</a></div>`;
-      list.parentElement.insertBefore(guide, list);
+      list.insertAdjacentElement('beforebegin', guide);
       guide.addEventListener('click', event => {
         const button = event.target.closest('[data-view]');
         if (!button) return;
@@ -84,7 +84,7 @@
       });
     }
     apply();
-    return true;
+    return plans.length >= 3;
   }
   function apply() {
     const guide = document.getElementById('lighthouse-pricing-guide');
@@ -113,7 +113,14 @@
   let attempts = 0;
   const retry = setInterval(() => {
     attempts += 1;
-    if (render() || attempts >= 80) clearInterval(retry);
+    try {
+      if (render() || attempts >= 80) clearInterval(retry);
+    } catch (error) {
+      document.documentElement.dataset.lighthousePricingError = String(error?.message || error).slice(0, 240);
+      if (attempts >= 80) clearInterval(retry);
+    }
   }, 250);
-  render();
+  try { render(); } catch (error) {
+    document.documentElement.dataset.lighthousePricingError = String(error?.message || error).slice(0, 240);
+  }
 })();
