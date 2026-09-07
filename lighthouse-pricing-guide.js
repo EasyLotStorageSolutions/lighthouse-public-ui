@@ -108,9 +108,12 @@
     const originalTitle = document.querySelector('[data-hook="app-title"]');
     if (originalTitle) originalTitle.textContent = current === 'lighthouse' ? 'Lighthouse memberships' : current === 'storage' ? 'Storage & facility plans' : 'All plans';
   }
-  if (!render()) {
-    const observer = new MutationObserver(() => { if (render()) observer.disconnect(); });
-    observer.observe(document.documentElement, {childList:true, subtree:true});
-    setTimeout(() => observer.disconnect(), 15000);
-  }
+  // Wix hydrates this app after the page shell. A short bounded retry is more
+  // dependable here than tying behavior to Wix's internal mutation sequence.
+  let attempts = 0;
+  const retry = setInterval(() => {
+    attempts += 1;
+    if (render() || attempts >= 80) clearInterval(retry);
+  }, 250);
+  render();
 })();
