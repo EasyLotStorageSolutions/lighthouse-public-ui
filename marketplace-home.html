@@ -15,7 +15,7 @@
       window.lighthouseStylesReady=Promise.all([
         'lighthouse-category-spacing.css?v=20260907-1',
         'lighthouse-category-phones.css?v=20260907-6',
-        'lighthouse-harbor.css?v=20260907-2'
+        'lighthouse-harbor.css?v=20260907-3'
       ].map(file=>new Promise((resolve,reject)=>{
         const link=document.createElement('link');link.rel='stylesheet';
         link.href=new URL(file,location.href).href;
@@ -2555,7 +2555,7 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-8',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-9',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})

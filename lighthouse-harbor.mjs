@@ -33,15 +33,14 @@ const back=button('← Back to the harbor','harbor-subtle',()=>go('home',true));
 const pin=button('☆ Add to favorites','harbor-subtle',()=>{if(!sourceIds[current])return;prefs.favorites=prefs.favorites.includes(current)?prefs.favorites.filter(id=>id!==current):[...prefs.favorites,current];save();updateFavorite();});
 panelHeading.append(back,pin);stage.append(panelHeading);
 let current='home';
-for(const s of sections){
-  const card=el('article','harbor-destination');card.dataset.destination=s.id;
-  const preview=el('div','harbor-feature-preview');const feature=featuredVideos[s.id];
-  const photo=el('img');photo.src=feature.poster;photo.alt=s.name+' preview';photo.width=200;photo.height=112;
+function renderFeature(preview,s,feature){
+  preview.replaceChildren();
+  const photo=el('img');photo.src=feature.mode==='image'?feature.source:feature.poster;photo.alt=feature.title||s.name+' preview';photo.width=200;photo.height=112;
   preview.append(photo);
   if(feature.mode==='video'){
-    const video=el('video');video.controls=true;video.playsInline=true;video.preload='none';video.poster=feature.poster;video.src=feature.source;video.setAttribute('aria-label',s.name+' featured video');
-    if(feature.captions){const track=el('track');track.kind='captions';track.srclang='en';track.label='English';track.src=feature.captions;video.append(track);}
-    video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();});});
+    const video=el('video');video.controls=true;video.playsInline=true;video.preload='none';video.poster=feature.poster;video.src=feature.source;video.setAttribute('aria-label',feature.title||s.name+' featured video');
+    if(feature.captions){video.crossOrigin='anonymous';const track=el('track');track.kind='captions';track.srclang='en';track.label='English';track.src=feature.captions;video.append(track);}
+    video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('.harbor-feature-preview iframe').forEach(f=>f.src=f.src.replace('autoplay=1','autoplay=0'));});
     video.addEventListener('error',()=>{video.hidden=true;photo.hidden=false;});
     photo.hidden=true;preview.append(video);
   }else if(feature.mode==='youtube'){
@@ -49,6 +48,11 @@ for(const s of sections){
       pauseAll();const frame=el('iframe');frame.src='https://www.youtube-nocookie.com/embed/'+youtubeId(feature.source)+'?autoplay=1&playsinline=1';frame.title=s.name+' featured video';frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;preview.replaceChildren(frame);
     });preview.append(play);
   }
+  if(feature.title){const caption=el('p','harbor-feature-caption');caption.append(el('strong',null,feature.title));if(feature.note)caption.append(el('span',null,feature.note));preview.append(caption);}
+}
+for(const s of sections){
+  const card=el('article','harbor-destination');card.dataset.destination=s.id;
+  const preview=el('div','harbor-feature-preview');renderFeature(preview,s,featuredVideos[s.id]);
   const enter=button('','harbor-feature-enter',()=>go(s.id,true));enter.setAttribute('aria-label','Enter '+s.name);
   const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,s.name),el('small',null,descriptors[s.id]));enter.append(cardText,el('span','harbor-destination-arrow','↗'));card.append(preview,enter);
   card.addEventListener('pointerenter',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
@@ -60,6 +64,8 @@ for(const s of sections){
   const overview=el('div','harbor-overview');const intro=el('div','harbor-intro');
   intro.append(el('p','harbor-eyebrow',s.eyebrow));const h=el('h2',null,s.title);h.id='harbor-heading-'+s.id;h.tabIndex=-1;intro.append(h,el('p','harbor-description',s.description));
   const actions=el('div','harbor-actions');paths[s.id].forEach(([text,href])=>{const a=el('a',null,text);a.href=href.startsWith('/')?'https://www.easylotstoragesolutions.com'+href:href;a.target='_top';actions.append(a);});intro.append(actions);
+  const expectations={storage:'Browse without an account. Availability and rental terms come from each listing; entering this area does not reserve a space.',employment:'Your work profile and hiring details stay behind sign-in. Review available access before choosing a paid plan; an introduction is not a job offer.',social:'Try the sample experience without an account. Posts and messages in this preview are not shared with real people.',marketplace:'Browse approved listings without signing in. If there are no listings yet, the page will say so. Read item details before contacting a seller.',music:'Sign in to save studio projects and manage your work. This is a creative workspace, not a music streaming or distribution service.'};
+  intro.append(el('p','harbor-availability',expectations[s.id]));
   const guide=el('div','harbor-guide-note');const avatar=el('img');avatar.src=new URL('yvette-portrait.jpg',base).href;avatar.alt='';avatar.width=42;avatar.height=42;guide.append(avatar,el('p',null,'Yvette is here to show you around. Press Play guide in the Lighthouse viewer whenever you’re ready.'));intro.append(guide);
   if(s.id==='social')intro.append(el('p','harbor-availability','Social preview · Adults 18+ · Sample activity, not a live network.'));
   overview.append(intro);if(phone){phone.classList.add('lighthouse-viewer');phone.querySelector('.yvette-phone')?.setAttribute('aria-label',s.name+' Lighthouse video viewer');const screen=phone.querySelector('.yvette-screen');if(screen)screen.style.backgroundImage=`url("${new URL(s.id+'-poster.jpg',base).href}")`;overview.append(phone);}panel.append(overview);
@@ -82,7 +88,7 @@ function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());doc
 function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
 function go(id,user=false){
   if(id!=='home'&&!panels.has(id))return;
-  pauseAll();current=id;app.dataset.view=id;welcome.hidden=id!=='home';stage.hidden=id==='home';panels.forEach((p,key)=>p.hidden=key!==id);cards.forEach((b,key)=>b.setAttribute('aria-current',key===id?'page':'false'));updateFavorite();
+  pauseAll();current=id;app.dataset.view=id;welcome.hidden=id!=='home';stage.hidden=id==='home';panels.forEach((p,key)=>p.hidden=key!==id);cards.forEach((b,key)=>b.querySelector('.harbor-feature-enter').setAttribute('aria-current',key===id?'page':'false'));updateFavorite();
   if(prefs.remember){prefs.last=id;save();}
   if(user){const url=new URL(location.href);url.hash=id==='home'?'':sourceIds[id];history.replaceState(null,'',url.href);cards.get(id)?.scrollIntoView({block:'nearest',inline:'center'});(id==='home'?heading:document.getElementById('harbor-heading-'+id)).focus({preventScroll:true});app.scrollIntoView({block:'start'});}
 }
@@ -98,3 +104,14 @@ document.documentElement.classList.add('harbor-ready');updateTheme();updateFavor
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 if(new URLSearchParams(location.search).has('easyStart'))openMore();
 await import('./lighthouse-embed-height.mjs?v=1');
+
+// Receive only published editorial fields from the owning Wix page. Keep original
+// media intact when the bridge or CMS is unavailable (including standalone previews).
+const mediaParentOrigins=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
+window.addEventListener('message',event=>{
+  if(event.source!==window.parent||!mediaParentOrigins.includes(event.origin)||event.data?.type!=='lighthouse-media:publicResult')return;
+  for(const s of sections){const custom=event.data.features?.[s.id];if(!custom||custom.mode==='default')continue;
+    try{renderFeature(cards.get(s.id).querySelector('.harbor-feature-preview'),s,{...custom,poster:custom.poster||featuredVideos[s.id].poster});if(custom.title){const text=cards.get(s.id).querySelector('.harbor-destination-text small');text.textContent=custom.title;text.title=custom.note||custom.title;}}catch{renderFeature(cards.get(s.id).querySelector('.harbor-feature-preview'),s,featuredVideos[s.id]);}
+  }
+});
+if(window.parent!==window)mediaParentOrigins.forEach(origin=>window.parent.postMessage({type:'lighthouse-media:public'},origin));
