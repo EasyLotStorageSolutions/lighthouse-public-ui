@@ -73,7 +73,8 @@
       guide.id = 'lighthouse-pricing-guide';
       guide.setAttribute('aria-labelledby', 'lpg-title');
       guide.innerHTML = `<p class="lpg-eyebrow"></p><h1 id="lpg-title"></h1><p class="lpg-copy"></p><div class="lpg-tabs" role="group" aria-label="Choose which plans to see"><button type="button" data-view="lighthouse">Lighthouse memberships</button><button type="button" data-view="storage">Storage & facility plans</button><button type="button" data-view="all">Compare all</button></div><p class="lpg-note"></p><div class="lpg-quick"><a href="/">Return to Lighthouse</a><a href="/find-storage">Explore storage first</a></div>`;
-      list.insertAdjacentElement('beforebegin', guide);
+      const mount = list.closest('[id^="TPASection_"]') || list;
+      mount.insertAdjacentElement('beforebegin', guide);
       guide.addEventListener('click', event => {
         const button = event.target.closest('[data-view]');
         if (!button) return;
