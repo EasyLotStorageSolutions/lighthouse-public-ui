@@ -42,7 +42,7 @@ function mountPhone(section, old, options) {
   const full=make('button',null,'Full screen');full.type='button';
   const status=make('p','yvette-status');status.setAttribute('role','status');
   const legacy=make('div','yvette-legacy');legacy.hidden=true;
-  function showGuide(){legacy.hidden=true;screen.hidden=false;toggle?.setAttribute('aria-pressed','false');}
+  function showGuide(){legacy.hidden=true;screen.hidden=false;toggle?.setAttribute('aria-pressed','false');if(toggle)toggle.textContent=options.label;legacy.querySelectorAll('video').forEach(v=>v.pause());}
   async function start(){showGuide();try{await video.play();}catch{status.textContent='Tap the video’s play control to start the guide.';}}
   play.addEventListener('click',()=>video.paused?start():video.pause());
   replay.addEventListener('click',()=>{video.currentTime=0;start();});
@@ -61,6 +61,7 @@ function mountPhone(section, old, options) {
   }
   const enter=make('a','yvette-enter',section.id==='employment'?'Open work profile':section.cta);enter.href=options.href;enter.target='_top';dock.append(enter,make('div','yvette-home-indicator'));
   phone.append(top,screen,legacy,dock);
+  if(section.id==='storage'&&old){screen.hidden=true;legacy.hidden=false;toggle.setAttribute('aria-pressed','true');toggle.textContent='Hear Yvette’s guide';}
   const transcript=make('details','yvette-transcript');transcript.append(make('summary',null,'Read Yvette’s guide'),make('p',null,section.transcript));
   group.append(phone,status,transcript);
   return group;
