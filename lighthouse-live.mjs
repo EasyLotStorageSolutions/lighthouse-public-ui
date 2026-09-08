@@ -206,3 +206,33 @@ if(app){
     lantern.append(controls);card.classList.add('has-mini-lighthouse');
   });
 }
+
+
+// Lighthouse Locksmith: an independent storefront with its own media placement.
+// This first-look entrance is intentionally separate from existing category tools.
+{
+  const nav=document.querySelector('.harbor-nav');
+  if(nav&&!nav.querySelector('[data-destination="locksmith"]')){
+    const store='https://0d6907a2-4134-45b9-acd5-b1ef0fc7ff8e.filesusr.com/html/d4a0d6_eaac41c58002e18822a22bbaa09a6261.html';
+    const art=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;
+    const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n};
+    const style=make('style');style.textContent=
+      '.harbor-nav.has-locksmith{grid-template-columns:repeat(6,minmax(0,1fr))}.locksmith-feature-empty{width:100%;height:100%;position:relative;background:radial-gradient(circle,#174963,#041624);display:grid;place-items:center;overflow:hidden}.locksmith-feature-empty img{width:100%!important;height:100%!important;position:absolute;object-fit:contain!important;opacity:.7}.locksmith-feature-empty span{position:relative;padding:5px 8px;border-radius:6px;background:#031422db;color:#fff0d2;font:10px Arial,sans-serif}.locksmith-media-controls{grid-template-columns:1fr}.locksmith-media-controls .locksmith-main-tv{min-height:38px;font-size:11px}.locksmith-main-tv{width:100%;min-height:36px;background:#0b2a42;color:#fff0d2;border:0;border-bottom:1px solid #edca8b44;cursor:pointer;font:600 12px Arial,sans-serif}.locksmith-main-dialog{width:min(620px,calc(100% - 24px));max-height:calc(100dvh - 24px);overflow:auto;border:1px solid #edca8b77;border-radius:16px;background:#08253b;color:#fff0d2;padding:24px}.locksmith-main-dialog::backdrop{background:#00101cd9}.locksmith-main-dialog button,.locksmith-main-dialog a{display:inline-block;min-height:44px;padding:12px 18px;background:#123e58;color:#fff0d2;border:1px solid #edca8b88;border-radius:24px;cursor:pointer;text-decoration:none}.locksmith-main-dialog>button{float:right}.locksmith-main-dialog .locksmith-main-screen{clear:both;aspect-ratio:16/9;display:grid;place-content:center;text-align:center;background:#051321;border:1px solid #edca8b55;margin:18px 0}.locksmith-main-dialog p{line-height:1.6}.locksmith-main-dialog h2{font:600 26px Georgia,serif}@media(max-width:1100px){.harbor-nav.has-locksmith{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.harbor-nav.has-locksmith{grid-template-columns:repeat(2,minmax(0,1fr))}.harbor-nav.has-locksmith .harbor-destination:last-child{grid-column:auto;display:block}.harbor-nav.has-locksmith .harbor-destination:last-child img{width:100%}}';
+    document.head.append(style);
+    const card=make('article','harbor-destination has-mini-lighthouse');card.dataset.destination='locksmith';
+    const preview=make('div','harbor-feature-preview');const empty=make('div','locksmith-feature-empty');
+    const image=make('img','harbor-mini-lighthouse-art');image.src=art;image.alt='';image.loading='lazy';empty.append(make('span',null,'Video coming soon'));preview.append(empty);const lantern=make('div','harbor-mini-lighthouse');lantern.append(image,preview);
+    const tv=make('button','locksmith-main-tv','Locksmith TV');tv.type='button';
+    const enter=make('a','harbor-feature-enter');enter.href=store;enter.target='_top';enter.setAttribute('aria-label','Enter Locksmith');
+    const label=make('span','harbor-destination-text');label.append(make('strong',null,'Locksmith'),make('small',null,'Store preview'));enter.append(label,make('span','harbor-destination-arrow','↗'));
+    const controls=make('div','harbor-mini-controls locksmith-media-controls');controls.append(tv);lantern.append(controls);card.append(lantern,enter);nav.append(card);nav.classList.add('has-locksmith');
+    const modal=make('dialog','locksmith-main-dialog');modal.setAttribute('aria-labelledby','locksmith-main-tv-title');
+    const close=make('button',null,'Close ×');close.type='button';close.addEventListener('click',()=>modal.close());
+    const title=make('h2',null,'Lighthouse Locksmith TV');title.id='locksmith-main-tv-title';
+    const screen=make('div','locksmith-main-screen');screen.append(make('strong',null,'Your Locksmith video spot'),make('p',null,'Video coming soon.'));
+    const visit=make('a',null,'Enter the Locksmith store →');visit.href=store;visit.target='_top';
+    modal.append(close,title,screen,make('p',null,'Explore the store while our Locksmith video is on its way.'),visit);document.body.append(modal);
+    tv.addEventListener('click',()=>{document.querySelectorAll('video,audio').forEach(v=>v.pause());modal.showModal()});
+    modal.addEventListener('click',event=>{if(event.target===modal)modal.close()});
+  }
+}
