@@ -66,7 +66,9 @@ for(const s of sections){
   const panel=el('section','harbor-panel');panel.hidden=true;panel.id='harbor-'+s.id;panel.setAttribute('aria-labelledby','harbor-heading-'+s.id);card.setAttribute('aria-controls',panel.id);
   const overview=el('div','harbor-overview');const intro=el('div','harbor-intro');
   intro.append(el('p','harbor-eyebrow',s.eyebrow));const h=el('h2',null,s.title);h.id='harbor-heading-'+s.id;h.tabIndex=-1;intro.append(h,el('p','harbor-description',s.description));
-  const actions=el('div','harbor-actions');paths[s.id].forEach(([text,href])=>{const a=el('a',null,text);a.href=href.startsWith('/')?'https://www.easylotstoragesolutions.com'+href:href;a.target='_top';actions.append(a);});intro.append(actions);
+  const makeAction=([text,href])=>{const a=el('a',null,text);a.href=href.startsWith('/')?'https://www.easylotstoragesolutions.com'+href:href;a.target='_top';return a};
+  const [primaryPath,...otherPaths]=paths[s.id];const start=el('div','harbor-start');start.append(el('span',null,'Recommended first step'),makeAction(primaryPath));intro.append(start);
+  if(otherPaths.length){const morePaths=el('details','harbor-paths');morePaths.append(el('summary',null,'Other ways into this area'));const actions=el('div','harbor-actions');otherPaths.forEach(path=>actions.append(makeAction(path)));morePaths.append(actions);intro.append(morePaths)}
   const expectations={storage:'Browse without an account. Availability and rental terms come from each listing; entering this area does not reserve a space.',employment:'Your work profile and hiring details stay behind sign-in. Review available access before choosing a paid plan; an introduction is not a job offer.',social:'Try the sample experience without an account. Posts and messages in this preview are not shared with real people.',marketplace:'Browse approved listings without signing in. If there are no listings yet, the page will say so. Read item details before contacting a seller.',music:'Sign in to save studio projects and manage your work. This is a creative workspace, not a music streaming or distribution service.'};
   intro.append(el('p','harbor-availability',expectations[s.id]));
   const guide=el('div','harbor-guide-note');const avatar=el('img');avatar.src=new URL('yvette-portrait.jpg',base).href;avatar.alt='';avatar.width=42;avatar.height=42;guide.append(avatar,el('p',null,'Yvette is here to show you around. Press Play guide in the Lighthouse viewer whenever you’re ready.'));intro.append(guide);
@@ -110,7 +112,7 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-void import('./lighthouse-live.mjs?v=20260907-5').catch(()=>{});
+void import('./lighthouse-live.mjs?v=20260907-6').catch(()=>{});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
 // media intact when the bridge or CMS is unavailable (including standalone previews).

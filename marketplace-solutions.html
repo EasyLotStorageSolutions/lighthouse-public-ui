@@ -19,6 +19,7 @@
     form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}label{display:grid;gap:7px;font-weight:600}label.full,.full{grid-column:1/-1}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:3px;background:rgba(255,255,255,.65);color:#16334f;padding:12px;font:16px/1.35 "Playfair Display",Georgia,serif}textarea{min-height:110px;resize:vertical}.checks{display:grid;gap:10px}.check{display:flex;align-items:flex-start;gap:9px;font-weight:400}.check input{width:auto;margin-top:5px}.status{grid-column:1/-1;padding:14px;border:1px solid var(--line);background:rgba(255,255,255,.55)}
     @media(max-width:720px){main{padding:32px 18px 60px}.featured,.categories,.service-grid,form{grid-template-columns:1fr}.lead{font-size:19px}.role-row button{width:100%}.card,.panel{padding:20px}h1{font-size:39px}h2{font-size:44px}}
   </style>
+  <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-interior-2040.css?v=20260907-1">
 </head>
 <body>
 <main>
@@ -85,5 +86,6 @@ const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).ori
   window.addEventListener('message',event=>{if(event.source!==window.parent||event.origin!==parentOrigin)return;const d=event.data||{};if(d.type==='solutions:catalog')renderCatalog(d.catalog);if(d.type==='solutions:result'){const status=document.getElementById('status');status.classList.remove('hidden');status.textContent=d.error?d.error:(d.result.message||'Request received.');document.getElementById('requestForm').querySelector('button[type=submit]').disabled=false;if(!d.error)document.getElementById('requestForm').reset();}});
   parentWindow.postMessage({type:'solutions:ready'},parentOrigin);
 </script>
+  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-interior-2040.js?v=20260907-1"></script>
 </body>
 </html>

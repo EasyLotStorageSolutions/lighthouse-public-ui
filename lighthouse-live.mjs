@@ -40,7 +40,7 @@ if(app){
   const tvInput=el('input');tvInput.type='url';tvInput.inputMode='url';tvInput.placeholder='Paste a YouTube video link';tvInput.autocomplete='off';tvInput.maxLength=240;
   const tvLoad=button('WATCH HERE','',()=>{});tvLoad.type='submit';tvLabel.append(tvInput);tvForm.append(tvLabel,tvLoad);
   const tvStatus=el('p','harbor-live-status','The Lighthouse expands into a theater when you choose TV. Nothing starts automatically.');tvStatus.setAttribute('role','status');
-  tvControls.append(tvExpand,tvForm);
+  tvControls.append(tvExpand);
   const tvGuide=el('div','harbor-tv-guide');tvGuide.setAttribute('aria-label','Free official TV streams');
   const tvChannels=[
     {name:'ABC News Live',id:'gN0PZCe-kwQ'},
@@ -83,12 +83,16 @@ if(app){
   const iheartStatus=el('p','harbor-live-status','Choose a quick station above, or find any station on iHeart and paste its link here.');iheartStatus.setAttribute('role','status');
   iheartCustomLabel.append(iheartCustomInput);iheartCustom.append(iheartCustomLabel,iheartCustomButton);
   const results=el('div','harbor-radio-results');
-  dialog.append(close,eyebrow,title,intro,modes,media,tvGuide,tvControls,tvStatus,localControls,searchForm,suggestions,iheartControls,iheartCustom,iheartStatus,status,results);
+  function disclosure(label,...content){const box=el('details','harbor-live-disclosure');const summary=el('summary',null,label);box.append(summary,...content);return box}
+  const tvCustom=disclosure('Bring a different YouTube video',tvForm);
+  const radioSearch=disclosure('Search for another station',searchForm,suggestions);
+  const iheartCustomPanel=disclosure('Use a different iHeart station',iheartCustom);
+  dialog.append(close,eyebrow,title,intro,modes,media,tvGuide,tvControls,tvCustom,tvStatus,localControls,radioSearch,status,results,iheartControls,iheartCustomPanel,iheartStatus);
   app.append(dialog);
 
   function setMode(mode){
     const radio=mode==='radio',iheart=mode==='iheart',visual=mode==='visual';visualButton.setAttribute('aria-pressed',String(visual));radioButton.setAttribute('aria-pressed',String(radio));iheartButton.setAttribute('aria-pressed',String(iheart));
-    dialog.dataset.mode=mode;frame.hidden=radio;radioPanel.hidden=!radio;tvGuide.hidden=!visual;tvControls.hidden=!visual;tvStatus.hidden=!visual;localControls.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
+    dialog.dataset.mode=mode;frame.hidden=radio;radioPanel.hidden=!radio;tvGuide.hidden=!visual;tvControls.hidden=!visual;tvCustom.hidden=!visual;tvStatus.hidden=!visual;localControls.hidden=!radio;radioSearch.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustomPanel.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
   }
   function loadTvChannel(channel){
     frame.src=`https://www.youtube-nocookie.com/embed/${channel.id}?rel=0`;frame.title=channel.name;
@@ -194,11 +198,11 @@ if(app){
     const architecture=el('img','harbor-mini-lighthouse-art');architecture.src=art;architecture.alt='';architecture.setAttribute('aria-hidden','true');
     preview.replaceWith(lantern);lantern.append(architecture,preview);
     const experience=experiences[category];const controls=el('div','harbor-mini-controls');controls.setAttribute('aria-label',`${experience.name} Lighthouse media controls`);
-    controls.append(
-      button(experience.guide,'',()=>{const video=preview.querySelector('video');const play=preview.querySelector('.harbor-feature-play');if(video){video.paused?video.play().catch(()=>{}):video.pause()}else if(play)play.click()}),
-      button(experience.tv,'',()=>openLive(category,'visual')),
-      button(experience.radio,'',()=>openLive(category,'radio'))
-    );
+    const guideButton=button(experience.guide,'',()=>{const video=preview.querySelector('video');const play=preview.querySelector('.harbor-feature-play');if(video){video.paused?video.play().catch(()=>{}):video.pause()}else if(play){play.click();guideButton.setAttribute('aria-pressed','true')}});
+    guideButton.setAttribute('aria-pressed','false');
+    const guideVideo=preview.querySelector('video');
+    if(guideVideo){guideVideo.addEventListener('play',()=>{guideButton.textContent='Pause';guideButton.setAttribute('aria-pressed','true')});guideVideo.addEventListener('pause',()=>{guideButton.textContent=experience.guide;guideButton.setAttribute('aria-pressed','false')});guideVideo.addEventListener('ended',()=>{guideButton.textContent=experience.guide;guideButton.setAttribute('aria-pressed','false')})}
+    controls.append(guideButton,button(experience.tv,'',()=>openLive(category,'visual')),button(experience.radio,'',()=>openLive(category,'radio')));
     lantern.append(controls);card.classList.add('has-mini-lighthouse');
   });
 }
