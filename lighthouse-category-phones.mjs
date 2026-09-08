@@ -127,4 +127,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-story-v2');
+await import('./lighthouse-harbor.mjs?v=20260908-story-v3');
