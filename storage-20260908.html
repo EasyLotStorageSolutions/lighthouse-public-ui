@@ -268,5 +268,20 @@ $('exploreSpaces').onclick=()=>{setView(false);$('locationPicker').scrollIntoVie
 document.querySelectorAll('[data-select]').forEach(button=>{const choose=button.onclick;button.onclick=()=>{if(!selectedStorageLocation){notice('Choose your location first.');$('locationPicker').scrollIntoView({block:'start'});return;}choose();$('lotChoice').value=selectedStorageLocation;};});
 window.addEventListener('message',event=>{if(event.source!==parentWindow||event.origin!==parentOrigin)return;const data=event.data;if(data?.type==='my-easy-lot:data'&&Array.isArray(data.workspace?.locations)){storageLocations=data.workspace.locations;updateLocationCards();}});
 updateLocationCards();
+
+const beforeFleetWorkspace=enhanceWorkspace;
+enhanceWorkspace=function(data){
+ beforeFleetWorkspace(data);
+ document.getElementById('customFleetOffer')?.remove();
+ const quote=data?.signedIn&&data.customFleetQuote;
+ $('newTab').hidden=Boolean(quote);
+ if(!quote)return;
+ const panel=document.createElement('article');panel.id='customFleetOffer';panel.className='card section';
+ const dollars=cents=>'$'+(cents/100).toFixed(2);
+ panel.innerHTML='<div class="eyebrow">YOUR PERSONAL STORAGE ARRANGEMENT</div><h2>'+esc(quote.customerName)+'</h2><p>'+esc(quote.facilityAddress)+'</p><h2>'+esc(dollars(quote.monthlyTotalCents))+' / month for all '+quote.vehicles.length+' vehicles</h2><ul>'+quote.vehicles.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul><p>Monthly rent '+esc(dollars(quote.baseRentCents))+' + parking tax '+esc(dollars(quote.taxCents))+'. Recurring monthly until canceled.</p><p><strong>Your rate is saved to your account.</strong> No need to choose a standard single-vehicle package.</p><p>Next: vehicle verification, your final agreement, and recurring payment enrollment. Your confirmed payment link will appear with your rental once prepared. This quote does not activate payments or release access.</p>';
+ $('summary').before(panel);
+ if(!(data.rentals||[]).length)$('rentals').innerHTML='<p class="empty">Your fleet arrangement is saved above. Your rental and payment details will appear here after setup.</p>';
+ setView(true);
+};
 </script><script type="module" src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-live.mjs?v=20260908-harbor-names1"></script></body>
 </html>
