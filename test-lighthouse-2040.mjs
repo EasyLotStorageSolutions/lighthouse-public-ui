@@ -94,4 +94,7 @@ test('the homepage explains Lighthouse Mall, its goal, and its future honestly',
   assert.match(harbor, /Lighthouse AI is being developed/);
   assert.match(harbor, /not hidden transaction fees/);
   assert.match(styles, /\.harbor-story-columns/);
+  assert.match(harbor, /phoneDevice/);
+  assert.match(harbor, /harbor-device-mobile/);
+  assert.match(styles, /\.harbor-device-mobile \.harbor-introduction/);
 });

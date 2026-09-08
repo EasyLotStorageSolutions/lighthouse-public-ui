@@ -13,6 +13,9 @@ try{const saved=JSON.parse(localStorage.getItem('lighthouse-harbor-v1')||'null')
 function save(){try{localStorage.setItem('lighthouse-harbor-v1',JSON.stringify(prefs));}catch{announcement.textContent='Your browser cannot save preferences. You can still explore everything.';}}
 const original=[...root.children];
 const app=el('div','harbor-app');app.dataset.theme=prefs.theme;app.dataset.view='home';app.classList.toggle('harbor-still',prefs.still);
+const deviceWidth=Math.max(280,Math.min(700,Number(window.screen?.width)||window.innerWidth));
+const phoneDevice=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(matchMedia('(pointer:coarse)').matches&&deviceWidth<=700);
+if(phoneDevice){app.classList.add('harbor-device-mobile');app.style.setProperty('--harbor-device-width',deviceWidth+'px');}
 const scene=el('div','harbor-scene');scene.setAttribute('aria-hidden','true');scene.append(el('div','harbor-atmosphere'),el('div','harbor-beam'),el('div','harbor-lantern'),el('div','harbor-water'));
 const header=el('header','harbor-header');
 const home=button('Lighthouse Home','harbor-brand',()=>go('home',true));home.setAttribute('aria-label','Return to Lighthouse Home');
