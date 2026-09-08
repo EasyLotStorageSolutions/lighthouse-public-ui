@@ -22,7 +22,8 @@ test('category and feature videos are framed as Lighthouse lanterns', () => {
   assert.match(styles, /\.harbor-app \.lighthouse-viewer/);
   assert.match(styles, /lighthouse-media-console-2040\.webp/);
   assert.match(harbor, /video inside a Lighthouse lantern/);
-  assert.match(harbor, /harbor-film-collection/);
+  assert.doesNotMatch(harbor, /cinema\.append\(filmCollection\)/, 'the film collection must remain inside Sound Harbor');
+  assert.match(home, /class="channel-2040" aria-label="Watch the Lighthouse film collection"/);
   assert.match(home, /Selected film playing inside a Lighthouse lantern/);
 });
 
@@ -72,9 +73,11 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.match(live, /Exact coordinates go to the location lookup service once and are not saved by Lighthouse/);
 });
 
-test('the visible site header uses the dark Lighthouse navigation and a dependable Home link', () => {
-  assert.match(header, /linear-gradient\(100deg,rgba\(4,25,43,.97\)/);
-  assert.match(header, /href="https:\/\/www\.easylotstoragesolutions\.com\/\?lighthouseHome=1" target="_top">Home/);
+test('the approved hero retains a dependable Home link and visible corner navigation', () => {
+  assert.match(header, /class="brand" href="\/" aria-label="The Lighthouse by Easy Lot Storage Solutions home"/);
+  assert.match(header, /href="\/#how-easy-works">How It Works/);
+  assert.match(header, /href="\/customer-portal">Sign In/);
+  assert.match(header, /object-fit:contain/);
 });
 
 test('Yvette never falls through to an arbitrary male browser voice', () => {

@@ -1,6 +1,7 @@
 import {sections} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
 import {youtubeId} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
 import {featuredVideos} from './lighthouse-featured-videos.mjs?v=1';
+import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=20260908-recovery1';
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
 const descriptors={storage:'Space for your next chapter',employment:'Opportunity starts with people',social:'A place to belong',marketplace:'Discover something unexpected',music:'Make room for your imagination'};
@@ -91,7 +92,7 @@ for(const s of sections){
   const guide=el('div','harbor-guide-note');const avatar=el('img');avatar.src=new URL('yvette-portrait.jpg',base).href;avatar.alt='';avatar.width=42;avatar.height=42;guide.append(avatar,el('p',null,'Yvette is here to show you around. Press Play guide in the Lighthouse viewer whenever you’re ready.'));intro.append(guide);
   if(s.id==='social')intro.append(el('p','harbor-availability','Social preview · Adults 18+ · Sample activity, not a live network.'));
   overview.append(intro);if(phone){phone.classList.add('lighthouse-viewer');phone.querySelector('.yvette-phone')?.setAttribute('aria-label',s.name+' video inside a Lighthouse lantern');const screen=phone.querySelector('.yvette-screen');if(screen)screen.style.backgroundImage=`url("${new URL(s.id+'-poster.jpg',base).href}")`;overview.append(phone);}panel.append(overview);
-  if(source){const details=el('details','harbor-tools');details.append(el('summary',null,'Explore '+s.name+' tools & details'),source);panel.append(details);}
+  restoreDestination({panel,source,overview,section:s});
   panels.set(s.id,panel);stage.append(panel);
 }
 const footer=el('footer','harbor-footer');
@@ -135,7 +136,7 @@ function go(id,user=false){
   moreDialog.close();document.getElementById('beacon-quest')?.close();
   pauseAll();current=id;app.dataset.view=id;welcome.hidden=id!=='home';stage.hidden=id==='home';panels.forEach((p,key)=>p.hidden=key!==id);cards.forEach((b,key)=>b.querySelector('.harbor-feature-enter').setAttribute('aria-current',key===id?'page':'false'));updateFavorite();
   if(prefs.remember){prefs.last=id;save();}
-  if(user){const url=new URL(location.href);url.hash=id==='home'?'':sourceIds[id];history.replaceState(null,'',url.href);cards.get(id)?.scrollIntoView({block:'nearest',inline:'center'});(id==='home'?heading:document.getElementById('harbor-heading-'+id)).focus({preventScroll:true});app.scrollIntoView({block:'start'});}
+  if(user){const url=new URL(location.href);url.searchParams.delete('section');url.hash=id==='home'?'':sourceIds[id];if(url.href!==location.href)history.pushState(null,'',url.href);(id==='home'?heading:document.getElementById('harbor-heading-'+id)).focus({preventScroll:true});app.scrollIntoView({block:'start'});}
 }
 function openDestination(target){
   if(!target)return false;
@@ -143,6 +144,9 @@ function openDestination(target){
   if(target==='lighthouse-vision'){go('home',true);fullStory.open=true;fullStory.scrollIntoView({block:'start'});return true;}
   const id=Object.keys(sourceIds).find(key=>sourceIds[key]===target);
   if(id){go(id,true);return true;}
+  const nested=document.getElementById(target);
+  const owner=nested&&[...panels].find(([,panel])=>panel.contains(nested));
+  if(owner){go(owner[0],true);owner[1].dispatchEvent(new CustomEvent('lighthouse:reveal',{detail:nested}));nested.scrollIntoView({block:'start'});return true;}
   if(info.querySelector('#'+CSS.escape(target))){document.getElementById('beacon-quest')?.close();openMore(target);return true;}
   return false;
 }
@@ -152,14 +156,17 @@ window.addEventListener('message',event=>{
   if(event.source!==window.parent||!trusted.includes(event.origin)||event.data?.type!=='lighthouse:navigate')return;
   openDestination(String(event.data.section||''));
 });
-window.addEventListener('hashchange',()=>{const id=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));if(id)go(id);else if(!location.hash)go('home');});
+function restoreHistoryDestination(){const target=location.hash.slice(1)||new URLSearchParams(location.search).get('section');const id=Object.keys(sourceIds).find(key=>sourceIds[key]===target);if(id)go(id);else if(!target)go('home');}
+window.addEventListener('hashchange',restoreHistoryDestination);
+window.addEventListener('popstate',restoreHistoryDestination);
 const cinema=el('dialog','harbor-cinema');cinema.setAttribute('aria-label','Watch Lighthouse');
 const cinemaTitle=el('h2',null,'Watch the Lighthouse');const cinemaClose=button('Close ×','harbor-close',()=>cinema.close());
 const film=el('video');film.controls=true;film.playsInline=true;film.preload='none';film.poster=new URL('./assets/lighthouse-memorial-hero-poster.jpg',import.meta.url).href;film.src=new URL('./assets/lighthouse-memorial-hero.mp4',import.meta.url).href;film.setAttribute('aria-label','Original Lighthouse coastal film');
 cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>pauseAll());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
 const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});discovery.append(watch);welcome.append(discovery);
 app.append(scene,header,welcome,favorites,introduction,nav,carousel,stage,story,yvetteSection,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;updateCarousel();
-const filmCollection=root.querySelector('#lighthouse-video-studio .channel-2040');if(filmCollection){filmCollection.classList.add('harbor-film-collection');cinema.append(filmCollection);}
+// The Studio's original film collection belongs in Sound Harbor. The separate
+// Watch Lighthouse dialog retains the homepage's coastal film.
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 openDestination(new URLSearchParams(location.search).get('section')||location.hash.slice(1));
@@ -168,7 +175,7 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
 await import('./lighthouse-live.mjs?v=20260908-harbor-names1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-harbor-names1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-recovery1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original

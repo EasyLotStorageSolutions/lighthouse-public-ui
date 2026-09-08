@@ -87,6 +87,11 @@ for(const section of sections){
   if(section.id==='social')continue;
   const options=settings[section.id];const old=document.querySelector(options.selector);
   if(old)mountPhone(section,old,options);
+  else if(section.id==='music'){
+    // The original channel TV was replaced by the film collection. Its removal
+    // must not silently remove Sound Harbor's guide and shared lounge entrance.
+    document.querySelector('#lighthouse-video-studio .container')?.append(mountPhone(section,null,options));
+  }
 }
 // Keep the existing Work tools full width, beneath its description and phone.
 const workShell=document.querySelector('.work-shell');
@@ -127,4 +132,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-harbor-names1');
+await import('./lighthouse-harbor.mjs?v=20260908-recovery1');

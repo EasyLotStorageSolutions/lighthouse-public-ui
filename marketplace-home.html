@@ -19,7 +19,8 @@
       window.lighthouseStylesReady=Promise.all([
         'lighthouse-category-spacing.css?v=20260907-1',
         'lighthouse-category-phones.css?v=20260907-6',
-        'lighthouse-harbor.css?v=20260908-nav3'
+        'lighthouse-harbor.css?v=20260908-nav3',
+        'lighthouse-destination-recovery.css?v=20260908-recovery1'
       ].map(file=>new Promise((resolve,reject)=>{
         const link=document.createElement('link');link.rel='stylesheet';
         link.href=new URL(file,location.href).href;
@@ -2401,12 +2402,12 @@
       const marketplaceMedia = document.querySelector('[data-phone-screen="0"] .phone-photo');
       const marketplaceMediaButton = document.querySelector('[data-phone-screen="0"] .phone-camera-button');
       buildLocalPhoneVideo({ inputId:'marketplace-video-input', videoId:'marketplace-phone-video', labelId:'marketplace-video-label', container:marketplaceMedia, triggerParent:marketplaceMediaButton.parentElement, triggerText:'TRY YOUR VIDEO', videoLabel:'General Marketplace demo montage', defaultSrc:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-marketplace-demo-montage.mp4?v=20260906', defaultLabel:'STOCK MEDIA DEMO · NOT LIVE INVENTORY' });
-      const phoneDemo = { step:0, saleType:'Buy Now', automatic:!reduceMarketplaceMotion, timer:null };
+      const phoneDemo = { step:0, saleType:'Buy Now', automatic:false, timer:null };
       function stopPhoneDemo(){phoneDemo.automatic=false;if(phoneDemo.timer)clearTimeout(phoneDemo.timer);phoneDemo.timer=null;phonePlayState.textContent='You’re in control';phoneHint.textContent='Hands-on sample · nothing is uploaded or saved.'}
       function renderPhoneDemo(step=phoneDemo.step){phoneDemo.step=Math.max(0,Math.min(phoneScreens.length-1,step));phoneScreens.forEach((screen,index)=>screen.classList.toggle('active',index===phoneDemo.step));phoneTabs.forEach((tab,index)=>{const active=index===phoneDemo.step;tab.classList.toggle('active',active);tab.classList.toggle('complete',index<phoneDemo.step);tab.setAttribute('aria-selected',String(active));tab.setAttribute('tabindex',active?'0':'-1')});phoneBack.disabled=phoneDemo.step===0;phoneNext.disabled=phoneDemo.step===phoneScreens.length-1;phoneNext.textContent=phoneDemo.step===phoneScreens.length-2?'Submit':'Next';const amount=Math.max(1,Number(phonePrice.value)||1).toLocaleString('en-US');phonePreviewPrice.textContent=`$${amount}`;phonePreviewTitle.textContent=phoneTitle.value.trim()||'Untitled listing';phonePreviewType.textContent=phoneDemo.saleType;phonePriceHelp.textContent=phoneDemo.saleType==='Auction'?'Choose the opening amount people will see.':'Choose the Buy Now price people will see.'}
       function schedulePhoneDemo(){if(!phoneDemo.automatic)return;if(phoneDemo.timer)clearTimeout(phoneDemo.timer);phoneDemo.timer=setTimeout(()=>{renderPhoneDemo((phoneDemo.step+1)%phoneScreens.length);schedulePhoneDemo()},phoneDemo.step===phoneScreens.length-1?3200:2200)}
-      marketplacePhone.addEventListener('pointerdown',stopPhoneDemo,{once:true});marketplacePhone.addEventListener('keydown',stopPhoneDemo,{once:true});phoneTabs.forEach(tab=>tab.addEventListener('click',()=>renderPhoneDemo(Number(tab.dataset.phoneStep))));phoneBack.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step-1));phoneNext.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step+1));document.querySelectorAll('[data-phone-next]').forEach(button=>button.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step+1)));document.querySelectorAll('[data-sale-type]').forEach(button=>button.addEventListener('click',()=>{phoneDemo.saleType=button.dataset.saleType;document.querySelectorAll('[data-sale-type]').forEach(choice=>choice.classList.toggle('active',choice===button));renderPhoneDemo()}));phonePrice.addEventListener('input',renderPhoneDemo);phoneTitle.addEventListener('input',renderPhoneDemo);if(phoneDemo.automatic)schedulePhoneDemo();else{phonePlayState.textContent='Choose a step';phoneHint.textContent='Hands-on sample · autoplay is off for reduced motion.'}
-      document.addEventListener('visibilitychange',()=>{if(document.hidden&&phoneDemo.timer)clearTimeout(phoneDemo.timer);else if(!document.hidden&&phoneDemo.automatic)schedulePhoneDemo()});document.getElementById('phone-demo-replay')?.addEventListener('click',()=>{renderPhoneDemo(0);if(!reduceMarketplaceMotion){phoneDemo.automatic=true;phonePlayState.textContent='Demo playing';schedulePhoneDemo()}marketplacePhone.scrollIntoView({behavior:reduceMarketplaceMotion?'auto':'smooth',block:'center'})});
+      marketplacePhone.addEventListener('pointerdown',stopPhoneDemo,{once:true});marketplacePhone.addEventListener('keydown',stopPhoneDemo,{once:true});phoneTabs.forEach(tab=>tab.addEventListener('click',()=>renderPhoneDemo(Number(tab.dataset.phoneStep))));phoneBack.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step-1));phoneNext.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step+1));document.querySelectorAll('[data-phone-next]').forEach(button=>button.addEventListener('click',()=>renderPhoneDemo(phoneDemo.step+1)));document.querySelectorAll('[data-sale-type]').forEach(button=>button.addEventListener('click',()=>{phoneDemo.saleType=button.dataset.saleType;document.querySelectorAll('[data-sale-type]').forEach(choice=>choice.classList.toggle('active',choice===button));renderPhoneDemo()}));phonePrice.addEventListener('input',()=>renderPhoneDemo());phoneTitle.addEventListener('input',()=>renderPhoneDemo());if(phoneDemo.automatic)schedulePhoneDemo();else{phonePlayState.textContent='Choose a step';phoneHint.textContent='Hands-on sample · choose Next when you’re ready.'}
+      document.addEventListener('visibilitychange',()=>{if(document.hidden&&phoneDemo.timer)clearTimeout(phoneDemo.timer);else if(!document.hidden&&phoneDemo.automatic)schedulePhoneDemo()});document.getElementById('phone-demo-replay')?.addEventListener('click',()=>{stopPhoneDemo();renderPhoneDemo(0);marketplacePhone.scrollIntoView({behavior:reduceMarketplaceMotion?'auto':'smooth',block:'center'})});
       const portalCopy = {
         quick: ['Quick mode keeps everything fast, familiar, and screen-reader friendly.', 'BROWSE QUICKLY'],
         explore: ['Explore mode opens the visual Marketplace campus. You can switch modes at any time.', 'ENTER EXPLORE MODE'],
@@ -2592,7 +2593,7 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260908-harbor-names1',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260908-recovery1',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
