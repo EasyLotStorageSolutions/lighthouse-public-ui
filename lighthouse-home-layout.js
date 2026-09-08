@@ -13,7 +13,7 @@
     set(frame,'width','100%');set(frame,'height',height+'px');
     set(component,'width','100%');set(component,'max-width','1120px');set(component,'min-width','0px');set(component,'margin','0px auto');set(component,'left','auto');set(component,'height',height+'px');set(component,'min-height','0px');
     for(let n=component.parentElement;n&&n.id!=='masterPage';n=n.parentElement){set(n,'width','100%');set(n,'min-width','0px');set(n,'height','auto');set(n,'min-height','0px');if(getComputedStyle(n).display==='grid'){set(n,'grid-template-rows','auto');set(n,'grid-template-columns','minmax(0,1fr)');}}
-    if(location.pathname==='/'){for(const id of ['site-root','masterPage','SITE_CONTAINER']){const n=document.getElementById(id);set(n,'min-width','0px');set(n,'width','100%');}set(document.body,'background','#071827');set(document.getElementById('SITE_CONTAINER'),'background','#071827');}
+    if(location.pathname==='/'){for(const id of ['site-root','masterPage','SITE_CONTAINER','pageBackground_rvfuy']){const n=document.getElementById(id);set(n,'min-width','0px');set(n,'width','100%');}set(document.querySelector('#rvfuy>.wixui-page'),'width','100%');set(document.body,'background','#071827');set(document.getElementById('SITE_CONTAINER'),'background','#071827');}
   }
   window.addEventListener('message',event=>{
     if(event.origin!==origin||!['lighthouse:content-height','lighthouse:chrome-height'].includes(event.data?.type))return;
