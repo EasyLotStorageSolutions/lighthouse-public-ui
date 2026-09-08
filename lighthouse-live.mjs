@@ -213,7 +213,7 @@ if(app){
 {
   const nav=document.querySelector('.harbor-nav');
   if(nav&&!nav.querySelector('[data-destination="locksmith"]')){
-    const store='https://www.easylotstoragesolutions.com/lighthouse-locksmith?release=20260908-launch5';
+    const store='https://www.easylotstoragesolutions.com/lighthouse-locksmith?release=20260908-network1';
     const art=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;
     const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n};
     const style=make('style');style.textContent=
@@ -221,17 +221,17 @@ if(app){
     document.head.append(style);
     const card=make('article','harbor-destination has-mini-lighthouse');card.dataset.destination='locksmith';
     const preview=make('div','harbor-feature-preview');const empty=make('div','locksmith-feature-empty');
-    const image=make('img','harbor-mini-lighthouse-art');image.src=art;image.alt='';image.loading='lazy';empty.append(make('span',null,'Video coming soon'));preview.append(empty);const lantern=make('div','harbor-mini-lighthouse');lantern.append(image,preview);
+    const image=make('img','harbor-mini-lighthouse-art');image.src=art;image.alt='';image.loading='lazy';empty.append(make('span',null,'Watch Locksmith TV'));preview.append(empty);const lantern=make('div','harbor-mini-lighthouse');lantern.append(image,preview);
     const tv=make('button','locksmith-main-tv','Locksmith TV');tv.type='button';
     const enter=make('a','harbor-feature-enter');enter.href=store;enter.target='_top';enter.setAttribute('aria-label','Enter Locksmith');
-    const label=make('span','harbor-destination-text');label.append(make('strong',null,'Locksmith'),make('small',null,'Store preview'));enter.append(label,make('span','harbor-destination-arrow','↗'));
-    const controls=make('div','harbor-mini-controls locksmith-media-controls');controls.append(tv);lantern.append(controls);card.append(lantern,enter);nav.append(card);nav.classList.add('has-locksmith');
+    const label=make('span','harbor-destination-text');label.append(make('strong',null,'Locksmith'),make('small',null,'Locksmith store'));enter.append(label,make('span','harbor-destination-arrow','↗'));
+    const controls=make('div','harbor-mini-controls locksmith-media-controls');const radio=make('a','locksmith-main-tv','Lounge Radio');radio.href='https://www.easylotstoragesolutions.com/customer-portal?view=locksmith&locksmithScreen=lounge';radio.target='_top';controls.append(tv,radio);lantern.append(controls);card.append(lantern,enter);nav.append(card);nav.classList.add('has-locksmith');
     const modal=make('dialog','locksmith-main-dialog');modal.setAttribute('aria-labelledby','locksmith-main-tv-title');
     const close=make('button',null,'Close ×');close.type='button';close.addEventListener('click',()=>modal.close());
     const title=make('h2',null,'Lighthouse Locksmith TV');title.id='locksmith-main-tv-title';
-    const screen=make('div','locksmith-main-screen');screen.append(make('strong',null,'Your Locksmith video spot'),make('p',null,'Video coming soon.'));
-    const visit=make('a',null,'Enter the Locksmith store →');visit.href=store;visit.target='_top';
-    modal.append(close,title,screen,make('p',null,'Explore the store while our Locksmith video is on its way.'),visit);document.body.append(modal);
+    const screen=make('div','locksmith-main-screen');const welcome=make('video');welcome.src=new URL('./assets/locksmith-welcome.mp4',import.meta.url).href;welcome.controls=true;welcome.playsInline=true;welcome.preload='metadata';welcome.style.width='100%';screen.append(welcome);modal.addEventListener('close',()=>welcome.pause());
+    const visit=make('a',null,'Open the Locksmith TV network →');visit.href=store+'&screen=network';visit.target='_top';
+    modal.append(close,title,screen,make('p',null,'Welcome to the trade. Watch member videos, meet creators and explore the Locksmith community.'),visit);document.body.append(modal);
     tv.addEventListener('click',()=>{document.querySelectorAll('video,audio').forEach(v=>v.pause());modal.showModal()});
     modal.addEventListener('click',event=>{if(event.target===modal)modal.close()});
   }
