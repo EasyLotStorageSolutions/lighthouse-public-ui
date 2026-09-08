@@ -85,3 +85,13 @@ test('Yvette never falls through to an arbitrary male browser voice', () => {
   assert.match(phones, /A suitable feminine narrator is not available/);
   assert.match(home, /synthetic feminine narrator/);
 });
+
+test('the homepage explains Lighthouse Mall, its goal, and its future honestly', () => {
+  assert.match(harbor, /One place for the many parts of life/);
+  assert.match(harbor, /What Lighthouse offers/);
+  assert.match(harbor, /Our goal/);
+  assert.match(harbor, /Where we are heading/);
+  assert.match(harbor, /Lighthouse AI is being developed/);
+  assert.match(harbor, /not hidden transaction fees/);
+  assert.match(styles, /\.harbor-story-columns/);
+});

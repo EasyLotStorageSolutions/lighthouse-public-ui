@@ -28,6 +28,16 @@ welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),
 const beacon=button('✦ Enter the Beacon','harbor-watch',()=>document.getElementById('beacon-quest')?.showModal());
 const meetYvette=button('Meet Yvette · AI in development','harbor-subtle',()=>openMore('lighthouse-title'));
 welcome.append(beacon,meetYvette);
+const introduction=el('section','harbor-introduction');
+introduction.setAttribute('aria-labelledby','harbor-introduction-title');
+const introductionTitle=el('h2',null,'One place for the many parts of life');introductionTitle.id='harbor-introduction-title';
+introduction.append(
+  el('p','harbor-eyebrow','Welcome to Lighthouse Mall'),
+  introductionTitle,
+  el('p',null,'Lighthouse is a growing community built to help people find what they need, share what they have, and discover what comes next.'),
+  el('p',null,'Shop, sell, find work, hire, discover storage and usable space, connect with businesses and skilled providers, enjoy music and community media, or ask for help when you are unsure where to begin.'),
+  el('p','harbor-introduction-promise','Every destination has its own purpose. Together, they form one welcoming world—with the Lighthouse guiding the way.')
+);
 const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');
 const cards=new Map();const panels=new Map();
 const stage=el('div','harbor-stage');
@@ -81,6 +91,13 @@ const footer=el('footer','harbor-footer');
 const favorites=el('div','harbor-favorites');favorites.setAttribute('aria-label','Your favorite destinations');
 const rememberLabel=el('label','harbor-remember');const remember=el('input');remember.type='checkbox';remember.checked=prefs.remember;remember.addEventListener('change',()=>{prefs.remember=remember.checked;prefs.last=current;save();});rememberLabel.append(remember,el('span',null,'Remember my place on this device'));
 footer.append(favorites,rememberLabel);
+const story=el('section','harbor-story');story.setAttribute('aria-labelledby','harbor-story-title');
+const storyLead=el('div','harbor-story-lead');const storyTitle=el('h2',null,'A light for real life.');storyTitle.id='harbor-story-title';
+storyLead.append(el('p','harbor-eyebrow','What Lighthouse offers'),storyTitle,el('p',null,'Lighthouse Mall brings practical parts of everyday life into one connected community. The Marketplace has places for vehicles, equipment, household goods, business assets, free items, trades, wanted posts, handmade work, repairs, and reviewed auctions. Storage & Space helps people describe what they need and connect with a fitting space. Lighthouse Work brings workers, drivers, employers, and opportunities together. Business, service, creative, music, and community areas give people more ways to be discovered, create, and connect.'));
+const storyColumns=el('div','harbor-story-columns');
+const goal=el('article');goal.append(el('p','harbor-eyebrow','Our goal'),el('h3',null,'Make opportunity easier to find and understand.'),el('p',null,'We are building a place where people are treated like people—not listings, leads, or numbers. Information should be honest, private contact details should be protected, choices should be explained clearly, and unavailable or developing features should always say so.'),el('p',null,'Lighthouse connects people. It does not take a percentage of their work, sale, or opportunity. The platform is supported through clear subscription services, not hidden transaction fees.'));
+const future=el('article');future.append(el('p','harbor-eyebrow','Where we are heading'),el('h3',null,'One guide across every destination.'),el('p',null,'The future of Lighthouse is a connected place that can guide each visitor without taking away their control. Someone looking for work may also need transportation or storage. A business may need workers, equipment, space, and local services. A seller may meet a buyer through the Marketplace or a request on the Wanted Board.'),el('p',null,'Lighthouse AI is being developed to help people understand their choices, see why something is recommended, protect private information, and take a clear next step. The goal is not to replace human connection—it is to make that connection easier to find.'));
+storyColumns.append(goal,future);story.append(storyLead,storyColumns,el('p','harbor-story-close','One community. Many destinations. A light that always points you forward.'));
 const announcement=el('p','harbor-announcement');announcement.setAttribute('role','status');
 const moreDialog=el('dialog','harbor-more');moreDialog.setAttribute('aria-label','More at Lighthouse');
 const closeMore=button('Close ×','harbor-close',()=>moreDialog.close());moreDialog.append(closeMore,el('h2',null,'More at Lighthouse'));
@@ -117,7 +134,7 @@ const cinemaTitle=el('h2',null,'Watch the Lighthouse');const cinemaClose=button(
 const film=el('video');film.controls=true;film.playsInline=true;film.preload='none';film.poster=new URL('./assets/lighthouse-memorial-hero-poster.jpg',import.meta.url).href;film.src=new URL('./assets/lighthouse-memorial-hero.mp4',import.meta.url).href;film.setAttribute('aria-label','Original Lighthouse coastal film');
 cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>pauseAll());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
 const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});welcome.append(watch);
-app.append(scene,header,welcome,nav,stage,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;
+app.append(scene,header,welcome,introduction,nav,stage,story,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;
 const filmCollection=root.querySelector('#lighthouse-video-studio .channel-2040');if(filmCollection){filmCollection.classList.add('harbor-film-collection');cinema.append(filmCollection);}
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
