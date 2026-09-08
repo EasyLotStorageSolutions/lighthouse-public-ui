@@ -64,6 +64,9 @@ test('Lighthouse Work is public between Storage and Marketplace with nine intera
   assert.equal((source.match(/data-work-screen="\d"/g) || []).length, 9);
   assert.match(source, /PUBLIC EARLY ACCESS/);
   assert.match(source, /Lighthouse is the connector—not the employer, payroll provider, or contracting party/);
+  for (const marker of ['data-work-path="worker"', 'data-work-path="employer"', 'data-work-action="interest"', 'data-work-action="invite"', 'data-work-feedback', 'data-work-restart']) assert.match(source, new RegExp(marker));
+  assert.match(source, /Demo invitation saved for review/);
+  assert.match(source, /\['ArrowLeft', 'ArrowRight', 'Home', 'End'\]/);
 });
 
 test('embedded homepage script parses', () => {
