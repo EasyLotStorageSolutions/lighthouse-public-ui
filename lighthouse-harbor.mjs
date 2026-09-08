@@ -126,7 +126,7 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-void import('./lighthouse-live.mjs?v=20260908-4').catch(()=>{});
+void import('./lighthouse-live.mjs?v=20260908-5').catch(()=>{});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
 // media intact when the bridge or CMS is unavailable (including standalone previews).
