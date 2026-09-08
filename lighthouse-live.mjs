@@ -6,10 +6,10 @@ const app=document.querySelector('.harbor-app')||document.body;
 if(app){
   const experiences={
     storage:{name:'Storage & Space',guide:'Tour',tv:'Property TV',radio:'Local Radio',video:'0TPmbw4sPUo',prompt:'your city, state, or station',suggestions:['weather','talk','community']},
-    employment:{name:'Jobs & Hiring',guide:'Yvette',tv:'Work TV',radio:'News Radio',video:'lLqdB_7FfUA',prompt:'business news',suggestions:['business news','public radio','education']},
-    social:{name:'Community & Social',guide:'Yvette',tv:'Community TV',radio:'Talk Radio',video:'Sj_7xYkL680',prompt:'community',suggestions:['community','talk','culture']},
+    employment:{name:'Jobs & Hiring',guide:'Guide',tv:'Work TV',radio:'News Radio',video:'lLqdB_7FfUA',prompt:'business news',suggestions:['business news','public radio','education']},
+    social:{name:'Community & Social',guide:'Guide',tv:'Community TV',radio:'Talk Radio',video:'Sj_7xYkL680',prompt:'community',suggestions:['community','talk','culture']},
     marketplace:{name:'Marketplace',guide:'Showcase',tv:'Market TV',radio:'Business Radio',video:'r0fwqV0glGs',prompt:'business',suggestions:['business','entrepreneur','local']},
-    music:{name:'Creative Studio',guide:'Yvette',tv:'Music TV',radio:'Music Radio',video:'x0DinqPXxTo',prompt:'jazz',suggestions:['jazz','soul','classical']}
+    music:{name:'Creative Studio',guide:'Guide',tv:'Music TV',radio:'Music Radio',video:'x0DinqPXxTo',prompt:'jazz',suggestions:['jazz','soul','classical']}
   };
   const art=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;
   const el=(tag,cls,text)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(text)node.textContent=text;return node};

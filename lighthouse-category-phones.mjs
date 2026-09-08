@@ -1,4 +1,4 @@
-import {sections} from './lighthouse-guide-data.mjs?v=20260908-public-names1';
+import {sections} from './lighthouse-guide-data.mjs?v=20260908-yvette-balance1';
 
 const media = new URL('./assets/lighthouse-guides/', import.meta.url);
 const settings = {
@@ -18,10 +18,10 @@ async function chooseYvetteVoice(){
   return null;
 }
 async function speakAsYvette(section,status){
-  if(!('speechSynthesis' in window)){status.textContent='Open Read Yvette’s guide to follow the introduction.';return}
+  if(!('speechSynthesis' in window)){status.textContent='Open Read guide to follow the introduction.';return}
   window.speechSynthesis.cancel();const voice=await chooseYvetteVoice();
   if(!voice){status.textContent='A suitable feminine narrator is not available on this device. Open the written guide below.';return}
-  const utterance=new SpeechSynthesisUtterance(section.transcript);utterance.voice=voice;utterance.rate=.94;utterance.pitch=1.03;utterance.onend=()=>{if(activeNarration?.utterance===utterance)activeNarration=null};utterance.onerror=()=>{if(activeNarration?.utterance===utterance)activeNarration=null;status.textContent='Open the written guide below to continue.'};activeNarration={sectionId:section.id,utterance};status.textContent='Yvette is speaking with a synthetic feminine narrator.';window.speechSynthesis.speak(utterance);
+  const utterance=new SpeechSynthesisUtterance(section.transcript);utterance.voice=voice;utterance.rate=.94;utterance.pitch=1.03;utterance.onend=()=>{if(activeNarration?.utterance===utterance)activeNarration=null};utterance.onerror=()=>{if(activeNarration?.utterance===utterance)activeNarration=null;status.textContent='Open the written guide below to continue.'};activeNarration={sectionId:section.id,utterance};status.textContent='Guide narration is playing.';window.speechSynthesis.speak(utterance);
 }
 function stopYvette(sectionId){if(activeNarration?.sectionId===sectionId&&'speechSynthesis' in window){window.speechSynthesis.cancel();activeNarration=null}}
 function make(tag, className, text) {
@@ -33,7 +33,7 @@ function make(tag, className, text) {
 function mountPhone(section, old, options) {
   const group=make('div','yvette-phone-group');
   const phone=make('section','yvette-phone');
-  phone.setAttribute('aria-label',section.name+' Lighthouse lantern with Yvette');
+  phone.setAttribute('aria-label',section.name+' optional guide');
   phone.dataset.category=section.id;
   const top=make('div','yvette-phone-top',section.name);
   top.append(make('span','yvette-island'));
@@ -42,16 +42,15 @@ function mountPhone(section, old, options) {
   video.controls=false; video.playsInline=true; video.preload='none';video.muted=true;video.volume=0;
   video.poster=new URL(section.id+'-poster.jpg',media).href;
   video.src=new URL(section.id+'.mp4',media).href;
-  video.setAttribute('aria-label','Yvette introduces '+section.name);
+  video.setAttribute('aria-label','Optional introduction to '+section.name);
   const captions=make('track'); captions.kind='captions';captions.srclang='en';captions.label='English';captions.src=new URL(section.id+'.vtt',media).href;
   video.append(captions); screen.append(video);allVideos.add(video);
   const fallback=make('p','yvette-error','The guide could not load. You can read it below or enter the section.');fallback.hidden=true;screen.append(fallback);
   video.addEventListener('error',()=>{fallback.hidden=true;status.textContent=fallback.textContent;});
   const dock=make('div','yvette-dock');
   const identity=make('div','yvette-identity');
-  const portrait=make('img');portrait.src=new URL('yvette-portrait.jpg',media).href;portrait.alt='Yvette';portrait.width=44;portrait.height=44;portrait.loading='lazy';
-  const greeting=make('div');greeting.append(make('strong',null,"Hi, I’m Yvette."),make('span',null,'Your Lighthouse guide'));
-  identity.append(portrait,greeting);dock.append(identity);
+  const greeting=make('div');greeting.append(make('strong',null,'Optional guide'),make('span',null,'A short introduction when you want it'));
+  identity.append(greeting);dock.append(identity);
   const controls=make('div','yvette-controls');
   const play=make('button',null,'Play guide');play.type='button';
   const replay=make('button',null,'Replay');replay.type='button';
@@ -72,14 +71,14 @@ function mountPhone(section, old, options) {
   if(old){
     old.before(group);legacy.append(old);old.classList.add('yvette-unframed');
     toggle=make('button','yvette-mode',options.label);toggle.type='button';toggle.setAttribute('aria-pressed','false');
-    toggle.addEventListener('click',()=>{const opening=legacy.hidden;video.pause();screen.hidden=opening;legacy.hidden=!opening;toggle.setAttribute('aria-pressed',String(opening));toggle.textContent=opening?'Back to Yvette':options.label;
+    toggle.addEventListener('click',()=>{const opening=legacy.hidden;video.pause();screen.hidden=opening;legacy.hidden=!opening;toggle.setAttribute('aria-pressed',String(opening));toggle.textContent=opening?'Back to guide':options.label;
       if(!opening){legacy.querySelectorAll('video').forEach(v=>v.pause());legacy.querySelectorAll('iframe').forEach(frame=>{const src=frame.getAttribute('src');if(src)frame.setAttribute('src',src);});}
     });dock.append(toggle);
   }
   const enter=make('a','yvette-enter',section.id==='employment'?'Open work profile':section.cta);enter.href=options.href;enter.target='_top';dock.append(enter,make('div','yvette-home-indicator'));
   phone.append(top,screen,legacy,dock);
-  if(section.id==='storage'&&old){screen.hidden=true;legacy.hidden=false;toggle.setAttribute('aria-pressed','true');toggle.textContent='Hear Yvette’s guide';}
-  const transcript=make('details','yvette-transcript');transcript.append(make('summary',null,'Read Yvette’s guide'),make('p',null,section.transcript));
+  if(section.id==='storage'&&old){screen.hidden=true;legacy.hidden=false;toggle.setAttribute('aria-pressed','true');toggle.textContent='Hear guide';}
+  const transcript=make('details','yvette-transcript');transcript.append(make('summary',null,'Read guide'),make('p',null,section.transcript));
   group.append(phone,status,transcript);
   return group;
 }
@@ -132,4 +131,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-public-names1');
+await import('./lighthouse-harbor.mjs?v=20260908-yvette-balance1');

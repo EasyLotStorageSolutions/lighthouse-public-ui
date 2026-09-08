@@ -41,7 +41,7 @@ export function restoreDestination({panel, source, overview, section}) {
     }
   }
   const labels={storage:'Storage & rentals',employment:'Work & hiring',social:'Community',marketplace:'Buying & selling',music:'Studio & channel'};
-  const guideLabel=section.id==='storage'?'Lot tour & guide':'Yvette’s guide';
+  const guideLabel=section.id==='storage'?'Lot tour & guide':'Optional guide';
   const views=[{id:'tools',label:labels[section.id],node:content},{id:'guide',label:guideLabel,node:guide}];
   if(demo)views.splice(1,0,{id:'demo',label:section.id==='employment'?'Work demo':'Listing demo',node:demo});
   function select(id,focus=false){

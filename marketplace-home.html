@@ -2586,14 +2586,14 @@
   <dialog class="beacon-quest" id="beacon-quest" aria-labelledby="beacon-title">
     <div class="beacon-shell"><button class="beacon-close" id="beacon-close" type="button" aria-label="Close Quick Help and Inspiration">×</button><div class="eyebrow">A quick break or useful next step</div><h2 id="beacon-title">What do you need right now?</h2><p>Choose the option closest to how you feel. You’ll get one simple activity or useful next step.</p><div class="beacon-choices" role="group" aria-label="Choose a Quick Help and Inspiration option"><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="calm"><strong>I need calm.</strong><span>Two minutes of coast, light, and room to breathe.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="curious"><strong>Surprise me.</strong><span>Discover an area or idea you may have missed.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="ready"><strong>I’m ready to move.</strong><span>Turn one real thought into a useful next step.</span></button></div><div class="beacon-result" aria-live="polite"><span class="beacon-number" aria-hidden="true">✦</span><div><h3 id="beacon-result-title">Choose an option above.</h3><p id="beacon-result-copy">Your suggestion will appear here.</p></div><a class="button" id="beacon-result-link" href="#" hidden>BEGIN</a></div><p class="beacon-score" id="beacon-score">0 activities tried on this device.</p></div>
   </dialog>
-  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.js?v=20260908-public-names1"></script>
+  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.js?v=20260908-yvette-balance1"></script>
   <script type="module">
     let loadTimer;
     try {
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260908-public-names1',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260908-yvette-balance1',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
