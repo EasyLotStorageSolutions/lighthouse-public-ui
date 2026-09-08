@@ -21,6 +21,6 @@
     if(!frame||!Number.isFinite(height)||height<80||height>40000)return;
     heights.set(frame,height);layout(frame,height);
   });
-  function refresh(){if(lastPath!==location.pathname){restore();lastPath=location.pathname;}const current=frames();if(!current.length){if(changed.size)restore();return;}for(const f of current){const height=heights.get(f)||f.clientHeight;layout(f,height);f.contentWindow?.postMessage({type:'lighthouse:request-height'},origin);}}
+  function refresh(){if(lastPath!==location.pathname){restore();lastPath=location.pathname;}const current=frames();if(!current.length){if(changed.size)restore();return;}for(const f of current){const url=new URL(f.src);if(url.searchParams.get('lighthouseRelease')!=='20260908-corners1'){url.searchParams.set('lighthouseRelease','20260908-corners1');f.src=url.href;continue;}const height=heights.get(f)||f.clientHeight;layout(f,height);f.contentWindow?.postMessage({type:'lighthouse:request-height'},origin);}}
   window.addEventListener('resize',refresh);setInterval(refresh,1200);refresh();
 })();
