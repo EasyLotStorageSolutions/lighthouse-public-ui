@@ -63,7 +63,7 @@ test('Lighthouse Work is public between Storage and Marketplace with nine intera
   assert.match(source, /id="lighthouse-work"[^>]*data-live-work="true"/);
   assert.equal((source.match(/data-work-screen="\d"/g) || []).length, 9);
   assert.match(source, /PUBLIC EARLY ACCESS/);
-  assert.match(source, /Interest is never a contract, hiring decision, or payment/);
+  assert.match(source, /Lighthouse is the connector—not the employer, payroll provider, or contracting party/);
 });
 
 test('embedded homepage script parses', () => {
