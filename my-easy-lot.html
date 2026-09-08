@@ -38,6 +38,7 @@
     <section class="card section"><div class="eyebrow">YOUR DOCUMENTS</div><h2>Documents Easy Lot has linked to you</h2><div id="documents" class="stack"></div></section>
     <div class="source-note section"><strong>Truth boundary:</strong> Payment links appear only when an authoritative invoice or Wix payment reference is already attached to your rental. Access information is labeled operator-provided unless a real live integration is verified.</div>
   </section>
+  <section class="card section" aria-labelledby="accountHelpTitle"><h2 id="accountHelpTitle">Need help with your account?</h2><p>If your rental or payment link is missing, contact Easy Lot so we can check the account connected to your sign-in. You can still use a payment link previously sent to you.</p><a class="button" href="https://www.easylotstoragesolutions.com/contact">Contact Easy Lot</a><p class="tiny">Never send your card details, password, or gate code in a message.</p></section>
 </main>
 <script>
 const parentWindow=window.parent,parentOrigin=(()=>{try{return new URL(document.referrer).origin}catch(error){return'https://www.easylotstoragesolutions.com'}})();
@@ -64,6 +65,7 @@ document.getElementById('issueForm').onsubmit=event=>{event.preventDefault();pos
 document.getElementById('moveOutForm').onsubmit=event=>{event.preventDefault();post('my-easy-lot:move-out',{rentalId:document.getElementById('moveOutRental').value,requestedDate:document.getElementById('moveOutDate').value,reason:document.getElementById('moveOutReason').value,stepsConfirmed:document.getElementById('moveOutConfirm').checked})};
 window.addEventListener('message',event=>{if(event.source!==parentWindow||event.origin!==parentOrigin)return;const message=event.data||{};if(message.type==='my-easy-lot:data')render(message.workspace);if(message.type==='my-easy-lot:changed'){notice(message.message||'Saved.');document.querySelectorAll('form').forEach(form=>form.reset());document.querySelectorAll('.form-panel').forEach(panel=>panel.classList.remove('active'));post('my-easy-lot:refresh')}if(message.type==='my-easy-lot:error')notice(message.error==='MEMBER_SIGN_IN_REQUIRED'?'Please sign in to continue.':message.error||'My Easy Lot could not complete that request.',true)});
 post('my-easy-lot:ready');
+setTimeout(()=>{const loading=document.getElementById('loading');if(!loading.classList.contains('hidden')){loading.innerHTML='<h2>Your account is taking longer to load.</h2><p>Please try again. If it still does not load, use Contact Easy Lot below for help with your rental or payment.</p><a class="button secondary" href="/customer-portal?view=storage">Try again</a>';}},15000);
 </script>
   <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-interior-2040.js?v=20260907-3"></script>
 </body>
