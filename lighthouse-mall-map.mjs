@@ -1,11 +1,12 @@
-import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-public-names1';
+import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-yvette-balance1';
 const districts=[
- {id:'marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:21,y:17,angle:-145},
- {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:79,y:17,angle:-35},
- {id:'storage',name:'Storage & Space',hint:'Find or offer storage space',x:16,y:50,angle:180},
- {id:'social',name:'Community & Social',hint:'People, groups & connections',x:84,y:50,angle:0},
- {id:'music',name:'Creative Studio',hint:'Music, video & creative tools',x:24,y:83,angle:145},
- {id:'locksmith',name:'Locksmith Services',hint:'Find a locksmith or join the trade',x:76,y:83,angle:35}
+ {id:'marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:16,y:18,angle:-145},
+ {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:50,y:11,angle:-90},
+ {id:'storage',name:'Storage & Space',hint:'Find or offer storage space',x:84,y:18,angle:-35},
+ {id:'social',name:'Community & Social',hint:'People, groups & connections',x:12,y:57,angle:180},
+ {id:'makers',name:'Makers Market & Community',hint:'Handmade goods, custom work & maker connections',x:88,y:57,angle:0,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-maker-space.html'},
+ {id:'music',name:'Creative Studio',hint:'Music, video & creative tools',x:22,y:86,angle:145},
+ {id:'locksmith',name:'Locksmith Services',hint:'Find a locksmith or join the trade',x:78,y:86,angle:35}
 ];
 const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls||'';if(text)n.textContent=text;return n;};
 const btn=(text,cls,fn)=>{const n=make('button',cls,text);n.type='button';n.addEventListener('click',fn);return n;};
@@ -19,7 +20,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  const marker=make('span','mall-you-are-here','THE LIGHTHOUSE');canvas.append(marker);
  const theater=make('section','mall-theater');theater.hidden=true;theater.setAttribute('aria-label','Center Lighthouse theater');
  const watchCenter=btn('▶ TV & Radio Lounge','mall-center-play',()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');openCenterPlayer(theater,()=>{theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)watchCenter.focus({preventScroll:true});});});canvas.append(watchCenter);
- const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.setAttribute('aria-label','Enter '+d.name);if(d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
+ const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.setAttribute('aria-label','Enter '+d.name);if(!d.url&&d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a category. See what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');
  const close=btn('← All categories','mall-close',()=>showMap());const panelTitle=make('h3');panelTitle.tabIndex=-1;const panelHint=make('p','mall-panel-hint');panel.append(close,panelTitle,panelHint,nav);
@@ -33,6 +34,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  function select(d){
    // A district is an entrance, not another directory. Locksmith has its own
    // existing site page; the other five retain their original in-page tools.
+   if(d.url){window.top.location.href=d.url;return;}
    if(d.id==='locksmith'){nav.querySelector('[data-destination="locksmith"] .harbor-feature-enter')?.click();return;}
    showMap();go(d.id,true);
  }

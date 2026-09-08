@@ -10,6 +10,8 @@ const live = await readFile(new URL('./lighthouse-live.mjs', import.meta.url), '
 const phones = await readFile(new URL('./lighthouse-category-phones.mjs', import.meta.url), 'utf8');
 const mallMap = await readFile(new URL('./lighthouse-mall-map.mjs', import.meta.url), 'utf8');
 const header = await readFile(new URL('./marketplace-header.html', import.meta.url), 'utf8');
+const makerStore = await readFile(new URL('./marketplace-maker-space.html', import.meta.url), 'utf8');
+const marketplace = await readFile(new URL('./marketplace-explore.html', import.meta.url), 'utf8');
 
 test('Lighthouse 2040 behavior parses and keeps video IDs constrained', () => {
   assert.doesNotThrow(() => new Function(behavior));
@@ -112,7 +114,7 @@ test('the homepage explains its categories, goal, and future honestly', () => {
 });
 
 test('public category buttons use plain-language names', () => {
-  for (const label of ['Marketplace', 'Jobs & Hiring', 'Storage & Space', 'Community & Social', 'Creative Studio', 'Locksmith Services']) {
+  for (const label of ['Marketplace', 'Jobs & Hiring', 'Storage & Space', 'Community & Social', 'Makers Market & Community', 'Creative Studio', 'Locksmith Services']) {
     assert.match(mallMap, new RegExp(label.replace('&', '\\&')));
   }
   for (const oldLabel of ['Market Harbor', 'Work Pier', 'Storage Cove', 'Lighthouse World', 'Sound Harbor', 'Locksmith Point', 'Mall Map']) {
@@ -121,4 +123,18 @@ test('public category buttons use plain-language names', () => {
   assert.match(harbor, /Quick Help & Inspiration/);
   assert.match(home, /What do you need right now\?/);
   assert.doesNotMatch(home, /Close the Beacon|Choose your Beacon path|beacons found/);
+});
+
+test('Makers Market and Community is its own honest Lighthouse destination', () => {
+  assert.match(mallMap, /marketplace-maker-space\.html/);
+  assert.match(makerStore, /Shop handmade and custom work/);
+  assert.match(makerStore, /Custom work or repair/);
+  assert.match(makerStore, /Join as a maker/);
+  assert.match(makerStore, /Maker Community/);
+  assert.match(makerStore, /discussion forum is being prepared and is not live yet/);
+  assert.match(makerStore, /_functions\/marketplaceMaker/);
+  assert.doesNotMatch(makerStore, /native lane inside Lighthouse Marketplace/);
+  assert.match(marketplace, /Eight distinct districts/);
+  assert.doesNotMatch(marketplace, /<b>Maker Space<\/b>|>MAKER SPACE<\/a>/);
+  assert.match(marketplace, /Visit Makers Market &amp; Community/);
 });

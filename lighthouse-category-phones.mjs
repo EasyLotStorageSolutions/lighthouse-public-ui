@@ -131,4 +131,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-yvette-balance1');
+await import('./lighthouse-harbor.mjs?v=20260908-makers-store1');
