@@ -86,7 +86,7 @@ const moreDialog=el('dialog','harbor-more');moreDialog.setAttribute('aria-label'
 const closeMore=button('Close ×','harbor-close',()=>moreDialog.close());moreDialog.append(closeMore,el('h2',null,'More at Lighthouse'));
 const info=el('div','harbor-more-content');moreDialog.append(info);
 const selectedSources=new Set(Object.values(sourceIds));
-original.forEach(node=>{if(selectedSources.has(node.id))return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
+original.forEach(node=>{if(selectedSources.has(node.id)||node.tagName==='DIALOG')return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
 function openMore(target){moreDialog.showModal();if(target){const node=info.querySelector('#'+target);node?.scrollIntoView({block:'start'});}}
 moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.close();});
 function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe,.harbor-cinema iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
@@ -105,7 +105,7 @@ function openDestination(target){
   if(info.querySelector('#'+CSS.escape(target))){document.getElementById('beacon-quest')?.close();openMore(target);return true;}
   return false;
 }
-document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(!a)return;if(openDestination(a.getAttribute('href').slice(1))){event.preventDefault();event.stopImmediatePropagation();}},true);
+document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"],a[href^="/#"]');if(!a)return;if(openDestination(a.getAttribute('href').replace(/^\/?#/,''))){event.preventDefault();event.stopImmediatePropagation();}},true);
 window.addEventListener('message',event=>{
   const trusted=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
   if(event.source!==window.parent||!trusted.includes(event.origin)||event.data?.type!=='lighthouse:navigate')return;

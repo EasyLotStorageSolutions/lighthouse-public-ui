@@ -15,7 +15,7 @@ test('the AI signal deck is an honest development preview led by Yvette', () => 
 });
 
 test('membership details stay available without crowding the homepage', () => {
-  assert.match(source, /href="\/plans-pricing">MEMBERSHIP OPTIONS/);
+  assert.match(source, /href="\/pricing-plans">MEMBERSHIP OPTIONS/);
   assert.match(source, /href="\/customer-portal">OPEN MY LIGHTHOUSE/);
 });
 

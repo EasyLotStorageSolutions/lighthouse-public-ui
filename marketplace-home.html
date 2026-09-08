@@ -862,7 +862,7 @@
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
         <div class="container"><div class="signal-deck">
-          <div class="signal-grid"><div class="signal-copy"><div class="eyebrow">Lighthouse AI · development preview</div><h2 id="lighthouse-title">A clearer way through what comes next.</h2><p>Yvette will be the familiar guide at the center of Lighthouse. The complete AI workspace is still being built journey by journey; the working destinations remain open while it grows.</p><p id="yvette-transcript" class="yvette-transcript" hidden>“Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.”</p><div class="signal-access"><a class="button" href="/#what-easy-does">EXPLORE WHAT WORKS TODAY</a><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN MY LIGHTHOUSE</a><a class="button secondary" href="/plans-pricing">MEMBERSHIP OPTIONS</a></div><p class="signal-small"><span id="lighthouse-state" role="status" aria-live="polite">Checking your access…</span> · Yvette uses a synthetic feminine narrator and never claims to reproduce a real person's voice.</p></div>
+          <div class="signal-grid"><div class="signal-copy"><div class="eyebrow">Lighthouse AI · development preview</div><h2 id="lighthouse-title">A clearer way through what comes next.</h2><p>Yvette will be the familiar guide at the center of Lighthouse. The complete AI workspace is still being built journey by journey; the working destinations remain open while it grows.</p><p id="yvette-transcript" class="yvette-transcript" hidden>“Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.”</p><div class="signal-access"><a class="button" href="/#what-easy-does">EXPLORE WHAT WORKS TODAY</a><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN MY LIGHTHOUSE</a><a class="button secondary" href="/pricing-plans">MEMBERSHIP OPTIONS</a></div><p class="signal-small"><span id="lighthouse-state" role="status" aria-live="polite">Checking your access…</span> · Yvette uses a synthetic feminine narrator and never claims to reproduce a real person's voice.</p></div>
           <div class="lighthouse-media" aria-label="Yvette development message inside a Lighthouse lantern"><img src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-media-console-2040.webp" alt="Futuristic Lighthouse lantern built around a media window"><div class="lighthouse-screen yvette-screen"><div class="yvette-message"><span class="yvette-orbit" aria-hidden="true">Y</span><strong>Yvette</strong><span>Lighthouse guide · in development</span></div></div><button class="yvette-control" id="yvette-play" type="button">HEAR YVETTE’S WELCOME</button></div></div>
         </div></div>
       </section>
@@ -2333,7 +2333,13 @@
       workBack.addEventListener('click', () => renderWorkStep(workStep - 1));
       workNext.addEventListener('click', () => renderWorkStep(workStep + 1));
       document.querySelectorAll('[data-work-next]').forEach(button => button.addEventListener('click', () => renderWorkStep(workStep + 1)));
-      document.querySelector('[data-work-step-jump="driver"]')?.addEventListener('click', () => document.getElementById('local-delivery')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }));
+      document.querySelector('[data-work-step-jump="driver"]')?.addEventListener('click', () => {
+        const destination = document.getElementById('local-delivery');
+        for (let parent = destination?.parentElement; parent; parent = parent.parentElement) {
+          if (parent.tagName === 'DETAILS') parent.open = true;
+        }
+        destination?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      });
       workPhone.addEventListener('keydown', event => {
         if (event.target.matches('button,input,textarea,select')) return;
         if (event.key === 'ArrowLeft') renderWorkStep(workStep - 1);
@@ -2548,7 +2554,7 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260908-nav1',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260908-nav2',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
