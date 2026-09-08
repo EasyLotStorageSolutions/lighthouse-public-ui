@@ -18,7 +18,7 @@ test('footer preserves browser navigation for redirects and account queries, bri
 test('workspace accepts Work and Studio navigation but ignores unknown views',()=>{
   const html=readFileSync(new URL('./easytalk-portal.html',import.meta.url),'utf8');
   for(const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
-  const expression=html.match(/"easytalk:navigate"===t\.type&&.*?selectView\([^)]*\)/)[0];
+  const expression=html.match(/"easytalk:navigate"\s*===\s*t\.type\s*&&[\s\S]*?selectView\([^)]*\)/)[0];
   const selected=[];const context={selectView:v=>selected.push(v),t:{}};
   for(const view of ['controls','studio','unknown']){context.t={type:'easytalk:navigate',view};vm.runInNewContext(expression,context);}
   assert.deepEqual(selected,['controls','studio']);
