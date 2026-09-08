@@ -99,6 +99,10 @@ test('the homepage explains Lighthouse Mall, its goal, and its future honestly',
   assert.match(styles, /scroll-snap-type:x mandatory/);
   assert.match(styles, /scrollbar-width:none/);
   assert.match(harbor, /harbor-carousel-controls/);
+  assert.match(harbor, /facing you/);
+  assert.match(styles, /\.harbor-mini-lighthouse:after/);
+  assert.match(styles, /\.harbor-destination\.is-centered \.harbor-mini-lighthouse:after/);
+  assert.match(styles, /left:16%;top:25\.2%;width:68%;height:23%/);
   assert.match(harbor, /Previous Lighthouse/);
   assert.match(harbor, /Next Lighthouse/);
 });
