@@ -12,6 +12,9 @@ const mallMap = await readFile(new URL('./lighthouse-mall-map.mjs', import.meta.
 const header = await readFile(new URL('./marketplace-header.html', import.meta.url), 'utf8');
 const makerStore = await readFile(new URL('./marketplace-maker-space.html', import.meta.url), 'utf8');
 const marketplace = await readFile(new URL('./marketplace-explore.html', import.meta.url), 'utf8');
+const towingStore = await readFile(new URL('./towing-roadside.html', import.meta.url), 'utf8');
+const contractorStore = await readFile(new URL('./contractors-home-services.html', import.meta.url), 'utf8');
+const lounge = await readFile(new URL('./lighthouse-lounge-catalog-ui.mjs', import.meta.url), 'utf8');
 
 test('Lighthouse 2040 behavior parses and keeps video IDs constrained', () => {
   assert.doesNotThrow(() => new Function(behavior));
@@ -114,7 +117,7 @@ test('the homepage explains its categories, goal, and future honestly', () => {
 });
 
 test('public category buttons use plain-language names', () => {
-  for (const label of ['Marketplace', 'Jobs & Hiring', 'Storage & Space', 'Community & Social', 'Makers Market & Community', 'Creative Studio', 'Locksmith Services']) {
+  for (const label of ['Marketplace', 'Jobs & Hiring', 'Storage & Space', 'Community & Social', 'Makers Market & Community', 'Creative Studio', 'Locksmith Services', 'Towing & Roadside Assistance', 'Contractors & Home Services']) {
     assert.match(mallMap, new RegExp(label.replace('&', '\\&')));
   }
   for (const oldLabel of ['Market Harbor', 'Work Pier', 'Storage Cove', 'Lighthouse World', 'Sound Harbor', 'Locksmith Point', 'Mall Map']) {
@@ -123,6 +126,30 @@ test('public category buttons use plain-language names', () => {
   assert.match(harbor, /Quick Help & Inspiration/);
   assert.match(home, /What do you need right now\?/);
   assert.doesNotMatch(home, /Close the Beacon|Choose your Beacon path|beacons found/);
+});
+
+test('every new focused store has a playing Lighthouse screen and full media lounge', () => {
+  for (const [source, category, video] of [[makerStore,'makers','makers-welcome.mp4'],[towingStore,'towing','towing-welcome.mp4'],[contractorStore,'contractors','contractors-welcome.mp4']]) {
+    assert.match(source, /class="site-lighthouse"/);
+    assert.match(source, new RegExp(`data-category="${category}"`));
+    assert.match(source, new RegExp(video.replace('.', '\\.')));
+    assert.match(source, /<video autoplay muted loop playsinline controls/);
+    assert.match(source, /lighthouse-live\.mjs/);
+  }
+  for (const category of ['makers','towing','contractors']) assert.match(live, new RegExp(`${category}:\\{name:`));
+  assert.match(lounge, /regionalTV/);
+  assert.match(lounge, /radioServices/);
+  assert.match(lounge, /Saved stations/);
+  assert.match(lounge, /Show more live stations/);
+});
+
+test('new service stores keep honest, focused boundaries', () => {
+  assert.match(towingStore, /does not dispatch a truck/);
+  assert.match(towingStore, /A Lighthouse inquiry is not a confirmed dispatch/);
+  assert.doesNotMatch(towingStore, /handmade|contractor membership|locksmith directory/i);
+  assert.match(contractorStore, /No contractor is currently represented as approved/);
+  assert.match(contractorStore, /Confirm licensing requirements, insurance, written scope/);
+  assert.doesNotMatch(contractorStore, /towing company|handmade|locksmith directory/i);
 });
 
 test('Makers Market and Community is its own honest Lighthouse destination', () => {

@@ -4,7 +4,7 @@ const button=(text,fn)=>{const n=el('button',text);n.type='button';n.addEventLis
 const link=(name,url,description)=>{const n=el('a');n.href=url;n.target='_blank';n.rel='noopener noreferrer';n.append(el('strong',name+' ↗'),el('small',description));return n;};
 export function mountLoungeCatalog(dialog,{audio,radioNow,radioMeta}){
  const root=el('section');root.className='shared-lounge';
- const heading=el('h3','Community & Social · TV & Radio Lounge');const area=el('label','Your country / region');const select=el('select');
+ const heading=el('h3','Lighthouse · TV & Radio Lounge');const area=el('label','Your country / region');const select=el('select');
  for(const [code,name]of Object.entries(countries)){const o=el('option',name);o.value=code;select.append(o);}const all=el('option','Worldwide');all.value='';select.append(all);
  let country='';try{country=localStorage.getItem('lighthouse-lounge-country')||'';}catch{}if(!country){try{country=new Intl.Locale(navigator.language).region||'';}catch{}}select.value=countries[country]?country:'';area.append(select);
  const info=el('p','Starts with your browser region. Change it to explore another country. Official TV services open in a new tab; live radio plays here.');
@@ -21,4 +21,5 @@ export function mountLoungeCatalog(dialog,{audio,radioNow,radioMeta}){
  select.addEventListener('change',()=>{region='';try{localStorage.setItem('lighthouse-lounge-country',select.value);}catch{}renderTV();loaded=false;if(dialog.dataset.mode==='radio')load();});form.addEventListener('submit',e=>{e.preventDefault();savedOnly=false;savedButton.setAttribute('aria-pressed','false');load();});
  function update(){const mode=dialog.dataset.mode;television.hidden=mode!=='visual';radio.hidden=mode!=='radio';root.hidden=mode==='iheart';if(mode==='radio'&&!loaded&&!loading)load();}
  new MutationObserver(update).observe(dialog,{attributes:true,attributeFilter:['data-mode']});renderTV();update();
+ return {setName(name){heading.textContent=name+' · TV & Radio Lounge';}};
 }

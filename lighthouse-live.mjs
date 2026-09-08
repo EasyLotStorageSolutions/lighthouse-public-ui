@@ -9,7 +9,10 @@ if(app){
     employment:{name:'Jobs & Hiring',guide:'Guide',tv:'Work TV',radio:'News Radio',video:'lLqdB_7FfUA',prompt:'business news',suggestions:['business news','public radio','education']},
     social:{name:'Community & Social',guide:'Guide',tv:'Community TV',radio:'Talk Radio',video:'Sj_7xYkL680',prompt:'community',suggestions:['community','talk','culture']},
     marketplace:{name:'Marketplace',guide:'Showcase',tv:'Market TV',radio:'Business Radio',video:'r0fwqV0glGs',prompt:'business',suggestions:['business','entrepreneur','local']},
-    music:{name:'Creative Studio',guide:'Guide',tv:'Music TV',radio:'Music Radio',video:'x0DinqPXxTo',prompt:'jazz',suggestions:['jazz','soul','classical']}
+    music:{name:'Creative Studio',guide:'Guide',tv:'Music TV',radio:'Music Radio',video:'x0DinqPXxTo',prompt:'jazz',suggestions:['jazz','soul','classical']},
+    makers:{name:'Makers Market & Community',guide:'Welcome',tv:'Maker TV',radio:'Workshop Radio',video:'r0fwqV0glGs',prompt:'makers or workshop music',suggestions:['makers','crafts','workshop']},
+    towing:{name:'Towing & Roadside Assistance',guide:'Welcome',tv:'Roadside TV',radio:'Road Radio',video:'gN0PZCe-kwQ',prompt:'traffic, road, or local news',suggestions:['traffic','road','local news']},
+    contractors:{name:'Contractors & Home Services',guide:'Welcome',tv:'Contractor TV',radio:'Jobsite Radio',video:'21X5lGlDOfg',prompt:'home, building, or work music',suggestions:['home improvement','building','work music']}
   };
   const art=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;
   const el=(tag,cls,text)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(text)node.textContent=text;return node};
@@ -93,7 +96,7 @@ if(app){
   const iheartCustomPanel=disclosure('Use a different iHeart station',iheartCustom);
   dialog.append(close,eyebrow,title,intro,modes,media,tvGuide,tvControls,tvCustom,tvStatus,localControls,radioSearch,status,results,iheartControls,iheartCustomPanel,iheartStatus);
   app.append(dialog);
-  mountLoungeCatalog(dialog,{audio,radioNow,radioMeta});
+  const loungeCatalog=mountLoungeCatalog(dialog,{audio,radioNow,radioMeta});
   const categoryLabel=el('label','harbor-channel-category','Lighthouse channels');
   const categorySelect=el('select');
   Object.entries(experiences).forEach(([id,experience])=>{const option=el('option',null,experience.name);option.value=id;categorySelect.append(option)});
@@ -120,12 +123,14 @@ if(app){
   function showVisual(){
     audio.pause();dialog.scrollTop=0;setMode('visual');
     const experience=experiences[activeCategory];let saved=null;try{saved=JSON.parse(localStorage.getItem(`lighthouse-tv-${activeCategory}`)||'null')}catch{}
+    loungeCatalog.setName(experience.name);
     if(saved?.id&&/^[A-Za-z0-9_-]{11}$/.test(saved.id))loadTvChannel(saved);else{frame.src=`https://www.youtube-nocookie.com/embed/${experience.video}?rel=0`;tvChannelButtons.forEach(item=>item.setAttribute('aria-pressed','false'))}
     title.textContent=`${experience.name} Lighthouse · Watch`;
     intro.textContent='The Lighthouse opens into a larger theater. Choose play when you are ready, expand to full screen, or bring in a YouTube video.';
   }
   function showRadio(){
     const experience=experiences[activeCategory];dialog.scrollTop=0;frame.src='about:blank';setMode('radio');title.textContent=`${experience.name} Lighthouse · Radio`;
+    loungeCatalog.setName(experience.name);
     intro.textContent='Search thousands of internet stations, then listen without leaving your Lighthouse.';
     searchInput.placeholder=`Try ${experience.prompt} or a station name`;
     suggestions.replaceChildren(...experience.suggestions.map(term=>button(term,'',()=>{searchInput.value=term;searchStations(term)})));
@@ -134,6 +139,7 @@ if(app){
   }
   function showIHeart(){
     audio.pause();dialog.scrollTop=0;setMode('iheart');frame.title='Official iHeartRadio station widget';
+    loungeCatalog.setName(experiences[activeCategory].name);
     let station=iheartSelect.value;
     try{const saved=localStorage.getItem(`lighthouse-iheart-${activeCategory}`);if(saved&&toIHeartEmbed(saved)){station=saved;iheartCustomInput.value=saved;iheartStatus.textContent='Your station for this Lighthouse is ready. Press play in the official iHeart player.'}}catch{}
     frame.src=toIHeartEmbed(station)||station;
@@ -144,7 +150,7 @@ if(app){
   function mountSharedEntrances(){
     document.querySelectorAll('.yvette-phone-group,.tv-art,.harbor-mini-lighthouse,.site-lighthouse').forEach(tower=>{
       if(tower.dataset.sharedLounge)return;tower.dataset.sharedLounge='true';
-      const category=tower.querySelector('[data-category]')?.dataset.category||tower.closest('[data-destination]')?.dataset.destination||'social';
+      const category=tower.dataset.category||tower.querySelector('[data-category]')?.dataset.category||tower.closest('[data-destination]')?.dataset.destination||'social';
       const entrance=button('▶ TV & Radio Lounge','lighthouse-shared-entrance',()=>openLive(experiences[category]?category:'social','visual'));
       tower.after(entrance);
     });
