@@ -36,7 +36,10 @@
         nav { display: none; }
       }
       @media (prefers-reduced-motion: reduce) { .brand-video { display: none; } }
-    </style>
+    /* Compact identity with useful navigation at every width. */
+html,body{background:#071827}.shell{min-height:0}.brand{height:180px;background:url('https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-memorial-hero-poster.jpg') center 48%/cover}.brand-video{display:none}.brand-lockup{margin:0;width:min(540px,calc(100% - 32px))}.brand-mark{width:30px;height:30px}.brand-the{font-size:16px;gap:12px}.brand-title{font-size:clamp(32px,7vw,54px)}.brand-by{font-size:10px;letter-spacing:.14em;margin-top:6px;padding-top:6px}.brand-by br{display:none}nav{width:100%;border-radius:0;box-shadow:none;gap:12px;padding:8px}nav a{min-height:44px;font-size:14px;padding:10px 14px}nav a.primary{background:#edca8b;color:#071827}
+@media(max-width:700px){.shell{height:auto;min-height:0}.brand{height:150px}.brand-lockup{margin:0}.brand-title{font-size:38px}.brand-mark{width:25px;height:25px}.brand-the{font-size:14px}.brand-by{font-size:9px}nav{display:flex;gap:2px;padding:6px}nav a{font-size:12px;padding:10px 8px;min-height:44px}}
+@media(max-width:700px){nav{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:8px 12px}nav a{justify-content:center;min-height:44px;font-size:13px}.brand{height:130px}} </style>
   </head>
   <body>
     <header class="shell">
@@ -54,15 +57,9 @@
         </span>
       </a>
       <nav aria-label="Main navigation">
-        <a href="https://www.easylotstoragesolutions.com/?lighthouseHome=1" target="_top">Home</a>
-        <a class="primary" href="/#assistant">Ask Lighthouse</a>
-        <a href="/#what-easy-does">For You</a>
+        <a class="primary" href="/#what-easy-does">Explore the Mall</a>
         <a href="/copy-of-how-it-works">For Business</a>
-        <a href="/customer-portal?view=work">Work</a>
-        <a href="/find-storage">Storage &amp; Space</a>
-        <a href="/storage">Easy Lot Rentals</a>
-        <a href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-explore.html?mode=explore">Marketplace</a>
-        <a href="/#how-easy-works">How Lighthouse Works</a>
+        <a href="/#how-easy-works">How It Works</a>
         <a href="/customer-portal">Sign In</a>
       </nav>
     </header>
@@ -70,15 +67,15 @@
       const publicOrigin = 'https://www.easylotstoragesolutions.com';
       const referrerOrigin = (() => { try { return new URL(document.referrer).origin; } catch (error) { return ''; } })();
       const referrerHost = (() => { try { return new URL(referrerOrigin).hostname; } catch (error) { return ''; } })();
-      const parentOrigin = referrerOrigin === publicOrigin || referrerOrigin === 'https://easylotstoragesolutions.com' || /\.editor\.wix\.com$/.test(referrerHost) ? referrerOrigin : publicOrigin;
+      const parentOrigin = referrerOrigin === 'http://localhost:8847' || referrerOrigin === publicOrigin || referrerOrigin === 'https://easylotstoragesolutions.com' || /\.editor\.wix\.com$/.test(referrerHost) ? referrerOrigin : publicOrigin;
       document.addEventListener('click', event => {
         const link = event.target.closest('a[href]');
         if (!link) return;
         const href = link.getAttribute('href');
-        if (!href || !href.startsWith('/')) return;
+        if (!href || !href.startsWith('/#') || window.parent === window || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
         window.parent.postMessage({ type: 'easy-lot:navigate', href }, parentOrigin);
       });
     </script>
-  </body>
+  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-chrome-height.js?v=20260908-cleanup1"></script></body>
 </html>

@@ -21,24 +21,18 @@ const themes=el('div','harbor-themes');themes.setAttribute('role','group');theme
 ['day','sunset','night'].forEach(theme=>{const b=button(theme[0].toUpperCase()+theme.slice(1),'',()=>{prefs.theme=theme;app.dataset.theme=theme;save();updateTheme();});b.dataset.theme=theme;themes.append(b);});
 function updateTheme(){[...themes.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===prefs.theme)));}
 const motion=button('Pause scene','harbor-subtle',()=>{prefs.still=!prefs.still;app.classList.toggle('harbor-still',prefs.still);motion.textContent=prefs.still?'Animate scene':'Pause scene';motion.setAttribute('aria-pressed',String(prefs.still));save();});motion.textContent=prefs.still?'Animate scene':'Pause scene';motion.setAttribute('aria-pressed',String(prefs.still));
-const more=button('More at Lighthouse','harbor-subtle',()=>openMore());tools.append(themes,motion,more);header.append(home,tools);
+const more=button('More at Lighthouse','harbor-subtle',()=>openMore());const sceneOptions=el('details','harbor-scene-options');sceneOptions.append(el('summary',null,'Scene'),themes,motion);tools.append(sceneOptions);header.append(home,tools);
 const welcome=el('section','harbor-welcome');welcome.setAttribute('aria-labelledby','harbor-title');
 const heading=el('h1',null,'Your world. One Lighthouse.');heading.id='harbor-title';
-welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),heading,el('p','harbor-invitation','Where would you like to go?'));
+welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),heading,el('p','harbor-invitation','Shop, find work and space, create, and connect. Choose your next destination.'));
 const beacon=button('✦ Enter the Beacon','harbor-watch',()=>document.getElementById('beacon-quest')?.showModal());
 const meetYvette=button('Meet Yvette · AI in development','harbor-subtle',()=>openMore('lighthouse-title'));
-welcome.append(beacon,meetYvette);
+const explore=button('Explore the Mall ↓','harbor-explore',()=>{nav.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});nav.querySelector('.harbor-feature-enter')?.focus({preventScroll:true});});welcome.append(explore);beacon.textContent='Enter the Beacon · find a little inspiration';
 const introduction=el('section','harbor-introduction');
 introduction.setAttribute('aria-labelledby','harbor-introduction-title');
-const introductionTitle=el('h2',null,'One place for the many parts of life');introductionTitle.id='harbor-introduction-title';
-introduction.append(
-  el('p','harbor-eyebrow','Welcome to Lighthouse Mall'),
-  introductionTitle,
-  el('p',null,'Lighthouse is a growing community built to help people find what they need, share what they have, and discover what comes next.'),
-  el('p',null,'Shop, sell, find work, hire, discover storage and usable space, connect with businesses and skilled providers, enjoy music and community media, or ask for help when you are unsure where to begin.'),
-  el('p','harbor-introduction-promise','Every destination has its own purpose. Together, they form one welcoming world—with the Lighthouse guiding the way.')
-);
-const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');
+const introductionTitle=el('h2',null,'One place for the many parts of life');introductionTitle.id='harbor-introduction-title';introductionTitle.textContent='Where would you like to go?';
+introduction.append(el('p','harbor-eyebrow','Welcome to Lighthouse Mall'),introductionTitle,el('p',null,'Six destinations. Find what you need, share what you have, and discover what comes next.'));
+const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');nav.id='mall-destinations';
 const carousel=el('div','harbor-carousel-controls');carousel.setAttribute('aria-label','Move between Lighthouse destinations');
 const carouselPrevious=button('←','harbor-carousel-arrow',()=>moveCarousel(-1));carouselPrevious.setAttribute('aria-label','Previous Lighthouse');
 const carouselDots=el('div','harbor-carousel-dots');
@@ -64,7 +58,7 @@ function renderFeature(preview,s,feature){
   const photo=el('img');photo.src=feature.mode==='image'?feature.source:feature.poster;photo.alt=feature.title||s.name+' preview';photo.width=200;photo.height=112;
   preview.append(photo);
   if(feature.mode==='video'){
-    const video=el('video');video.controls=true;video.playsInline=true;video.preload='none';video.poster=feature.poster;video.src=feature.source;video.setAttribute('aria-label',feature.title||s.name+' featured video');
+    const video=el('video');video.controls=false;video.addEventListener('play',()=>video.controls=true);video.playsInline=true;video.preload='none';video.poster=feature.poster;video.src=feature.source;video.setAttribute('aria-label',feature.title||s.name+' featured video');
     if(feature.captions){video.crossOrigin='anonymous';const track=el('track');track.kind='captions';track.srclang='en';track.label='English';track.src=feature.captions;video.append(track);}
     video.addEventListener('play',()=>{document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('.harbor-feature-preview iframe').forEach(f=>f.src=f.src.replace('autoplay=1','autoplay=0'));});
     video.addEventListener('error',()=>{video.hidden=true;photo.hidden=false;});
@@ -80,7 +74,7 @@ for(const s of sections){
   const card=el('article','harbor-destination');card.dataset.destination=s.id;
   const preview=el('div','harbor-feature-preview');renderFeature(preview,s,featuredVideos[s.id]);
   const enter=button('','harbor-feature-enter',()=>go(s.id,true));enter.setAttribute('aria-label','Enter '+s.name);
-  const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,s.name),el('small',null,descriptors[s.id]));enter.append(cardText,el('span','harbor-destination-arrow','↗'));card.append(preview,enter);
+  const cardText=el('span','harbor-destination-text');cardText.append(el('strong',null,'Enter '+(s.id==='employment'?'Work':s.name)),el('small',null,({storage:'Find space or manage your rental',employment:'Find work or hire people',social:'Community and connections',marketplace:'Discover, buy, sell, and trade',music:'Watch, listen, and create'})[s.id]));enter.append(cardText,el('span','harbor-destination-arrow','↗'));card.append(preview,enter);
   card.addEventListener('pointerenter',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
   card.addEventListener('focus',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
   nav.append(card);cards.set(s.id,card);
@@ -102,22 +96,37 @@ for(const s of sections){
 }
 const footer=el('footer','harbor-footer');
 const favorites=el('div','harbor-favorites');favorites.setAttribute('aria-label','Your favorite destinations');
-const rememberLabel=el('label','harbor-remember');const remember=el('input');remember.type='checkbox';remember.checked=prefs.remember;remember.addEventListener('change',()=>{prefs.remember=remember.checked;prefs.last=current;save();});rememberLabel.append(remember,el('span',null,'Remember my place on this device'));
-footer.append(favorites,rememberLabel);
+const rememberLabel=el('label','harbor-remember');const remember=el('input');remember.type='checkbox';remember.checked=prefs.remember;remember.addEventListener('change',()=>{prefs.remember=remember.checked;prefs.last=current;save();});rememberLabel.append(remember,el('span',null,'Reopen my last destination on this device'));rememberLabel.title='When enabled, Lighthouse opens your last visited destination on this browser. You can turn this off at any time.';
+footer.append(rememberLabel);
 const story=el('section','harbor-story');story.setAttribute('aria-labelledby','harbor-story-title');
 const storyLead=el('div','harbor-story-lead');const storyTitle=el('h2',null,'A light for real life.');storyTitle.id='harbor-story-title';
 storyLead.append(el('p','harbor-eyebrow','What Lighthouse offers'),storyTitle,el('p',null,'Lighthouse Mall brings practical parts of everyday life into one connected community. The Marketplace has places for vehicles, equipment, household goods, business assets, free items, trades, wanted posts, handmade work, repairs, and reviewed auctions. Storage & Space helps people describe what they need and connect with a fitting space. Lighthouse Work brings workers, drivers, employers, and opportunities together. Business, service, creative, music, and community areas give people more ways to be discovered, create, and connect.'));
 const storyColumns=el('div','harbor-story-columns');
 const goal=el('article');goal.append(el('p','harbor-eyebrow','Our goal'),el('h3',null,'Make opportunity easier to find and understand.'),el('p',null,'We are building a place where people are treated like people—not listings, leads, or numbers. Information should be honest, private contact details should be protected, choices should be explained clearly, and unavailable or developing features should always say so.'),el('p',null,'Lighthouse connects people. It does not take a percentage of their work, sale, or opportunity. The platform is supported through clear subscription services, not hidden transaction fees.'));
 const future=el('article');future.append(el('p','harbor-eyebrow','Where we are heading'),el('h3',null,'One guide across every destination.'),el('p',null,'The future of Lighthouse is a connected place that can guide each visitor without taking away their control. Someone looking for work may also need transportation or storage. A business may need workers, equipment, space, and local services. A seller may meet a buyer through the Marketplace or a request on the Wanted Board.'),el('p',null,'Lighthouse AI is being developed to help people understand their choices, see why something is recommended, protect private information, and take a clear next step. The goal is not to replace human connection—it is to make that connection easier to find.'));
-storyColumns.append(goal,future);story.append(storyLead,storyColumns,el('p','harbor-story-close','One community. Many destinations. A light that always points you forward.'));
+storyColumns.append(goal,future);
+const fullStory=el('details','harbor-full-story');fullStory.id='lighthouse-vision';fullStory.append(el('summary',null,'About Lighthouse · our mission and vision'),storyColumns);
+const completeOverview=storyLead.lastElementChild.cloneNode(true);fullStory.append(completeOverview);
+storyLead.lastElementChild.textContent='Life does not fit into one category. Lighthouse brings people, opportunities, space, and creativity into one connected community.';
+const promises=el('ul','harbor-promises');['People first. Honest information and human connection.','Your choices stay yours. Private contact details stay protected.','Clear subscriptions. No percentage taken from your work or sale.'].forEach(text=>promises.append(el('li',null,text)));
+story.append(storyLead,promises,fullStory);
+const yvetteSection=el('section','harbor-yvette-preview');yvetteSection.append(el('p','harbor-eyebrow','Lighthouse AI · in development'),el('h2',null,'Meet Yvette, your future guide.'),el('p',null,'Yvette is being developed to help you understand your choices and find a useful next step. The destinations are here to explore while she grows.'),meetYvette);
+const discovery=el('div','harbor-discovery');discovery.append(beacon);
 const announcement=el('p','harbor-announcement');announcement.setAttribute('role','status');
 const moreDialog=el('dialog','harbor-more');moreDialog.setAttribute('aria-label','More at Lighthouse');
 const closeMore=button('Close ×','harbor-close',()=>moreDialog.close());moreDialog.append(closeMore,el('h2',null,'More at Lighthouse'));
 const info=el('div','harbor-more-content');moreDialog.append(info);
+const infoNav=el('nav','harbor-info-nav');infoNav.setAttribute('aria-label','About Lighthouse');
+[['How It Works','how-easy-works'],['For You','what-easy-does'],['Meet Yvette','lighthouse-title'],['AI status','assistant'],['For Business','for-business']].forEach(([label,target])=>infoNav.append(button(label,'harbor-subtle',()=>openMore(target))));moreDialog.insertBefore(infoNav,info);
 const selectedSources=new Set(Object.values(sourceIds));
 original.forEach(node=>{if(selectedSources.has(node.id)||node.tagName==='DIALOG')return;if(node.classList.contains('hero')){const journey=node.querySelector('#starting-journey');if(journey)info.append(journey);node.hidden=true;return;}info.append(node);});
-function openMore(target){moreDialog.showModal();if(target){const node=info.querySelector('#'+target);node?.scrollIntoView({block:'start'});}}
+function openMore(target='how-easy-works'){
+  const requested=info.querySelector('#'+CSS.escape(target));
+  const section=requested && [...info.children].find(node=>node===requested||node.contains(requested));
+  [...info.children].forEach(node=>node.hidden=section?node!==section:false);
+  moreDialog.querySelector('h2').textContent=target==='how-easy-works'?'How Lighthouse Works':target==='what-easy-does'?'Find your next step':'Meet Yvette · in development';
+  moreDialog.showModal();moreDialog.scrollTop=0;
+}
 moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.close();});
 function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe,.harbor-cinema iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
 function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
@@ -130,6 +139,8 @@ function go(id,user=false){
 }
 function openDestination(target){
   if(!target)return false;
+  if(target==='mall-destinations'||target==='what-easy-does'){go('home',true);(document.getElementById('lighthouse-mall-map')||nav).scrollIntoView({block:'start'});return true;}
+  if(target==='lighthouse-vision'){go('home',true);fullStory.open=true;fullStory.scrollIntoView({block:'start'});return true;}
   const id=Object.keys(sourceIds).find(key=>sourceIds[key]===target);
   if(id){go(id,true);return true;}
   if(info.querySelector('#'+CSS.escape(target))){document.getElementById('beacon-quest')?.close();openMore(target);return true;}
@@ -137,7 +148,7 @@ function openDestination(target){
 }
 document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"],a[href^="/#"]');if(!a)return;if(openDestination(a.getAttribute('href').replace(/^\/?#/,''))){event.preventDefault();event.stopImmediatePropagation();}},true);
 window.addEventListener('message',event=>{
-  const trusted=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
+  const trusted=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];if(location.hostname==='localhost')trusted.push(location.origin);
   if(event.source!==window.parent||!trusted.includes(event.origin)||event.data?.type!=='lighthouse:navigate')return;
   openDestination(String(event.data.section||''));
 });
@@ -146,8 +157,8 @@ const cinema=el('dialog','harbor-cinema');cinema.setAttribute('aria-label','Watc
 const cinemaTitle=el('h2',null,'Watch the Lighthouse');const cinemaClose=button('Close ×','harbor-close',()=>cinema.close());
 const film=el('video');film.controls=true;film.playsInline=true;film.preload='none';film.poster=new URL('./assets/lighthouse-memorial-hero-poster.jpg',import.meta.url).href;film.src=new URL('./assets/lighthouse-memorial-hero.mp4',import.meta.url).href;film.setAttribute('aria-label','Original Lighthouse coastal film');
 cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>pauseAll());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
-const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});welcome.append(watch);
-app.append(scene,header,welcome,introduction,nav,carousel,stage,story,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;updateCarousel();
+const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});discovery.append(watch);welcome.append(discovery);
+app.append(scene,header,welcome,favorites,introduction,nav,carousel,stage,story,yvetteSection,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;updateCarousel();
 const filmCollection=root.querySelector('#lighthouse-video-studio .channel-2040');if(filmCollection){filmCollection.classList.add('harbor-film-collection');cinema.append(filmCollection);}
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
@@ -156,7 +167,9 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-void import('./lighthouse-live.mjs?v=20260908-5').catch(()=>{});
+await import('./lighthouse-live.mjs?v=20260908-cleanup1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-map1');
+mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
 // media intact when the bridge or CMS is unavailable (including standalone previews).

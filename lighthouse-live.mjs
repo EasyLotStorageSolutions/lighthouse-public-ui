@@ -1,3 +1,5 @@
+let centerPlayer;
+export function openCenterPlayer(host,onClose){centerPlayer?.(host,onClose);}
 const app=document.querySelector('.harbor-app');
 if(app){
   const experiences={
@@ -89,8 +91,20 @@ if(app){
   const iheartCustomPanel=disclosure('Use a different iHeart station',iheartCustom);
   dialog.append(close,eyebrow,title,intro,modes,media,tvGuide,tvControls,tvCustom,tvStatus,localControls,radioSearch,status,results,iheartControls,iheartCustomPanel,iheartStatus);
   app.append(dialog);
+  const categoryLabel=el('label','harbor-channel-category','Lighthouse channels');
+  const categorySelect=el('select');
+  Object.entries(experiences).forEach(([id,experience])=>{const option=el('option',null,experience.name);option.value=id;categorySelect.append(option)});
+  categoryLabel.append(categorySelect);modes.before(categoryLabel);
+  categorySelect.addEventListener('change',()=>{audio.pause();activeCategory=categorySelect.value;dialog.dataset.mode==='radio'?showRadio():dialog.dataset.mode==='iheart'?showIHeart():showVisual()});
+  let returnToMap=null;
+  centerPlayer=(host,onClose)=>{
+    if(dialog.open)dialog.close();
+    host.append(dialog);dialog.classList.add('harbor-center-player');close.textContent='← Home';returnToMap=onClose;
+    activeCategory='music';categorySelect.value=activeCategory;dialog.show();showVisual();close.focus({preventScroll:true});
+  };
 
   function setMode(mode){
+    if(dialog.classList.contains('harbor-center-player'))requestAnimationFrame(()=>dialog.scrollIntoView({block:'start',behavior:'instant'}));
     const radio=mode==='radio',iheart=mode==='iheart',visual=mode==='visual';visualButton.setAttribute('aria-pressed',String(visual));radioButton.setAttribute('aria-pressed',String(radio));iheartButton.setAttribute('aria-pressed',String(iheart));
     dialog.dataset.mode=mode;frame.hidden=radio;radioPanel.hidden=!radio;tvGuide.hidden=!visual;tvControls.hidden=!visual;tvCustom.hidden=!visual;tvStatus.hidden=!visual;localControls.hidden=!radio;radioSearch.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustomPanel.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
   }
@@ -123,7 +137,7 @@ if(app){
     title.textContent=`${experiences[activeCategory].name} Lighthouse · iHeartRadio`;
     intro.textContent='Choose a quick station or bring in any official iHeart station. The player stays inside this Lighthouse and does not autoplay.';
   }
-  function openLive(category,mode){activeCategory=category;dialog.showModal();mode==='radio'?showRadio():showVisual();}
+  function openLive(category,mode){activeCategory=category;categorySelect.value=category;dialog.showModal();mode==='radio'?showRadio():showVisual();}
   iheartSelect.addEventListener('change',()=>{if(iheartButton.getAttribute('aria-pressed')==='true'){frame.src=iheartSelect.value}});
   function toIHeartEmbed(value){
     try{const url=new URL(value);if(!['iheart.com','www.iheart.com'].includes(url.hostname.toLowerCase()))return null;const match=url.pathname.match(/^\/live\/([a-z0-9-]+)\/?$/i);if(!match)return null;return `https://www.iheart.com/live/${match[1]}/?embed=true&theme=dark`}catch{return null}
@@ -168,6 +182,7 @@ if(app){
   }
   async function findLocalStations(forcePrompt){
     if(!forcePrompt){try{const saved=JSON.parse(localStorage.getItem('lighthouse-radio-region')||'null');if(saved?.state||saved?.city){await searchRegion(saved);return}}catch{}}
+    if(!forcePrompt)return;
     if(!navigator.geolocation){localStatus.textContent='Location is unavailable in this browser. Search by city, state, or station below.';return}
     localButton.disabled=true;localStatus.textContent='Waiting for location permission…';
     navigator.geolocation.getCurrentPosition(async position=>{
@@ -188,7 +203,7 @@ if(app){
     renderStations(await fetchStations(params),'No playable HTTPS stations were found. Try a different city, state, name, or style.');
   }
   searchForm.addEventListener('submit',event=>{event.preventDefault();const query=searchInput.value.trim();if(query.length<2){status.textContent='Enter at least two letters to search for a station.';return}searchStations(query)});
-  dialog.addEventListener('close',()=>{audio.pause();frame.src='about:blank'});
+  dialog.addEventListener('close',()=>{audio.pause();frame.src='about:blank';if(returnToMap){const restore=returnToMap;returnToMap=null;dialog.classList.remove('harbor-center-player');app.append(dialog);close.textContent='Close ×';restore();}});
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
 
   app.querySelectorAll('.harbor-destination').forEach(card=>{
@@ -203,7 +218,7 @@ if(app){
     const guideVideo=preview.querySelector('video');
     if(guideVideo){guideVideo.addEventListener('play',()=>{guideButton.textContent='Pause';guideButton.setAttribute('aria-pressed','true')});guideVideo.addEventListener('pause',()=>{guideButton.textContent=experience.guide;guideButton.setAttribute('aria-pressed','false')});guideVideo.addEventListener('ended',()=>{guideButton.textContent=experience.guide;guideButton.setAttribute('aria-pressed','false')})}
     controls.append(guideButton,button(experience.tv,'',()=>openLive(category,'visual')),button(experience.radio,'',()=>openLive(category,'radio')));
-    lantern.append(controls);card.classList.add('has-mini-lighthouse');
+    const options=el('details','harbor-media-options');options.append(el('summary',null,'Watch / Listen'),controls);card.append(options);card.classList.add('has-mini-lighthouse');
   });
 }
 
@@ -224,8 +239,8 @@ if(app){
     const image=make('img','harbor-mini-lighthouse-art');image.src=art;image.alt='';image.loading='lazy';empty.append(make('span',null,'Watch Locksmith TV'));preview.append(empty);const lantern=make('div','harbor-mini-lighthouse');lantern.append(image,preview);
     const tv=make('button','locksmith-main-tv','Locksmith TV');tv.type='button';
     const enter=make('a','harbor-feature-enter');enter.href=store;enter.target='_top';enter.setAttribute('aria-label','Enter Locksmith');
-    const label=make('span','harbor-destination-text');label.append(make('strong',null,'Locksmith'),make('small',null,'Locksmith store'));enter.append(label,make('span','harbor-destination-arrow','↗'));
-    const controls=make('div','harbor-mini-controls locksmith-media-controls');const radio=make('a','locksmith-main-tv','Lounge Radio');radio.href='https://www.easylotstoragesolutions.com/customer-portal?view=locksmith&locksmithScreen=lounge';radio.target='_top';controls.append(tv,radio);lantern.append(controls);card.append(lantern,enter);nav.append(card);nav.classList.add('has-locksmith');
+    const label=make('span','harbor-destination-text');label.append(make('strong',null,'Enter Locksmith'),make('small',null,'Explore the Locksmith store'));enter.append(label,make('span','harbor-destination-arrow','↗'));
+    const controls=make('div','harbor-mini-controls locksmith-media-controls');const radio=make('a','locksmith-main-tv','Lounge Radio');radio.href='https://www.easylotstoragesolutions.com/customer-portal?view=locksmith&locksmithScreen=lounge';radio.target='_top';controls.append(tv,radio);const options=make('details','harbor-media-options');options.append(make('summary',null,'Watch / Listen'),controls);card.append(lantern,enter,options);nav.append(card);nav.classList.add('has-locksmith');
     const modal=make('dialog','locksmith-main-dialog');modal.setAttribute('aria-labelledby','locksmith-main-tv-title');
     const close=make('button',null,'Close ×');close.type='button';close.addEventListener('click',()=>modal.close());
     const title=make('h2',null,'Lighthouse Locksmith TV');title.id='locksmith-main-tv-title';
