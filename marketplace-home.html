@@ -2548,7 +2548,7 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-21',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260908-nav1',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
