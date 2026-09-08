@@ -124,3 +124,52 @@
   .harbor-app[data-view=home] .harbor-header-tools>.harbor-subtle{width:100%;min-height:34px;padding:7px 8px;border:1px solid rgba(212,232,245,.22);border-radius:18px;background:rgba(6,23,40,.52);font-size:10px;text-align:center}
   .harbor-app[data-view=home] .harbor-welcome{padding-top:12px}
 }
+
+/* Phone Lighthouse Harbor: only the lighthouse rail moves; the page stays centered. */
+@media(max-width:700px){
+  html,body{width:100%;max-width:100%;overflow-x:clip!important}
+  .harbor-app{width:100%;max-width:100%;overflow-x:clip}
+  .harbor-welcome,.harbor-introduction,.harbor-story,.harbor-footer{width:calc(100% - 24px);margin-left:auto;margin-right:auto}
+  .harbor-app[data-view=home] .harbor-nav,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith{
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+    width:100%;
+    max-width:100%;
+    padding:92px max(20px,calc((100% - 272px)/2)) 20px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:calc((100% - 272px)/2);
+    scrollbar-width:none;
+    touch-action:pan-x;
+    contain:layout paint;
+  }
+  .harbor-app[data-view=home] .harbor-nav::-webkit-scrollbar{display:none}
+  .harbor-app[data-view=home] .harbor-destination,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith .harbor-destination:last-child,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even){
+    position:relative;
+    inset:auto;
+    flex:0 0 272px;
+    display:block;
+    width:272px;
+    max-width:272px;
+    margin:0;
+    opacity:.68;
+    transform:scale(.9);
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    transition:opacity .28s ease,transform .28s ease,filter .28s ease;
+  }
+  .harbor-app[data-view=home] .harbor-destination.is-centered{opacity:1;transform:scale(1);filter:drop-shadow(0 18px 26px rgba(0,0,0,.46))}
+  .harbor-app[data-view=home] .harbor-destination:hover,
+  .harbor-app[data-view=home] .harbor-destination:focus-within,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even):hover,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even):focus-within{opacity:1;transform:scale(1)}
+}
+.harbor-carousel-controls{display:none}
+@media(max-width:700px){.harbor-carousel-controls{position:relative;z-index:3;display:grid;grid-template-columns:46px 1fr 46px;gap:12px;align-items:center;width:min(310px,calc(100% - 32px));margin:0 auto 26px}.harbor-carousel-arrow{width:46px;height:46px;border:1px solid rgba(190,235,252,.48);border-radius:50%;background:rgba(7,35,57,.86);color:#fff3da;font-size:21px;box-shadow:0 10px 25px rgba(0,0,0,.24)}.harbor-carousel-arrow:disabled{opacity:.3}.harbor-carousel-dots{display:flex;justify-content:center;gap:8px}.harbor-carousel-dots button{width:9px;height:9px;padding:0;border:1px solid rgba(207,238,250,.65);border-radius:50%;background:transparent}.harbor-carousel-dots button.is-active{background:#f1d18f;box-shadow:0 0 12px rgba(241,209,143,.75)}.harbor-carousel-status{position:absolute;left:0;right:0;top:52px;margin:0;color:#cce2ef;text-align:center;font:700 10px/1.3 Arial,sans-serif}}
