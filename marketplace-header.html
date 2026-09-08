@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <base href="https://www.easylotstoragesolutions.com/" target="_top" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" />
     <style>
 *{box-sizing:border-box}html,body{margin:0;background:#071827;color:#fff;font-family:Arial,sans-serif;overflow:hidden}
 .shell{position:relative;width:min(1120px,100%);margin:auto;padding:76px 28px 24px}
@@ -22,6 +23,12 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
 .brand-title{font-size:clamp(34px,5vw,58px)}.brand-mark{width:30px;height:30px}.brand-the:before,.brand-the:after{background:#fff9}
 .motion-toggle{top:88px;bottom:auto;right:max(40px,calc(50% - 408px))}
 @media(max-width:700px){.brand{border-radius:12px}.brand-lockup{bottom:12px;width:calc(100% - 32px);margin:0}.brand-title{font-size:clamp(26px,8vw,38px);margin:3px 0 4px}.brand-the{font-size:12px}.brand-by{font-size:8px;padding-top:5px;letter-spacing:.11em}.motion-toggle{top:80px;right:24px;min-width:86px;min-height:36px;padding:6px 9px}}
+.brand::after{inset:0;background:radial-gradient(ellipse at center,rgba(3,18,31,.5),rgba(3,18,31,.12) 75%)}
+.brand-lockup{top:50%;bottom:auto;transform:translate(-50%,-50%);width:calc(100% - 48px);text-shadow:0 3px 12px #03121f,0 1px 3px #03121f}
+.brand-mark{display:none}.brand-the{width:min(420px,70%);font:400 34px/1.1 'Niconne','Brush Script MT',cursive;letter-spacing:0}
+.brand-title{font:400 clamp(64px,9vw,108px)/1.05 'Niconne','Brush Script MT',cursive;letter-spacing:0;margin:3px 0 12px}
+.brand-by{font:400 27px/1.25 'Niconne','Brush Script MT',cursive;letter-spacing:0;padding-top:10px;border-color:#fff9}
+@media(max-width:700px){.brand-lockup{top:54%;bottom:auto;width:calc(100% - 28px)}.brand-the{font-size:23px;width:66%}.brand-title{font-size:clamp(40px,13.5vw,78px);margin:0 0 6px}.brand-by{font-size:clamp(16px,4.8vw,25px);padding-top:6px}}
 </style>
   </head>
   <body>
@@ -34,9 +41,9 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
           <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Lighthouse">
             <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M43 31h14l9 55H34l9-55Z"/><path d="M39 31h22M42 18h16l4 13H38l4-13Z"/><path d="M47 10h6v8M29 86h42M17 44l13-6M83 44l-13-6M15 60h14M85 60H71"/></g>
           </svg>
-          <span class="brand-the">THE</span>
-          <span class="brand-title">LIGHTHOUSE</span>
-          <span class="brand-by">BY EASY LOT<br />STORAGE SOLUTIONS</span>
+          <span class="brand-the">The</span>
+          <span class="brand-title">Lighthouse</span>
+          <span class="brand-by">by Easy Lot Storage Solutions</span>
         </span>
       </a>
       <nav aria-label="Main navigation">
