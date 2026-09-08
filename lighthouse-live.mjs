@@ -213,7 +213,7 @@ if(app){
 {
   const nav=document.querySelector('.harbor-nav');
   if(nav&&!nav.querySelector('[data-destination="locksmith"]')){
-    const store='https://www.easylotstoragesolutions.com/lighthouse-locksmith?release=20260908-launch3';
+    const store='https://www.easylotstoragesolutions.com/lighthouse-locksmith?release=20260908-launch4';
     const art=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;
     const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n};
     const style=make('style');style.textContent=
