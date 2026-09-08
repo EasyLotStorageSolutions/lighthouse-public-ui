@@ -17,3 +17,11 @@ test('storage public scripts parse',()=>{
   assert.ok(scripts.length);
   for(const script of scripts)new Function(script);
 });
+
+test('owner-only customer exceptions are visible, expiring and auditable',()=>{
+  assert.match(source,/OWNER ONLY · CUSTOMER EXCEPTIONS/);
+  assert.match(source,/PAYMENT_GRACE/);
+  assert.match(source,/TEMPORARY_ACCESS_HOURS/);
+  assert.match(source,/my-easy-lot:owner-exception-set/);
+  assert.match(source,/cannot bypass identity, ownership, final agreement, verified payment for access/);
+});
