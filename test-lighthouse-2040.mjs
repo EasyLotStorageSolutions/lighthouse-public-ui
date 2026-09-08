@@ -63,6 +63,13 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.match(live, /youtube-nocookie\.com\/embed/);
   assert.match(styles, /\.harbor-live\[data-mode=visual\]/);
   assert.match(live, /Browse more stations on iHeart/);
+  for (const channel of ['ABC News Live', 'NBC News NOW', 'CBS News 24\/7', 'Bloomberg TV', 'NASA TV']) assert.match(live, new RegExp(channel));
+  assert.match(live, /FIND STATIONS NEAR ME/);
+  assert.match(live, /navigator\.geolocation\.getCurrentPosition/);
+  assert.match(live, /reverse-geocode-client/);
+  assert.match(live, /lighthouse-radio-region/);
+  assert.match(live, /countrycode:'US',state:/);
+  assert.match(live, /Exact coordinates go to the location lookup service once and are not saved by Lighthouse/);
 });
 
 test('the visible site header uses the dark Lighthouse navigation and a dependable Home link', () => {

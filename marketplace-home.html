@@ -776,7 +776,7 @@
       @media(max-width:600px){.assistant-coming-soon{padding:48px 0 28px}.ai-coming-soon-card{padding-top:4px}.ai-coming-soon-card p{font-size:16px}}
     </style>
   
-    <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-nav2035-v3" />
+    <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-nav2035-v4" />
 </head>
   <body>
     <main>
@@ -2543,7 +2543,7 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-17',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-18',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
