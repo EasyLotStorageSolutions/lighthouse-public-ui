@@ -1,5 +1,5 @@
-import {sections} from './lighthouse-guide-data.mjs';
-import {youtubeId} from './lighthouse-guide-data.mjs';
+import {sections} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
+import {youtubeId} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
 import {featuredVideos} from './lighthouse-featured-videos.mjs?v=1';
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
@@ -167,8 +167,8 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-await import('./lighthouse-live.mjs?v=20260908-lounge1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-lounge1');
+await import('./lighthouse-live.mjs?v=20260908-harbor-names1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-harbor-names1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original

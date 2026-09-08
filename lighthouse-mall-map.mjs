@@ -1,11 +1,11 @@
-import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-lounge1';
+import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-harbor-names1';
 const districts=[
- {id:'marketplace',name:'Marketplace',hint:'Discover, buy, sell & trade',x:21,y:17,angle:-145},
- {id:'employment',name:'Work',hint:'Find work or hire people',x:79,y:17,angle:-35},
- {id:'storage',name:'Storage',hint:'Space for what matters',x:16,y:50,angle:180},
- {id:'social',name:'Community',hint:'Explore Lighthouse World',x:84,y:50,angle:0},
- {id:'music',name:'Music',hint:'Watch, listen & create',x:24,y:83,angle:145},
- {id:'locksmith',name:'Services',hint:'Visit Lighthouse Locksmith',x:76,y:83,angle:35}
+ {id:'marketplace',name:'Market Harbor',hint:'Discover, buy, sell & trade',x:21,y:17,angle:-145},
+ {id:'employment',name:'Work Pier',hint:'Find work or hire people',x:79,y:17,angle:-35},
+ {id:'storage',name:'Storage Cove',hint:'Space for what matters',x:16,y:50,angle:180},
+ {id:'social',name:'Lighthouse World',hint:'Community & connections',x:84,y:50,angle:0},
+ {id:'music',name:'Sound Harbor',hint:'Music, video & studio',x:24,y:83,angle:145},
+ {id:'locksmith',name:'Locksmith Point',hint:'Lighthouse Locksmith',x:76,y:83,angle:35}
 ];
 const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls||'';if(text)n.textContent=text;return n;};
 const btn=(text,cls,fn)=>{const n=make('button',cls,text);n.type='button';n.addEventListener('click',fn);return n;};
@@ -25,7 +25,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  const close=btn('← All districts','mall-close',()=>showMap());const panelTitle=make('h3');panelTitle.tabIndex=-1;const panelHint=make('p','mall-panel-hint');panel.append(close,panelTitle,panelHint,nav);
  const directory=make('section','mall-directory');directory.hidden=true;directory.setAttribute('aria-label','Mall directory');
  const searchLabel=make('label','mall-search-label','Find a destination');const search=make('input');search.type='search';search.placeholder='Search stores, work, storage…';searchLabel.append(search);const results=make('div','mall-directory-results');const resultStatus=make('p','mall-result-status');resultStatus.setAttribute('role','status');directory.append(searchLabel,resultStatus,results);let favoritesOnly=false;
- function renderDirectory(){const q=search.value.trim().toLowerCase();const matches=districts.filter(d=>(!favoritesOnly||prefs.favorites.includes(d.id))&&`${d.name} ${d.hint}`.toLowerCase().includes(q));results.replaceChildren();for(const d of matches){const row=btn('','mall-directory-row',()=>select(d));row.append(make('strong',null,d.name),make('span',null,d.hint),make('span','mall-row-arrow','→'));results.append(row);}resultStatus.textContent=matches.length?`${matches.length} ${matches.length===1?'district':'districts'}`:favoritesOnly?'No saved destinations yet. Enter a destination and choose Add to favorites.':'No matching destinations. Try another name.';}
+ function renderDirectory(){const q=search.value.trim().toLowerCase();const matches=districts.filter(d=>(!favoritesOnly||prefs.favorites.includes(d.id))&&`${d.id} ${d.name} ${d.hint}`.toLowerCase().includes(q));results.replaceChildren();for(const d of matches){const row=btn('','mall-directory-row',()=>select(d));row.append(make('strong',null,d.name),make('span',null,d.hint),make('span','mall-row-arrow','→'));results.append(row);}resultStatus.textContent=matches.length?`${matches.length} ${matches.length===1?'district':'districts'}`:favoritesOnly?'No saved destinations yet. Enter a destination and choose Add to favorites.':'No matching destinations. Try another name.';}
  search.addEventListener('input',renderDirectory);
  function tabState(active){[mapButton,directoryButton,favoriteButton].forEach(b=>{b.classList.toggle('is-active',b===active);b.setAttribute('aria-pressed',String(b===active));});}
  function showMap(focus=false){const player=theater.querySelector('dialog[open]');if(player)player.close();directory.hidden=true;canvas.hidden=false;panel.hidden=true;world.classList.remove('has-selection','show-directory');nodes.forEach(n=>n.setAttribute('aria-expanded','false'));tabState(mapButton);if(focus)nodes.values().next().value.focus();}

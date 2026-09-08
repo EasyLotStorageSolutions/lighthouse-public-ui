@@ -1,4 +1,4 @@
-import {sections} from './lighthouse-guide-data.mjs';
+import {sections} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
 
 const media = new URL('./assets/lighthouse-guides/', import.meta.url);
 const settings = {
@@ -127,4 +127,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-lounge1');
+await import('./lighthouse-harbor.mjs?v=20260908-harbor-names1');
