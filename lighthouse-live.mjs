@@ -236,3 +236,6 @@ if(app){
     modal.addEventListener('click',event=>{if(event.target===modal)modal.close()});
   }
 }
+
+// Keep the Locksmith preview readable under the home page's shared typography.
+{const style=document.createElement('style');style.textContent='.locksmith-main-dialog h2,.locksmith-main-dialog p,.locksmith-main-dialog strong{color:#fff0d2}.harbor-destination[data-destination=locksmith] .harbor-feature-enter{text-decoration:none}.harbor-destination[data-destination=locksmith] .harbor-destination-text small{display:block;margin-top:4px;color:#dfebf3;font:11px Arial,sans-serif}';document.head.append(style);}
