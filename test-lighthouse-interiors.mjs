@@ -13,8 +13,11 @@ const pages = [
 
 test('every Lighthouse interior loads the shared visual shell and dependable Home control', async () => {
   const shell = await readFile(new URL('./lighthouse-interior-2040.js', import.meta.url), 'utf8');
+  const theme = await readFile(new URL('./lighthouse-interior-2040.css', import.meta.url), 'utf8');
   assert.doesNotThrow(() => new Function(shell));
   assert.match(shell, /easylotstoragesolutions\.com\//);
+  assert.match(theme, /padding-bottom:max\(140px/);
+  assert.match(theme, /safe-area-inset-bottom/);
   for (const page of pages) {
     const source = await readFile(new URL(`./${page}`, import.meta.url), 'utf8');
     assert.match(source, /https:\/\/easylotstoragesolutions\.github\.io\/lighthouse-public-ui\/lighthouse-interior-2040\.css/, `${page} is missing the shared theme`);
