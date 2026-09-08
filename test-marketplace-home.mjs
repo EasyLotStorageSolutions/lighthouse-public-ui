@@ -19,6 +19,13 @@ test('membership details stay available without crowding the homepage', () => {
   assert.match(source, /href="\/customer-portal">OPEN MY LIGHTHOUSE/);
 });
 
+test('mobile startup shows a lightweight Lighthouse entrance instead of a hidden dark page', () => {
+  assert.match(source, /id="lighthouse-boot"/);
+  assert.match(source, /lighthouse-harbor-mobile\.webp/);
+  assert.doesNotMatch(source, /html\.lighthouse-loading body\{visibility:hidden/);
+  assert.match(source, /Opening your world/);
+});
+
 test('the Beacon and Watch experiences are present on the homepage', () => {
   assert.match(source, /id="beacon-quest"/);
   for (const mood of ['calm', 'curious', 'ready']) assert.match(source, new RegExp(`data-beacon-mood="${mood}"`));

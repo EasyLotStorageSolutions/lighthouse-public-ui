@@ -107,8 +107,10 @@ const filmCollection=root.querySelector('#lighthouse-video-studio .channel-2040'
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
 if(new URLSearchParams(location.search).has('easyStart'))openMore();
-await import('./lighthouse-embed-height.mjs?v=1');
-await import('./lighthouse-live.mjs?v=20260907-5');
+// The first screen is complete at this point. Load resizing and live media in the
+// background so a slow phone never waits on below-the-fold features.
+void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
+void import('./lighthouse-live.mjs?v=20260907-5').catch(()=>{});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
 // media intact when the bridge or CMS is unavailable (including standalone previews).

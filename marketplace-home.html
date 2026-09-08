@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <style>
-      html.lighthouse-loading,html.lighthouse-loading body{background:#071827!important}
-      html.lighthouse-loading body{visibility:hidden!important}
-      html.lighthouse-loading::before{content:'The Lighthouse';position:fixed;inset:0;display:grid;place-items:center;color:#edca8b;background:#071827;font:italic 36px Georgia,serif;z-index:2147483646}
-      html.lighthouse-load-error::before{display:none}
-      #lighthouse-load-status{position:fixed;inset:0;z-index:2147483647;display:grid;place-content:center;gap:20px;padding:32px;text-align:center;background:#071827;color:#f4f1e8;font:18px/1.5 Arial,sans-serif;visibility:visible}
+      html.lighthouse-loading,html.lighthouse-loading body{background:#d9e9f2!important}
+      html.lighthouse-loading body>:not(#lighthouse-boot):not(script){visibility:hidden!important}
+      #lighthouse-boot{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;overflow:hidden;background:linear-gradient(180deg,#c9e2ef 0 55%,#7da3b5 56%,#173c57 100%);color:#0b304b;text-align:center;visibility:visible;transition:opacity .22s ease}
+      #lighthouse-boot::before{content:'';position:absolute;left:50%;bottom:19%;width:clamp(58px,16vw,94px);height:43%;transform:translateX(-50%);background:linear-gradient(90deg,#d6dde0,#fff 48%,#aebec5);clip-path:polygon(38% 0,62% 0,78% 100%,22% 100%);filter:drop-shadow(0 15px 14px rgba(5,35,54,.28))}
+      #lighthouse-boot::after{content:'';position:absolute;left:50%;bottom:58%;width:clamp(95px,26vw,148px);height:50px;transform:translateX(-50%);border-radius:50% 50% 8px 8px;background:linear-gradient(#153c58 0 24%,#ffe3a0 25% 72%,#153c58 73%);box-shadow:0 0 38px 13px rgba(255,224,143,.78)}
+      .lighthouse-boot-copy{position:relative;z-index:2;margin-top:-43svh;padding:24px}.lighthouse-boot-copy strong{display:block;font:italic clamp(34px,9vw,58px)/1 Georgia,serif;color:#103b58}.lighthouse-boot-copy span{display:block;margin-top:13px;font:700 10px/1.4 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase}.lighthouse-boot-line{width:126px;height:2px;margin:18px auto 0;overflow:hidden;background:#6b91a8}.lighthouse-boot-line::after{content:'';display:block;width:48%;height:100%;background:#f1c66f;animation:lighthouse-arrive 1.1s ease-in-out infinite alternate}@keyframes lighthouse-arrive{to{transform:translateX(110%)}}
+      html:not(.lighthouse-loading) #lighthouse-boot{opacity:0;pointer-events:none}
+      html.lighthouse-load-error #lighthouse-boot{display:none}
+      #lighthouse-load-status{position:fixed;inset:0;z-index:2147483647;display:grid;place-content:center;gap:20px;padding:32px;text-align:center;background:#d9e9f2;color:#0b304b;font:18px/1.5 Arial,sans-serif;visibility:visible}
       #lighthouse-load-status button{padding:14px 24px;background:#edca8b;color:#071827;border:0;border-radius:8px;font:inherit;cursor:pointer}
     </style>
     <script>
@@ -15,7 +19,7 @@
       window.lighthouseStylesReady=Promise.all([
         'lighthouse-category-spacing.css?v=20260907-1',
         'lighthouse-category-phones.css?v=20260907-6',
-        'lighthouse-harbor.css?v=20260907-3'
+        'lighthouse-harbor.css?v=20260907-4'
       ].map(file=>new Promise((resolve,reject)=>{
         const link=document.createElement('link');link.rel='stylesheet';
         link.href=new URL(file,location.href).href;
@@ -25,6 +29,7 @@
       window.lighthouseStylesReady.catch(()=>{});
     </script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preload" as="image" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-harbor-mobile.webp" fetchpriority="high" />
     <base href="https://www.easylotstoragesolutions.com/" target="_top" />
     <title>The Lighthouse — AI Help, Projects &amp; Community Video</title>
     <style>
@@ -779,6 +784,7 @@
     <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-nav2035-v4" />
 </head>
   <body>
+    <div id="lighthouse-boot" role="status" aria-live="polite"><div class="lighthouse-boot-copy"><strong>The Lighthouse</strong><span>Opening your world</span><div class="lighthouse-boot-line" aria-hidden="true"></div></div></div>
     <main>
       <section class="hero">
         <div class="container">
@@ -2543,12 +2549,13 @@
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-19',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-20',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})
       ]);
       document.documentElement.classList.remove('lighthouse-loading');
+      setTimeout(()=>document.getElementById('lighthouse-boot')?.remove(),260);
     } catch(error) {
       document.documentElement.classList.add('lighthouse-load-error');
       const status=document.createElement('section');status.id='lighthouse-load-status';status.setAttribute('role','alert');
