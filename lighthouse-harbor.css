@@ -1,4 +1,6 @@
 /* Lighthouse Harbor: custom artwork, persistent destinations, architectural video viewers. */
+.harbor-app .lighthouse-viewer .yvette-phone .yvette-legacy{height:100%;max-height:100%;overflow:auto;overscroll-behavior:contain}
+.harbor-app .work-phone .work-viewport{height:calc(100% - 190px)}
 html.harbor-ready,html.harbor-ready body{overflow:auto;background:#071827;color:#f8f1e5}
 .harbor-ready body:before,.harbor-ready body:after{display:none}.harbor-ready body>main{max-height:none;overflow:visible}.harbor-ready [hidden]{display:none!important}
 .harbor-app{--gold:#edca8b;--beam-angle:0deg;position:relative;isolation:isolate;min-height:100svh;background:#0b233a;color:#f4f4f0;display:flex;flex-direction:column;font-family:Arial,sans-serif;overflow:clip}
