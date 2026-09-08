@@ -7,7 +7,7 @@ if (old) {
   const box=document.createElement('div');box.className='card owner-channel';
   box.innerHTML=`<div class="eyebrow">YOUR HOMEPAGE · YOUR STORIES</div><h2>Feature something at Lighthouse</h2><p>Choose one destination and show visitors what makes it worth exploring. Drafts stay private until you publish.</p>
   <form class="stack" id="featuredMediaForm">
-  <label>Destination<select name="category"><option value="storage">Storage</option><option value="employment">Employment</option><option value="social">Lighthouse World</option><option value="marketplace">Marketplace</option><option value="music">Music</option></select></label>
+  <label>Category<select name="category"><option value="storage">Storage &amp; Space</option><option value="employment">Jobs &amp; Hiring</option><option value="social">Community &amp; Social</option><option value="marketplace">Marketplace</option><option value="music">Creative Studio</option></select></label>
   <label>What should visitors see?<select name="mode"><option value="default">Original Lighthouse video</option><option value="youtube">YouTube video</option><option value="video">Video from Wix Media</option><option value="image">Image only</option></select></label>
   <div data-custom class="stack" hidden><label>Media link<input name="source" type="url" maxlength="2000" placeholder="https://www.youtube.com/watch?v=…"></label>
   <p class="tiny">For your own file, upload it in Wix Media Manager and paste its public video or image URL here. Direct file upload inside this panel is not yet available.</p>

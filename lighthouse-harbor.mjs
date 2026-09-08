@@ -1,7 +1,7 @@
-import {sections} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
-import {youtubeId} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
+import {sections} from './lighthouse-guide-data.mjs?v=20260908-public-names1';
+import {youtubeId} from './lighthouse-guide-data.mjs?v=20260908-public-names1';
 import {featuredVideos} from './lighthouse-featured-videos.mjs?v=1';
-import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=20260908-recovery1';
+import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=20260908-public-names1';
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
 const descriptors={storage:'Space for your next chapter',employment:'Opportunity starts with people',social:'A place to belong',marketplace:'Discover something unexpected',music:'Make room for your imagination'};
@@ -26,13 +26,13 @@ const more=button('More at Lighthouse','harbor-subtle',()=>openMore());const sce
 const welcome=el('section','harbor-welcome');welcome.setAttribute('aria-labelledby','harbor-title');
 const heading=el('h1',null,'Your world. One Lighthouse.');heading.id='harbor-title';
 welcome.append(el('p','harbor-eyebrow','A place for everything that moves you'),heading,el('p','harbor-invitation','Shop, find work and space, create, and connect. Choose your next destination.'));
-const beacon=button('✦ Enter the Beacon','harbor-watch',()=>document.getElementById('beacon-quest')?.showModal());
+const beacon=button('✦ Quick Help & Inspiration','harbor-watch',()=>document.getElementById('beacon-quest')?.showModal());
 const meetYvette=button('Meet Yvette · AI in development','harbor-subtle',()=>openMore('lighthouse-title'));
-const explore=button('Explore the Mall ↓','harbor-explore',()=>{nav.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});nav.querySelector('.harbor-feature-enter')?.focus({preventScroll:true});});welcome.append(explore);beacon.textContent='Enter the Beacon · find a little inspiration';
+const explore=button('Explore Categories ↓','harbor-explore',()=>{nav.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});nav.querySelector('.harbor-feature-enter')?.focus({preventScroll:true});});welcome.append(explore);beacon.textContent='Quick Help & Inspiration';
 const introduction=el('section','harbor-introduction');
 introduction.setAttribute('aria-labelledby','harbor-introduction-title');
 const introductionTitle=el('h2',null,'One place for the many parts of life');introductionTitle.id='harbor-introduction-title';introductionTitle.textContent='Where would you like to go?';
-introduction.append(el('p','harbor-eyebrow','Welcome to Lighthouse Mall'),introductionTitle,el('p',null,'Six destinations. Find what you need, share what you have, and discover what comes next.'));
+introduction.append(el('p','harbor-eyebrow','Explore Easy'),introductionTitle,el('p',null,'Six clear categories. Find what you need, share what you have, and discover what comes next.'));
 const nav=el('nav','harbor-nav');nav.setAttribute('aria-label','Lighthouse destinations');nav.id='mall-destinations';
 const carousel=el('div','harbor-carousel-controls');carousel.setAttribute('aria-label','Move between Lighthouse destinations');
 const carouselPrevious=button('←','harbor-carousel-arrow',()=>moveCarousel(-1));carouselPrevious.setAttribute('aria-label','Previous Lighthouse');
@@ -101,7 +101,7 @@ const rememberLabel=el('label','harbor-remember');const remember=el('input');rem
 footer.append(rememberLabel);
 const story=el('section','harbor-story');story.setAttribute('aria-labelledby','harbor-story-title');
 const storyLead=el('div','harbor-story-lead');const storyTitle=el('h2',null,'A light for real life.');storyTitle.id='harbor-story-title';
-storyLead.append(el('p','harbor-eyebrow','What Lighthouse offers'),storyTitle,el('p',null,'Lighthouse Mall brings practical parts of everyday life into one connected community. The Marketplace has places for vehicles, equipment, household goods, business assets, free items, trades, wanted posts, handmade work, repairs, and reviewed auctions. Storage & Space helps people describe what they need and connect with a fitting space. Lighthouse Work brings workers, drivers, employers, and opportunities together. Business, service, creative, music, and community areas give people more ways to be discovered, create, and connect.'));
+storyLead.append(el('p','harbor-eyebrow','What Lighthouse offers'),storyTitle,el('p',null,'Lighthouse brings practical parts of everyday life into one connected community. The Marketplace has places for vehicles, equipment, household goods, business assets, free items, trades, wanted posts, handmade work, repairs, and reviewed auctions. Storage & Space helps people describe what they need and connect with a fitting space. Jobs & Hiring brings workers, employers, and opportunities together. Business, service, creative, music, and community areas give people more ways to be discovered, create, and connect.'));
 const storyColumns=el('div','harbor-story-columns');
 const goal=el('article');goal.append(el('p','harbor-eyebrow','Our goal'),el('h3',null,'Make opportunity easier to find and understand.'),el('p',null,'We are building a place where people are treated like people—not listings, leads, or numbers. Information should be honest, private contact details should be protected, choices should be explained clearly, and unavailable or developing features should always say so.'),el('p',null,'Lighthouse connects people. It does not take a percentage of their work, sale, or opportunity. The platform is supported through clear subscription services, not hidden transaction fees.'));
 const future=el('article');future.append(el('p','harbor-eyebrow','Where we are heading'),el('h3',null,'One guide across every destination.'),el('p',null,'The future of Lighthouse is a connected place that can guide each visitor without taking away their control. Someone looking for work may also need transportation or storage. A business may need workers, equipment, space, and local services. A seller may meet a buyer through the Marketplace or a request on the Wanted Board.'),el('p',null,'Lighthouse AI is being developed to help people understand their choices, see why something is recommended, protect private information, and take a clear next step. The goal is not to replace human connection—it is to make that connection easier to find.'));
@@ -165,7 +165,7 @@ const film=el('video');film.controls=true;film.playsInline=true;film.preload='no
 cinema.append(cinemaClose,cinemaTitle,film);cinema.addEventListener('close',()=>pauseAll());cinema.addEventListener('click',e=>{if(e.target===cinema)cinema.close();});
 const watch=button('▷ Watch Lighthouse','harbor-watch',()=>{pauseAll();cinema.showModal();});discovery.append(watch);welcome.append(discovery);
 app.append(scene,header,welcome,favorites,introduction,nav,carousel,stage,story,yvetteSection,footer,announcement,moreDialog,cinema);root.prepend(app);heading.tabIndex=-1;updateCarousel();
-// The Studio's original film collection belongs in Sound Harbor. The separate
+// The Studio's original film collection belongs in Creative Studio. The separate
 // Watch Lighthouse dialog retains the homepage's coastal film.
 document.documentElement.classList.add('harbor-ready');updateTheme();updateFavorite();
 const fromHash=Object.keys(sourceIds).find(key=>sourceIds[key]===location.hash.slice(1));go(fromHash||(prefs.remember?prefs.last:'home'));
@@ -174,8 +174,8 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-await import('./lighthouse-live.mjs?v=20260908-harbor-names1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-recovery1');
+await import('./lighthouse-live.mjs?v=20260908-public-names1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-public-names1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original

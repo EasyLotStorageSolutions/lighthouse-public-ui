@@ -83,7 +83,7 @@
   };
   let earned = 0;
   try { earned = Number(localStorage.getItem('lighthouseBeacons') || 0); } catch (error) { earned = 0; }
-  const renderScore = () => { if (questScore) questScore.textContent = `${earned} beacon${earned === 1 ? '' : 's'} found on this device.`; };
+  const renderScore = () => { if (questScore) questScore.textContent = `${earned} ${earned === 1 ? 'activity' : 'activities'} tried on this device.`; };
   renderScore();
   questOpeners.forEach(button => button.addEventListener('click', () => quest && quest.showModal()));
   if (questClose) questClose.addEventListener('click', () => quest.close());

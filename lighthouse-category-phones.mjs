@@ -1,4 +1,4 @@
-import {sections} from './lighthouse-guide-data.mjs?v=20260908-harbor-names1';
+import {sections} from './lighthouse-guide-data.mjs?v=20260908-public-names1';
 
 const media = new URL('./assets/lighthouse-guides/', import.meta.url);
 const settings = {
@@ -89,7 +89,7 @@ for(const section of sections){
   if(old)mountPhone(section,old,options);
   else if(section.id==='music'){
     // The original channel TV was replaced by the film collection. Its removal
-    // must not silently remove Sound Harbor's guide and shared lounge entrance.
+    // must not silently remove Creative Studio's guide and shared lounge entrance.
     document.querySelector('#lighthouse-video-studio .container')?.append(mountPhone(section,null,options));
   }
 }
@@ -106,12 +106,12 @@ if(workShell&&workDemo){
 const social=sections.find(s=>s.id==='social');
 const world=make('section','section yvette-world');world.id='lighthouse-world';
 const layout=make('div','container yvette-category-layout');const copy=make('div','yvette-category-copy');
-copy.append(make('div','eyebrow','Lighthouse World · Social preview'),make('h2',null,social.title),make('p','copy',social.description),make('p','copy','Explore the adult-only social demonstration. Personal Spaces, communities, and chronological feeds are being built here.'));
+copy.append(make('div','eyebrow','Community & Social · Preview'),make('h2',null,social.title),make('p','copy',social.description),make('p','copy','Explore the adult-only social demonstration. Personal Spaces, communities, and chronological feeds are being built here.'));
 layout.append(copy,mountPhone(social,null,{href:'https://lighthouse-world-entrance.sreichert21.chatgpt.site/social.html'}));world.append(layout);
 document.querySelector('#marketplace-showcase')?.before(world);
 // Direct category choices spare visitors a long scroll through every doorway.
-const quick=make('nav','yvette-category-nav');quick.setAttribute('aria-label','Choose your Lighthouse category');
-[['Storage','storage'],['Employment','lighthouse-work'],['Lighthouse World','lighthouse-world'],['Marketplace','marketplace-showcase'],['Music & Studio','lighthouse-video-studio']].forEach(([name,id])=>{const a=make('a',null,name);a.href='#'+id;a.addEventListener('click',event=>{event.preventDefault();document.getElementById(id)?.scrollIntoView({behavior:'auto',block:'start'});});quick.append(a);});
+const quick=make('nav','yvette-category-nav');quick.setAttribute('aria-label','Choose a category');
+[['Storage & Space','storage'],['Jobs & Hiring','lighthouse-work'],['Community & Social','lighthouse-world'],['Marketplace','marketplace-showcase'],['Creative Studio','lighthouse-video-studio']].forEach(([name,id])=>{const a=make('a',null,name);a.href='#'+id;a.addEventListener('click',event=>{event.preventDefault();document.getElementById(id)?.scrollIntoView({behavior:'auto',block:'start'});});quick.append(a);});
 document.querySelector('#storage')?.before(quick);
 document.documentElement.classList.add('yvette-phones-ready');
 // Keep detailed tools available on demand, with the category doorway first.
@@ -132,4 +132,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-recovery1');
+await import('./lighthouse-harbor.mjs?v=20260908-public-names1');

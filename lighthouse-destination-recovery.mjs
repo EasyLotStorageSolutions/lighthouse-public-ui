@@ -32,7 +32,7 @@ export function restoreDestination({panel, source, overview, section}) {
       [...details.children].filter(n=>n.tagName!=='SUMMARY').forEach(n=>details.before(n));details.remove();
     });
     if(section.id==='social'){
-      const hub=make('nav','destination-community-grid');hub.setAttribute('aria-label','Lighthouse World community preview');
+      const hub=make('nav','destination-community-grid');hub.setAttribute('aria-label','Community and social preview');
       const communityBase='https://lighthouse-world-entrance.sreichert21.chatgpt.site/social.html';
       [['home','Your feed','See the chronological sample feed and saved stories.'],['explore','People & communities','Explore shared interests and sample communities.'],['create','Create & share','Try a post or keep a private draft.'],['messages','Messages','Try message drafts in the local preview.'],['my','My Lighthouse','Personal Spaces, Top People and saved posts.'],['memories','Memory library','Keep moments in your private preview library.']].forEach(([route,title,description])=>{
         const link=make('a','destination-community-link');link.href=communityBase+'#'+route;link.target='_top';link.append(make('strong',null,title+' ↗'),make('span',null,description));hub.append(link);

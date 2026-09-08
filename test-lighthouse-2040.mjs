@@ -8,6 +8,7 @@ const harbor = await readFile(new URL('./lighthouse-harbor.mjs', import.meta.url
 const styles = await readFile(new URL('./lighthouse-2040.css', import.meta.url), 'utf8');
 const live = await readFile(new URL('./lighthouse-live.mjs', import.meta.url), 'utf8');
 const phones = await readFile(new URL('./lighthouse-category-phones.mjs', import.meta.url), 'utf8');
+const mallMap = await readFile(new URL('./lighthouse-mall-map.mjs', import.meta.url), 'utf8');
 const header = await readFile(new URL('./marketplace-header.html', import.meta.url), 'utf8');
 
 test('Lighthouse 2040 behavior parses and keeps video IDs constrained', () => {
@@ -22,7 +23,7 @@ test('category and feature videos are framed as Lighthouse lanterns', () => {
   assert.match(styles, /\.harbor-app \.lighthouse-viewer/);
   assert.match(styles, /lighthouse-media-console-2040\.webp/);
   assert.match(harbor, /video inside a Lighthouse lantern/);
-  assert.doesNotMatch(harbor, /cinema\.append\(filmCollection\)/, 'the film collection must remain inside Sound Harbor');
+  assert.doesNotMatch(harbor, /cinema\.append\(filmCollection\)/, 'the film collection must remain inside Creative Studio');
   assert.match(home, /class="channel-2040" aria-label="Watch the Lighthouse film collection"/);
   assert.match(home, /Selected film playing inside a Lighthouse lantern/);
 });
@@ -89,7 +90,7 @@ test('Yvette never falls through to an arbitrary male browser voice', () => {
   assert.match(home, /synthetic feminine narrator/);
 });
 
-test('the homepage explains Lighthouse Mall, its goal, and its future honestly', () => {
+test('the homepage explains its categories, goal, and future honestly', () => {
   assert.match(harbor, /One place for the many parts of life/);
   assert.match(harbor, /What Lighthouse offers/);
   assert.match(harbor, /Our goal/);
@@ -108,4 +109,16 @@ test('the homepage explains Lighthouse Mall, its goal, and its future honestly',
   assert.match(styles, /left:16%;top:25\.2%;width:68%;height:23%/);
   assert.match(harbor, /Previous Lighthouse/);
   assert.match(harbor, /Next Lighthouse/);
+});
+
+test('public category buttons use plain-language names', () => {
+  for (const label of ['Marketplace', 'Jobs & Hiring', 'Storage & Space', 'Community & Social', 'Creative Studio', 'Locksmith Services']) {
+    assert.match(mallMap, new RegExp(label.replace('&', '\\&')));
+  }
+  for (const oldLabel of ['Market Harbor', 'Work Pier', 'Storage Cove', 'Lighthouse World', 'Sound Harbor', 'Locksmith Point', 'Mall Map']) {
+    assert.doesNotMatch(mallMap, new RegExp(oldLabel));
+  }
+  assert.match(harbor, /Quick Help & Inspiration/);
+  assert.match(home, /What do you need right now\?/);
+  assert.doesNotMatch(home, /Close the Beacon|Choose your Beacon path|beacons found/);
 });
