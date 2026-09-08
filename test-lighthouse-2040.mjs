@@ -70,11 +70,13 @@ test('the visible site header uses the dark Lighthouse navigation and a dependab
   assert.match(header, /href="https:\/\/www\.easylotstoragesolutions\.com\/\?lighthouseHome=1" target="_top">Home/);
 });
 
-test('Yvette never falls through to an arbitrary male browser voice', () => {
-  assert.match(behavior, /async function chooseYvetteVoice/);
-  assert.match(behavior, /Microsoft Aria/);
-  assert.doesNotMatch(behavior, /voices\.find\(item => \/en\/i\.test\(item\.lang\)\)/);
+test('Yvette uses one protected Lighthouse narration instead of a device voice', () => {
+  assert.match(behavior, /yvette-voice:request/);
+  assert.match(behavior, /LighthouseYvetteVoice/);
+  assert.match(behavior, /audioBase64/);
+  assert.doesNotMatch(behavior, /speechSynthesis|SpeechSynthesisUtterance/);
   assert.match(phones, /video\.muted=true;video\.volume=0/);
-  assert.match(phones, /A suitable feminine narrator is not available/);
+  assert.match(phones, /LighthouseYvetteVoice/);
+  assert.doesNotMatch(phones, /speechSynthesis|SpeechSynthesisUtterance/);
   assert.match(home, /synthetic feminine narrator/);
 });

@@ -1,30 +1,68 @@
 (() => {
   const yvetteButton = document.getElementById('yvette-play');
   const yvetteTranscript = document.getElementById('yvette-transcript');
-  const yvetteMessage = "Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.";
   let speaking = false;
+  let yvetteAudio = null;
+  const yvettePending = new Map();
+  const yvetteClipCache = new Map();
+  const yvetteParentOrigin = (() => {
+    try {
+      const origin = new URL(document.referrer).origin;
+      return ['https://www.easylotstoragesolutions.com', 'https://easylotstoragesolutions.com'].includes(origin) || /\.editor\.wix\.com$/.test(new URL(origin).hostname) ? origin : '';
+    } catch { return ''; }
+  })();
+  const yvetteSessionKey = (() => {
+    try {
+      const saved = sessionStorage.getItem('lighthouse-yvette-session');
+      if (saved) return saved;
+      const created = `${Date.now()}-${crypto.getRandomValues(new Uint32Array(4)).join('-')}`;
+      sessionStorage.setItem('lighthouse-yvette-session', created);
+      return created;
+    } catch { return `${Date.now()}-yvette-voice-session`; }
+  })();
 
-  async function chooseYvetteVoice() {
-    if (!('speechSynthesis' in window)) return null;
-    let voices = window.speechSynthesis.getVoices();
-    if (!voices.length) {
-      await new Promise(resolve => {
-        const done = () => { window.speechSynthesis.removeEventListener('voiceschanged', done); resolve(); };
-        window.speechSynthesis.addEventListener('voiceschanged', done, { once: true });
-        setTimeout(done, 1200);
-      });
-      voices = window.speechSynthesis.getVoices();
-    }
-    const preferred = [/Microsoft Aria/i, /Microsoft Jenny/i, /Samantha/i, /Zira/i, /Google US English/i, /female/i];
-    for (const pattern of preferred) {
-      const match = voices.find(item => /^en(?:-|_)/i.test(item.lang) && pattern.test(item.name));
-      if (match) return match;
-    }
-    return null;
+  function requestYvetteClip(clipKey) {
+    if (yvetteClipCache.has(clipKey)) return Promise.resolve(yvetteClipCache.get(clipKey));
+    if (!yvetteParentOrigin || window.parent === window) return Promise.reject(new Error('YVETTE_VOICE_REQUIRES_LIGHTHOUSE'));
+    const requestId = `yvette-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => { yvettePending.delete(requestId); reject(new Error('YVETTE_VOICE_TIMEOUT')); }, 30000);
+      yvettePending.set(requestId, { resolve, reject, timer, clipKey });
+      window.parent.postMessage({ type: 'yvette-voice:request', requestId, input: { clipKey, sessionKey: yvetteSessionKey } }, yvetteParentOrigin);
+    });
   }
 
+  window.addEventListener('message', event => {
+    if (event.source !== window.parent || event.origin !== yvetteParentOrigin) return;
+    const payload = event.data || {};
+    if (!['yvette-voice:response', 'yvette-voice:error'].includes(payload.type)) return;
+    const pending = yvettePending.get(payload.requestId);
+    if (!pending) return;
+    clearTimeout(pending.timer); yvettePending.delete(payload.requestId);
+    if (payload.type === 'yvette-voice:error' || !payload.voice?.audioBase64) pending.reject(new Error('YVETTE_VOICE_UNAVAILABLE'));
+    else { yvetteClipCache.set(payload.voice.clipKey || pending.clipKey, payload.voice); pending.resolve(payload.voice); }
+  });
+
+  async function playYvetteClip(clipKey, callbacks = {}) {
+    if (yvetteAudio) { yvetteAudio.pause(); yvetteAudio = null; }
+    callbacks.loading?.();
+    const voice = await requestYvetteClip(clipKey);
+    const audio = new Audio(`data:${voice.contentType || 'audio/mpeg'};base64,${voice.audioBase64}`);
+    yvetteAudio = audio;
+    audio.onplay = () => callbacks.playing?.();
+    audio.onended = () => { if (yvetteAudio === audio) yvetteAudio = null; callbacks.ended?.(); };
+    audio.onerror = () => { if (yvetteAudio === audio) yvetteAudio = null; callbacks.error?.(); };
+    await audio.play();
+    return audio;
+  }
+
+  function stopYvetteAudio() {
+    if (yvetteAudio) { yvetteAudio.pause(); yvetteAudio.currentTime = 0; yvetteAudio = null; }
+  }
+  window.LighthouseYvetteVoice = { play: playYvetteClip, stop: stopYvetteAudio };
+
   function stopYvette() {
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    stopYvetteAudio();
     speaking = false;
     if (yvetteButton) yvetteButton.textContent = 'HEAR YVETTE’S WELCOME';
   }
@@ -32,26 +70,18 @@
   if (yvetteButton) yvetteButton.addEventListener('click', async () => {
     if (speaking) return stopYvette();
     if (yvetteTranscript) yvetteTranscript.hidden = false;
-    if (!('speechSynthesis' in window)) {
-      yvetteButton.textContent = 'WELCOME MESSAGE SHOWN';
-      return;
-    }
-    yvetteButton.textContent = 'PREPARING YVETTE…';
-    const voice = await chooseYvetteVoice();
-    if (!voice) {
-      yvetteButton.textContent = 'WELCOME MESSAGE SHOWN';
-      return;
-    }
-    const utterance = new SpeechSynthesisUtterance(yvetteMessage);
-    utterance.voice = voice;
-    utterance.rate = .94;
-    utterance.pitch = 1.03;
-    utterance.onend = stopYvette;
-    utterance.onerror = stopYvette;
     speaking = true;
-    yvetteButton.textContent = 'STOP WELCOME';
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+    try {
+      await playYvetteClip('welcome', {
+        loading: () => { yvetteButton.textContent = 'PREPARING YVETTE…'; },
+        playing: () => { yvetteButton.textContent = 'STOP WELCOME'; },
+        ended: stopYvette,
+        error: stopYvette
+      });
+    } catch {
+      speaking = false;
+      yvetteButton.textContent = 'WELCOME MESSAGE SHOWN';
+    }
   });
 
   const frame = document.getElementById('lighthouse-film-frame');
