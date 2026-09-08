@@ -46,6 +46,60 @@
 .harbor-destination.has-mini-lighthouse .harbor-feature-enter{width:88%;margin:-15px auto 0;min-height:58px;border:1px solid rgba(211,235,250,.34);border-radius:5px;background:linear-gradient(145deg,rgba(7,32,54,.96),rgba(14,61,92,.94));box-shadow:0 12px 24px rgba(0,0,0,.34);text-align:center}.harbor-destination.has-mini-lighthouse .harbor-destination-text{padding:12px 8px}.harbor-destination.has-mini-lighthouse .harbor-destination-arrow{display:none}
 .harbor-app:not([data-view=home]) .harbor-mini-lighthouse{display:none}
 
+/* Archipelago preview: every destination keeps its lighthouse, but the harbor
+   reads as a navigable coastline instead of a repeated row of towers. */
+@media(min-width:1101px){
+  .harbor-app[data-view=home] .harbor-nav,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith{
+    position:relative;
+    display:block;
+    width:min(1220px,calc(100% - 48px));
+    height:430px;
+    margin:0 auto;
+    padding:0;
+    perspective:1100px;
+  }
+  .harbor-app[data-view=home] .harbor-destination{
+    position:absolute;
+    width:clamp(132px,13vw,158px);
+    transform-origin:50% 100%;
+    transition:transform .42s ease,filter .42s ease,opacity .42s ease;
+  }
+  .harbor-app[data-view=home] .harbor-destination:nth-child(1){left:1%;bottom:0;transform:scale(.7) rotate(-3deg)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(2){left:17%;bottom:52px;transform:scale(.82) rotate(-1.5deg)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(3){left:34%;bottom:105px;transform:scale(.9)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(4){right:34%;bottom:105px;transform:scale(.9)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(5){right:17%;bottom:52px;transform:scale(.82) rotate(1.5deg)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(6){right:1%;bottom:0;transform:scale(.7) rotate(3deg)}
+  .harbor-app[data-view=home] .harbor-nav:has(.harbor-destination:hover) .harbor-destination:not(:hover),
+  .harbor-app[data-view=home] .harbor-nav:has(.harbor-destination:focus-within) .harbor-destination:not(:focus-within){opacity:.55;filter:saturate(.65) brightness(.82)}
+  .harbor-app[data-view=home] .harbor-destination:hover,
+  .harbor-app[data-view=home] .harbor-destination:focus-within{z-index:5;transform:translateY(-18px) scale(1.12);filter:drop-shadow(0 24px 32px rgba(0,0,0,.62))}
+  .harbor-app[data-view=home] .harbor-destination:before{content:'';position:absolute;z-index:-1;left:50%;bottom:-12px;width:118%;height:42px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,#e7c88c38 0 18%,#071c30b8 48%,transparent 70%);filter:blur(2px)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(1) .harbor-mini-lighthouse-art,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(6) .harbor-mini-lighthouse-art{filter:brightness(.8) saturate(.78)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(2) .harbor-mini-lighthouse-art,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(5) .harbor-mini-lighthouse-art{filter:brightness(.9) saturate(.88)}
+}
+@media(min-width:701px) and (max-width:1100px){
+  .harbor-app[data-view=home] .harbor-nav,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:12px 22px;padding-top:120px}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(2),
+  .harbor-app[data-view=home] .harbor-destination:nth-child(5){transform:translateY(-28px) scale(.94)}
+}
+@media(max-width:700px){
+  .harbor-app[data-view=home] .harbor-nav,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith{display:flex;align-items:flex-end;gap:18px;width:100%;padding:118px max(20px,calc((100vw - 272px)/2)) 18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:calc((100vw - 272px)/2);overscroll-behavior-inline:contain;scrollbar-width:none}
+  .harbor-app[data-view=home] .harbor-nav::-webkit-scrollbar{display:none}
+  .harbor-app[data-view=home] .harbor-destination,
+  .harbor-app[data-view=home] .harbor-nav.has-locksmith .harbor-destination:last-child{flex:0 0 272px;display:block;grid-column:auto;scroll-snap-align:center;opacity:.78;transform:scale(.9);transition:opacity .28s ease,transform .28s ease}
+  .harbor-app[data-view=home] .harbor-destination:focus-within,
+  .harbor-app[data-view=home] .harbor-destination:hover{opacity:1;transform:scale(1)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even){transform:translateY(-16px) scale(.9)}
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even):focus-within,
+  .harbor-app[data-view=home] .harbor-destination:nth-child(even):hover{transform:translateY(-16px) scale(1)}
+}
+
 /* The larger live tuner always belongs to the Lighthouse that opened it. */
 .harbor-live{width:min(980px,94vw);max-height:92svh;padding:28px;border:1px solid rgba(155,225,255,.55);border-radius:18px;background:radial-gradient(circle at 75% 8%,rgba(79,202,255,.18),transparent 28%),linear-gradient(145deg,#071d35,#0a3b60);color:#fff;overflow:auto;box-shadow:0 40px 110px rgba(0,0,0,.62)}.harbor-live::backdrop{background:rgba(2,13,25,.82);backdrop-filter:blur(12px)}.harbor-live .harbor-close{float:right}.harbor-live h2{margin:6px 0 8px;color:#fff1d8;font:400 clamp(46px,6vw,70px)/1 'Niconne',cursive}.harbor-live-intro{max-width:680px;color:#cee3f3;font:16px/1.55 'Playfair Display',Georgia,serif}.harbor-live-modes{display:flex;gap:8px;margin:18px 0}.harbor-live-modes button,.harbor-radio-suggestions button{min-height:40px;padding:9px 16px;border:1px solid rgba(173,228,252,.4);border-radius:999px;background:rgba(255,255,255,.06);color:#fff;cursor:pointer}.harbor-live-modes button[aria-pressed=true]{background:#dff8ff;color:#072f50}.harbor-live-lighthouse{width:min(100%,430px)}.harbor-live-screen{display:block}.harbor-radio-panel{height:100%;padding:8%;color:#fff;text-align:center;background:radial-gradient(circle at 50% 10%,#245f82,#06182b 72%)}.harbor-radio-wave{display:block;color:#99e5ff;font:800 16px/1 Arial,sans-serif;letter-spacing:.18em}.harbor-radio-panel strong,.harbor-radio-panel span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.harbor-radio-panel strong{margin:6px 0 2px;font-size:12px}.harbor-radio-panel span:not(.harbor-radio-wave){color:#c7e0ef;font-size:8px}.harbor-radio-panel audio{width:100%;height:28px;margin-top:7px}
 .harbor-live[data-mode=visual]{width:min(1480px,97vw);height:min(930px,95svh)}.harbor-live[data-mode=visual] .harbor-live-intro{max-width:920px}.harbor-live[data-mode=visual] .harbor-live-lighthouse{width:min(1180px,100%);aspect-ratio:16/9;padding:14px;margin:8px auto;border:1px solid rgba(170,232,255,.52);border-radius:24px;background:radial-gradient(circle at 50% -10%,rgba(113,225,255,.44),transparent 31%),linear-gradient(145deg,#07223d,#0c4a73);filter:drop-shadow(0 25px 35px rgba(0,0,0,.5))}.harbor-live[data-mode=visual] .harbor-live-lighthouse>img{display:none}.harbor-live[data-mode=visual] .harbor-live-screen{position:relative;inset:auto;width:100%;height:100%;border-radius:15px;box-shadow:inset 0 0 35px rgba(106,218,255,.24)}.harbor-live[data-mode=visual] .harbor-live-screen iframe{width:100%;height:100%}.harbor-tv-controls{display:grid;grid-template-columns:auto minmax(360px,1fr);gap:12px;align-items:end;max-width:1180px;margin:14px auto 0}.harbor-tv-controls>button,.harbor-tv-form button{min-height:48px;padding:10px 18px;border:1px solid #b9ecff;border-radius:9px;background:#dff8ff;color:#082e4d;font-weight:800}.harbor-tv-form{display:grid;grid-template-columns:1fr auto;gap:10px}.harbor-tv-form label{display:grid;gap:6px;color:#c7deed;font:700 11px Arial,sans-serif}.harbor-tv-form input{width:100%;min-height:48px;padding:10px 14px;border:1px solid #8dbbd5;border-radius:9px;background:#f7fbff;color:#103b5e;font-size:14px}.harbor-tv-controls+.harbor-live-status{max-width:1180px;margin:8px auto 0}
@@ -55,3 +109,13 @@
 .harbor-iheart-controls{display:flex;align-items:end;justify-content:center;gap:12px;max-width:720px;margin:14px auto}.harbor-iheart-controls label{display:grid;gap:6px;flex:1;color:#c7deed;font:700 11px Arial,sans-serif}.harbor-iheart-controls select{min-height:46px;padding:9px 12px;border:1px solid #8dbbd5;border-radius:7px;background:#f7fbff;color:#103b5e;font-size:14px}.harbor-iheart-controls a{display:inline-flex;align-items:center;min-height:46px;padding:9px 14px;border:1px solid rgba(181,235,255,.45);border-radius:7px;color:#e9f8ff;font:700 11px Arial,sans-serif;text-decoration:none}
 .harbor-iheart-custom{display:grid;grid-template-columns:1fr auto;gap:10px;max-width:720px;margin:12px auto 0}.harbor-iheart-custom label{display:grid;gap:6px;color:#c7deed;font:700 11px Arial,sans-serif}.harbor-iheart-custom input{width:100%;min-height:46px;padding:10px 14px;border:1px solid #8dbbd5;border-radius:7px;background:#f7fbff;color:#103b5e;font-size:14px}.harbor-iheart-custom button{align-self:end;min-height:46px;padding:10px 16px;border:1px solid #b9ecff;border-radius:7px;background:#dff8ff;color:#082e4d;font-weight:800}.harbor-iheart-custom+.harbor-live-status{max-width:720px;margin:8px auto 0}
 @media(max-width:700px){.harbor-app[data-view=home] .harbor-header{padding:8px 14px}.harbor-app[data-view=home] .harbor-welcome{min-height:250px}.harbor-app[data-view=home] .harbor-nav{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:calc(100% - 24px);padding:12px 3px 18px;gap:8px}.harbor-app[data-view=home] .harbor-destination{flex:0 0 min(68vw,250px);scroll-snap-align:center}.harbor-app:not([data-view=home]) .harbor-header{inset:10px 10px auto}.harbor-app:not([data-view=home]) .harbor-brand{min-height:43px;padding:8px 14px 8px 11px;font-size:9px}.harbor-app:not([data-view=home]) .harbor-brand:before{width:16px;height:24px}.harbor-app:not([data-view=home]) .harbor-brand:after{left:19px;top:13px;width:38px}.harbor-mini-controls button{font-size:7px}.harbor-live{padding:20px 14px}.harbor-live[data-mode=visual]{height:auto;min-height:92svh}.harbor-radio-results{grid-template-columns:1fr}.harbor-radio-search,.harbor-iheart-custom,.harbor-tv-controls,.harbor-tv-form,.harbor-local-controls{grid-template-columns:1fr}.harbor-radio-search button,.harbor-iheart-custom button,.harbor-tv-controls>button,.harbor-tv-form button,.harbor-local-controls button{width:100%}.harbor-iheart-controls{align-items:stretch;flex-direction:column}.harbor-iheart-controls a{justify-content:center}}
+
+/* Phone-safe control deck: preserve every atmosphere and navigation control. */
+@media(max-width:700px){
+  .harbor-app[data-view=home] .harbor-header{padding:30px 12px 6px}
+  .harbor-app[data-view=home] .harbor-header-tools{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;width:100%;max-width:330px;margin-inline:auto}
+  .harbor-app[data-view=home] .harbor-themes{grid-column:1/-1;justify-self:center;padding:3px}
+  .harbor-app[data-view=home] .harbor-themes button{min-height:34px;padding:7px 12px;font-size:10px}
+  .harbor-app[data-view=home] .harbor-header-tools>.harbor-subtle{width:100%;min-height:34px;padding:7px 8px;border:1px solid rgba(212,232,245,.22);border-radius:18px;background:rgba(6,23,40,.52);font-size:10px;text-align:center}
+  .harbor-app[data-view=home] .harbor-welcome{padding-top:12px}
+}
