@@ -1,4 +1,4 @@
-import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-cleanup1';
+import {openCenterPlayer} from './lighthouse-live.mjs?v=20260908-lounge1';
 const districts=[
  {id:'marketplace',name:'Marketplace',hint:'Discover, buy, sell & trade',x:21,y:17,angle:-145},
  {id:'employment',name:'Work',hint:'Find work or hire people',x:79,y:17,angle:-35},
@@ -18,7 +18,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  const beam=make('div','mall-selection-beam');beam.setAttribute('aria-hidden','true');canvas.append(beam,central);
  const marker=make('span','mall-you-are-here','THE LIGHTHOUSE');canvas.append(marker);
  const theater=make('section','mall-theater');theater.hidden=true;theater.setAttribute('aria-label','Center Lighthouse theater');
- const watchCenter=btn('▶ Watch & Listen','mall-center-play',()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');openCenterPlayer(theater,()=>{theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)watchCenter.focus({preventScroll:true});});});canvas.append(watchCenter);
+ const watchCenter=btn('▶ TV & Radio Lounge','mall-center-play',()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');openCenterPlayer(theater,()=>{theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)watchCenter.focus({preventScroll:true});});});canvas.append(watchCenter);
  const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.setAttribute('aria-expanded','false');n.setAttribute('aria-controls','mall-district-panel');n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a light. Discover what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');

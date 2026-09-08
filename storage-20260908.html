@@ -268,5 +268,5 @@ $('exploreSpaces').onclick=()=>{setView(false);$('locationPicker').scrollIntoVie
 document.querySelectorAll('[data-select]').forEach(button=>{const choose=button.onclick;button.onclick=()=>{if(!selectedStorageLocation){notice('Choose your location first.');$('locationPicker').scrollIntoView({block:'start'});return;}choose();$('lotChoice').value=selectedStorageLocation;};});
 window.addEventListener('message',event=>{if(event.source!==parentWindow||event.origin!==parentOrigin)return;const data=event.data;if(data?.type==='my-easy-lot:data'&&Array.isArray(data.workspace?.locations)){storageLocations=data.workspace.locations;updateLocationCards();}});
 updateLocationCards();
-</script></body>
+</script><script type="module" src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-live.mjs?v=20260908-lounge1"></script></body>
 </html>

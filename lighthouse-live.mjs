@@ -1,6 +1,8 @@
+import {mountLoungeCatalog} from './lighthouse-lounge-catalog-ui.mjs';
+const loungeStyle=document.createElement('link');loungeStyle.rel='stylesheet';loungeStyle.href=new URL('./lighthouse-shared-lounge.css?v=20260908-lounge1',import.meta.url).href;document.head.append(loungeStyle);
 let centerPlayer;
 export function openCenterPlayer(host,onClose){centerPlayer?.(host,onClose);}
-const app=document.querySelector('.harbor-app');
+const app=document.querySelector('.harbor-app')||document.body;
 if(app){
   const experiences={
     storage:{name:'Storage',guide:'Tour',tv:'Property TV',radio:'Local Radio',video:'0TPmbw4sPUo',prompt:'your city, state, or station',suggestions:['weather','talk','community']},
@@ -91,6 +93,7 @@ if(app){
   const iheartCustomPanel=disclosure('Use a different iHeart station',iheartCustom);
   dialog.append(close,eyebrow,title,intro,modes,media,tvGuide,tvControls,tvCustom,tvStatus,localControls,radioSearch,status,results,iheartControls,iheartCustomPanel,iheartStatus);
   app.append(dialog);
+  mountLoungeCatalog(dialog,{audio,radioNow,radioMeta});
   const categoryLabel=el('label','harbor-channel-category','Lighthouse channels');
   const categorySelect=el('select');
   Object.entries(experiences).forEach(([id,experience])=>{const option=el('option',null,experience.name);option.value=id;categorySelect.append(option)});
@@ -127,7 +130,7 @@ if(app){
     searchInput.placeholder=`Try ${experience.prompt} or a station name`;
     suggestions.replaceChildren(...experience.suggestions.map(term=>button(term,'',()=>{searchInput.value=term;searchStations(term)})));
     try{const saved=JSON.parse(localStorage.getItem(`lighthouse-radio-${activeCategory}`)||'null');if(saved?.url&&/^https:\/\//i.test(saved.url)){radioNow.textContent=saved.name;radioMeta.textContent=saved.meta;audio.src=saved.url;status.textContent='Your last station for this Lighthouse is ready. Press play when you want it.'}}catch{}
-    findLocalStations(false);
+    localControls.hidden=true;radioSearch.hidden=true;status.hidden=true;results.hidden=true;
   }
   function showIHeart(){
     audio.pause();dialog.scrollTop=0;setMode('iheart');frame.title='Official iHeartRadio station widget';
@@ -137,7 +140,16 @@ if(app){
     title.textContent=`${experiences[activeCategory].name} Lighthouse · iHeartRadio`;
     intro.textContent='Choose a quick station or bring in any official iHeart station. The player stays inside this Lighthouse and does not autoplay.';
   }
-  function openLive(category,mode){activeCategory=category;categorySelect.value=category;dialog.showModal();mode==='radio'?showRadio():showVisual();}
+  function openLive(category,mode){activeCategory=category;categorySelect.value=category;document.querySelectorAll('video,audio').forEach(v=>v.pause());dialog.showModal();mode==='radio'?showRadio():showVisual();dialog.scrollIntoView({block:'start'});}
+  function mountSharedEntrances(){
+    document.querySelectorAll('.yvette-phone-group,.tv-art,.harbor-mini-lighthouse,.site-lighthouse').forEach(tower=>{
+      if(tower.dataset.sharedLounge)return;tower.dataset.sharedLounge='true';
+      const category=tower.querySelector('[data-category]')?.dataset.category||tower.closest('[data-destination]')?.dataset.destination||'social';
+      const entrance=button('▶ TV & Radio Lounge','lighthouse-shared-entrance',()=>openLive(experiences[category]?category:'social','visual'));
+      tower.after(entrance);
+    });
+  }
+  mountSharedEntrances();new MutationObserver(mountSharedEntrances).observe(app,{childList:true,subtree:true});
   iheartSelect.addEventListener('change',()=>{if(iheartButton.getAttribute('aria-pressed')==='true'){frame.src=iheartSelect.value}});
   function toIHeartEmbed(value){
     try{const url=new URL(value);if(!['iheart.com','www.iheart.com'].includes(url.hostname.toLowerCase()))return null;const match=url.pathname.match(/^\/live\/([a-z0-9-]+)\/?$/i);if(!match)return null;return `https://www.iheart.com/live/${match[1]}/?embed=true&theme=dark`}catch{return null}
