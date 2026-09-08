@@ -7,6 +7,7 @@ const behavior = await readFile(new URL('./lighthouse-2040.js', import.meta.url)
 const harbor = await readFile(new URL('./lighthouse-harbor.mjs', import.meta.url), 'utf8');
 const styles = await readFile(new URL('./lighthouse-2040.css', import.meta.url), 'utf8');
 const live = await readFile(new URL('./lighthouse-live.mjs', import.meta.url), 'utf8');
+const phones = await readFile(new URL('./lighthouse-category-phones.mjs', import.meta.url), 'utf8');
 const header = await readFile(new URL('./marketplace-header.html', import.meta.url), 'utf8');
 
 test('Lighthouse 2040 behavior parses and keeps video IDs constrained', () => {
@@ -57,10 +58,23 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.match(live, /\['iheart\.com','www\.iheart\.com'\]/);
   assert.match(live, /lighthouse-iheart-\$\{activeCategory\}/);
   assert.match(live, /Use any iHeart station/);
+  assert.match(live, /EXPAND TV/);
+  assert.match(live, /function youtubeVideoId\(value\)/);
+  assert.match(live, /youtube-nocookie\.com\/embed/);
+  assert.match(styles, /\.harbor-live\[data-mode=visual\]/);
   assert.match(live, /Browse more stations on iHeart/);
 });
 
 test('the visible site header uses the dark Lighthouse navigation and a dependable Home link', () => {
   assert.match(header, /linear-gradient\(100deg,rgba\(4,25,43,.97\)/);
   assert.match(header, /href="https:\/\/www\.easylotstoragesolutions\.com\/\?lighthouseHome=1" target="_top">Home/);
+});
+
+test('Yvette never falls through to an arbitrary male browser voice', () => {
+  assert.match(behavior, /async function chooseYvetteVoice/);
+  assert.match(behavior, /Microsoft Aria/);
+  assert.doesNotMatch(behavior, /voices\.find\(item => \/en\/i\.test\(item\.lang\)\)/);
+  assert.match(phones, /video\.muted=true;video\.volume=0/);
+  assert.match(phones, /A suitable feminine narrator is not available/);
+  assert.match(home, /synthetic feminine narrator/);
 });

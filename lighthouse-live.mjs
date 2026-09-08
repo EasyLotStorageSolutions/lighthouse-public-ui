@@ -33,6 +33,15 @@ if(app){
   const audio=el('audio');audio.controls=true;audio.preload='none';
   radioPanel.append(el('span','harbor-radio-wave','◖ ))) ◗'),radioNow,radioMeta,audio);screen.append(frame,radioPanel);media.append(image,screen);
 
+  const tvControls=el('div','harbor-tv-controls');
+  const tvExpand=button('EXPAND TV','',async()=>{try{if(media.requestFullscreen)await media.requestFullscreen();else if(frame.requestFullscreen)await frame.requestFullscreen()}catch{tvStatus.textContent='Use the full-screen control inside the video player.'}});
+  const tvForm=el('form','harbor-tv-form');
+  const tvLabel=el('label',null,'Bring a YouTube video to this Lighthouse');
+  const tvInput=el('input');tvInput.type='url';tvInput.inputMode='url';tvInput.placeholder='Paste a YouTube video link';tvInput.autocomplete='off';tvInput.maxLength=240;
+  const tvLoad=button('WATCH HERE','',()=>{});tvLoad.type='submit';tvLabel.append(tvInput);tvForm.append(tvLabel,tvLoad);
+  const tvStatus=el('p','harbor-live-status','The Lighthouse expands into a theater when you choose TV. Nothing starts automatically.');tvStatus.setAttribute('role','status');
+  tvControls.append(tvExpand,tvForm);
+
   const searchForm=el('form','harbor-radio-search');
   const searchLabel=el('label',null,'Find an internet radio station');
   const searchInput=el('input');searchInput.type='search';searchInput.name='station';searchInput.placeholder='Try jazz, Baltimore, news, or a station name';searchInput.maxLength=80;searchInput.autocomplete='off';
@@ -59,18 +68,18 @@ if(app){
   const iheartStatus=el('p','harbor-live-status','Choose a quick station above, or find any station on iHeart and paste its link here.');iheartStatus.setAttribute('role','status');
   iheartCustomLabel.append(iheartCustomInput);iheartCustom.append(iheartCustomLabel,iheartCustomButton);
   const results=el('div','harbor-radio-results');
-  dialog.append(close,eyebrow,title,intro,modes,media,searchForm,suggestions,iheartControls,iheartCustom,iheartStatus,status,results);
+  dialog.append(close,eyebrow,title,intro,modes,media,tvControls,tvStatus,searchForm,suggestions,iheartControls,iheartCustom,iheartStatus,status,results);
   app.append(dialog);
 
   function setMode(mode){
     const radio=mode==='radio',iheart=mode==='iheart',visual=mode==='visual';visualButton.setAttribute('aria-pressed',String(visual));radioButton.setAttribute('aria-pressed',String(radio));iheartButton.setAttribute('aria-pressed',String(iheart));
-    frame.hidden=radio;radioPanel.hidden=!radio;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
+    dialog.dataset.mode=mode;frame.hidden=radio;radioPanel.hidden=!radio;tvControls.hidden=!visual;tvStatus.hidden=!visual;searchForm.hidden=!radio;suggestions.hidden=!radio;status.hidden=!radio;results.hidden=!radio;iheartControls.hidden=!iheart;iheartCustom.hidden=!iheart;iheartStatus.hidden=!iheart;
   }
   function showVisual(){
     audio.pause();dialog.scrollTop=0;setMode('visual');
     const experience=experiences[activeCategory];frame.src=`https://www.youtube-nocookie.com/embed/${experience.video}?rel=0`;
     title.textContent=`${experience.name} Lighthouse · Watch`;
-    intro.textContent='Choose play inside the lantern when you are ready. The channel does not autoplay.';
+    intro.textContent='The Lighthouse opens into a larger theater. Choose play when you are ready, expand to full screen, or bring in a YouTube video.';
   }
   function showRadio(){
     const experience=experiences[activeCategory];dialog.scrollTop=0;frame.src='about:blank';setMode('radio');title.textContent=`${experience.name} Lighthouse · Radio`;
@@ -98,6 +107,12 @@ if(app){
     if(!embed){iheartStatus.textContent='Paste a complete iHeart station link, such as https://www.iheart.com/live/station-name-1234/';return}
     frame.src=embed;iheartStatus.textContent='Station loaded. Press play in the official iHeart player.';
     try{localStorage.setItem(`lighthouse-iheart-${activeCategory}`,station)}catch{}
+  });
+  function youtubeVideoId(value){
+    try{const url=new URL(value);const host=url.hostname.toLowerCase();let id='';if(host==='youtu.be')id=url.pathname.slice(1).split('/')[0];else if(['youtube.com','www.youtube.com','m.youtube.com','youtube-nocookie.com','www.youtube-nocookie.com'].includes(host)){id=url.searchParams.get('v')||url.pathname.match(/^\/embed\/([A-Za-z0-9_-]{11})/)?.[1]||''}return /^[A-Za-z0-9_-]{11}$/.test(id)?id:null}catch{return null}
+  }
+  tvForm.addEventListener('submit',event=>{
+    event.preventDefault();const id=youtubeVideoId(tvInput.value.trim());if(!id){tvStatus.textContent='Paste a complete YouTube video link.';return}frame.src=`https://www.youtube-nocookie.com/embed/${id}?rel=0`;tvStatus.textContent='Video loaded. Press play or choose Expand TV.';
   });
 
   async function searchStations(query){

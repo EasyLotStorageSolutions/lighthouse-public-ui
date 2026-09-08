@@ -8,6 +8,22 @@ const settings = {
   music: {selector:'.channel-tv', label:'Watch featured video', href:'https://www.easylotstoragesolutions.com/customer-portal?view=studio'}
 };
 const allVideos = new Set();
+let activeNarration=null;
+async function chooseYvetteVoice(){
+  if(!('speechSynthesis' in window))return null;
+  let voices=window.speechSynthesis.getVoices();
+  if(!voices.length){await new Promise(resolve=>{const done=()=>{window.speechSynthesis.removeEventListener('voiceschanged',done);resolve()};window.speechSynthesis.addEventListener('voiceschanged',done,{once:true});setTimeout(done,1200)});voices=window.speechSynthesis.getVoices()}
+  const preferred=[/Microsoft Aria/i,/Microsoft Jenny/i,/Samantha/i,/Zira/i,/Google US English/i,/female/i];
+  for(const pattern of preferred){const match=voices.find(item=>/^en(?:-|_)/i.test(item.lang)&&pattern.test(item.name));if(match)return match}
+  return null;
+}
+async function speakAsYvette(section,status){
+  if(!('speechSynthesis' in window)){status.textContent='Open Read Yvette’s guide to follow the introduction.';return}
+  window.speechSynthesis.cancel();const voice=await chooseYvetteVoice();
+  if(!voice){status.textContent='A suitable feminine narrator is not available on this device. Open the written guide below.';return}
+  const utterance=new SpeechSynthesisUtterance(section.transcript);utterance.voice=voice;utterance.rate=.94;utterance.pitch=1.03;utterance.onend=()=>{if(activeNarration?.utterance===utterance)activeNarration=null};utterance.onerror=()=>{if(activeNarration?.utterance===utterance)activeNarration=null;status.textContent='Open the written guide below to continue.'};activeNarration={sectionId:section.id,utterance};status.textContent='Yvette is speaking with a synthetic feminine narrator.';window.speechSynthesis.speak(utterance);
+}
+function stopYvette(sectionId){if(activeNarration?.sectionId===sectionId&&'speechSynthesis' in window){window.speechSynthesis.cancel();activeNarration=null}}
 function make(tag, className, text) {
   const node = document.createElement(tag);
   if(className) node.className=className;
@@ -23,7 +39,7 @@ function mountPhone(section, old, options) {
   top.append(make('span','yvette-island'));
   const screen=make('div','yvette-screen');
   const video=make('video','yvette-video');
-  video.controls=true; video.playsInline=true; video.preload='none';
+  video.controls=false; video.playsInline=true; video.preload='none';video.muted=true;video.volume=0;
   video.poster=new URL(section.id+'-poster.jpg',media).href;
   video.src=new URL(section.id+'.mp4',media).href;
   video.setAttribute('aria-label','Yvette introduces '+section.name);
@@ -47,9 +63,10 @@ function mountPhone(section, old, options) {
   play.addEventListener('click',()=>video.paused?start():video.pause());
   replay.addEventListener('click',async()=>{const active=!legacy.hidden?legacy.querySelector('video'):video;if(active){active.currentTime=0;try{await active.play();}catch{status.textContent='Press play on the video to begin.';}}else{video.currentTime=0;start();}});
   full.addEventListener('click',async()=>{const active=!legacy.hidden?(legacy.querySelector('video')||legacy):video;try{if(active.requestFullscreen)await active.requestFullscreen();else if(active.webkitEnterFullscreen)active.webkitEnterFullscreen();else status.textContent='Use the full-screen control on the video.';}catch{status.textContent='Use the full-screen control on the video.';}});
-  video.addEventListener('play',()=>{allVideos.forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('video:not(.yvette-video)').forEach(other=>other.pause());play.textContent='Pause';status.textContent='';});
-  video.addEventListener('pause',()=>play.textContent='Play guide');
-  video.addEventListener('ended',()=>play.textContent='Play guide');
+  video.addEventListener('volumechange',()=>{if(!video.muted||video.volume!==0){video.muted=true;video.volume=0}});
+  video.addEventListener('play',()=>{allVideos.forEach(other=>{if(other!==video)other.pause();});document.querySelectorAll('video:not(.yvette-video)').forEach(other=>other.pause());play.textContent='Pause';speakAsYvette(section,status);});
+  video.addEventListener('pause',()=>{play.textContent='Play guide';stopYvette(section.id)});
+  video.addEventListener('ended',()=>{play.textContent='Play guide';stopYvette(section.id)});
   controls.append(play,replay,full);dock.append(controls);
   let toggle;
   if(old){
@@ -110,4 +127,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260907-11');
+await import('./lighthouse-harbor.mjs?v=20260907-12');

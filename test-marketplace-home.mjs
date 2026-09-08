@@ -9,7 +9,8 @@ test('the AI signal deck is an honest development preview led by Yvette', () => 
   assert.match(source, /Yvette will be the familiar guide at the center of Lighthouse/);
   assert.match(source, /The full AI workspace is still in development/);
   assert.match(source, /HEAR YVETTE’S WELCOME/);
-  assert.match(source, /Voice playback uses a narrator available on your device/);
+  assert.match(source, /Yvette uses a synthetic feminine narrator/);
+  assert.match(source, /never claims to reproduce a real person's voice/);
   assert.doesNotMatch(source, /<div class="lighthouse-plans"/);
 });
 

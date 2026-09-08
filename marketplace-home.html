@@ -776,7 +776,7 @@
       @media(max-width:600px){.assistant-coming-soon{padding:48px 0 28px}.ai-coming-soon-card{padding-top:4px}.ai-coming-soon-card p{font-size:16px}}
     </style>
   
-    <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-nav2035-v2" />
+    <link rel="stylesheet" href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.css?v=20260907-nav2035-v3" />
 </head>
   <body>
     <main>
@@ -856,7 +856,7 @@
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
         <div class="container"><div class="signal-deck">
-          <div class="signal-grid"><div class="signal-copy"><div class="eyebrow">Lighthouse AI · development preview</div><h2 id="lighthouse-title">A clearer way through what comes next.</h2><p>Yvette will be the familiar guide at the center of Lighthouse. The complete AI workspace is still being built journey by journey; the working destinations remain open while it grows.</p><p id="yvette-transcript" class="yvette-transcript" hidden>“Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.”</p><div class="signal-access"><a class="button" href="/#what-easy-does">EXPLORE WHAT WORKS TODAY</a><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN MY LIGHTHOUSE</a><a class="button secondary" href="/plans-pricing">MEMBERSHIP OPTIONS</a></div><p class="signal-small"><span id="lighthouse-state" role="status" aria-live="polite">Checking your access…</span> · Voice playback uses a narrator available on your device.</p></div>
+          <div class="signal-grid"><div class="signal-copy"><div class="eyebrow">Lighthouse AI · development preview</div><h2 id="lighthouse-title">A clearer way through what comes next.</h2><p>Yvette will be the familiar guide at the center of Lighthouse. The complete AI workspace is still being built journey by journey; the working destinations remain open while it grows.</p><p id="yvette-transcript" class="yvette-transcript" hidden>“Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.”</p><div class="signal-access"><a class="button" href="/#what-easy-does">EXPLORE WHAT WORKS TODAY</a><a class="button secondary" id="lighthouse-action" href="/customer-portal">OPEN MY LIGHTHOUSE</a><a class="button secondary" href="/plans-pricing">MEMBERSHIP OPTIONS</a></div><p class="signal-small"><span id="lighthouse-state" role="status" aria-live="polite">Checking your access…</span> · Yvette uses a synthetic feminine narrator and never claims to reproduce a real person's voice.</p></div>
           <div class="lighthouse-media" aria-label="Yvette development message inside a Lighthouse lantern"><img src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/assets/lighthouse-media-console-2040.webp" alt="Futuristic Lighthouse lantern built around a media window"><div class="lighthouse-screen yvette-screen"><div class="yvette-message"><span class="yvette-orbit" aria-hidden="true">Y</span><strong>Yvette</strong><span>Lighthouse guide · in development</span></div></div><button class="yvette-control" id="yvette-play" type="button">HEAR YVETTE’S WELCOME</button></div></div>
         </div></div>
       </section>
@@ -2536,14 +2536,14 @@
   <dialog class="beacon-quest" id="beacon-quest" aria-labelledby="beacon-title">
     <div class="beacon-shell"><button class="beacon-close" id="beacon-close" type="button" aria-label="Close the Beacon">×</button><div class="eyebrow">A small reason to return</div><h2 id="beacon-title">What kind of light do you need today?</h2><p>Choose the feeling closest to where you are. The Beacon will give you one simple experience inside Lighthouse.</p><div class="beacon-choices" role="group" aria-label="Choose your Beacon path"><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="calm"><strong>I need calm.</strong><span>Two minutes of coast, light, and room to breathe.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="curious"><strong>Surprise me.</strong><span>Open a part of Lighthouse you may have missed.</span></button><button class="beacon-choice" type="button" aria-pressed="false" data-beacon-mood="ready"><strong>I’m ready to move.</strong><span>Turn one real thought into a useful next step.</span></button></div><div class="beacon-result" aria-live="polite"><span class="beacon-number" aria-hidden="true">✦</span><div><h3 id="beacon-result-title">Choose a light above.</h3><p id="beacon-result-copy">Your path will appear here.</p></div><a class="button" id="beacon-result-link" href="#" hidden>BEGIN</a></div><p class="beacon-score" id="beacon-score">0 beacons found on this device.</p></div>
   </dialog>
-  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.js?v=20260907-2040-v1"></script>
+  <script src="https://easylotstoragesolutions.github.io/lighthouse-public-ui/lighthouse-2040.js?v=20260907-yvette-v2"></script>
   <script type="module">
     let loadTimer;
     try {
       await Promise.race([
         (async()=>{
           await window.lighthouseStylesReady;
-          await import(new URL('lighthouse-category-phones.mjs?v=20260907-16',location.href).href);
+          await import(new URL('lighthouse-category-phones.mjs?v=20260907-17',location.href).href);
           if(!document.querySelector('.harbor-app'))throw new Error('Harbor unavailable');
         })(),
         new Promise((_,reject)=>{loadTimer=setTimeout(()=>reject(new Error('Loading timed out')),20000)})

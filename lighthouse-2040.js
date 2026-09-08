@@ -4,25 +4,48 @@
   const yvetteMessage = "Hi, I’m Yvette, your guide inside Lighthouse. The full AI workspace is still in development. You can explore the working experiences today, and this space will grow as each journey is completed.";
   let speaking = false;
 
+  async function chooseYvetteVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    let voices = window.speechSynthesis.getVoices();
+    if (!voices.length) {
+      await new Promise(resolve => {
+        const done = () => { window.speechSynthesis.removeEventListener('voiceschanged', done); resolve(); };
+        window.speechSynthesis.addEventListener('voiceschanged', done, { once: true });
+        setTimeout(done, 1200);
+      });
+      voices = window.speechSynthesis.getVoices();
+    }
+    const preferred = [/Microsoft Aria/i, /Microsoft Jenny/i, /Samantha/i, /Zira/i, /Google US English/i, /female/i];
+    for (const pattern of preferred) {
+      const match = voices.find(item => /^en(?:-|_)/i.test(item.lang) && pattern.test(item.name));
+      if (match) return match;
+    }
+    return null;
+  }
+
   function stopYvette() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     speaking = false;
     if (yvetteButton) yvetteButton.textContent = 'HEAR YVETTE’S WELCOME';
   }
 
-  if (yvetteButton) yvetteButton.addEventListener('click', () => {
+  if (yvetteButton) yvetteButton.addEventListener('click', async () => {
     if (speaking) return stopYvette();
     if (yvetteTranscript) yvetteTranscript.hidden = false;
     if (!('speechSynthesis' in window)) {
       yvetteButton.textContent = 'WELCOME MESSAGE SHOWN';
       return;
     }
+    yvetteButton.textContent = 'PREPARING YVETTE…';
+    const voice = await chooseYvetteVoice();
+    if (!voice) {
+      yvetteButton.textContent = 'WELCOME MESSAGE SHOWN';
+      return;
+    }
     const utterance = new SpeechSynthesisUtterance(yvetteMessage);
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(item => /en-US/i.test(item.lang) && /natural|aria|jenny|samantha|zira/i.test(item.name)) || voices.find(item => /en/i.test(item.lang));
-    if (voice) utterance.voice = voice;
-    utterance.rate = .92;
-    utterance.pitch = 1;
+    utterance.voice = voice;
+    utterance.rate = .94;
+    utterance.pitch = 1.03;
     utterance.onend = stopYvette;
     utterance.onerror = stopYvette;
     speaking = true;
