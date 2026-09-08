@@ -9,11 +9,21 @@ const settings = {
 };
 const allVideos = new Set();
 let activeNarration=null;
-async function speakAsYvette(section,status){
-  const voice=window.LighthouseYvetteVoice;if(!voice){status.textContent='Open Read Yvette’s guide to follow the introduction.';return}
-  try{activeNarration={sectionId:section.id};await voice.play(section.id,{loading:()=>{status.textContent='Preparing Yvette’s narration…'},playing:()=>{status.textContent='Yvette is speaking with her Lighthouse narrator.'},ended:()=>{if(activeNarration?.sectionId===section.id)activeNarration=null},error:()=>{status.textContent='Open the written guide below to continue.'}})}catch{activeNarration=null;status.textContent='Yvette’s narration is temporarily unavailable. Open the written guide below.'}
+async function chooseYvetteVoice(){
+  if(!('speechSynthesis' in window))return null;
+  let voices=window.speechSynthesis.getVoices();
+  if(!voices.length){await new Promise(resolve=>{const done=()=>{window.speechSynthesis.removeEventListener('voiceschanged',done);resolve()};window.speechSynthesis.addEventListener('voiceschanged',done,{once:true});setTimeout(done,1200)});voices=window.speechSynthesis.getVoices()}
+  const preferred=[/Microsoft Aria/i,/Microsoft Jenny/i,/Samantha/i,/Zira/i,/Google US English/i,/female/i];
+  for(const pattern of preferred){const match=voices.find(item=>/^en(?:-|_)/i.test(item.lang)&&pattern.test(item.name));if(match)return match}
+  return null;
 }
-function stopYvette(sectionId){if(activeNarration?.sectionId===sectionId){window.LighthouseYvetteVoice?.stop();activeNarration=null}}
+async function speakAsYvette(section,status){
+  if(!('speechSynthesis' in window)){status.textContent='Open Read Yvette’s guide to follow the introduction.';return}
+  window.speechSynthesis.cancel();const voice=await chooseYvetteVoice();
+  if(!voice){status.textContent='A suitable feminine narrator is not available on this device. Open the written guide below.';return}
+  const utterance=new SpeechSynthesisUtterance(section.transcript);utterance.voice=voice;utterance.rate=.94;utterance.pitch=1.03;utterance.onend=()=>{if(activeNarration?.utterance===utterance)activeNarration=null};utterance.onerror=()=>{if(activeNarration?.utterance===utterance)activeNarration=null;status.textContent='Open the written guide below to continue.'};activeNarration={sectionId:section.id,utterance};status.textContent='Yvette is speaking with a synthetic feminine narrator.';window.speechSynthesis.speak(utterance);
+}
+function stopYvette(sectionId){if(activeNarration?.sectionId===sectionId&&'speechSynthesis' in window){window.speechSynthesis.cancel();activeNarration=null}}
 function make(tag, className, text) {
   const node = document.createElement(tag);
   if(className) node.className=className;
