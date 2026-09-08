@@ -71,3 +71,8 @@ html.harbor-ready,html.harbor-ready body{width:100%;min-width:0;background:#0718
  .harbor-app .harbor-availability{font-size:13px;line-height:1.6}
  .harbor-app .harbor-start{flex-direction:column;align-items:stretch;text-align:center}.harbor-start span{font-size:11px}.harbor-start a{font-size:14px}
 }
+
+/* Consistent homepage rhythm, with the mall kept close to the hero. */
+.harbor-app[data-view=home] .harbor-welcome{max-width:820px;margin-inline:auto;padding-top:0}
+.harbor-story{margin-top:32px}.harbor-yvette-preview{margin-top:28px}
+@media(max-width:700px){.mall-map-ready .harbor-welcome h1{font-size:clamp(32px,9vw,40px)}.harbor-app[data-view=home] .harbor-welcome{padding-inline:20px}.harbor-story{margin-top:24px}.harbor-yvette-preview{margin-top:24px}}
