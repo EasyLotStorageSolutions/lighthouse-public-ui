@@ -14,14 +14,16 @@
       <div class="grid">
         <div class="brand"><span class="kicker">The Lighthouse</span><h2>Lighthouse</h2><p>One place to come when you need help with work, business, projects, events, everyday life, storage, or something you have not figured out yet.</p><span class="coming">Lighthouse AI · Coming Soon</span></div>
         <div><h3>Explore</h3><a href="/">Home</a><a href="/find-storage">Storage Exchange</a><a href="/marketplace">Marketplace</a><a href="/#lighthouse-video-studio">Studio &amp; Channel</a></div>
-        <div><h3>Business &amp; Operators</h3><a href="/copy-of-how-it-works">Lighthouse for Business</a><a href="/customer-portal">Find Work</a><a href="/operator-community">The Operator Exchange</a><a href="/copy-of-find-storage">Advertise a Facility</a></div>
+        <div><h3>Business &amp; Operators</h3><a href="/copy-of-how-it-works">Lighthouse for Business</a><a href="/customer-portal?view=work">Find Work</a><a href="/operator-community">The Operator Exchange</a><a href="/copy-of-find-storage">Advertise a Facility</a></div>
         <div><h3>Your Account</h3><a href="/customer-portal">Sign In</a><a href="/customer-portal?view=storage">My Easy Lot &amp; Pay Bills</a><a href="/contact">Contact Lighthouse</a><a href="/policies-terms">Policies &amp; Terms</a></div>
       </div>
       <div class="bottom"><span>© 2026 Lighthouse. All rights reserved.</span><span>Easy Lot Storage Solutions · Baltimore, Maryland</span></div>
     </footer>
     <script>
       const parentOrigin=(()=>{let origin='';try{origin=new URL(document.referrer).origin}catch{}let host='';try{host=new URL(origin).hostname}catch{}const trusted=origin==='https://www.easylotstoragesolutions.com'||origin==='https://easylotstoragesolutions.com'||/(^|\.)editor\.wix\.com$/.test(host)||/(^|\.)manage\.wix\.com$/.test(host)||host==='localhost'||host==='127.0.0.1';return trusted?origin:'https://www.easylotstoragesolutions.com'})();
-      document.addEventListener('click',event=>{const link=event.target.closest('a[href]');if(!link)return;const href=link.getAttribute('href');if(!href||!href.startsWith('/'))return;event.preventDefault();window.parent.postMessage({type:'easy-lot:navigate',href},parentOrigin)});
+      // Ordinary links use full navigation so Wix redirects and query-selected
+      // account views run. Only home-section links need the iframe bridge.
+      document.addEventListener('click',event=>{const link=event.target.closest('a[href]');if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;const href=link.getAttribute('href');if(!href?.startsWith('/#')||window.parent===window)return;event.preventDefault();window.parent.postMessage({type:'easy-lot:navigate',href},parentOrigin)});
     </script>
   </body>
 </html>

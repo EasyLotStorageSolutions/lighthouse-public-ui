@@ -3,7 +3,7 @@ import {sections} from './lighthouse-guide-data.mjs';
 const media = new URL('./assets/lighthouse-guides/', import.meta.url);
 const settings = {
   storage: {selector:'.storage-drivein', label:'Facility tour', href:'https://www.easylotstoragesolutions.com/find-storage'},
-  employment: {selector:'#work-phone', label:'Try work demo', href:'https://www.easylotstoragesolutions.com/customer-portal?view=controls'},
+  employment: {selector:'#work-phone', label:'Try work demo', href:'https://www.easylotstoragesolutions.com/customer-portal?view=work'},
   marketplace: {selector:'#marketplace-phone', label:'Try listing demo', href:'https://www.easylotstoragesolutions.com/marketplace'},
   music: {selector:'.channel-tv', label:'Watch featured video', href:'https://www.easylotstoragesolutions.com/customer-portal?view=studio'}
 };
