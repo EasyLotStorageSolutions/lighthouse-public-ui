@@ -55,7 +55,7 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
       </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
-        <a href="/customer-portal" data-sign-in>Sign In</a>
+        <a href="/customer-portal">My account</a>
       </nav>
       <button class="motion-toggle" type="button" aria-label="Pause hero video">Pause video</button>
     </header>
@@ -82,7 +82,7 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
           window.parent.postMessage({ type: 'easy-lot:signin' }, parentOrigin);
           return;
         }
-        if (!href.startsWith('/#')) return;
+        if (!href.startsWith('/') || href.startsWith('//')) return;
         event.preventDefault();
         window.parent.postMessage({ type: 'easy-lot:navigate', href }, parentOrigin);
       });
