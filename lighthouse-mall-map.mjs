@@ -1,6 +1,6 @@
 import {openCenterPlayer} from './lighthouse-live.mjs?v=20260909-launch1';
 const districts=[
- {id:'marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:15,y:18,mx:20,my:10,angle:-145},
+ {id:'marketplace',url:'https://www.easylotstoragesolutions.com/customer-portal?view=marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:15,y:18,mx:20,my:10,angle:-145},
  {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:38,y:12,mx:80,my:10,angle:-110},
  {id:'storage',name:'Storage & Space',hint:'Find or offer storage space',x:63,y:12,mx:20,my:28,angle:-70},
  {id:'social',name:'Community & Social',hint:'People, groups & connections',x:86,y:18,mx:80,my:28,angle:-35},
