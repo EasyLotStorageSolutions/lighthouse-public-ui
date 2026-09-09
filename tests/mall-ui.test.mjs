@@ -6,6 +6,27 @@ const require=createRequire(import.meta.url),{JSDOM}=require('jsdom');
 const html=await fs.readFile(new URL('../marketplace-mall.html',import.meta.url),'utf8');
 const source=(await fs.readFile(new URL('../marketplace-mall.mjs',import.meta.url),'utf8')).replace("import Hls from './vendor/hls.light.mjs';",'const Hls={isSupported:()=>false};');
 const listing={id:'a'.repeat(36),version:4,title:'Oak dining table',category:'home-goods',condition:'Good',city:'Baltimore',state:'MD',price:120,status:'LIVE',description:'Solid oak table with a scratch on the top.',fulfillment:'Local pickup.',photos:[],publishedAt:'2026-09-09',updatedAt:'2026-09-09'};
+
+test('sign-out clears the displayed owner identity without reopening login',async()=>{
+    const a=await app({embedded:true,hash:'#account',handler:async action=>{
+        if(action==='session')return {signedIn:true,id:'owner',name:'Owner Test',owner:true};
+        if(action==='logout')return {signedIn:false};
+        throw new Error(action);
+    }});
+    try{await a.click('[data-action=logout]');assert.doesNotMatch(a.w.document.querySelector('#content').textContent,/Owner Test|Owner review/);assert.ok(a.w.document.querySelector('[data-action=login]'));assert.equal(a.calls.filter(c=>c.action==='login').length,0);}finally{a.close();}
+});
+test('failed sign-out retains the account and offers a retry',async()=>{
+    const a=await app({embedded:true,hash:'#account',handler:async action=>{
+        if(action==='session')return {signedIn:true,id:'owner',name:'Owner Test',owner:true};
+        if(action==='logout')throw new Error('Sign-out unavailable');
+        throw new Error(action);
+    }});
+    try{await a.click('[data-action=logout]');assert.match(a.w.document.body.textContent,/Sign-out unavailable/);assert.ok(a.w.document.querySelector('[data-action=logout]'));assert.match(a.w.document.querySelector('#content').textContent,/Owner Test/);}finally{a.close();}
+});
+test('seller dashboard does not offer a nonexistent draft to resume',async()=>{
+    const a=await app({embedded:true,hash:'#seller',handler:async action=>action==='session'?{signedIn:true,id:'customer',name:'Customer'}:{items:[],nextCursor:null}});
+    try{assert.doesNotMatch(a.w.document.querySelector('#content').textContent,/Resume current draft/);}finally{a.close();}
+});
 async function flush(){for(let n=0;n<8;n++)await new Promise(r=>setTimeout(r,0));}
 async function app({hash='#browse',embedded=false,handler,query=''}={}){
     const dom=new JSDOM(html,{url:`https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-mall.html?${embedded?'embedded=1&':''}${query}${hash}`,runScripts:'outside-only',pretendToBeVisual:true});
