@@ -55,7 +55,7 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
       </a>
       <nav aria-label="Main navigation">
         <a href="/#how-easy-works">How It Works</a>
-        <a href="/customer-portal">Sign In</a>
+        <a href="/customer-portal" data-sign-in>Sign In</a>
       </nav>
       <button class="motion-toggle" type="button" aria-label="Pause hero video">Pause video</button>
     </header>
@@ -76,7 +76,13 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
         const link = event.target.closest('a[href]');
         if (!link) return;
         const href = link.getAttribute('href');
-        if (!href || !href.startsWith('/#') || window.parent === window || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        if (!href || window.parent === window || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        if (link.hasAttribute('data-sign-in')) {
+          event.preventDefault();
+          window.parent.postMessage({ type: 'easy-lot:signin' }, parentOrigin);
+          return;
+        }
+        if (!href.startsWith('/#')) return;
         event.preventDefault();
         window.parent.postMessage({ type: 'easy-lot:navigate', href }, parentOrigin);
       });
