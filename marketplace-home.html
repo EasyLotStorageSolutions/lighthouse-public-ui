@@ -840,7 +840,7 @@
       </section>
       <section class="marketplace-showcase" id="marketplace-showcase" aria-labelledby="marketplace-showcase-title">
         <div class="lh-market-intro" id="marketplaceExperience">
-<div class="lh-market-copy"><span class="lh-eyebrow">THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketplace-showcase-title">Buy it. Sell it. Auction it.<span>All in one Marketplace.</span></h2><p>List goods, vehicles, equipment, business items, free items, trades, or wanted posts. Handmade goods and custom work now have their own Makers Market &amp; Community destination.</p><div class="lh-market-actions"><a class="button" href="/sell-something">Sell Something</a><a class="button secondary" href="/marketplace">Explore Marketplace</a></div><p><a href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-maker-space.html">Looking for handmade goods or custom work? Visit Makers Market &amp; Community →</a></p><button class="lh-demo-link" id="phone-demo-replay" type="button">See how it works</button></div>
+<div class="lh-market-copy"><span class="lh-eyebrow">THE LIGHTHOUSE MARKETPLACE</span><h2 id="marketplace-showcase-title">Buy it. Sell it. Auction it.<span>All in one Marketplace.</span></h2><p>List goods, vehicles, equipment, business items, free items, trades, or wanted posts. Handmade goods and custom work now have their own Makers Market &amp; Community destination.</p><div class="lh-market-actions"><a class="button" href="https://www.easylotstoragesolutions.com/customer-portal?view=marketplace&amp;mallScreen=sell">Sell Something</a><a class="button secondary" href="https://www.easylotstoragesolutions.com/customer-portal?view=marketplace">Explore Marketplace</a></div><p><a href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-maker-space.html">Looking for handmade goods or custom work? Visit Makers Market &amp; Community →</a></p><button class="lh-demo-link" id="phone-demo-replay" type="button">See how it works</button></div>
           <div class="lh-phone-stage"><div class="lh-phone-glow" aria-hidden="true"></div><div class="marketplace-phone-wrap">
             <div class="marketplace-phone" id="marketplace-phone" aria-label="Interactive Lighthouse Marketplace listing demonstration"><div class="marketplace-phone-screen">
               <div class="marketplace-phone-island" aria-hidden="true"></div><div class="phone-status"><span>9:41</span><span class="phone-status-icons" aria-hidden="true">● ◒ ▰</span></div>
@@ -862,7 +862,7 @@
           <button class="experience-mode" type="button" data-home-mode="quick" aria-pressed="false"><small>QUICK</small><strong>Browse without waiting.</strong><span>A clean, conventional grid with filters and minimal effects.</span></button>
           <button class="experience-mode" type="button" data-home-mode="explore" aria-pressed="true"><small>EXPLORE</small><strong>Move through the districts.</strong><span>A spatial 2.5D Marketplace campus built over the same real inventory.</span></button>
           <button class="experience-mode" type="button" data-home-mode="immersive" aria-pressed="false"><small>IMMERSIVE</small><strong>Turn up the atmosphere.</strong><span>Explore with deeper transitions and optional sound after you opt in.</span></button>
-        </div><div class="portal-enter"><span id="portal-mode-copy">Explore mode opens the visual Marketplace campus. You can switch modes at any time.</span><div class="lh-market-actions"><a class="button" id="portal-enter-link" href="/marketplace">ENTER EXPLORE MODE</a><a class="button secondary" href="/auction-hall">ENTER AUCTION HALL · VIEW ONLY</a></div></div></div>
+        </div><div class="portal-enter"><span id="portal-mode-copy">Explore mode opens the visual Marketplace campus. You can switch modes at any time.</span><div class="lh-market-actions"><a class="button" id="portal-enter-link" href="https://www.easylotstoragesolutions.com/customer-portal?view=marketplace">ENTER EXPLORE MODE</a><a class="button secondary" href="/auction-hall">ENTER AUCTION HALL · VIEW ONLY</a></div></div></div>
       </section>
       <section class="lighthouse-doorway" aria-labelledby="lighthouse-title">
         <div class="container"><div class="signal-deck">
@@ -2411,7 +2411,7 @@
         document.querySelectorAll('[data-home-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.homeMode === mode)));
         document.getElementById('portal-mode-copy').textContent = portalCopy[mode][0];
         const enterLink = document.getElementById('portal-enter-link');
-        enterLink.href = mode === 'explore' ? '/marketplace' : `https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-explore.html?mode=${mode}`;
+        enterLink.href = "https://www.easylotstoragesolutions.com/customer-portal?view=marketplace";
         enterLink.textContent = portalCopy[mode][1];
       }
       document.querySelectorAll('[data-home-mode]').forEach(button => button.addEventListener('click', () => setHomepageMarketplaceMode(button.dataset.homeMode)));
