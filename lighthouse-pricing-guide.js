@@ -2,18 +2,28 @@
   'use strict';
   if (!['/pricing-plans', '/pricing-plans.html'].includes(location.pathname.replace(/\/$/, ''))) return;
 
-  const lighthousePlans = new Set(['The Lighthouse Membership', 'Lighthouse Business', 'Lighthouse Employer']);
+  const providerPlans = new Map([
+    ['storage-provider', 'Lighthouse Storage Provider'],
+    ['employer', 'Lighthouse Employer Provider'],
+    ['maker', 'Lighthouse Maker Provider'],
+    ['creative', 'Lighthouse Creative Provider'],
+    ['locksmith', 'Lighthouse Locksmith Provider'],
+    ['towing', 'Lighthouse Towing Provider'],
+    ['contractor', 'Lighthouse Contractor Provider'],
+    ['landscaping', 'Lighthouse Landscaping Provider']
+  ]);
+  const legacyLighthousePlans = new Set(['The Lighthouse Membership', 'Lighthouse Business', 'Lighthouse Employer']);
   const storagePlans = new Set([
     'Car/Truck Storage', "Small & Medium RV's and Box Trucks", "Large Size RV's and Box Trucks",
     'Small and Medium Boats', 'Large Boats', 'Single Lot Access', 'Rose Street Car and Truck Storage',
     'Contractor Yard 36x36', 'Contractor Yard 36x72', 'Storage Facility Advertising'
   ]);
   const labels = {
-    lighthouse: {
-      eyebrow: 'LIGHTHOUSE MEMBERSHIPS',
-      title: 'Choose how Lighthouse helps you.',
-      copy: 'Personal help, business tools, and employer access are memberships in the Lighthouse platform. They do not include a storage space, storage rent, or facility advertising.',
-      note: 'The personal plan has a 7-day trial. Business and Employer have 14-day trials. Each is a recurring monthly subscription. Review the final checkout for the charge date and cancellation terms before starting.'
+    provider: {
+      eyebrow: 'PROVIDER SUBSCRIPTIONS',
+      title: 'Choose only the store your business needs.',
+      copy: 'Customers are free. Service providers subscribe separately to each paid store they use, keep their customer relationships, and collect customer payments directly.',
+      note: 'Every provider plan includes a 30-day free trial and then renews monthly until canceled. Marketplace and Community & Social require no subscription. Review the final checkout before starting.'
     },
     storage: {
       eyebrow: 'STORAGE & FACILITY PLANS',
@@ -24,8 +34,8 @@
     all: {
       eyebrow: 'ALL CURRENT PLANS',
       title: 'Compare everything, with the difference kept clear.',
-      copy: 'Lighthouse memberships pay for platform access. Storage plans pay for a physical Easy Lot space or a facility advertising service.',
-      note: 'Selecting a plan does not combine the two businesses. Review the plan name and final checkout carefully.'
+      copy: 'Provider subscriptions pay for access to one business category. Storage plans pay for a physical Easy Lot space.',
+      note: 'Customers remain free. Lighthouse does not collect or take a percentage of customer-to-provider transactions. Review the plan name and final checkout carefully.'
     }
   };
   const style = document.createElement('style');
@@ -49,12 +59,13 @@
 
   let current = (() => {
     const requested = new URLSearchParams(location.search).get('for');
-    return ['storage', 'all'].includes(requested) ? requested : 'lighthouse';
+    return requested === 'storage' || requested === 'all' ? requested : providerPlans.has(requested) ? requested : 'provider';
   })();
-  const focusName = new URLSearchParams(location.search).get('for') === 'employer' ? 'Lighthouse Employer' : '';
+  const focusName = providerPlans.get(new URLSearchParams(location.search).get('for')) || '';
 
   function classify(title) {
-    if (lighthousePlans.has(title)) return 'lighthouse';
+    if ([...providerPlans.values()].includes(title)) return 'provider';
+    if (legacyLighthousePlans.has(title)) return 'legacy';
     if (storagePlans.has(title)) return 'storage';
     return 'other';
   }
@@ -72,7 +83,7 @@
       guide = document.createElement('section');
       guide.id = 'lighthouse-pricing-guide';
       guide.setAttribute('aria-labelledby', 'lpg-title');
-      guide.innerHTML = `<p class="lpg-eyebrow"></p><h1 id="lpg-title"></h1><p class="lpg-copy"></p><div class="lpg-tabs" role="group" aria-label="Choose which plans to see"><button type="button" data-view="lighthouse">Lighthouse memberships</button><button type="button" data-view="storage">Storage & facility plans</button><button type="button" data-view="all">Compare all</button></div><p class="lpg-note"></p><div class="lpg-quick"><a href="/">Return to Lighthouse</a><a href="/find-storage">Explore storage first</a></div>`;
+      guide.innerHTML = `<p class="lpg-eyebrow"></p><h1 id="lpg-title"></h1><p class="lpg-copy"></p><div class="lpg-tabs" role="group" aria-label="Choose which plans to see"><button type="button" data-view="provider">Provider subscriptions</button><button type="button" data-view="storage">Easy Lot storage plans</button><button type="button" data-view="all">Compare all active plans</button></div><p class="lpg-note"></p><div class="lpg-quick"><a href="/">Return to Lighthouse</a><a href="https://easylotstoragesolutions.github.io/lighthouse-public-ui/provider-subscriptions.html">Compare provider stores</a><a href="/find-storage">Explore storage first</a></div>`;
       // Keep the site's own header first, then introduce the choices immediately
       // before Wix's plan app. The bounded startup retry restores this placement
       // if Wix replaces the app shell while it finishes hydrating.
@@ -95,7 +106,7 @@
   function apply() {
     const guide = document.getElementById('lighthouse-pricing-guide');
     if (!guide) return;
-    const words = labels[current];
+    const words = labels[current] || labels.provider;
     guide.querySelector('.lpg-eyebrow').textContent = words.eyebrow;
     guide.querySelector('h1').textContent = words.title;
     guide.querySelector('.lpg-copy').textContent = words.copy;
@@ -104,7 +115,7 @@
     document.querySelectorAll('[data-hook="plan"]').forEach(plan => {
       const title = plan.querySelector('[data-hook="plan-title"]')?.textContent.trim() || '';
       const group = classify(title);
-      const visible = current === 'all' || group === current || group === 'other';
+      const visible = current === 'all' ? group !== 'legacy' : focusName ? title === focusName : group === current;
       plan.hidden = !visible;
       plan.style.display = visible ? '' : 'none';
       plan.setAttribute('aria-hidden', String(!visible));
@@ -112,7 +123,7 @@
       plan.dataset.lighthousePlanFocus = String(focused);
     });
     const originalTitle = document.querySelector('[data-hook="app-title"]');
-    if (originalTitle) originalTitle.textContent = current === 'lighthouse' ? 'Lighthouse memberships' : current === 'storage' ? 'Storage & facility plans' : 'All plans';
+    if (originalTitle) originalTitle.textContent = focusName || (current === 'provider' ? 'Provider subscriptions' : current === 'storage' ? 'Easy Lot storage plans' : 'All active plans');
   }
   // Wix hydrates this app after the page shell. A short bounded retry is more
   // dependable here than tying behavior to Wix's internal mutation sequence.

@@ -172,8 +172,8 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-await import('./lighthouse-live.mjs?v=20260908-store-media1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260908-store-media1');
+await import('./lighthouse-live.mjs?v=20260909-launch1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260909-launch1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original

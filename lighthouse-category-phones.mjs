@@ -8,6 +8,7 @@ const settings = {
   music: {selector:'.channel-tv', label:'Watch featured video', href:'https://www.easylotstoragesolutions.com/customer-portal?view=studio'}
 };
 const allVideos = new Set();
+const walkthroughs={storage:'storage',employment:'employment',marketplace:'marketplace',music:'creative',social:'social'};
 let activeNarration=null;
 async function chooseYvetteVoice(){
   if(!('speechSynthesis' in window))return null;
@@ -41,10 +42,9 @@ function mountPhone(section, old, options) {
   const video=make('video','yvette-video');
   video.controls=false; video.playsInline=true; video.preload='none';video.muted=true;video.volume=0;
   video.poster=new URL(section.id+'-poster.jpg',media).href;
-  video.src=new URL(section.id+'.mp4',media).href;
+  video.src=new URL('../'+walkthroughs[section.id]+'-walkthrough.mp4',media).href;
   video.setAttribute('aria-label','Optional introduction to '+section.name);
-  const captions=make('track'); captions.kind='captions';captions.srclang='en';captions.label='English';captions.src=new URL(section.id+'.vtt',media).href;
-  video.append(captions); screen.append(video);allVideos.add(video);
+  screen.append(video);allVideos.add(video);
   const fallback=make('p','yvette-error','The guide could not load. You can read it below or enter the section.');fallback.hidden=true;screen.append(fallback);
   video.addEventListener('error',()=>{fallback.hidden=true;status.textContent=fallback.textContent;});
   const dock=make('div','yvette-dock');
@@ -131,4 +131,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260908-store-media1');
+await import('./lighthouse-harbor.mjs?v=20260909-launch1');

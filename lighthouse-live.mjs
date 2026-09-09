@@ -262,7 +262,7 @@ if(app){
     const modal=make('dialog','locksmith-main-dialog');modal.setAttribute('aria-labelledby','locksmith-main-tv-title');
     const close=make('button',null,'Close ×');close.type='button';close.addEventListener('click',()=>modal.close());
     const title=make('h2',null,'Lighthouse Locksmith TV');title.id='locksmith-main-tv-title';
-    const screen=make('div','locksmith-main-screen');const welcome=make('video');welcome.src=new URL('./assets/locksmith-welcome.mp4',import.meta.url).href;welcome.controls=true;welcome.playsInline=true;welcome.preload='metadata';welcome.style.width='100%';screen.append(welcome);modal.addEventListener('close',()=>welcome.pause());
+    const screen=make('div','locksmith-main-screen');const welcome=make('video');welcome.src=new URL('./assets/locksmith-walkthrough.mp4',import.meta.url).href;welcome.controls=true;welcome.playsInline=true;welcome.preload='metadata';welcome.style.width='100%';screen.append(welcome);modal.addEventListener('close',()=>welcome.pause());
     const visit=make('a',null,'Open the Locksmith TV network →');visit.href=store+'&screen=network';visit.target='_top';
     modal.append(close,title,screen,make('p',null,'Welcome to the trade. Watch member videos, meet creators and explore the Locksmith community.'),visit);document.body.append(modal);
     tv.addEventListener('click',()=>{document.querySelectorAll('video,audio').forEach(v=>v.pause());modal.showModal()});
