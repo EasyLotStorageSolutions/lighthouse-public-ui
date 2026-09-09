@@ -55,7 +55,7 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
       </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
-        <a href="/customer-portal">My account</a>
+        <a href="/customer-portal" data-account-link aria-live="polite">My Account</a>
       </nav>
       <button class="motion-toggle" type="button" aria-label="Pause hero video">Pause video</button>
     </header>
@@ -72,6 +72,24 @@ nav{position:absolute;top:16px;left:28px;right:28px;display:flex;justify-content
       const referrerOrigin = (() => { try { return new URL(document.referrer).origin; } catch (error) { return ''; } })();
       const referrerHost = (() => { try { return new URL(referrerOrigin).hostname; } catch (error) { return ''; } })();
       const parentOrigin = referrerOrigin === 'http://localhost:8847' || referrerOrigin === publicOrigin || referrerOrigin === 'https://easylotstoragesolutions.com' || /\.editor\.wix\.com$/.test(referrerHost) ? referrerOrigin : publicOrigin;
+
+      // Ask Wix for the real session; never infer authentication from local storage.
+      const accountLink = document.querySelector('[data-account-link]');
+      window.addEventListener('message', event => {
+        if (event.source !== window.parent || event.origin !== parentOrigin) return;
+        const data = event.data || {};
+        if (data.type !== 'easy-lot:auth-state' || typeof data.signedIn !== 'boolean') return;
+        accountLink.textContent = data.signedIn ? 'My Account · Signed in' : 'Sign In';
+        accountLink.setAttribute('aria-label', data.signedIn ? 'My Account, signed in' : 'Sign In');
+      });
+      function refreshAccountStatus() {
+        if (window.parent !== window) window.parent.postMessage({ type: 'easy-lot:auth-request' }, parentOrigin);
+      }
+      refreshAccountStatus();
+      // Also covers iframe load timing and signing in or out without a page reload.
+      setInterval(refreshAccountStatus, 2000);
+      window.addEventListener('focus', refreshAccountStatus);
+
       document.addEventListener('click', event => {
         const link = event.target.closest('a[href]');
         if (!link) return;
