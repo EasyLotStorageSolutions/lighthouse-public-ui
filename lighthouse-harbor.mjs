@@ -79,6 +79,8 @@ for(const s of sections){
   card.addEventListener('focus',()=>app.style.setProperty('--beam-angle',({storage:'-16deg',employment:'-8deg',social:'0deg',marketplace:'8deg',music:'16deg'})[s.id]));
   nav.append(card);cards.set(s.id,card);
   const source=document.getElementById(sourceIds[s.id]);
+  // The failed Marketplace draft is retired; do not construct or retain its panel.
+  if (s.id === 'marketplace') { source?.remove(); continue; }
   const phone=source?.querySelector('.yvette-phone-group');
   const panel=el('section','harbor-panel');panel.hidden=true;panel.id='harbor-'+s.id;panel.setAttribute('aria-labelledby','harbor-heading-'+s.id);card.setAttribute('aria-controls',panel.id);
   const overview=el('div','harbor-overview');const intro=el('div','harbor-intro');
@@ -130,6 +132,7 @@ moreDialog.addEventListener('click',e=>{if(e.target===moreDialog)moreDialog.clos
 function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause());document.querySelectorAll('.harbor-panel:not([hidden]) iframe,.harbor-feature-preview iframe,.harbor-cinema iframe').forEach(f=>{const src=f.getAttribute('src');if(src)f.setAttribute('src',src.replace('autoplay=1','autoplay=0'));});}
 function updateFavorite(){cards.forEach((card,id)=>card.classList.toggle('is-favorite',prefs.favorites.includes(id)));pin.textContent=prefs.favorites.includes(current)?'★ Saved to favorites':'☆ Add to favorites';pin.setAttribute('aria-pressed',String(prefs.favorites.includes(current)));favorites.replaceChildren();if(prefs.favorites.length){favorites.append(el('span',null,'Your places'));prefs.favorites.forEach(id=>favorites.append(button(sections.find(s=>s.id===id).name,'',()=>go(id,true))));}else favorites.append(el('span',null,'Make this place yours. Save a favorite inside any destination.'));}
 function go(id,user=false){
+  if (id === 'marketplace') { window.top.location.href = 'https://www.easylotstoragesolutions.com/customer-portal?view=marketplace'; return; }
   if(id!=='home'&&!panels.has(id))return;
   moreDialog.close();document.getElementById('beacon-quest')?.close();
   pauseAll();current=id;app.dataset.view=id;welcome.hidden=id!=='home';stage.hidden=id==='home';panels.forEach((p,key)=>p.hidden=key!==id);cards.forEach((b,key)=>b.querySelector('.harbor-feature-enter').setAttribute('aria-current',key===id?'page':'false'));updateFavorite();
@@ -173,7 +176,7 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
 await import('./lighthouse-live.mjs?v=20260909-launch1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260909-community1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260909-new-marketplace');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
