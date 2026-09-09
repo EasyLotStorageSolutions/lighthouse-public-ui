@@ -4,12 +4,12 @@ const districts=[
  {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:38,y:12,mx:80,my:10,angle:-110},
  {id:'storage',name:'Storage & Space',hint:'Find or offer storage space',x:63,y:12,mx:20,my:28,angle:-70},
  {id:'social',name:'Community & Social',hint:'People, groups & connections',x:86,y:18,mx:80,my:28,angle:-35},
- {id:'makers',name:'Makers Market & Community',hint:'Handmade goods, custom work & maker connections',x:90,y:52,mx:20,my:65,angle:0,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-maker-space.html'},
- {id:'music',name:'Creative Studio',hint:'Music, video & creative tools',x:82,y:84,mx:80,my:65,angle:35},
- {id:'locksmith',name:'Locksmith Services',hint:'Find a locksmith or join the trade',x:62,y:89,mx:20,my:83,angle:70},
- {id:'towing',name:'Towing & Roadside Assistance',hint:'Towing, roadside help & vehicle transport',x:38,y:89,mx:80,my:83,angle:110,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/towing-roadside.html'},
- {id:'contractors',name:'Contractors & Home Services',hint:'Find contractors & home-service professionals',x:18,y:84,mx:20,my:83,angle:145,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/contractors-home-services.html'},
- {id:'landscaping',name:'Landscaping & Lawn Care',hint:'Find lawn care or grow a landscaping business',x:8,y:52,mx:80,my:95,angle:180,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/landscaping-lawn-care.html'}
+ {id:'makers',name:'Makers Market & Community',hint:'Handmade goods, custom work & maker connections',x:90,y:52,mx:20,my:46,angle:0,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/marketplace-maker-space.html'},
+ {id:'music',name:'Creative Studio',hint:'Music, video & creative tools',x:82,y:84,mx:80,my:46,angle:35},
+ {id:'locksmith',name:'Locksmith Services',hint:'Find a locksmith or join the trade',x:62,y:89,mx:20,my:64,angle:70},
+ {id:'towing',name:'Towing & Roadside Assistance',hint:'Towing, roadside help & vehicle transport',x:38,y:89,mx:80,my:64,angle:110,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/towing-roadside.html'},
+ {id:'contractors',name:'Contractors & Home Services',hint:'Find contractors & home-service professionals',x:18,y:84,mx:20,my:82,angle:145,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/contractors-home-services.html'},
+ {id:'landscaping',name:'Landscaping & Lawn Care',hint:'Find lawn care or grow a landscaping business',x:8,y:52,mx:80,my:82,angle:180,url:'https://easylotstoragesolutions.github.io/lighthouse-public-ui/landscaping-lawn-care.html'}
 ];
 const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls||'';if(text)n.textContent=text;return n;};
 const btn=(text,cls,fn)=>{const n=make('button',cls,text);n.type='button';n.addEventListener('click',fn);return n;};
