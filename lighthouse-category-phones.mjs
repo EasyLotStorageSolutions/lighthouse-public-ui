@@ -131,4 +131,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260909-mobile-map1');
+await import('./lighthouse-harbor.mjs?v=20260909-map-clear2');
