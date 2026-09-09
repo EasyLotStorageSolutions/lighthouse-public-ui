@@ -1,0 +1,6 @@
+{
+  "name": "lighthouse-public-ui",
+  "private": true,
+  "scripts": { "test:mall": "node --test tests/mall-ui.test.mjs" },
+  "devDependencies": { "jsdom": "26.1.0" }
+}
