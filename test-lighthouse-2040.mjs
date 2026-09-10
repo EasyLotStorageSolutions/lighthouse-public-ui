@@ -9,6 +9,7 @@ const styles = await readFile(new URL('./lighthouse-2040.css', import.meta.url),
 const live = await readFile(new URL('./lighthouse-live.mjs', import.meta.url), 'utf8');
 const phones = await readFile(new URL('./lighthouse-category-phones.mjs', import.meta.url), 'utf8');
 const mallMap = await readFile(new URL('./lighthouse-mall-map.mjs', import.meta.url), 'utf8');
+const concierge = await readFile(new URL('./lighthouse-concierge.html', import.meta.url), 'utf8');
 const header = await readFile(new URL('./marketplace-header.html', import.meta.url), 'utf8');
 const makerStore = await readFile(new URL('./marketplace-maker-space.html', import.meta.url), 'utf8');
 const marketplace = await readFile(new URL('./marketplace-explore.html', import.meta.url), 'utf8');
@@ -79,10 +80,9 @@ test('radio search is user-started, HTTPS-only, and keeps each Lighthouse choice
   assert.match(live, /Exact coordinates go to the location lookup service once and are not saved by Lighthouse/);
 });
 
-test('the approved hero retains a dependable Home link and visible corner navigation', () => {
+test('the approved hero retains dependable Home and account navigation', () => {
   assert.match(header, /class="brand" href="\/" aria-label="The Lighthouse by Easy Lot Storage Solutions home"/);
-  assert.match(header, /href="\/#how-easy-works">How It Works/);
-  assert.match(header, /href="\/customer-portal">Sign In/);
+  assert.match(header, /href="\/customer-portal" data-account-link/);
   assert.match(header, /object-fit:contain/);
 });
 
@@ -128,8 +128,17 @@ test('public category buttons use plain-language names', () => {
   assert.doesNotMatch(home, /Close the Beacon|Choose your Beacon path|beacons found/);
 });
 
+test('the main Lighthouse video screen opens the site-wide concierge without removing TV and radio', () => {
+  assert.match(mallMap, /Talk to the Concierge/);
+  assert.match(mallMap, /lighthouse-concierge\.html\?embedded=1/);
+  assert.match(mallMap, /frame\.allow='microphone'/);
+  assert.match(mallMap, /TV & Radio/);
+  assert.match(mallMap, /Return to the mall/);
+  assert.match(concierge, /What can I help you accomplish today\?/);
+});
+
 test('every new focused store has a playing Lighthouse screen and full media lounge', () => {
-  for (const [source, category, video] of [[makerStore,'makers','makers-welcome.mp4'],[towingStore,'towing','towing-welcome.mp4'],[contractorStore,'contractors','contractors-welcome.mp4']]) {
+  for (const [source, category, video] of [[makerStore,'makers','makers-walkthrough.mp4'],[towingStore,'towing','towing-walkthrough.mp4'],[contractorStore,'contractors','contractors-walkthrough.mp4']]) {
     assert.match(source, /class="site-lighthouse"/);
     assert.match(source, new RegExp(`data-category="${category}"`));
     assert.match(source, new RegExp(video.replace('.', '\\.')));
