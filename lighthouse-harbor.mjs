@@ -5,7 +5,7 @@ import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=202609
 // Cache-bust the concierge-aware mall styling even when Wix serves older HTML.
 const mallMapStyle=document.createElement('link');
 mallMapStyle.rel='stylesheet';
-mallMapStyle.href=new URL('./lighthouse-mall-map.css?v=20260910-window-player1',import.meta.url).href;
+mallMapStyle.href=new URL('./lighthouse-mall-map.css?v=20260910-concierge-screen2',import.meta.url).href;
 document.head.append(mallMapStyle);
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
@@ -177,8 +177,8 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // The first screen is complete at this point. Load resizing and live media in the
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
-await import('./lighthouse-live.mjs?v=20260910-embedded-player1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260910-window-player1');
+await import('./lighthouse-live.mjs?v=20260909-launch1');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260909-concierge-screen1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
