@@ -24,6 +24,14 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  const theater=make('section','mall-theater');theater.hidden=true;theater.setAttribute('aria-label','Center Lighthouse video screen');let conciergeFrame=null;
  const openScreen=()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');};
  const closeScreen=focusTarget=>{conciergeFrame=null;theater.replaceChildren();theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)focusTarget.focus({preventScroll:true});};
+ const concierge=btn('✦ Talk to the Concierge','mall-center-play mall-concierge-open',()=>{
+   openScreen();
+   const close=btn('← Return to the mall','mall-screen-close',()=>closeScreen(concierge));
+   const heading=make('h2','mall-screen-title','Lighthouse Concierge');
+   const frame=make('iframe','mall-concierge-frame');conciergeFrame=frame;frame.title='Lighthouse Concierge';frame.src=new URL('./lighthouse-concierge.html?embedded=1',import.meta.url).href;frame.allow='microphone';frame.setAttribute('sandbox','allow-scripts allow-forms allow-same-origin allow-top-navigation-by-user-activation');
+   const fallback=make('p','mall-screen-fallback');fallback.append('If the concierge screen does not open, ',Object.assign(make('a',null,'open it directly'),{href:frame.src,target:'_top'}),'.');
+   theater.append(close,heading,frame,fallback);close.focus({preventScroll:true});
+ });
  const wixOrigins=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
  window.addEventListener('message',event=>{
    if(event.source===conciergeFrame?.contentWindow&&event.origin===location.origin&&event.data?.type==='lighthouse-concierge:rpc'){
@@ -35,7 +43,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
      conciergeFrame.contentWindow.postMessage(event.data,location.origin);
    }
  });
- const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});watchCenter.style.cssText='top:58%!important;z-index:5!important;';canvas.append(watchCenter);
+ const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});canvas.append(concierge,watchCenter);
  const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.style.setProperty('--mx',d.mx+'%');n.style.setProperty('--my',d.my+'%');n.setAttribute('aria-label','Enter '+d.name);if(!d.url&&d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a category. See what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');
@@ -55,10 +63,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
    showMap();go(d.id,true);
  }
  map.addEventListener('keydown',e=>{if(e.key==='Escape'){showMap(true);e.stopPropagation();}});
- const conciergeSection=make('section','lighthouse-concierge-section');conciergeSection.setAttribute('aria-label','Lighthouse Concierge');
- const conciergeCopy=make('div','lighthouse-concierge-copy');conciergeCopy.append(make('p','harbor-eyebrow','THE LIGHTHOUSE CONCIERGE'),make('h2',null,'Tell us what you need.'),make('p',null,'Start here. Tell the Lighthouse what you are looking for, and it will guide you to the right place across the mall.'));
- const conciergeStage=make('div','lighthouse-concierge-stage');const conciergeImage=make('img','lighthouse-concierge-image');conciergeImage.src=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;conciergeImage.alt='The Lighthouse concierge screen';conciergeFrame=make('iframe','lighthouse-concierge-frame');conciergeFrame.title='Lighthouse Concierge';conciergeFrame.src=new URL('./lighthouse-concierge.html?embedded=1',import.meta.url).href;conciergeFrame.allow='microphone';conciergeFrame.setAttribute('sandbox','allow-scripts allow-forms allow-same-origin allow-top-navigation-by-user-activation');conciergeStage.append(conciergeImage,conciergeFrame);conciergeSection.append(conciergeCopy,conciergeStage);
- world.append(canvas,panel,directory,theater);map.append(toolbar,world);const extras=app.querySelector('.harbor-discovery');if(extras)map.append(extras);map.append(conciergeSection);introduction.replaceWith(map);app.classList.add('mall-map-ready');
+ world.append(canvas,panel,directory,theater);map.append(toolbar,world);const extras=app.querySelector('.harbor-discovery');if(extras)map.append(extras);introduction.replaceWith(map);app.classList.add('mall-map-ready');
  explore.textContent='Explore Categories';explore.addEventListener('click',()=>{showMap();map.scrollIntoView({block:'start',behavior:'auto'});nodes.values().next().value.focus({preventScroll:true});});
  const returnMap=btn('← Category Map','mall-return',()=>{go('home',true);showMap();map.scrollIntoView({block:'start'});});app.prepend(returnMap);
  // Home navigation and saved-destination behavior retain their original handlers.
