@@ -32,6 +32,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
    const fallback=make('p','mall-screen-fallback');fallback.append('If the concierge screen does not open, ',Object.assign(make('a',null,'open it directly'),{href:frame.src,target:'_top'}),'.');
    theater.append(close,heading,frame,fallback);close.focus({preventScroll:true});
  });
+ concierge.style.cssText='top:54%!important;background:#f3cf87!important;color:#09243a!important;border-color:#fff0c8!important;z-index:6!important;';
  const wixOrigins=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
  window.addEventListener('message',event=>{
    if(event.source===conciergeFrame?.contentWindow&&event.origin===location.origin&&event.data?.type==='lighthouse-concierge:rpc'){
@@ -43,7 +44,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
      conciergeFrame.contentWindow.postMessage(event.data,location.origin);
    }
  });
- const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});canvas.append(concierge,watchCenter);
+ const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});watchCenter.style.cssText='top:64%!important;z-index:5!important;';canvas.append(concierge,watchCenter);
  const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.style.setProperty('--mx',d.mx+'%');n.style.setProperty('--my',d.my+'%');n.setAttribute('aria-label','Enter '+d.name);if(!d.url&&d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a category. See what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');
