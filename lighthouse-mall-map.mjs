@@ -1,4 +1,4 @@
-import {openCenterPlayer} from './lighthouse-live.mjs?v=20260909-launch1';
+import {openCenterPlayer} from './lighthouse-live.mjs?v=20260910-embedded-player1';
 const districts=[
  {id:'marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:15,y:18,mx:20,my:10,angle:-145},
  {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:38,y:12,mx:80,my:10,angle:-110},
@@ -35,7 +35,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
      conciergeFrame.contentWindow.postMessage(event.data,location.origin);
    }
  });
- const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});watchCenter.style.cssText='top:43%!important;z-index:5!important;';canvas.append(watchCenter);
+ // This is a real player inside the Lighthouse window, not a decorative launch button.\n const openPackage=(mode='visual')=>{openScreen();openCenterPlayer(theater,()=>closeScreen(mediaConsole),mode);};\n const mediaConsole=make('section','mall-window-player');mediaConsole.setAttribute('aria-label','Lighthouse TV and Radio player');\n const mediaFrame=make('iframe','mall-window-video');mediaFrame.title='Lighthouse TV';mediaFrame.loading='lazy';mediaFrame.allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';mediaFrame.allowFullscreen=true;mediaFrame.src='https://www.youtube-nocookie.com/embed/x0DinqPXxTo?rel=0';\n const mediaControls=make('div','mall-window-controls');\n const tvButton=btn('TV','mall-window-control is-active',()=>openPackage('visual'));tvButton.setAttribute('aria-label','Open Lighthouse TV package');\n const radioButton=btn('Radio','mall-window-control',()=>openPackage('radio'));radioButton.setAttribute('aria-label','Open Lighthouse Radio package');\n const iheartButton=btn('iHeart','mall-window-control',()=>openPackage('iheart'));iheartButton.setAttribute('aria-label','Open iHeartRadio package');\n mediaControls.append(tvButton,radioButton,iheartButton);mediaConsole.append(mediaFrame,mediaControls);canvas.append(mediaConsole);
  const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.style.setProperty('--mx',d.mx+'%');n.style.setProperty('--my',d.my+'%');n.setAttribute('aria-label','Enter '+d.name);if(!d.url&&d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a category. See what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');
