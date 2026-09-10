@@ -50,7 +50,10 @@ function wixRequest(action, input = {}) {
   if (!embedded) return Promise.reject(new Error('Wix bridge unavailable.'));
   const requestId = crypto.randomUUID();
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => { pending.delete(requestId); reject(new Error('Wix did not respond.')); }, 12000);
+    // A cold Wix backend plus an AI response can exceed the old 12-second
+    // browser cutoff. This remains read-only; it only gives the bridge enough
+    // time to return its guidance instead of prematurely showing fallback.
+    const timer = setTimeout(() => { pending.delete(requestId); reject(new Error('Wix did not respond.')); }, 30000);
     pending.set(requestId, {resolve, reject, timer});
     window.parent.postMessage({type:'lighthouse-concierge:rpc', requestId, action, input}, location.origin);
   });
