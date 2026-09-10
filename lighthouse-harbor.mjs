@@ -2,6 +2,11 @@ import {sections} from './lighthouse-guide-data.mjs?v=20260908-yvette-balance1';
 import {youtubeId} from './lighthouse-guide-data.mjs?v=20260908-yvette-balance1';
 import {featuredVideos} from './lighthouse-featured-videos.mjs?v=1';
 import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=20260908-yvette-balance1';
+// Cache-bust the concierge-aware mall styling even when Wix serves older HTML.
+const mallMapStyle=document.createElement('link');
+mallMapStyle.rel='stylesheet';
+mallMapStyle.href=new URL('./lighthouse-mall-map.css?v=20260910-concierge-screen2',import.meta.url).href;
+document.head.append(mallMapStyle);
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
 const descriptors={storage:'Space for your next chapter',employment:'Opportunity starts with people',social:'A place to belong',marketplace:'Discover something unexpected',music:'Make room for your imagination'};

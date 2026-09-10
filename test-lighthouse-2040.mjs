@@ -128,12 +128,12 @@ test('public category buttons use plain-language names', () => {
   assert.doesNotMatch(home, /Close the Beacon|Choose your Beacon path|beacons found/);
 });
 
-test('the main Lighthouse video screen opens the site-wide concierge without removing TV and radio', () => {
-  assert.match(mallMap, /Talk to the Concierge/);
+test('the main map keeps TV and radio while placing the site-wide concierge in its own screen section', () => {
+  assert.match(mallMap, /lighthouse-concierge-section/);
+  assert.match(mallMap, /Tell us what you need\./);
   assert.match(mallMap, /lighthouse-concierge\.html\?embedded=1/);
-  assert.match(mallMap, /frame\.allow='microphone'/);
+  assert.match(mallMap, /conciergeFrame\.allow='microphone'/);
   assert.match(mallMap, /TV & Radio/);
-  assert.match(mallMap, /Return to the mall/);
   assert.match(concierge, /What can I help you accomplish today\?/);
 });
 
