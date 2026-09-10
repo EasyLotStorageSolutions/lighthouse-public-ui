@@ -58,16 +58,17 @@ function wixRequest(action, input = {}) {
 
 async function showRequest(request) {
   try {
-    const response = await wixRequest('search', {query: request});
+    const response = await wixRequest('answer', {query: request});
     const matches = Array.isArray(response?.items) ? response.items : [];
+    if (response?.answer) addMessage('concierge', response.answer);
     if (!matches.length) {
       addMessage('concierge','I do not have a confident match yet. You can browse every Lighthouse destination or describe the outcome another way.');
       results.innerHTML = departments.slice(0,6).map(department => departmentCard(department,true)).join('');
     } else {
-      addMessage('concierge',matches.length === 1 ? `The best match is ${matches[0].name}.` : 'These Lighthouse destinations best match what you asked for.');
+      if (!response?.answer) addMessage('concierge',matches.length === 1 ? `The best match is ${matches[0].name}.` : 'These Lighthouse destinations best match what you asked for.');
       results.innerHTML = matches.map(department => departmentCard(department,true)).join('');
     }
-    status.textContent = 'Results came through the secure Wix read-only bridge. Purchases and account changes remain disabled.';
+    status.textContent = 'The Concierge is guiding you through the secure Wix bridge. Purchases and account changes remain disabled.';
   } catch (error) {
     simulate(request);
     status.textContent = 'The Wix bridge is unavailable, so this is a directory-only fallback result. No action was taken.';
