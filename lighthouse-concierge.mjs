@@ -49,15 +49,20 @@ window.addEventListener('message', event => {
 
 function wixRequest(action, input = {}) {
   if (action === 'answer') {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
     return fetch(CONCIERGE_ENDPOINT, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({query: String(input.query || '').slice(0, 500)})
+      // Use a CORS simple request so Wix receives the question directly
+      // instead of leaving the visitor waiting on a separate preflight.
+      headers: {'Content-Type': 'text/plain;charset=UTF-8'},
+      body: JSON.stringify({query: String(input.query || '').slice(0, 500)}),
+      signal: controller.signal
     }).then(async response => {
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || 'The Concierge is unavailable right now.');
       return body;
-    });
+    }).finally(() => clearTimeout(timer));
   }
   if (!embedded) return Promise.reject(new Error('Wix bridge unavailable.'));
   const requestId = crypto.randomUUID();
@@ -99,7 +104,6 @@ form.addEventListener('submit', async event => {
   addMessage('user',request);
   await showRequest(request);
   input.value = '';
-  status.textContent = 'Simulator result only. Live data and actions remain disabled until their secure adapters pass testing.';
   results.scrollIntoView({block:'nearest'});
 });
 
