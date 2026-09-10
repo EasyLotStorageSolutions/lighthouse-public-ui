@@ -1,6 +1,6 @@
 import {openCenterPlayer} from './lighthouse-live.mjs?v=20260909-launch1';
 const districts=[
- {id:'marketplace',url:'https://www.easylotstoragesolutions.com/customer-portal?view=marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:15,y:18,mx:20,my:10,angle:-145},
+ {id:'marketplace',name:'Marketplace',hint:'Buy, sell, trade & discover',x:15,y:18,mx:20,my:10,angle:-145},
  {id:'employment',name:'Jobs & Hiring',hint:'Find work or hire people',x:38,y:12,mx:80,my:10,angle:-110},
  {id:'storage',name:'Storage & Space',hint:'Find or offer storage space',x:63,y:12,mx:20,my:28,angle:-70},
  {id:'social',name:'Community & Social',hint:'People, groups & connections',x:86,y:18,mx:80,my:28,angle:-35},
@@ -21,8 +21,29 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  const central=make('img','mall-central');central.src=new URL('./assets/lighthouse-media-console-2040.webp',import.meta.url).href;central.alt='The Lighthouse at the heart of the mall';central.width=400;central.height=600;
  const beam=make('div','mall-selection-beam');beam.setAttribute('aria-hidden','true');canvas.append(beam,central);
  const marker=make('span','mall-you-are-here','THE LIGHTHOUSE');canvas.append(marker);
- const theater=make('section','mall-theater');theater.hidden=true;theater.setAttribute('aria-label','Center Lighthouse theater');
- const watchCenter=btn('▶ TV & Radio Lounge','mall-center-play',()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');openCenterPlayer(theater,()=>{theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)watchCenter.focus({preventScroll:true});});});canvas.append(watchCenter);
+ const theater=make('section','mall-theater');theater.hidden=true;theater.setAttribute('aria-label','Center Lighthouse video screen');let conciergeFrame=null;
+ const openScreen=()=>{showMap();canvas.hidden=true;theater.hidden=false;world.classList.add('show-theater');};
+ const closeScreen=focusTarget=>{conciergeFrame=null;theater.replaceChildren();theater.hidden=true;world.classList.remove('show-theater');canvas.hidden=!directory.hidden;if(directory.hidden)focusTarget.focus({preventScroll:true});};
+ const concierge=btn('✦ Talk to the Concierge','mall-center-play mall-concierge-open',()=>{
+   openScreen();
+   const close=btn('← Return to the mall','mall-screen-close',()=>closeScreen(concierge));
+   const heading=make('h2','mall-screen-title','Lighthouse Concierge');
+   const frame=make('iframe','mall-concierge-frame');conciergeFrame=frame;frame.title='Lighthouse Concierge';frame.src=new URL('./lighthouse-concierge.html?embedded=1',import.meta.url).href;frame.allow='microphone';frame.setAttribute('sandbox','allow-scripts allow-forms allow-same-origin allow-top-navigation-by-user-activation');
+   const fallback=make('p','mall-screen-fallback');fallback.append('If the concierge screen does not open, ',Object.assign(make('a',null,'open it directly'),{href:frame.src,target:'_top'}),'.');
+   theater.append(close,heading,frame,fallback);close.focus({preventScroll:true});
+ });
+ const wixOrigins=['https://www.easylotstoragesolutions.com','https://easylotstoragesolutions.com'];
+ window.addEventListener('message',event=>{
+   if(event.source===conciergeFrame?.contentWindow&&event.origin===location.origin&&event.data?.type==='lighthouse-concierge:rpc'){
+     if(window.parent===window)return;
+     for(const origin of wixOrigins)window.parent.postMessage(event.data,origin);
+     return;
+   }
+   if(event.source===window.parent&&wixOrigins.includes(event.origin)&&event.data?.type==='lighthouse-concierge:reply'&&conciergeFrame){
+     conciergeFrame.contentWindow.postMessage(event.data,location.origin);
+   }
+ });
+ const watchCenter=btn('▶ TV & Radio','mall-center-play mall-media-open',()=>{openScreen();openCenterPlayer(theater,()=>closeScreen(watchCenter));});canvas.append(concierge,watchCenter);
  const nodes=new Map();districts.forEach(d=>{const n=btn('','mall-district',()=>select(d));n.style.setProperty('--x',d.x+'%');n.style.setProperty('--y',d.y+'%');n.style.setProperty('--mx',d.mx+'%');n.style.setProperty('--my',d.my+'%');n.setAttribute('aria-label','Enter '+d.name);if(!d.url&&d.id!=='locksmith')n.setAttribute('aria-controls','harbor-'+d.id);n.append(make('span','mall-node-light','✦'),make('strong',null,d.name),make('small',null,d.hint));nodes.set(d.id,n);canvas.append(n);});
  const prompt=make('p','mall-map-prompt','Choose a category. See what’s inside.');canvas.append(prompt);
  const panel=make('section','mall-district-panel');panel.id='mall-district-panel';panel.hidden=true;panel.setAttribute('aria-label','Selected district');
@@ -32,7 +53,7 @@ export function mountMallMap({app,nav,go,explore,introduction,prefs}){
  function renderDirectory(){const q=search.value.trim().toLowerCase();const matches=districts.filter(d=>(!favoritesOnly||prefs.favorites.includes(d.id))&&`${d.id} ${d.name} ${d.hint}`.toLowerCase().includes(q));results.replaceChildren();for(const d of matches){const row=btn('','mall-directory-row',()=>select(d));row.append(make('strong',null,d.name),make('span',null,d.hint),make('span','mall-row-arrow','→'));results.append(row);}resultStatus.textContent=matches.length?`${matches.length} ${matches.length===1?'category':'categories'}`:favoritesOnly?'No saved categories yet. Open a category and choose Add to favorites.':'No matching categories. Try another name.';}
  search.addEventListener('input',renderDirectory);
  function tabState(active){[mapButton,directoryButton,favoriteButton].forEach(b=>{b.classList.toggle('is-active',b===active);b.setAttribute('aria-pressed',String(b===active));});}
- function showMap(focus=false){const player=theater.querySelector('dialog[open]');if(player)player.close();directory.hidden=true;canvas.hidden=false;panel.hidden=true;world.classList.remove('has-selection','show-directory');tabState(mapButton);if(focus)nodes.values().next().value.focus();}
+ function showMap(focus=false){const player=theater.querySelector('dialog[open]');if(player)player.close();theater.replaceChildren();theater.hidden=true;directory.hidden=true;canvas.hidden=false;panel.hidden=true;world.classList.remove('has-selection','show-directory','show-theater');tabState(mapButton);if(focus)nodes.values().next().value.focus();}
  function showDirectory(favorites){showMap();favoritesOnly=favorites;directory.hidden=false;canvas.hidden=true;panel.hidden=true;world.classList.remove('has-selection');world.classList.add('show-directory');tabState(favorites?favoriteButton:directoryButton);search.value='';renderDirectory();search.focus();}
  function select(d){
    // A district is an entrance, not another directory. Locksmith has its own
