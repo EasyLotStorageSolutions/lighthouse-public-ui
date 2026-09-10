@@ -178,7 +178,7 @@ if(new URLSearchParams(location.search).has('easyStart'))openMore();
 // background so a slow phone never waits on below-the-fold features.
 void import('./lighthouse-embed-height.mjs?v=1').catch(()=>{});
 await import('./lighthouse-live.mjs?v=20260909-launch1');
-const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260910-concierge-screen2');
+const {mountMallMap}=await import('./lighthouse-mall-map.mjs?v=20260910-direct-guide1');
 mountMallMap({app,nav,go,explore,introduction,prefs});
 
 // Receive only published editorial fields from the owning Wix page. Keep original
