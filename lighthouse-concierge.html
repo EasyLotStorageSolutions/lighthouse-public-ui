@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Ask the Lighthouse Concierge to help you shop, sell, book, find services or explore the mall.">
+  <title>Lighthouse Concierge</title>
+  <link rel="stylesheet" href="lighthouse-concierge.css">
+  <script type="module" src="lighthouse-concierge.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#concierge-input">Skip to concierge</a>
+  <main class="shell">
+    <header class="masthead">
+      <a href="https://www.easylotstoragesolutions.com/" class="brand"><span aria-hidden="true">✦</span><span>THE LIGHTHOUSE<small>Your world. One Lighthouse.</small></span></a>
+      <a href="#browse" id="browse-all">Browse the mall</a>
+    </header>
+    <section class="welcome" aria-labelledby="welcome-title">
+      <div class="guide" aria-hidden="true"><span class="halo"></span><span class="beacon">✦</span></div>
+      <div>
+        <p class="eyebrow">LIGHTHOUSE CONCIERGE</p>
+        <h1 id="welcome-title">What can I help you accomplish today?</h1>
+        <p>Tell me what you need. I’ll bring the right products, services and next steps here.</p>
+      </div>
+    </section>
+    <section class="workspace" aria-label="Concierge workspace">
+      <div id="conversation" class="conversation" aria-live="polite">
+        <article class="message concierge"><strong>Concierge</strong><p>I can help you shop, sell something, find storage, hire, find work or locate a service. What would you like to do?</p></article>
+      </div>
+      <div id="results" class="results" aria-live="polite"></div>
+      <form id="concierge-form" class="composer">
+        <label for="concierge-input">Tell the Lighthouse what you need</label>
+        <div><button id="voice" type="button" aria-pressed="false" title="Voice will be connected during the AI activation step">🎙 <span>Speak</span></button><input id="concierge-input" name="request" maxlength="500" autocomplete="off" placeholder="Example: I need storage for my camper" required><button type="submit">Show me</button></div>
+      </form>
+      <p id="status" class="status" role="status">Free simulator active during construction. No purchase or account change can occur.</p>
+    </section>
+    <section id="browse" class="browse" aria-labelledby="browse-title"><p class="eyebrow">OPTIONAL BROWSE MODE</p><h2 id="browse-title">Explore every Lighthouse destination.</h2><div id="directory" class="directory"></div></section>
+  </main>
+</body>
+</html>
