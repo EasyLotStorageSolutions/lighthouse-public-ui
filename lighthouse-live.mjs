@@ -1,7 +1,7 @@
 import {mountLoungeCatalog} from './lighthouse-lounge-catalog-ui.mjs';
 const loungeStyle=document.createElement('link');loungeStyle.rel='stylesheet';loungeStyle.href=new URL('./lighthouse-shared-lounge.css?v=20260908-lounge1',import.meta.url).href;document.head.append(loungeStyle);
 let centerPlayer;
-export function openCenterPlayer(host,onClose){centerPlayer?.(host,onClose);}
+export function openCenterPlayer(host,onClose,mode='visual'){centerPlayer?.(host,onClose,mode);}
 const app=document.querySelector('.harbor-app')||document.body;
 if(app){
   const experiences={
@@ -103,10 +103,10 @@ if(app){
   categoryLabel.append(categorySelect);modes.before(categoryLabel);
   categorySelect.addEventListener('change',()=>{audio.pause();activeCategory=categorySelect.value;dialog.dataset.mode==='radio'?showRadio():dialog.dataset.mode==='iheart'?showIHeart():showVisual()});
   let returnToMap=null;
-  centerPlayer=(host,onClose)=>{
+  centerPlayer=(host,onClose,mode='visual')=>{
     if(dialog.open)dialog.close();
     host.append(dialog);dialog.classList.add('harbor-center-player');close.textContent='← Home';returnToMap=onClose;
-    activeCategory='music';categorySelect.value=activeCategory;dialog.show();showVisual();close.focus({preventScroll:true});
+    activeCategory='music';categorySelect.value=activeCategory;dialog.show();if(mode==='radio')showRadio();else if(mode==='iheart')showIHeart();else showVisual();close.focus({preventScroll:true});
   };
 
   function setMode(mode){
