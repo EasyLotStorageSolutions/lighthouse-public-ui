@@ -87,6 +87,17 @@ form.addEventListener('submit', async event => {
   results.scrollIntoView({block:'nearest'});
 });
 
+document.querySelectorAll('[data-prompt]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const request = button.dataset.prompt;
+    input.value = request;
+    addMessage('user', request);
+    await showRequest(request);
+    input.value = '';
+    results.scrollIntoView({block:'nearest'});
+  });
+});
+
 document.querySelector('#voice').addEventListener('click', () => {
   status.textContent = 'Voice uses the same permanent action contract and will be activated after the secure text workflow is verified.';
   input.focus();
