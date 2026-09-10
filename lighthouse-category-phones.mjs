@@ -131,4 +131,4 @@ if(welcome){
   document.querySelector('.hero').classList.add('lighthouse-welcome');
 }
 
-await import('./lighthouse-harbor.mjs?v=20260909-retire-draft');
+await import('./lighthouse-harbor.mjs?v=20260910-window-player1');
