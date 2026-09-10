@@ -5,7 +5,7 @@ import {restoreDestination} from './lighthouse-destination-recovery.mjs?v=202609
 // Cache-bust the concierge-aware mall styling even when Wix serves older HTML.
 const mallMapStyle=document.createElement('link');
 mallMapStyle.rel='stylesheet';
-mallMapStyle.href=new URL('./lighthouse-mall-map.css?v=20260909-concierge-screen1',import.meta.url).href;
+mallMapStyle.href=new URL('./lighthouse-mall-map.css?v=20260910-concierge-screen2',import.meta.url).href;
 document.head.append(mallMapStyle);
 const root=document.querySelector('main');
 const sourceIds={storage:'storage',employment:'lighthouse-work',social:'lighthouse-world',marketplace:'marketplace-showcase',music:'lighthouse-video-studio'};
