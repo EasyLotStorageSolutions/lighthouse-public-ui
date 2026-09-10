@@ -10,6 +10,7 @@ const directory = document.querySelector('#directory');
 const status = document.querySelector('#status');
 const embedded = document.body.classList.contains('embedded') && window.parent !== window;
 const pending = new Map();
+const CONCIERGE_ENDPOINT = 'https://www.easylotstoragesolutions.com/_functions/lighthouseConcierge';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 
@@ -47,6 +48,17 @@ window.addEventListener('message', event => {
 });
 
 function wixRequest(action, input = {}) {
+  if (action === 'answer') {
+    return fetch(CONCIERGE_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query: String(input.query || '').slice(0, 500)})
+    }).then(async response => {
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(body.error || 'The Concierge is unavailable right now.');
+      return body;
+    });
+  }
   if (!embedded) return Promise.reject(new Error('Wix bridge unavailable.'));
   const requestId = crypto.randomUUID();
   return new Promise((resolve, reject) => {
